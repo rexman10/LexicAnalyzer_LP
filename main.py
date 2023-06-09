@@ -2,55 +2,77 @@ import ply.lex as lex
 
 #Diccionario de palabras reservadas
 reserved = {
-    'if':'IF',
-    'else':'ELSE',
-    'for':'FOR',
-    'while':'WHILE',
-    'bool':'BOOLEAN',
-    'char':'CHAR',
-    'decimal':'DECIMAL',
-    'double':'DOUBLE',
-    'float':'FLOTANTE',
-    'int':'INTEGER',
-    'string':'STRING',
+    #Inicio aporte Juan Guadalupe
+    'const':'CONST',
+    'bool':'BOOLTYPE',
+    'char':'CHARTYPE',
+    'decimal':'DECIMALTYPE',
+    'double':'DOUBLETYPE',
+    'float':'FLOATTYPE',
+    'int':'INTTYPE',
+    'object':'OBJECT',
+    'string':'STRINGTYPE',
+    #Fin aporte Juan Guadalupe
+
+    #Inicio aporte Adair Abrigo
+
+    #Fin aporte Adair Abrigo
+    #Inicio aporte David Rivera
+
+    #Fin aporte David Rivera
+    #Inicio aporte Kenneth Pacheco
+    
+    #Fin aporte Kenneth Pacheco
+
 }
 
  #Sequencia de tokens, puede ser lista o tupla
 tokens = (
-    'NUMERO',
-    'PLUS',
-    'MINUS',
-    'TIMES',
-    'DIVIDE',
-    'LPAREN',
-    'RPAREN',
+    #Inicio aporte Juan Guadalupe
     'VARIABLE',
-    'COMA',
-    'MAYORQ',
-    'MENORQ',
-    'IGUALQ',
-    'DIFERENTEQ',
-    'CADENA',
-    'RPARENT',
     'LPARENT',
+    'RPARENT',
+    'LLLAVE',
+    'RLLAVE',
+    'LCORCHETE',
+    'RCORCHETE',
+    'PUNTO',
+    #Fin aporte Juan Guadalupe
+
+    #Inicio aporte Adair Abrigo
+
+    #Fin aporte Adair Abrigo
+    #Inicio aporte David Rivera
+
+    #Fin aporte David Rivera
+    #Inicio aporte Kenneth Pacheco
+
+    #Fin aporte Kenneth Pacheco
+
+
 ) + tuple(reserved.values())
  
  #Exp Regulares para tokens de símbolos
-t_PLUS    = r'\+'
-t_MINUS   = r'-'
-t_TIMES   = r'\*'
+
+#Inicio aporte Juan Guadalupe
 t_LPARENT = r'\('
 t_RPARENT = r'\)'
-t_DIVIDE  = r'/'
-t_LPAREN  = r'\('
-t_RPAREN  = r'\)'
-t_NUMERO  = r'\d+'
-t_COMA    = r','
-t_MAYORQ  = r'>'
-t_MENORQ  = r'<'
-t_DIFERENTEQ  = r'<>'
-t_IGUALQ  = r'=='
-t_CADENA  = r'"[\w\s\*]*"'
+t_LLLAVE = r'\['
+t_RLLAVE = r'\]'
+t_LCORCHETE = r'\{'
+t_RCORCHETE = r'\}'
+t_PUNTO   = r'\.'
+#Fin aporte Juan Guadalupe
+#Inicio aporte Adair Abrigo
+
+#Fin aporte Adair Abrigo
+#Inicio aporte David Rivera
+
+#Fin aporte David Rivera
+#Inicio aporte Kenneth Pacheco
+
+#Fin aporte Kenneth Pacheco
+
 
  
  #Para contabilizar nro de líneas
@@ -58,11 +80,12 @@ def t_newline(t):
   r'\n+'
   t.lexer.lineno += len(t.value)
 
+#Inicio aporte Juan Guadalupe
 def t_VARIABLE(t):
-  r'[a-zA-Z]\w*'
+  r'[a-zA-Z\_]\w*'
   t.type = reserved.get(t.value,'VARIABLE')
   return t
-
+#Fin aporte Juan Guadalupe
  
  # Ignorar lo que no sea un token en mi LP
 t_ignore  = ' \t'
@@ -72,15 +95,35 @@ def t_error(t):
   print("Componente léxico no reconocido '%s'" % t.value[0])
   t.lexer.skip(1)
  #Reconocer comentarios
+#Inicio aporte Juan Guadalupe
 def t_COMMENT(t):
-    r'\#.*'
+    r'(\/\/.*|(/\*(.|\n)*?\*/))'
     pass
+#Fin aporte Juan Guadalupe
  #Contruir analizador
 lexer = lex.lex()
 
 #Testeando
 data = '''
-cadena para prueba
+//comment de una linea
+/*
+coment 
+multilinea
+*/
+public void MetodoBurbuja()
+        {
+            int t;
+            for (int a = 1; a < vector.Length; a++)
+                for (int b = vector.Length - 1; b >= a; b--)
+                {
+                    if (vector[b - 1] > vector[b])
+                    {
+                        t = vector[b - 1];
+                        vector[b - 1] = vector[b];
+                        vector[b] = t;
+                    }
+                }
+        }
     '''.lower()
  
  #Datos de entrada
