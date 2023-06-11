@@ -25,10 +25,16 @@ reserved = {
     "for": "FOR",
     #Fin aporte Adair Abrigo
     #Inicio aporte David Rivera
-
+    "break": "BREAK",
+    "try": "TRY",
+    "private": "PRIVATE",
+    "new": "NEW",
+    "switch": "SWITCH",
+    "else": "ELSE",
+    "catch": "CATCH"
     #Fin aporte David Rivera
     #Inicio aporte Kenneth Pacheco
-    
+
     #Fin aporte Kenneth Pacheco
 
 }
@@ -75,7 +81,7 @@ tokens = (
 
 
 ) + tuple(reserved.values())
- 
+
  #Exp Regulares para tokens de símbolos
 
 #Inicio aporte Juan Guadalupe
@@ -104,7 +110,7 @@ t_INEQUALITY = r'!='
 t_GREATER_THAN_OR_EQUAL = r'>='
 t_SMALLER_THAN_OR_EQUAL = r'<='
 t_AND = r'&&'
-t_OR = r'||'
+#t_OR = r'||'
 t_NOT = r'!'
 #Fin aporte David Rivera
 #Inicio aporte Kenneth Pacheco
@@ -112,7 +118,7 @@ t_NOT = r'!'
 #Fin aporte Kenneth Pacheco
 
 
- 
+
  #Para contabilizar nro de líneas
 def t_newline(t):
   r'\n+'
@@ -124,10 +130,15 @@ def t_VARIABLE(t):
   t.type = reserved.get(t.value,'VARIABLE')
   return t
 #Fin aporte Juan Guadalupe
- 
+
+#Inicio aporte David Rivera
+    #Para validar los tipos de datos
+
+#Fin aporte David Rivera
+
  # Ignorar lo que no sea un token en mi LP
 t_ignore  = ' \t'
- 
+
  #Presentación de errores léxicos
 def t_error(t):
   print("Componente léxico no reconocido '%s'" % t.value[0])
@@ -169,9 +180,67 @@ public static long Factorial(int n)
         return 1;
     return n * Factorial(n-1);  // Si no es 1, sigue la recursión
   }
+  
+public class Program{
+    public static void Main(){
+        try{
+            Console.WriteLine("Ingrese un número:");
+            string input = Console.ReadLine();
+            int numero = int.Parse(input);
 
+            Console.WriteLine("Ingrese otro número:");
+            string otroInput = Console.ReadLine();
+            int otroNumero = int.Parse(otroInput);
+
+            CompararNumeros(numero, otroNumero);
+        }
+        catch (FormatException){
+            Console.WriteLine("Error: Ingrese un número válido.");
+        }
+        catch (Exception ex){
+            Console.WriteLine($"Error: {ex.Message}");
+        }
+    }
+
+    private static void CompararNumeros(int numero, int otroNumero){
+        if (numero != otroNumero){
+            Console.WriteLine("Los números no son iguales.");
+
+            if (numero > otroNumero){
+                Console.WriteLine($"El número {numero} es mayor que {otroNumero}.");
+            }
+            else if (numero < otroNumero){
+                Console.WriteLine($"El número {numero} es menor que {otroNumero}.");
+            }
+        }
+        else{
+            Console.WriteLine("Los números son iguales.");
+        }
+
+        if (numero >= 0 && otroNumero >= 0){
+            Console.WriteLine("Ambos números son mayores o iguales a cero.");
+        }
+
+        if (numero <= 10 || otroNumero <= 10){
+            Console.WriteLine("Al menos uno de los números es menor o igual a diez.");
+        }
+
+        switch (numero % 2){
+            case 0:
+                Console.WriteLine($"El número {numero} es par.");
+                break;
+            case 1:
+                Console.WriteLine($"El número {numero} es impar.");
+                break;
+        }
+    }
+}
+    
+    
+    
+    
     '''.lower()
- 
+
  #Datos de entrada
 lexer.input(data)
  
