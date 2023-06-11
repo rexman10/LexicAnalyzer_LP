@@ -76,7 +76,16 @@ tokens = (
     'XOR', #TRUE SI A O B ES TRUE
     #Fin aporte David Rivera
     #Inicio aporte Kenneth Pacheco
-
+    'ADDITION_ASSIGNMENT',
+    'SUBTRACTION_ASSIGNMENT',
+    'MULTIPLICATION_ASSIGNMENT',
+    'DIVISION_ASSIGNMENT',
+    'MODULE_ASSIGNMENT',
+    'JUMP_LINE',
+    'TABULATION',
+    'DOUBLE_QUOTATION_MARKS',
+    'SIPLE_QUOTATION_MARKS',
+    'BACK_SLASH'
     #Fin aporte Kenneth Pacheco
 
 
@@ -114,7 +123,16 @@ t_AND = r'&&'
 t_NOT = r'!'
 #Fin aporte David Rivera
 #Inicio aporte Kenneth Pacheco
-
+t_ADDITION_ASSIGNMENT = r'\+='
+t_SUBTRACTION_ASSIGNMENT = r'-='
+t_MULTIPLICATION_ASSIGNMENT = r'\*='
+t_DIVISION_ASSIGNMENT = r'\/='
+t_MODULE_ASSIGNMENT = r'%='
+t_JUMP_LINE = r'\\n'
+t_TABULATION = r'\\t'
+t_DOUBLE_QUOTATION_MARKS = r'"'
+t_SIPLE_QUOTATION_MARKS = r"'"
+t_BACK_SLASH = r'\\'
 #Fin aporte Kenneth Pacheco
 
 
@@ -235,7 +253,16 @@ public class Program{
         }
     }
 }
-    
+=
++=
+-=
+*=
+/=
+%=
+\\n
+\\t
+"
+'    
     
     
     
