@@ -50,6 +50,7 @@ tokens = (
     'LKEY',
     'RKEY',
     'DOT',
+    'DOUBLEPOINT',
     #Fin aporte Juan Guadalupe
 
     #Inicio aporte Adair Abrigo
@@ -58,10 +59,13 @@ tokens = (
     'MINUS',
     'TIMES',
     'DIVIDE',
+    'MODULO',
+    'DOLLARSIGN',
     'GREATER_THAN',
     'SMALLER_THAN',
     'EQUAL_COMPARATION',
     'EQUAL',
+    'COMMA',
     'DOTANDCOMMA',
     #Fin aporte Adair Abrigo
     #Inicio aporte David Rivera
@@ -70,10 +74,10 @@ tokens = (
     'GREATER_THAN_OR_EQUAL',
     'SMALLER_THAN_OR_EQUAL',
         #Operadores logicos
-    'AND',
-    'OR',
-    'NOT',
-    'XOR', #TRUE SI A O B ES TRUE
+    'LOGICAND',
+    'LOGICOR',
+    'LOGICNOT',
+    'LOGICXOR', #TRUE SI A O B ES TRUE
     #Fin aporte David Rivera
     #Inicio aporte Kenneth Pacheco
     'ADDITION_ASSIGNMENT',
@@ -101,13 +105,17 @@ t_RBRACKET = r'\]'
 t_LKEY = r'\{'
 t_RKEY = r'\}'
 t_DOT   = r'\.'
+t_COMMA = r'\,'
+t_DOUBLEPOINT = r'\:'
 #Fin aporte Juan Guadalupe
 #Inicio aporte Adair Abrigo
 t_NUMBER = r'\d+'
 t_PLUS = r'\+'
 t_MINUS = r'-'
 t_TIMES = r'\*'
-t_DIVIDE = r'/'
+t_DIVIDE = r'\/'
+t_MODULO = r'\%'
+t_DOLLARSIGN = r'\$'
 t_GREATER_THAN = r'>'
 t_SMALLER_THAN = r'<'
 t_EQUAL_COMPARATION = r'=='
@@ -118,9 +126,9 @@ t_DOTANDCOMMA = r';'
 t_INEQUALITY = r'!='
 t_GREATER_THAN_OR_EQUAL = r'>='
 t_SMALLER_THAN_OR_EQUAL = r'<='
-t_AND = r'&&'
-#t_OR = r'||'
-t_NOT = r'!'
+t_LOGICAND = r'\&\&'
+t_LOGICOR = r'\|\|'
+t_LOGICNOT = r'\!'
 #Fin aporte David Rivera
 #Inicio aporte Kenneth Pacheco
 t_ADDITION_ASSIGNMENT = r'\+='
