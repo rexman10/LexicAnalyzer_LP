@@ -59,7 +59,15 @@ tokens = (
     'DOTANDCOMMA',
     #Fin aporte Adair Abrigo
     #Inicio aporte David Rivera
-
+        #Operadores de comparacion
+    'INEQUALITY',
+    'GREATER_THAN_OR_EQUAL',
+    'SMALLER_THAN_OR_EQUAL',
+        #Operadores logicos
+    'AND',
+    'OR',
+    'NOT',
+    'XOR', #TRUE SI A O B ES TRUE
     #Fin aporte David Rivera
     #Inicio aporte Kenneth Pacheco
 
@@ -92,7 +100,12 @@ t_EQUAL = r'='
 t_DOTANDCOMMA = r';'
 #Fin aporte Adair Abrigo
 #Inicio aporte David Rivera
-
+t_INEQUALITY = r'!='
+t_GREATER_THAN_OR_EQUAL = r'>='
+t_SMALLER_THAN_OR_EQUAL = r'<='
+t_AND = r'&&'
+t_OR = r'||'
+t_NOT = r'!'
 #Fin aporte David Rivera
 #Inicio aporte Kenneth Pacheco
 
