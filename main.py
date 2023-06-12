@@ -5,12 +5,14 @@ reserved = {
     #Inicio aporte Juan Guadalupe
     'const':'CONST',
     'bool':'BOOLTYPE',
+    'true':'BOOLTRUE',
+    'false':'BOOLFALSE',
     'char':'CHARTYPE',
     'decimal':'DECIMALTYPE',
     'double':'DOUBLETYPE',
     'float':'FLOATTYPE',
     'int':'INTTYPE',
-    'object':'OBJECT',
+    'class':'CLASS',
     'string':'STRINGTYPE',
     #Fin aporte Juan Guadalupe
 
@@ -19,6 +21,7 @@ reserved = {
     "while": "WHILE",
     "public": "PUBLIC",
     "static": "STATIC",
+    "void": "VOID",
     "long": "LONG",
     "return": "RETURN",
     "int": "INT",
@@ -54,17 +57,21 @@ tokens = (
     #Fin aporte Juan Guadalupe
 
     #Inicio aporte Adair Abrigo
-    'NUMBER',
+    'FLOAT_NUMBER',
+    'INTEGER',
+    'BOOL',
+    'OBJECT',
+    'STRING',
     'PLUS',
     'MINUS',
     'TIMES',
     'DIVIDE',
-    'MODULO',
+    'PERCENT',
     'DOLLARSIGN',
     'GREATER_THAN',
     'SMALLER_THAN',
     'EQUAL_COMPARATION',
-    'EQUAL',
+    'ASSIGNATION',
     'COMMA',
     'DOTANDCOMMA',
     #Fin aporte Adair Abrigo
@@ -90,6 +97,7 @@ tokens = (
     'DOUBLE_QUOTATION_MARKS',
     'SIPLE_QUOTATION_MARKS',
     'BACK_SLASH'
+    'PIPE'
     #Fin aporte Kenneth Pacheco
 
 
@@ -109,17 +117,17 @@ t_COMMA = r'\,'
 t_DOUBLEPOINT = r'\:'
 #Fin aporte Juan Guadalupe
 #Inicio aporte Adair Abrigo
-t_NUMBER = r'\d+'
+t_STRING = r'("[^"]*"|\'[^\']*\')'
 t_PLUS = r'\+'
 t_MINUS = r'-'
 t_TIMES = r'\*'
 t_DIVIDE = r'\/'
-t_MODULO = r'\%'
+t_PERCENT = r'\%'
 t_DOLLARSIGN = r'\$'
 t_GREATER_THAN = r'>'
 t_SMALLER_THAN = r'<'
 t_EQUAL_COMPARATION = r'=='
-t_EQUAL = r'='
+t_ASSIGNATION = r'='
 t_DOTANDCOMMA = r';'
 #Fin aporte Adair Abrigo
 #Inicio aporte David Rivera
@@ -140,17 +148,22 @@ t_JUMP_LINE = r'\\n'
 t_TABULATION = r'\\t'
 t_DOUBLE_QUOTATION_MARKS = r'"'
 t_SIPLE_QUOTATION_MARKS = r"'"
+t_PIPE = r'\|'
 t_BACK_SLASH = r'\\'
 #Fin aporte Kenneth Pacheco
 
 
 
- #Para contabilizar nro de líneas
+#Para contabilizar nro de líneas
 def t_newline(t):
   r'\n+'
   t.lexer.lineno += len(t.value)
 
 #Inicio aporte Juan Guadalupe
+def t_OBJECT(t):
+  r'[A-Z]\w*'
+  return t
+
 def t_VARIABLE(t):
   r'[a-zA-Z\_]\w*'
   t.type = reserved.get(t.value,'VARIABLE')
@@ -158,8 +171,18 @@ def t_VARIABLE(t):
 #Fin aporte Juan Guadalupe
 
 #Inicio aporte David Rivera
-    #Para validar los tipos de datos
-
+# #Para validar los tipos de datos
+def t_FLOAT_NUMBER(t):
+    r'\d+\.\d+'
+    t.value = float(t.value)
+    return t
+def t_INTEGER(t):
+    r'\d+'
+    t.value = int(t.value)
+    return t
+def t_BOOL(t):
+    r"(True|False)"
+    return t
 #Fin aporte David Rivera
 
  # Ignorar lo que no sea un token en mi LP
@@ -180,101 +203,27 @@ lexer = lex.lex()
 
 #Testeando
 data = '''
-//comment de una linea
-/*
-coment 
-multilinea
-*/
-public void MetodoBurbuja()
-  {
-    int t;
-    for (int a = 1; a < vector.Length; a++)
-      for (int b = vector.Length - 1; b >= a; b--)
-      {
-          if (vector[b - 1] > vector[b])
-          {
-              t = vector[b - 1];
-              vector[b - 1] = vector[b];
-              vector[b] = t;
-          }
-      }
-  }
+public void busqueda(int num){
+    int l = 0, h = 9;
+    int m = 0;
+    bool found = false;
 
-public static long Factorial(int n) 
-  {
-    if (n==1)               // Aseguramos que termine (caso base)
-        return 1;
-    return n * Factorial(n-1);  // Si no es 1, sigue la recursión
-  }
-  
-public class Program{
-    public static void Main(){
-        try{
-            Console.WriteLine("Ingrese un número:");
-            string input = Console.ReadLine();
-            int numero = int.Parse(input);
-
-            Console.WriteLine("Ingrese otro número:");
-            string otroInput = Console.ReadLine();
-            int otroNumero = int.Parse(otroInput);
-
-            CompararNumeros(numero, otroNumero);
-        }
-        catch (FormatException){
-            Console.WriteLine("Error: Ingrese un número válido.");
-        }
-        catch (Exception ex){
-            Console.WriteLine($"Error: {ex.Message}");
-        }
+    while (l <= h && found == false)
+    {
+        m = (l + h) / 2;
+        if (vector[m] == num)
+            found = true;
+        if (vector[m] > num)
+            h = m - 1;
+        else
+            l = m + 1;
     }
-
-    private static void CompararNumeros(int numero, int otroNumero){
-        if (numero != otroNumero){
-            Console.WriteLine("Los números no son iguales.");
-
-            if (numero > otroNumero){
-                Console.WriteLine($"El número {numero} es mayor que {otroNumero}.");
-            }
-            else if (numero < otroNumero){
-                Console.WriteLine($"El número {numero} es menor que {otroNumero}.");
-            }
-        }
-        else{
-            Console.WriteLine("Los números son iguales.");
-        }
-
-        if (numero >= 0 && otroNumero >= 0){
-            Console.WriteLine("Ambos números son mayores o iguales a cero.");
-        }
-
-        if (numero <= 10 || otroNumero <= 10){
-            Console.WriteLine("Al menos uno de los números es menor o igual a diez.");
-        }
-
-        switch (numero % 2){
-            case 0:
-                Console.WriteLine($"El número {numero} es par.");
-                break;
-            case 1:
-                Console.WriteLine($"El número {numero} es impar.");
-                break;
-        }
-    }
+    if (found == false)
+    { Console.Write("\nEl elemento {0} no esta en el arreglo", num); }
+    else
+    { Console.Write("\nEl elemento {0} esta en la posicion: {1}", num, m + 1); 
 }
-=
-+=
--=
-*=
-/=
-%=
-\\n
-\\t
-"
-'    
-    
-    
-    
-    '''
+'''
 
  #Datos de entrada
 lexer.input(data)

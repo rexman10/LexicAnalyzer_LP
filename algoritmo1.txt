@@ -28,3 +28,4 @@ public static void BFS(Graph graph, int v, boolean[] discovered)
             }
         }
     }
+}
