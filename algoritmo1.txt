@@ -1,0 +1,30 @@
+// Realiza BFS en el graph a partir del vértice `v`
+public static void BFS(Graph graph, int v, boolean[] discovered)
+{
+    // crea una queue para hacer BFS
+    Queue<Integer> q = new ArrayDeque<>();
+
+    // marca el vértice de origen como descubierto
+    discovered[v] = true;
+
+    // poner en queue el vértice fuente
+    q.add(v);
+
+    // bucle hasta que la queue esté vacía
+    while (!q.isEmpty())
+    {
+        // quitar la queue del nodo frontal e imprimirlo
+        v = q.poll();
+        System.out.print(v + " ");
+
+        // hacer para cada borde (v, u)
+        for (int u: graph.adjList.get(v))
+        {
+            if (!discovered[u])
+            {
+                // marcarlo como descubierto y ponerlo en queue
+                discovered[u] = true;
+                q.add(u);
+            }
+        }
+    }
