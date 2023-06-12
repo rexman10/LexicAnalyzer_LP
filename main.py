@@ -274,7 +274,7 @@ public class Program{
     
     
     
-    '''.lower()
+    '''
 
  #Datos de entrada
 lexer.input(data)
