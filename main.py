@@ -54,6 +54,7 @@ tokens = (
     'RKEY',
     'DOT',
     'DOUBLEPOINT',
+    'PRINT',
     #Fin aporte Juan Guadalupe
 
     #Inicio aporte Adair Abrigo
@@ -96,7 +97,7 @@ tokens = (
     'TABULATION',
     'DOUBLE_QUOTATION_MARKS',
     'SIPLE_QUOTATION_MARKS',
-    'BACK_SLASH'
+    'BACK_SLASH',
     'PIPE'
     #Fin aporte Kenneth Pacheco
 
@@ -152,6 +153,9 @@ t_PIPE = r'\|'
 t_BACK_SLASH = r'\\'
 #Fin aporte Kenneth Pacheco
 
+def t_PRINT(t):
+    r'(Console\.WriteLine|Console\.Write|System\.Console\.WriteLine|System\.Console\.Write)'
+    return t
 
 
 #Para contabilizar nro de líneas
@@ -180,9 +184,6 @@ def t_INTEGER(t):
     r'\d+'
     t.value = int(t.value)
     return t
-def t_BOOL(t):
-    r"(True|False)"
-    return t
 #Fin aporte David Rivera
 
  # Ignorar lo que no sea un token en mi LP
@@ -201,36 +202,27 @@ def t_COMMENT(t):
  #Contruir analizador
 lexer = lex.lex()
 
-#Testeando
-data = '''
-public void busqueda(int num){
-    int l = 0, h = 9;
-    int m = 0;
-    bool found = false;
 
-    while (l <= h && found == false)
-    {
-        m = (l + h) / 2;
-        if (vector[m] == num)
-            found = true;
-        if (vector[m] > num)
-            h = m - 1;
-        else
-            l = m + 1;
-    }
-    if (found == false)
-    { Console.Write("\nEl elemento {0} no esta en el arreglo", num); }
-    else
-    { Console.Write("\nEl elemento {0} esta en la posicion: {1}", num, m + 1); 
-}
-'''
+#Datos de entrada
+def analizar(data):
+    lexer.input(data)
+    while True:
+        tok = lexer.token()
+        if not tok:
+            break
+        print(tok)
 
- #Datos de entrada
-lexer.input(data)
- 
+
+archivo = open("algoritmo1.txt")
+for linea in archivo:
+    print(">>"+linea)
+    analizar(linea)
+    if len(linea)==0:
+        break
+
  # Tokenizador
-while True:
-  tok = lexer.token()
-  if not tok: 
-    break      #Rompe
-  print(tok)
+#while True:
+#  tok = lexer.token()
+#  if not tok: 
+#    break      #Rompe
+#  print(tok)
