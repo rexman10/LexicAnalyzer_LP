@@ -34,10 +34,10 @@ reserved = {
     "new": "NEW",
     "switch": "SWITCH",
     "else": "ELSE",
-    "catch": "CATCH"
+    "catch": "CATCH",
     #Fin aporte David Rivera
     #Inicio aporte Kenneth Pacheco
-
+    "using": "USING"
     #Fin aporte Kenneth Pacheco
 
 }
@@ -213,7 +213,7 @@ def analizar(data):
         print(tok)
 
 
-archivo = open("algoritmo1.txt")
+archivo = open("algoritmo3.txt")
 for linea in archivo:
     print(">>"+linea)
     analizar(linea)
