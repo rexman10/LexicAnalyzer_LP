@@ -1,0 +1,28 @@
+public static void Main(string[] args){
+        try{
+            // Declaración e inicialización de variables
+            int num1 = 10;
+            int num2 = 0;
+            int result;
+
+            // Uso de un HashMap 
+            Dictionary<string, int> hashMap = new Dictionary<string, int>();
+            hashMap.Add("clave1", 100);
+            hashMap.Add("clave2", 200);
+            hashMap.Add("clave3", 300);
+
+            // Operación que puede generar una excepción
+            result = num1 / num2;
+
+            Console.WriteLine("El resultado es: " + result);
+        }
+	//captura de las excepciones
+        catch (DivideByZeroException){
+            Console.WriteLine("Error: División por cero");
+        }
+        catch (Exception ex){
+            Console.WriteLine("Error: " + ex.Message);
+        }
+
+        Console.ReadLine();
+}
