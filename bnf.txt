@@ -1,0 +1,18 @@
+<var_asignation>			::= <const> " "+ <type_data> " "+ <var> " "* <asignation_oper> " "* <var> <new_line> | <type_data> " "+ <var> " "* <asignation_oper> " "* <var> <new_line>
+<const>						::= "const"
+<type_data>					::= "int" | "float" | "bool" | "char" | "decimal" | "string" | "object" | "double"
+<var>						::= [a-z]+
+<new_line>					::= " "
+<aritmetic_oper>			::= "+" | "-" | "*" | "/" | "%" | "++" | "--"
+<comparation_oper>			::= "==" | "!=" | ">" | "<" | ">=" | "<="
+<logic_oper>				::= "&&" | "||" | "!" | "^"
+<asignation_oper>			::= "=" | "+=" | "-=" | "/=" | "*=" | "%="
+
+<try_catch>					::= <try> <catch_finaly>
+<try>						::= "try" <charact_ignore> "{" <charact_ignore> <block_code> <charact_ignore> "}" <charact_ignore>	
+<catch_finaly>				::= <catch> | <catch> <finaly> 
+<catch>						::= <charact_ignore> "catch" <charact_ignore> <exception> <charact_ignore> "{" <charact_ignore> <block_code> <charact_ignore> "}" <charact_ignore>
+<exception>					::= "(Exception" <charact_ignore>  <var> ")"   
+<block_code>				::= [a-z]*
+<finaly>					::= "finaly" <charact_ignore> "{" <charact_ignore> <block_code> <charact_ignore> "}"
+<charact_ignore>			::= " "* | "\n"
