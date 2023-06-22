@@ -14,6 +14,7 @@ reserved = {
     'int':'INTTYPE',
     'class':'CLASS',
     'string':'STRINGTYPE',
+    'namespace':'NAMESPACE',
     #Fin aporte Juan Guadalupe
 
     #Inicio aporte Adair Abrigo
