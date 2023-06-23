@@ -8,9 +8,8 @@ reserved = {
     'true':'BOOLTRUE',
     'false':'BOOLFALSE',
     'char':'CHARTYPE',
-    'decimal':'DECIMALTYPE',
-    'double':'DOUBLETYPE',
     'float':'FLOATTYPE',
+    'decimal':'DECIMALTYPE',
     'int':'INTTYPE',
     'class':'CLASS',
     'string':'STRINGTYPE',
@@ -21,6 +20,7 @@ reserved = {
     "if": "IF",
     "while": "WHILE",
     "public": "PUBLIC",
+    "private": "PRIVATE",
     "static": "STATIC",
     "void": "VOID",
     "long": "LONG",
@@ -64,12 +64,16 @@ tokens = (
 
     #Inicio aporte Adair Abrigo
     'FLOAT_NUMBER',
+    'DECIMAL_NUMBER',
     'INTEGER',
     'BOOL',
     'OBJECT',
     'STRING',
+    'CHAR',
     'PLUS',
+    'INCREMENT',
     'MINUS',
+    'DECREMENT',
     'TIMES',
     'DIVIDE',
     'PERCENT',
@@ -125,7 +129,9 @@ t_DOUBLEPOINT = r'\:'
 #Inicio aporte Adair Abrigo
 t_STRING = r'("[^"]*"|\'[^\']*\')'
 t_PLUS = r'\+'
+t_INCREMENT = r'\+\+'
 t_MINUS = r'-'
+t_DEVREMENT = r'\-\-'
 t_TIMES = r'\*'
 t_DIVIDE = r'\/'
 t_PERCENT = r'\%'
@@ -143,6 +149,7 @@ t_SMALLER_THAN_OR_EQUAL = r'<='
 t_LOGICAND = r'\&\&'
 t_LOGICOR = r'\|\|'
 t_LOGICNOT = r'\!'
+t_LOGICXOR = r'\^'
 #Fin aporte David Rivera
 #Inicio aporte Kenneth Pacheco
 t_ADDITION_ASSIGNMENT = r'\+='
@@ -181,12 +188,20 @@ def t_VARIABLE(t):
 
 #Inicio aporte David Rivera
 # #Para validar los tipos de datos
+def t_DECIMAL_NUMBER(t):
+    r'\d+\.\d+m'
+    t.value = float(t.value)
+    return t
 def t_FLOAT_NUMBER(t):
     r'\d+\.\d+'
     t.value = float(t.value)
     return t
 def t_INTEGER(t):
     r'\d+'
+    t.value = int(t.value)
+    return t
+def t_CHAR(t):
+    r'[a-zA-Z]'
     t.value = int(t.value)
     return t
 #Fin aporte David Rivera

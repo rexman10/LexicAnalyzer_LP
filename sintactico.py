@@ -11,7 +11,7 @@ def p_program(p):
     'program : block_using block_publicClass'
 
 def p_block_using(p):
-    'block_using : USING SYSTEM'
+    'block_using : USING SYSTEM DOTANDCOMMA'
 
 def p_block_publicClass(p):
     'block_publicClass : PUBLIC CLASS VARIABLE LKEY block_code RKEY'
@@ -20,19 +20,51 @@ def p_block_publicClass(p):
     '''block_try_catch : try_catch_simply
                         | try_catch_finaly
     ''' """
-def p_block_code(p):
-    '''block_code : VARIABLE
-                    | try_catch_simply
+
+def p_data_types(p):
+    '''data_types   : CHARTYPE
+                    | FLOATTYPE
+                    | DECIMALTYPE
+                    | INTTYPE
+                    | BOOLTYPE
     '''
 
-def p_try_catch_simply(p):
-    'try_catch_simply : TRY LKEY block_code RKEY CATCH LPARENT EXCEPTION VARIABLE RPARENT LKEY block_code RKEY'
-    
+def p_access_modifiers(p):
+    '''access_modifiers : PUBLIC
+                        | PRIVATE
+    '''
 
+def p_constant_assignation(p):
+    '''constant_assignation : access_modifiers CONST data_type VARIABLE ASSIGNATION value DOTANDCOMMA
+                            | CONST data_type VARIABLE ASSIGNATION value DOTANDCOMMA
+    '''
 
-def p_operator(p):
-    '''operator : logic_operator
-                | arithmetic_operator
+def p_variable_assignation(p):
+    '''variable_assignation : access_modifiers data_type VARIABLE ASSIGNATION value DOTANDCOMMA
+                            | data_type VARIABLE ASSIGNATION value DOTANDCOMMA
+                            | 
+    '''
+
+def p_value_numeric(p):
+    '''value    : INTEGER
+                | FLOAT_NUMBER
+                | DECIMAL_NUMBER
+                | VARIABLE
+                | arithmetic_operation
+    '''
+
+def p_value_logic(p):
+    '''value_logic  : BOOLTRUE
+                    | BOOLFALSE
+                    | VARIABLE
+                    | logic_operation
+    '''
+
+def p_value_string(p):
+    ''''value_string    : STRING
+                        | CHAR
+                        | VARIABLE
+                        | concatenation
     '''
 
 def p_logic_operators(p):
@@ -45,6 +77,7 @@ def p_logic_operators(p):
                         | LOGICAND
                         | LOGICOR
                         | LOGICNOT
+                        | LOGICXOR
     '''
 
 def p_arithmetic_operator(p):
@@ -54,6 +87,19 @@ def p_arithmetic_operator(p):
                             | DIVIDE
                             | PERCENT
     '''
+
+def p_variable_assignation(p):
+    'variable_assignation : value'
+
+def p_block_code(p):
+    '''block_code : VARIABLE
+                    | try_catch_simply
+    '''
+
+def p_try_catch_simply(p):
+    'try_catch_simply : TRY LKEY block_code RKEY CATCH LPARENT EXCEPTION VARIABLE RPARENT LKEY block_code RKEY'
+    
+
 
 
 def p_error(p):
