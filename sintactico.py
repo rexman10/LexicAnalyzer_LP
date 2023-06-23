@@ -3,7 +3,10 @@ import ply.yacc as yacc
 from main import tokens
 
 """ Ejemplos con los que probar:
-using system public class clase1 { adas } 
+using system;
+public class clase1 {
+adas
+}
 using system public class clase1 { try{ acacsacasc } catch (exception e){ dsadas } }
  """
  
@@ -21,8 +24,9 @@ def p_block_publicClass(p):
                         | try_catch_finaly
     ''' """
 
-def p_data_types(p):
-    '''data_types   : CHARTYPE
+def p_data_type(p):
+    '''data_type    : CHARTYPE
+                    | STRINGTYPE
                     | FLOATTYPE
                     | DECIMALTYPE
                     | INTTYPE
@@ -34,40 +38,49 @@ def p_access_modifiers(p):
                         | PRIVATE
     '''
 
-def p_constant_assignation(p):
-    '''constant_assignation : access_modifiers CONST data_type VARIABLE ASSIGNATION value DOTANDCOMMA
-                            | CONST data_type VARIABLE ASSIGNATION value DOTANDCOMMA
-    '''
-
-def p_variable_assignation(p):
-    '''variable_assignation : access_modifiers data_type VARIABLE ASSIGNATION value DOTANDCOMMA
-                            | data_type VARIABLE ASSIGNATION value DOTANDCOMMA
-                            | 
+def p_arithmetic_operation(p):
+    '''arithmetic_operation : value_numeric
+                            | value_numeric arithmetic_operator arithmetic_operation
     '''
 
 def p_value_numeric(p):
-    '''value    : INTEGER
-                | FLOAT_NUMBER
-                | DECIMAL_NUMBER
-                | VARIABLE
-                | arithmetic_operation
+    '''value_numeric    : INTEGER
+                        | FLOAT_NUMBER
+                        | DECIMAL_NUMBER
+                        | VARIABLE
     '''
 
 def p_value_logic(p):
     '''value_logic  : BOOLTRUE
                     | BOOLFALSE
                     | VARIABLE
-                    | logic_operation
+    '''
+
+def p_logic_operation(p):
+    '''logic_operation  : value_logic
+                        | value_logic logic_operator logic_operation
+    '''
+
+def p_concatenation(p):
+    '''concatenation    : STRING
+                        | STRING PLUS concatenation
     '''
 
 def p_value_string(p):
-    ''''value_string    : STRING
-                        | CHAR
-                        | VARIABLE
-                        | concatenation
+    '''value_string : STRING
+                    | CHAR
+                    | VARIABLE
+                    | READ LPARENT RPARENT DOTANDCOMMA
+                    | concatenation
     '''
 
-def p_logic_operators(p):
+def p_value(p):
+    '''value    : value_numeric
+                | value_logic
+                | value_string
+    '''
+
+def p_logic_operator(p):
     '''logic_operator   : GREATER_THAN
                         | SMALLER_THAN
                         | EQUAL_COMPARATION
@@ -87,9 +100,16 @@ def p_arithmetic_operator(p):
                             | DIVIDE
                             | PERCENT
     '''
+def p_constant_assignation(p):
+    '''constant_assignation : access_modifiers CONST data_type VARIABLE ASSIGNATION value DOTANDCOMMA
+                            | CONST data_type VARIABLE ASSIGNATION value DOTANDCOMMA
+    '''
 
 def p_variable_assignation(p):
-    'variable_assignation : value'
+    '''variable_assignation : access_modifiers data_type VARIABLE ASSIGNATION value DOTANDCOMMA
+                            | data_type VARIABLE ASSIGNATION value DOTANDCOMMA
+                            | 
+    '''
 
 def p_block_code(p):
     '''block_code : VARIABLE

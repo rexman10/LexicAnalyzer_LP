@@ -25,7 +25,6 @@ reserved = {
     "void": "VOID",
     "long": "LONG",
     "return": "RETURN",
-    "int": "INT",
     "for": "FOR",
     "finally": "FINALLY",
     "exception": "EXCEPTION",
@@ -34,7 +33,6 @@ reserved = {
     #Inicio aporte David Rivera
     "break": "BREAK",
     "try": "TRY",
-    "private": "PRIVATE",
     "new": "NEW",
     "switch": "SWITCH",
     "else": "ELSE",
@@ -60,6 +58,7 @@ tokens = (
     'DOT',
     'DOUBLEPOINT',
     'PRINT',
+    'READ',
     #Fin aporte Juan Guadalupe
 
     #Inicio aporte Adair Abrigo
@@ -86,11 +85,11 @@ tokens = (
     'DOTANDCOMMA',
     #Fin aporte Adair Abrigo
     #Inicio aporte David Rivera
-        #Operadores de comparacion
+    #Operadores de comparacion
     'INEQUALITY',
     'GREATER_THAN_OR_EQUAL',
     'SMALLER_THAN_OR_EQUAL',
-        #Operadores logicos
+    #Operadores logicos
     'LOGICAND',
     'LOGICOR',
     'LOGICNOT',
@@ -131,16 +130,16 @@ t_STRING = r'("[^"]*"|\'[^\']*\')'
 t_PLUS = r'\+'
 t_INCREMENT = r'\+\+'
 t_MINUS = r'-'
-t_DEVREMENT = r'\-\-'
+t_DECREMENT = r'\-\-'
 t_TIMES = r'\*'
 t_DIVIDE = r'\/'
 t_PERCENT = r'\%'
 t_DOLLARSIGN = r'\$'
-t_GREATER_THAN = r'>'
-t_SMALLER_THAN = r'<'
+t_GREATER_THAN = r'\>'
+t_SMALLER_THAN = r'\<'
 t_EQUAL_COMPARATION = r'=='
-t_ASSIGNATION = r'='
-t_DOTANDCOMMA = r';'
+t_ASSIGNATION = r'\='
+t_DOTANDCOMMA = r'\;'
 #Fin aporte Adair Abrigo
 #Inicio aporte David Rivera
 t_INEQUALITY = r'!='
@@ -169,6 +168,9 @@ def t_PRINT(t):
     r'(Console\.WriteLine|Console\.Write|System\.Console\.WriteLine|System\.Console\.Write)'
     return t
 
+def t_READ(t):
+    r'Console\.ReadLine'
+    return t
 
 #Para contabilizar nro de líneas
 def t_newline(t):

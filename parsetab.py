@@ -6,9 +6,9 @@ _tabversion = '3.10'
 
 _lr_method = 'LALR'
 
-_lr_signature = 'ADDITION_ASSIGNMENT ASSIGNATION BACK_SLASH BOOL BOOLFALSE BOOLTRUE BOOLTYPE BREAK CATCH CHARTYPE CLASS COMMA CONST DECIMALTYPE DIVIDE DIVISION_ASSIGNMENT DOLLARSIGN DOT DOTANDCOMMA DOUBLEPOINT DOUBLETYPE DOUBLE_QUOTATION_MARKS ELSE EQUAL_COMPARATION EXCEPTION FINALLY FLOATTYPE FLOAT_NUMBER FOR GREATER_THAN GREATER_THAN_OR_EQUAL IF INEQUALITY INT INTEGER JUMP_LINE LBRACKET LKEY LOGICAND LOGICNOT LOGICOR LOGICXOR LONG LPARENT MINUS MODULE_ASSIGNMENT MULTIPLICATION_ASSIGNMENT NAMESPACE NEW OBJECT PERCENT PIPE PLUS PRINT PRIVATE PUBLIC RBRACKET RETURN RKEY RPARENT SIPLE_QUOTATION_MARKS SMALLER_THAN SMALLER_THAN_OR_EQUAL STATIC STRING STRINGTYPE SUBTRACTION_ASSIGNMENT SWITCH SYSTEM TABULATION TIMES TRY USING VARIABLE VOID WHILEprogram : block_using block_publicClassblock_using : USING SYSTEMblock_publicClass : PUBLIC CLASS VARIABLE LKEY block_code RKEYblock_code : VARIABLE\n                    | try_catch_simply\n    try_catch_simply : TRY LKEY block_code RKEY CATCH LPARENT EXCEPTION VARIABLE RPARENT LKEY block_code RKEYoperator : logic_operator\n                | arithmetic_operator\n    logic_operator   : GREATER_THAN\n                        | SMALLER_THAN\n                        | EQUAL_COMPARATION\n                        | INEQUALITY\n                        | GREATER_THAN_OR_EQUAL\n                        | SMALLER_THAN_OR_EQUAL\n                        | LOGICAND\n                        | LOGICOR\n                        | LOGICNOT\n    arithmetic_operator  : PLUS\n                            | MINUS\n                            | TIMES\n                            | DIVIDE\n                            | PERCENT\n    '
+_lr_signature = 'ADDITION_ASSIGNMENT ASSIGNATION BACK_SLASH BOOL BOOLFALSE BOOLTRUE BOOLTYPE BREAK CATCH CHAR CHARTYPE CLASS COMMA CONST DECIMALTYPE DECIMAL_NUMBER DECREMENT DIVIDE DIVISION_ASSIGNMENT DOLLARSIGN DOT DOTANDCOMMA DOUBLEPOINT DOUBLE_QUOTATION_MARKS ELSE EQUAL_COMPARATION EXCEPTION FINALLY FLOATTYPE FLOAT_NUMBER FOR GREATER_THAN GREATER_THAN_OR_EQUAL IF INCREMENT INEQUALITY INTEGER INTTYPE JUMP_LINE LBRACKET LKEY LOGICAND LOGICNOT LOGICOR LOGICXOR LONG LPARENT MINUS MODULE_ASSIGNMENT MULTIPLICATION_ASSIGNMENT NAMESPACE NEW OBJECT PERCENT PIPE PLUS PRINT PRIVATE PUBLIC RBRACKET READ RETURN RKEY RPARENT SIPLE_QUOTATION_MARKS SMALLER_THAN SMALLER_THAN_OR_EQUAL STATIC STRING STRINGTYPE SUBTRACTION_ASSIGNMENT SWITCH SYSTEM TABULATION TIMES TRY USING VARIABLE VOID WHILEprogram : block_using block_publicClassblock_using : USING SYSTEM DOTANDCOMMAblock_publicClass : PUBLIC CLASS VARIABLE LKEY block_code RKEYdata_type    : CHARTYPE\n                    | STRINGTYPE\n                    | FLOATTYPE\n                    | DECIMALTYPE\n                    | INTTYPE\n                    | BOOLTYPE\n    access_modifiers : PUBLIC\n                        | PRIVATE\n    arithmetic_operation : value_numeric\n                            | value_numeric arithmetic_operator arithmetic_operation\n    value_numeric    : INTEGER\n                        | FLOAT_NUMBER\n                        | DECIMAL_NUMBER\n                        | VARIABLE\n    value_logic  : BOOLTRUE\n                    | BOOLFALSE\n                    | VARIABLE\n    logic_operation  : value_logic\n                        | value_logic logic_operator logic_operation\n    concatenation    : STRING\n                        | STRING PLUS concatenation\n    value_string : STRING\n                    | CHAR\n                    | VARIABLE\n                    | READ LPARENT RPARENT DOTANDCOMMA\n                    | concatenation\n    value    : value_numeric\n                | value_logic\n                | value_string\n    logic_operator   : GREATER_THAN\n                        | SMALLER_THAN\n                        | EQUAL_COMPARATION\n                        | INEQUALITY\n                        | GREATER_THAN_OR_EQUAL\n                        | SMALLER_THAN_OR_EQUAL\n                        | LOGICAND\n                        | LOGICOR\n                        | LOGICNOT\n                        | LOGICXOR\n    arithmetic_operator  : PLUS\n                            | MINUS\n                            | TIMES\n                            | DIVIDE\n                            | PERCENT\n    constant_assignation : access_modifiers CONST data_type VARIABLE ASSIGNATION value DOTANDCOMMA\n                            | CONST data_type VARIABLE ASSIGNATION value DOTANDCOMMA\n    variable_assignation : access_modifiers data_type VARIABLE ASSIGNATION value DOTANDCOMMA\n                            | data_type VARIABLE ASSIGNATION value DOTANDCOMMA\n                            | \n    block_code : VARIABLE\n                    | try_catch_simply\n    try_catch_simply : TRY LKEY block_code RKEY CATCH LPARENT EXCEPTION VARIABLE RPARENT LKEY block_code RKEY'
     
-_lr_action_items = {'USING':([0,],[3,]),'$end':([1,4,14,],[0,-1,-3,]),'PUBLIC':([2,6,],[5,-2,]),'SYSTEM':([3,],[6,]),'CLASS':([5,],[7,]),'VARIABLE':([7,9,15,20,23,],[8,10,10,21,10,]),'LKEY':([8,13,22,],[9,15,23,]),'TRY':([9,15,23,],[13,13,13,]),'RKEY':([10,11,12,16,24,25,],[-4,14,-5,17,25,-6,]),'CATCH':([17,],[18,]),'LPARENT':([18,],[19,]),'EXCEPTION':([19,],[20,]),'RPARENT':([21,],[22,]),}
+_lr_action_items = {'USING':([0,],[3,]),'$end':([1,4,15,],[0,-1,-3,]),'PUBLIC':([2,8,],[5,-2,]),'SYSTEM':([3,],[6,]),'CLASS':([5,],[7,]),'DOTANDCOMMA':([6,],[8,]),'VARIABLE':([7,10,16,21,24,],[9,11,11,22,11,]),'LKEY':([9,14,23,],[10,16,24,]),'TRY':([10,16,24,],[14,14,14,]),'RKEY':([11,12,13,17,25,26,],[-53,15,-54,18,26,-55,]),'CATCH':([18,],[19,]),'LPARENT':([19,],[20,]),'EXCEPTION':([20,],[21,]),'RPARENT':([22,],[23,]),}
 
 _lr_action = {}
 for _k, _v in _lr_action_items.items():
@@ -17,7 +17,7 @@ for _k, _v in _lr_action_items.items():
       _lr_action[_x][_k] = _y
 del _lr_action_items
 
-_lr_goto_items = {'program':([0,],[1,]),'block_using':([0,],[2,]),'block_publicClass':([2,],[4,]),'block_code':([9,15,23,],[11,16,24,]),'try_catch_simply':([9,15,23,],[12,12,12,]),}
+_lr_goto_items = {'program':([0,],[1,]),'block_using':([0,],[2,]),'block_publicClass':([2,],[4,]),'block_code':([10,16,24,],[12,17,25,]),'try_catch_simply':([10,16,24,],[13,13,13,]),}
 
 _lr_goto = {}
 for _k, _v in _lr_goto_items.items():
@@ -27,26 +27,59 @@ for _k, _v in _lr_goto_items.items():
 del _lr_goto_items
 _lr_productions = [
   ("S' -> program","S'",1,None,None,None),
-  ('program -> block_using block_publicClass','program',2,'p_program','sintactico.py',6),
-  ('block_using -> USING SYSTEM','block_using',2,'p_block_using','sintactico.py',9),
-  ('block_publicClass -> PUBLIC CLASS VARIABLE LKEY block_code RKEY','block_publicClass',6,'p_block_publicClass','sintactico.py',12),
-  ('block_code -> VARIABLE','block_code',1,'p_block_code','sintactico.py',19),
-  ('block_code -> try_catch_simply','block_code',1,'p_block_code','sintactico.py',20),
-  ('try_catch_simply -> TRY LKEY block_code RKEY CATCH LPARENT EXCEPTION VARIABLE RPARENT LKEY block_code RKEY','try_catch_simply',12,'p_try_catch_simply','sintactico.py',24),
-  ('operator -> logic_operator','operator',1,'p_operator','sintactico.py',29),
-  ('operator -> arithmetic_operator','operator',1,'p_operator','sintactico.py',30),
-  ('logic_operator -> GREATER_THAN','logic_operator',1,'p_logic_operators','sintactico.py',34),
-  ('logic_operator -> SMALLER_THAN','logic_operator',1,'p_logic_operators','sintactico.py',35),
-  ('logic_operator -> EQUAL_COMPARATION','logic_operator',1,'p_logic_operators','sintactico.py',36),
-  ('logic_operator -> INEQUALITY','logic_operator',1,'p_logic_operators','sintactico.py',37),
-  ('logic_operator -> GREATER_THAN_OR_EQUAL','logic_operator',1,'p_logic_operators','sintactico.py',38),
-  ('logic_operator -> SMALLER_THAN_OR_EQUAL','logic_operator',1,'p_logic_operators','sintactico.py',39),
-  ('logic_operator -> LOGICAND','logic_operator',1,'p_logic_operators','sintactico.py',40),
-  ('logic_operator -> LOGICOR','logic_operator',1,'p_logic_operators','sintactico.py',41),
-  ('logic_operator -> LOGICNOT','logic_operator',1,'p_logic_operators','sintactico.py',42),
-  ('arithmetic_operator -> PLUS','arithmetic_operator',1,'p_arithmetic_operator','sintactico.py',46),
-  ('arithmetic_operator -> MINUS','arithmetic_operator',1,'p_arithmetic_operator','sintactico.py',47),
-  ('arithmetic_operator -> TIMES','arithmetic_operator',1,'p_arithmetic_operator','sintactico.py',48),
-  ('arithmetic_operator -> DIVIDE','arithmetic_operator',1,'p_arithmetic_operator','sintactico.py',49),
-  ('arithmetic_operator -> PERCENT','arithmetic_operator',1,'p_arithmetic_operator','sintactico.py',50),
+  ('program -> block_using block_publicClass','program',2,'p_program','sintactico.py',14),
+  ('block_using -> USING SYSTEM DOTANDCOMMA','block_using',3,'p_block_using','sintactico.py',17),
+  ('block_publicClass -> PUBLIC CLASS VARIABLE LKEY block_code RKEY','block_publicClass',6,'p_block_publicClass','sintactico.py',20),
+  ('data_type -> CHARTYPE','data_type',1,'p_data_type','sintactico.py',28),
+  ('data_type -> STRINGTYPE','data_type',1,'p_data_type','sintactico.py',29),
+  ('data_type -> FLOATTYPE','data_type',1,'p_data_type','sintactico.py',30),
+  ('data_type -> DECIMALTYPE','data_type',1,'p_data_type','sintactico.py',31),
+  ('data_type -> INTTYPE','data_type',1,'p_data_type','sintactico.py',32),
+  ('data_type -> BOOLTYPE','data_type',1,'p_data_type','sintactico.py',33),
+  ('access_modifiers -> PUBLIC','access_modifiers',1,'p_access_modifiers','sintactico.py',37),
+  ('access_modifiers -> PRIVATE','access_modifiers',1,'p_access_modifiers','sintactico.py',38),
+  ('arithmetic_operation -> value_numeric','arithmetic_operation',1,'p_arithmetic_operation','sintactico.py',42),
+  ('arithmetic_operation -> value_numeric arithmetic_operator arithmetic_operation','arithmetic_operation',3,'p_arithmetic_operation','sintactico.py',43),
+  ('value_numeric -> INTEGER','value_numeric',1,'p_value_numeric','sintactico.py',47),
+  ('value_numeric -> FLOAT_NUMBER','value_numeric',1,'p_value_numeric','sintactico.py',48),
+  ('value_numeric -> DECIMAL_NUMBER','value_numeric',1,'p_value_numeric','sintactico.py',49),
+  ('value_numeric -> VARIABLE','value_numeric',1,'p_value_numeric','sintactico.py',50),
+  ('value_logic -> BOOLTRUE','value_logic',1,'p_value_logic','sintactico.py',54),
+  ('value_logic -> BOOLFALSE','value_logic',1,'p_value_logic','sintactico.py',55),
+  ('value_logic -> VARIABLE','value_logic',1,'p_value_logic','sintactico.py',56),
+  ('logic_operation -> value_logic','logic_operation',1,'p_logic_operation','sintactico.py',60),
+  ('logic_operation -> value_logic logic_operator logic_operation','logic_operation',3,'p_logic_operation','sintactico.py',61),
+  ('concatenation -> STRING','concatenation',1,'p_concatenation','sintactico.py',65),
+  ('concatenation -> STRING PLUS concatenation','concatenation',3,'p_concatenation','sintactico.py',66),
+  ('value_string -> STRING','value_string',1,'p_value_string','sintactico.py',70),
+  ('value_string -> CHAR','value_string',1,'p_value_string','sintactico.py',71),
+  ('value_string -> VARIABLE','value_string',1,'p_value_string','sintactico.py',72),
+  ('value_string -> READ LPARENT RPARENT DOTANDCOMMA','value_string',4,'p_value_string','sintactico.py',73),
+  ('value_string -> concatenation','value_string',1,'p_value_string','sintactico.py',74),
+  ('value -> value_numeric','value',1,'p_value','sintactico.py',78),
+  ('value -> value_logic','value',1,'p_value','sintactico.py',79),
+  ('value -> value_string','value',1,'p_value','sintactico.py',80),
+  ('logic_operator -> GREATER_THAN','logic_operator',1,'p_logic_operator','sintactico.py',84),
+  ('logic_operator -> SMALLER_THAN','logic_operator',1,'p_logic_operator','sintactico.py',85),
+  ('logic_operator -> EQUAL_COMPARATION','logic_operator',1,'p_logic_operator','sintactico.py',86),
+  ('logic_operator -> INEQUALITY','logic_operator',1,'p_logic_operator','sintactico.py',87),
+  ('logic_operator -> GREATER_THAN_OR_EQUAL','logic_operator',1,'p_logic_operator','sintactico.py',88),
+  ('logic_operator -> SMALLER_THAN_OR_EQUAL','logic_operator',1,'p_logic_operator','sintactico.py',89),
+  ('logic_operator -> LOGICAND','logic_operator',1,'p_logic_operator','sintactico.py',90),
+  ('logic_operator -> LOGICOR','logic_operator',1,'p_logic_operator','sintactico.py',91),
+  ('logic_operator -> LOGICNOT','logic_operator',1,'p_logic_operator','sintactico.py',92),
+  ('logic_operator -> LOGICXOR','logic_operator',1,'p_logic_operator','sintactico.py',93),
+  ('arithmetic_operator -> PLUS','arithmetic_operator',1,'p_arithmetic_operator','sintactico.py',97),
+  ('arithmetic_operator -> MINUS','arithmetic_operator',1,'p_arithmetic_operator','sintactico.py',98),
+  ('arithmetic_operator -> TIMES','arithmetic_operator',1,'p_arithmetic_operator','sintactico.py',99),
+  ('arithmetic_operator -> DIVIDE','arithmetic_operator',1,'p_arithmetic_operator','sintactico.py',100),
+  ('arithmetic_operator -> PERCENT','arithmetic_operator',1,'p_arithmetic_operator','sintactico.py',101),
+  ('constant_assignation -> access_modifiers CONST data_type VARIABLE ASSIGNATION value DOTANDCOMMA','constant_assignation',7,'p_constant_assignation','sintactico.py',104),
+  ('constant_assignation -> CONST data_type VARIABLE ASSIGNATION value DOTANDCOMMA','constant_assignation',6,'p_constant_assignation','sintactico.py',105),
+  ('variable_assignation -> access_modifiers data_type VARIABLE ASSIGNATION value DOTANDCOMMA','variable_assignation',6,'p_variable_assignation','sintactico.py',109),
+  ('variable_assignation -> data_type VARIABLE ASSIGNATION value DOTANDCOMMA','variable_assignation',5,'p_variable_assignation','sintactico.py',110),
+  ('variable_assignation -> <empty>','variable_assignation',0,'p_variable_assignation','sintactico.py',111),
+  ('block_code -> VARIABLE','block_code',1,'p_block_code','sintactico.py',115),
+  ('block_code -> try_catch_simply','block_code',1,'p_block_code','sintactico.py',116),
+  ('try_catch_simply -> TRY LKEY block_code RKEY CATCH LPARENT EXCEPTION VARIABLE RPARENT LKEY block_code RKEY','try_catch_simply',12,'p_try_catch_simply','sintactico.py',120),
 ]
