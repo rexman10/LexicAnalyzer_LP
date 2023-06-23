@@ -27,7 +27,10 @@ reserved = {
     "return": "RETURN",
     "int": "INT",
     "for": "FOR",
+    "finally": "FINALLY",
+    "exception": "EXCEPTION",
     #Fin aporte Adair Abrigo
+
     #Inicio aporte David Rivera
     "break": "BREAK",
     "try": "TRY",
@@ -38,7 +41,8 @@ reserved = {
     "catch": "CATCH",
     #Fin aporte David Rivera
     #Inicio aporte Kenneth Pacheco
-    "using": "USING"
+    "using": "USING",
+    "system": "SYSTEM"
     #Fin aporte Kenneth Pacheco
 
 }
@@ -211,12 +215,9 @@ def analizar(data):
         tok = lexer.token()
         if not tok:
             break
-        print(tok)
-
 
 archivo = open("algoritmo3.txt")
 for linea in archivo:
-    print(">>"+linea)
     analizar(linea)
     if len(linea)==0:
         break
