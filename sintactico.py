@@ -3,18 +3,15 @@ import ply.yacc as yacc
 from main import tokens
 
 """ Ejemplos con los que probar:
-using System;
-public class clase1 {
-        adas
-    }
-using system public class clase1 { try{ acacsacasc } catch (exception e){ dsadas } }
+using System public class clase1 { adas } 
+using System public class clase1 { try{ acacsacasc } catch (exception e){ dsadas } }
  """
  
 def p_program(p):
     'program : block_using block_publicClass'
 
 def p_block_using(p):
-    'block_using : USING SYSTEM DOTANDCOMMA JUMP_LINE'
+    'block_using : USING SYSTEM'
 
 def p_block_publicClass(p):
     'block_publicClass : PUBLIC CLASS VARIABLE LKEY block_code RKEY'
