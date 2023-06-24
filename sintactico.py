@@ -6,7 +6,12 @@ from main import tokens
 using System; public class clase1 { adas } 
 using System; public class clase1 { try{ acacsacasc } catch (exception e){ dsadas } }
 using System; public class clase1 { try{ acacsacasc } catch (exception e){ dsadas } finally { final } }
+using System; public class clase1 { const int var2 = 14 ; }
 using System; public class clase1 { const int var2 = 14 , var3 = 15 ; }
+using System; public class clase1 { int var2 = 14 ; }
+using System; public class clase1 { int var2 = 14 ; var3 = var2 ; }
+using System; public class clase1 { int var2 = 14 ; var3 = var2 ; var5 = 4 ; }
+este no vale aun : using System; public class clase1 { int var2 = 14 ; var3 = var2 ; int var5 = 4 ; }
 """
  
 def p_program(p):
@@ -41,11 +46,19 @@ def p_variable_assignation(p):
                                     | data_type multi_or_one_assignation DOTANDCOMMA
                                     | data_type VARIABLE DOTANDCOMMA
                                     | multi_or_one_assignation DOTANDCOMMA
+                                    | data_type block_assignations
+
     '''
 def p_constant_assignation(p):
     '''constant_assignation : access_modifiers CONST data_type multi_or_one_assignation DOTANDCOMMA
                             | CONST data_type multi_or_one_assignation DOTANDCOMMA
                             | CONST data_type VARIABLE DOTANDCOMMA
+                            | CONST data_type block_assignations
+    '''
+
+def p_block_assignations(p):
+    '''block_assignations : assignation_key_value DOTANDCOMMA
+                            | assignation_key_value DOTANDCOMMA block_assignations                       
     '''
 
 def p_multi_or_one_assignation(p):
@@ -120,6 +133,9 @@ def p_access_modifiers(p):
 
 
 
+
+""" Oeraciones """
+
 def p_arithmetic_operation(p):
     '''arithmetic_operation : value_numeric
                             | value_numeric arithmetic_operator arithmetic_operation
@@ -159,6 +175,14 @@ def p_arithmetic_operator(p):
 def p_variable_assignation_multiline(p):
     '''variable_assignation_multiline   : 
     '''
+
+
+
+
+
+""" Estructura de datos """
+
+
 
 
 def p_error(p):
