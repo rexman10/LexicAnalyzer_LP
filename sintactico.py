@@ -3,10 +3,10 @@ import ply.yacc as yacc
 from main import tokens
 
 """ Ejemplos con los que probar:
-using system;
+using System;
 public class clase1 {
-adas
-}
+        adas
+    }
 using system public class clase1 { try{ acacsacasc } catch (exception e){ dsadas } }
  """
  
@@ -14,7 +14,7 @@ def p_program(p):
     'program : block_using block_publicClass'
 
 def p_block_using(p):
-    'block_using : USING SYSTEM DOTANDCOMMA'
+    'block_using : USING SYSTEM DOTANDCOMMA JUMP_LINE'
 
 def p_block_publicClass(p):
     'block_publicClass : PUBLIC CLASS VARIABLE LKEY block_code RKEY'
@@ -70,7 +70,7 @@ def p_value_string(p):
     '''value_string : STRING
                     | CHAR
                     | VARIABLE
-                    | READ LPARENT RPARENT DOTANDCOMMA
+                    | READ LPARENT RPARENT
                     | concatenation
     '''
 
@@ -101,14 +101,24 @@ def p_arithmetic_operator(p):
                             | PERCENT
     '''
 def p_constant_assignation(p):
-    '''constant_assignation : access_modifiers CONST data_type VARIABLE ASSIGNATION value DOTANDCOMMA
-                            | CONST data_type VARIABLE ASSIGNATION value DOTANDCOMMA
+    '''constant_assignation : access_modifiers CONST data_type VARIABLE ASSIGNATION value
+                            | CONST data_type VARIABLE ASSIGNATION value
     '''
 
-def p_variable_assignation(p):
-    '''variable_assignation : access_modifiers data_type VARIABLE ASSIGNATION value DOTANDCOMMA
-                            | data_type VARIABLE ASSIGNATION value DOTANDCOMMA
-                            | 
+def p_variable_assignation_simple(p):
+    '''variable_assignation_simple  : access_modifiers data_type VARIABLE ASSIGNATION value
+                                    | data_type VARIABLE ASSIGNATION value
+                                    | data_type VARIABLE
+                                    | VARIABLE ASSIGNATION value
+    '''
+
+def p_variable_multivalue(p):
+    '''variable_multivalue  : variable_assignation_simple
+                            | variable_assignation_simple COMMA variable_multivalue
+    '''
+
+def p_variable_assignation_multiline(p):
+    '''variable_assignation_multiline   : 
     '''
 
 def p_block_code(p):

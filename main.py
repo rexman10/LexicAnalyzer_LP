@@ -40,7 +40,7 @@ reserved = {
     #Fin aporte David Rivera
     #Inicio aporte Kenneth Pacheco
     "using": "USING",
-    "system": "SYSTEM"
+    "System": "SYSTEM"
     #Fin aporte Kenneth Pacheco
 
 }
@@ -66,7 +66,6 @@ tokens = (
     'DECIMAL_NUMBER',
     'INTEGER',
     'BOOL',
-    'OBJECT',
     'STRING',
     'CHAR',
     'PLUS',
@@ -178,10 +177,6 @@ def t_newline(t):
   t.lexer.lineno += len(t.value)
 
 #Inicio aporte Juan Guadalupe
-def t_OBJECT(t):
-  r'[A-Z]\w*'
-  return t
-
 def t_VARIABLE(t):
   r'[a-zA-Z\_]\w*'
   t.type = reserved.get(t.value,'VARIABLE')

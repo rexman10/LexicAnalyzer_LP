@@ -6,9 +6,9 @@ _tabversion = '3.10'
 
 _lr_method = 'LALR'
 
-_lr_signature = 'ADDITION_ASSIGNMENT ASSIGNATION BACK_SLASH BOOL BOOLFALSE BOOLTRUE BOOLTYPE BREAK CATCH CHAR CHARTYPE CLASS COMMA CONST DECIMALTYPE DECIMAL_NUMBER DECREMENT DIVIDE DIVISION_ASSIGNMENT DOLLARSIGN DOT DOTANDCOMMA DOUBLEPOINT DOUBLE_QUOTATION_MARKS ELSE EQUAL_COMPARATION EXCEPTION FINALLY FLOATTYPE FLOAT_NUMBER FOR GREATER_THAN GREATER_THAN_OR_EQUAL IF INCREMENT INEQUALITY INTEGER INTTYPE JUMP_LINE LBRACKET LKEY LOGICAND LOGICNOT LOGICOR LOGICXOR LONG LPARENT MINUS MODULE_ASSIGNMENT MULTIPLICATION_ASSIGNMENT NAMESPACE NEW OBJECT PERCENT PIPE PLUS PRINT PRIVATE PUBLIC RBRACKET READ RETURN RKEY RPARENT SIPLE_QUOTATION_MARKS SMALLER_THAN SMALLER_THAN_OR_EQUAL STATIC STRING STRINGTYPE SUBTRACTION_ASSIGNMENT SWITCH SYSTEM TABULATION TIMES TRY USING VARIABLE VOID WHILEprogram : block_using block_publicClassblock_using : USING SYSTEM DOTANDCOMMAblock_publicClass : PUBLIC CLASS VARIABLE LKEY block_code RKEYdata_type    : CHARTYPE\n                    | STRINGTYPE\n                    | FLOATTYPE\n                    | DECIMALTYPE\n                    | INTTYPE\n                    | BOOLTYPE\n    access_modifiers : PUBLIC\n                        | PRIVATE\n    arithmetic_operation : value_numeric\n                            | value_numeric arithmetic_operator arithmetic_operation\n    value_numeric    : INTEGER\n                        | FLOAT_NUMBER\n                        | DECIMAL_NUMBER\n                        | VARIABLE\n    value_logic  : BOOLTRUE\n                    | BOOLFALSE\n                    | VARIABLE\n    logic_operation  : value_logic\n                        | value_logic logic_operator logic_operation\n    concatenation    : STRING\n                        | STRING PLUS concatenation\n    value_string : STRING\n                    | CHAR\n                    | VARIABLE\n                    | READ LPARENT RPARENT DOTANDCOMMA\n                    | concatenation\n    value    : value_numeric\n                | value_logic\n                | value_string\n    logic_operator   : GREATER_THAN\n                        | SMALLER_THAN\n                        | EQUAL_COMPARATION\n                        | INEQUALITY\n                        | GREATER_THAN_OR_EQUAL\n                        | SMALLER_THAN_OR_EQUAL\n                        | LOGICAND\n                        | LOGICOR\n                        | LOGICNOT\n                        | LOGICXOR\n    arithmetic_operator  : PLUS\n                            | MINUS\n                            | TIMES\n                            | DIVIDE\n                            | PERCENT\n    constant_assignation : access_modifiers CONST data_type VARIABLE ASSIGNATION value DOTANDCOMMA\n                            | CONST data_type VARIABLE ASSIGNATION value DOTANDCOMMA\n    variable_assignation : access_modifiers data_type VARIABLE ASSIGNATION value DOTANDCOMMA\n                            | data_type VARIABLE ASSIGNATION value DOTANDCOMMA\n                            | \n    block_code : VARIABLE\n                    | try_catch_simply\n    try_catch_simply : TRY LKEY block_code RKEY CATCH LPARENT EXCEPTION VARIABLE RPARENT LKEY block_code RKEY'
+_lr_signature = 'ADDITION_ASSIGNMENT ASSIGNATION BACK_SLASH BOOL BOOLFALSE BOOLTRUE BOOLTYPE BREAK CATCH CHAR CHARTYPE CLASS COMMA CONST DECIMALTYPE DECIMAL_NUMBER DECREMENT DIVIDE DIVISION_ASSIGNMENT DOLLARSIGN DOT DOTANDCOMMA DOUBLEPOINT DOUBLE_QUOTATION_MARKS ELSE EQUAL_COMPARATION EXCEPTION FINALLY FLOATTYPE FLOAT_NUMBER FOR GREATER_THAN GREATER_THAN_OR_EQUAL IF INCREMENT INEQUALITY INTEGER INTTYPE JUMP_LINE LBRACKET LKEY LOGICAND LOGICNOT LOGICOR LOGICXOR LONG LPARENT MINUS MODULE_ASSIGNMENT MULTIPLICATION_ASSIGNMENT NAMESPACE NEW PERCENT PIPE PLUS PRINT PRIVATE PUBLIC RBRACKET READ RETURN RKEY RPARENT SIPLE_QUOTATION_MARKS SMALLER_THAN SMALLER_THAN_OR_EQUAL STATIC STRING STRINGTYPE SUBTRACTION_ASSIGNMENT SWITCH SYSTEM TABULATION TIMES TRY USING VARIABLE VOID WHILEprogram : block_using block_publicClassblock_using : USING SYSTEM DOTANDCOMMA JUMP_LINEblock_publicClass : PUBLIC CLASS VARIABLE LKEY block_code RKEYdata_type    : CHARTYPE\n                    | STRINGTYPE\n                    | FLOATTYPE\n                    | DECIMALTYPE\n                    | INTTYPE\n                    | BOOLTYPE\n    access_modifiers : PUBLIC\n                        | PRIVATE\n    arithmetic_operation : value_numeric\n                            | value_numeric arithmetic_operator arithmetic_operation\n    value_numeric    : INTEGER\n                        | FLOAT_NUMBER\n                        | DECIMAL_NUMBER\n                        | VARIABLE\n    value_logic  : BOOLTRUE\n                    | BOOLFALSE\n                    | VARIABLE\n    logic_operation  : value_logic\n                        | value_logic logic_operator logic_operation\n    concatenation    : STRING\n                        | STRING PLUS concatenation\n    value_string : STRING\n                    | CHAR\n                    | VARIABLE\n                    | READ LPARENT RPARENT\n                    | concatenation\n    value    : value_numeric\n                | value_logic\n                | value_string\n    logic_operator   : GREATER_THAN\n                        | SMALLER_THAN\n                        | EQUAL_COMPARATION\n                        | INEQUALITY\n                        | GREATER_THAN_OR_EQUAL\n                        | SMALLER_THAN_OR_EQUAL\n                        | LOGICAND\n                        | LOGICOR\n                        | LOGICNOT\n                        | LOGICXOR\n    arithmetic_operator  : PLUS\n                            | MINUS\n                            | TIMES\n                            | DIVIDE\n                            | PERCENT\n    constant_assignation : access_modifiers CONST data_type VARIABLE ASSIGNATION value\n                            | CONST data_type VARIABLE ASSIGNATION value\n    variable_assignation_simple  : access_modifiers data_type VARIABLE ASSIGNATION value\n                                    | data_type VARIABLE ASSIGNATION value\n                                    | data_type VARIABLE\n                                    | VARIABLE ASSIGNATION value\n    variable_multivalue  : variable_assignation_simple\n                            | variable_assignation_simple COMMA variable_multivalue\n    variable_assignation_multiline   : \n    block_code : VARIABLE\n                    | try_catch_simply\n    try_catch_simply : TRY LKEY block_code RKEY CATCH LPARENT EXCEPTION VARIABLE RPARENT LKEY block_code RKEY'
     
-_lr_action_items = {'USING':([0,],[3,]),'$end':([1,4,15,],[0,-1,-3,]),'PUBLIC':([2,8,],[5,-2,]),'SYSTEM':([3,],[6,]),'CLASS':([5,],[7,]),'DOTANDCOMMA':([6,],[8,]),'VARIABLE':([7,10,16,21,24,],[9,11,11,22,11,]),'LKEY':([9,14,23,],[10,16,24,]),'TRY':([10,16,24,],[14,14,14,]),'RKEY':([11,12,13,17,25,26,],[-53,15,-54,18,26,-55,]),'CATCH':([18,],[19,]),'LPARENT':([19,],[20,]),'EXCEPTION':([20,],[21,]),'RPARENT':([22,],[23,]),}
+_lr_action_items = {'USING':([0,],[3,]),'$end':([1,4,16,],[0,-1,-3,]),'PUBLIC':([2,10,],[5,-2,]),'SYSTEM':([3,],[6,]),'CLASS':([5,],[7,]),'DOTANDCOMMA':([6,],[8,]),'VARIABLE':([7,11,17,22,25,],[9,12,12,23,12,]),'JUMP_LINE':([8,],[10,]),'LKEY':([9,15,24,],[11,17,25,]),'TRY':([11,17,25,],[15,15,15,]),'RKEY':([12,13,14,18,26,27,],[-57,16,-58,19,27,-59,]),'CATCH':([19,],[20,]),'LPARENT':([20,],[21,]),'EXCEPTION':([21,],[22,]),'RPARENT':([23,],[24,]),}
 
 _lr_action = {}
 for _k, _v in _lr_action_items.items():
@@ -17,7 +17,7 @@ for _k, _v in _lr_action_items.items():
       _lr_action[_x][_k] = _y
 del _lr_action_items
 
-_lr_goto_items = {'program':([0,],[1,]),'block_using':([0,],[2,]),'block_publicClass':([2,],[4,]),'block_code':([10,16,24,],[12,17,25,]),'try_catch_simply':([10,16,24,],[13,13,13,]),}
+_lr_goto_items = {'program':([0,],[1,]),'block_using':([0,],[2,]),'block_publicClass':([2,],[4,]),'block_code':([11,17,25,],[13,18,26,]),'try_catch_simply':([11,17,25,],[14,14,14,]),}
 
 _lr_goto = {}
 for _k, _v in _lr_goto_items.items():
@@ -28,7 +28,7 @@ del _lr_goto_items
 _lr_productions = [
   ("S' -> program","S'",1,None,None,None),
   ('program -> block_using block_publicClass','program',2,'p_program','sintactico.py',14),
-  ('block_using -> USING SYSTEM DOTANDCOMMA','block_using',3,'p_block_using','sintactico.py',17),
+  ('block_using -> USING SYSTEM DOTANDCOMMA JUMP_LINE','block_using',4,'p_block_using','sintactico.py',17),
   ('block_publicClass -> PUBLIC CLASS VARIABLE LKEY block_code RKEY','block_publicClass',6,'p_block_publicClass','sintactico.py',20),
   ('data_type -> CHARTYPE','data_type',1,'p_data_type','sintactico.py',28),
   ('data_type -> STRINGTYPE','data_type',1,'p_data_type','sintactico.py',29),
@@ -54,7 +54,7 @@ _lr_productions = [
   ('value_string -> STRING','value_string',1,'p_value_string','sintactico.py',70),
   ('value_string -> CHAR','value_string',1,'p_value_string','sintactico.py',71),
   ('value_string -> VARIABLE','value_string',1,'p_value_string','sintactico.py',72),
-  ('value_string -> READ LPARENT RPARENT DOTANDCOMMA','value_string',4,'p_value_string','sintactico.py',73),
+  ('value_string -> READ LPARENT RPARENT','value_string',3,'p_value_string','sintactico.py',73),
   ('value_string -> concatenation','value_string',1,'p_value_string','sintactico.py',74),
   ('value -> value_numeric','value',1,'p_value','sintactico.py',78),
   ('value -> value_logic','value',1,'p_value','sintactico.py',79),
@@ -74,12 +74,16 @@ _lr_productions = [
   ('arithmetic_operator -> TIMES','arithmetic_operator',1,'p_arithmetic_operator','sintactico.py',99),
   ('arithmetic_operator -> DIVIDE','arithmetic_operator',1,'p_arithmetic_operator','sintactico.py',100),
   ('arithmetic_operator -> PERCENT','arithmetic_operator',1,'p_arithmetic_operator','sintactico.py',101),
-  ('constant_assignation -> access_modifiers CONST data_type VARIABLE ASSIGNATION value DOTANDCOMMA','constant_assignation',7,'p_constant_assignation','sintactico.py',104),
-  ('constant_assignation -> CONST data_type VARIABLE ASSIGNATION value DOTANDCOMMA','constant_assignation',6,'p_constant_assignation','sintactico.py',105),
-  ('variable_assignation -> access_modifiers data_type VARIABLE ASSIGNATION value DOTANDCOMMA','variable_assignation',6,'p_variable_assignation','sintactico.py',109),
-  ('variable_assignation -> data_type VARIABLE ASSIGNATION value DOTANDCOMMA','variable_assignation',5,'p_variable_assignation','sintactico.py',110),
-  ('variable_assignation -> <empty>','variable_assignation',0,'p_variable_assignation','sintactico.py',111),
-  ('block_code -> VARIABLE','block_code',1,'p_block_code','sintactico.py',115),
-  ('block_code -> try_catch_simply','block_code',1,'p_block_code','sintactico.py',116),
-  ('try_catch_simply -> TRY LKEY block_code RKEY CATCH LPARENT EXCEPTION VARIABLE RPARENT LKEY block_code RKEY','try_catch_simply',12,'p_try_catch_simply','sintactico.py',120),
+  ('constant_assignation -> access_modifiers CONST data_type VARIABLE ASSIGNATION value','constant_assignation',6,'p_constant_assignation','sintactico.py',104),
+  ('constant_assignation -> CONST data_type VARIABLE ASSIGNATION value','constant_assignation',5,'p_constant_assignation','sintactico.py',105),
+  ('variable_assignation_simple -> access_modifiers data_type VARIABLE ASSIGNATION value','variable_assignation_simple',5,'p_variable_assignation_simple','sintactico.py',109),
+  ('variable_assignation_simple -> data_type VARIABLE ASSIGNATION value','variable_assignation_simple',4,'p_variable_assignation_simple','sintactico.py',110),
+  ('variable_assignation_simple -> data_type VARIABLE','variable_assignation_simple',2,'p_variable_assignation_simple','sintactico.py',111),
+  ('variable_assignation_simple -> VARIABLE ASSIGNATION value','variable_assignation_simple',3,'p_variable_assignation_simple','sintactico.py',112),
+  ('variable_multivalue -> variable_assignation_simple','variable_multivalue',1,'p_variable_multivalue','sintactico.py',116),
+  ('variable_multivalue -> variable_assignation_simple COMMA variable_multivalue','variable_multivalue',3,'p_variable_multivalue','sintactico.py',117),
+  ('variable_assignation_multiline -> <empty>','variable_assignation_multiline',0,'p_variable_assignation_multiline','sintactico.py',121),
+  ('block_code -> VARIABLE','block_code',1,'p_block_code','sintactico.py',125),
+  ('block_code -> try_catch_simply','block_code',1,'p_block_code','sintactico.py',126),
+  ('try_catch_simply -> TRY LKEY block_code RKEY CATCH LPARENT EXCEPTION VARIABLE RPARENT LKEY block_code RKEY','try_catch_simply',12,'p_try_catch_simply','sintactico.py',130),
 ]

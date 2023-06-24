@@ -6,7 +6,6 @@ Unused terminals:
     BACK_SLASH
     BOOL
     BREAK
-    COMMA
     DECREMENT
     DIVISION_ASSIGNMENT
     DOLLARSIGN
@@ -18,14 +17,12 @@ Unused terminals:
     FOR
     IF
     INCREMENT
-    JUMP_LINE
     LBRACKET
     LONG
     MODULE_ASSIGNMENT
     MULTIPLICATION_ASSIGNMENT
     NAMESPACE
     NEW
-    OBJECT
     PIPE
     PRINT
     RBRACKET
@@ -42,7 +39,7 @@ Grammar
 
 Rule 0     S' -> program
 Rule 1     program -> block_using block_publicClass
-Rule 2     block_using -> USING SYSTEM DOTANDCOMMA
+Rule 2     block_using -> USING SYSTEM DOTANDCOMMA JUMP_LINE
 Rule 3     block_publicClass -> PUBLIC CLASS VARIABLE LKEY block_code RKEY
 Rule 4     data_type -> CHARTYPE
 Rule 5     data_type -> STRINGTYPE
@@ -68,7 +65,7 @@ Rule 24    concatenation -> STRING PLUS concatenation
 Rule 25    value_string -> STRING
 Rule 26    value_string -> CHAR
 Rule 27    value_string -> VARIABLE
-Rule 28    value_string -> READ LPARENT RPARENT DOTANDCOMMA
+Rule 28    value_string -> READ LPARENT RPARENT
 Rule 29    value_string -> concatenation
 Rule 30    value -> value_numeric
 Rule 31    value -> value_logic
@@ -88,30 +85,34 @@ Rule 44    arithmetic_operator -> MINUS
 Rule 45    arithmetic_operator -> TIMES
 Rule 46    arithmetic_operator -> DIVIDE
 Rule 47    arithmetic_operator -> PERCENT
-Rule 48    constant_assignation -> access_modifiers CONST data_type VARIABLE ASSIGNATION value DOTANDCOMMA
-Rule 49    constant_assignation -> CONST data_type VARIABLE ASSIGNATION value DOTANDCOMMA
-Rule 50    variable_assignation -> access_modifiers data_type VARIABLE ASSIGNATION value DOTANDCOMMA
-Rule 51    variable_assignation -> data_type VARIABLE ASSIGNATION value DOTANDCOMMA
-Rule 52    variable_assignation -> <empty>
-Rule 53    block_code -> VARIABLE
-Rule 54    block_code -> try_catch_simply
-Rule 55    try_catch_simply -> TRY LKEY block_code RKEY CATCH LPARENT EXCEPTION VARIABLE RPARENT LKEY block_code RKEY
+Rule 48    constant_assignation -> access_modifiers CONST data_type VARIABLE ASSIGNATION value
+Rule 49    constant_assignation -> CONST data_type VARIABLE ASSIGNATION value
+Rule 50    variable_assignation_simple -> access_modifiers data_type VARIABLE ASSIGNATION value
+Rule 51    variable_assignation_simple -> data_type VARIABLE ASSIGNATION value
+Rule 52    variable_assignation_simple -> data_type VARIABLE
+Rule 53    variable_assignation_simple -> VARIABLE ASSIGNATION value
+Rule 54    variable_multivalue -> variable_assignation_simple
+Rule 55    variable_multivalue -> variable_assignation_simple COMMA variable_multivalue
+Rule 56    variable_assignation_multiline -> <empty>
+Rule 57    block_code -> VARIABLE
+Rule 58    block_code -> try_catch_simply
+Rule 59    try_catch_simply -> TRY LKEY block_code RKEY CATCH LPARENT EXCEPTION VARIABLE RPARENT LKEY block_code RKEY
 
 Terminals, with rules where they appear
 
 ADDITION_ASSIGNMENT  : 
-ASSIGNATION          : 48 49 50 51
+ASSIGNATION          : 48 49 50 51 53
 BACK_SLASH           : 
 BOOL                 : 
 BOOLFALSE            : 19
 BOOLTRUE             : 18
 BOOLTYPE             : 9
 BREAK                : 
-CATCH                : 55
+CATCH                : 59
 CHAR                 : 26
 CHARTYPE             : 4
 CLASS                : 3
-COMMA                : 
+COMMA                : 55
 CONST                : 48 49
 DECIMALTYPE          : 7
 DECIMAL_NUMBER       : 16
@@ -120,12 +121,12 @@ DIVIDE               : 46
 DIVISION_ASSIGNMENT  : 
 DOLLARSIGN           : 
 DOT                  : 
-DOTANDCOMMA          : 2 28 48 49 50 51
+DOTANDCOMMA          : 2
 DOUBLEPOINT          : 
 DOUBLE_QUOTATION_MARKS : 
 ELSE                 : 
 EQUAL_COMPARATION    : 35
-EXCEPTION            : 55
+EXCEPTION            : 59
 FINALLY              : 
 FLOATTYPE            : 6
 FLOAT_NUMBER         : 15
@@ -137,21 +138,20 @@ INCREMENT            :
 INEQUALITY           : 36
 INTEGER              : 14
 INTTYPE              : 8
-JUMP_LINE            : 
+JUMP_LINE            : 2
 LBRACKET             : 
-LKEY                 : 3 55 55
+LKEY                 : 3 59 59
 LOGICAND             : 39
 LOGICNOT             : 41
 LOGICOR              : 40
 LOGICXOR             : 42
 LONG                 : 
-LPARENT              : 28 55
+LPARENT              : 28 59
 MINUS                : 44
 MODULE_ASSIGNMENT    : 
 MULTIPLICATION_ASSIGNMENT : 
 NAMESPACE            : 
 NEW                  : 
-OBJECT               : 
 PERCENT              : 47
 PIPE                 : 
 PLUS                 : 24 43
@@ -161,8 +161,8 @@ PUBLIC               : 3 10
 RBRACKET             : 
 READ                 : 28
 RETURN               : 
-RKEY                 : 3 55 55
-RPARENT              : 28 55
+RKEY                 : 3 59 59
+RPARENT              : 28 59
 SIPLE_QUOTATION_MARKS : 
 SMALLER_THAN         : 34
 SMALLER_THAN_OR_EQUAL : 38
@@ -174,9 +174,9 @@ SWITCH               :
 SYSTEM               : 2
 TABULATION           : 
 TIMES                : 45
-TRY                  : 55
+TRY                  : 59
 USING                : 2
-VARIABLE             : 3 17 20 27 48 49 50 51 53 55
+VARIABLE             : 3 17 20 27 48 49 50 51 52 53 57 59
 VOID                 : 
 WHILE                : 
 error                : 
@@ -186,21 +186,23 @@ Nonterminals, with rules where they appear
 access_modifiers     : 48 50
 arithmetic_operation : 13
 arithmetic_operator  : 13
-block_code           : 3 55 55
+block_code           : 3 59 59
 block_publicClass    : 1
 block_using          : 1
 concatenation        : 24 29
 constant_assignation : 
-data_type            : 48 49 50 51
+data_type            : 48 49 50 51 52
 logic_operation      : 22
 logic_operator       : 22
 program              : 0
-try_catch_simply     : 54
-value                : 48 49 50 51
+try_catch_simply     : 58
+value                : 48 49 50 51 53
 value_logic          : 21 22 31
 value_numeric        : 12 13 30
 value_string         : 32
-variable_assignation : 
+variable_assignation_multiline : 
+variable_assignation_simple : 54 55
+variable_multivalue  : 55
 
 Parsing method: LALR
 
@@ -208,7 +210,7 @@ state 0
 
     (0) S' -> . program
     (1) program -> . block_using block_publicClass
-    (2) block_using -> . USING SYSTEM DOTANDCOMMA
+    (2) block_using -> . USING SYSTEM DOTANDCOMMA JUMP_LINE
 
     USING           shift and go to state 3
 
@@ -232,7 +234,7 @@ state 2
 
 state 3
 
-    (2) block_using -> USING . SYSTEM DOTANDCOMMA
+    (2) block_using -> USING . SYSTEM DOTANDCOMMA JUMP_LINE
 
     SYSTEM          shift and go to state 6
 
@@ -253,7 +255,7 @@ state 5
 
 state 6
 
-    (2) block_using -> USING SYSTEM . DOTANDCOMMA
+    (2) block_using -> USING SYSTEM . DOTANDCOMMA JUMP_LINE
 
     DOTANDCOMMA     shift and go to state 8
 
@@ -267,151 +269,158 @@ state 7
 
 state 8
 
-    (2) block_using -> USING SYSTEM DOTANDCOMMA .
+    (2) block_using -> USING SYSTEM DOTANDCOMMA . JUMP_LINE
 
-    PUBLIC          reduce using rule 2 (block_using -> USING SYSTEM DOTANDCOMMA .)
+    JUMP_LINE       shift and go to state 10
 
 
 state 9
 
     (3) block_publicClass -> PUBLIC CLASS VARIABLE . LKEY block_code RKEY
 
-    LKEY            shift and go to state 10
+    LKEY            shift and go to state 11
 
 
 state 10
 
-    (3) block_publicClass -> PUBLIC CLASS VARIABLE LKEY . block_code RKEY
-    (53) block_code -> . VARIABLE
-    (54) block_code -> . try_catch_simply
-    (55) try_catch_simply -> . TRY LKEY block_code RKEY CATCH LPARENT EXCEPTION VARIABLE RPARENT LKEY block_code RKEY
+    (2) block_using -> USING SYSTEM DOTANDCOMMA JUMP_LINE .
 
-    VARIABLE        shift and go to state 11
-    TRY             shift and go to state 14
+    PUBLIC          reduce using rule 2 (block_using -> USING SYSTEM DOTANDCOMMA JUMP_LINE .)
 
-    block_code                     shift and go to state 12
-    try_catch_simply               shift and go to state 13
 
 state 11
 
-    (53) block_code -> VARIABLE .
+    (3) block_publicClass -> PUBLIC CLASS VARIABLE LKEY . block_code RKEY
+    (57) block_code -> . VARIABLE
+    (58) block_code -> . try_catch_simply
+    (59) try_catch_simply -> . TRY LKEY block_code RKEY CATCH LPARENT EXCEPTION VARIABLE RPARENT LKEY block_code RKEY
 
-    RKEY            reduce using rule 53 (block_code -> VARIABLE .)
+    VARIABLE        shift and go to state 12
+    TRY             shift and go to state 15
 
+    block_code                     shift and go to state 13
+    try_catch_simply               shift and go to state 14
 
 state 12
 
-    (3) block_publicClass -> PUBLIC CLASS VARIABLE LKEY block_code . RKEY
+    (57) block_code -> VARIABLE .
 
-    RKEY            shift and go to state 15
+    RKEY            reduce using rule 57 (block_code -> VARIABLE .)
 
 
 state 13
 
-    (54) block_code -> try_catch_simply .
+    (3) block_publicClass -> PUBLIC CLASS VARIABLE LKEY block_code . RKEY
 
-    RKEY            reduce using rule 54 (block_code -> try_catch_simply .)
+    RKEY            shift and go to state 16
 
 
 state 14
 
-    (55) try_catch_simply -> TRY . LKEY block_code RKEY CATCH LPARENT EXCEPTION VARIABLE RPARENT LKEY block_code RKEY
+    (58) block_code -> try_catch_simply .
 
-    LKEY            shift and go to state 16
+    RKEY            reduce using rule 58 (block_code -> try_catch_simply .)
 
 
 state 15
+
+    (59) try_catch_simply -> TRY . LKEY block_code RKEY CATCH LPARENT EXCEPTION VARIABLE RPARENT LKEY block_code RKEY
+
+    LKEY            shift and go to state 17
+
+
+state 16
 
     (3) block_publicClass -> PUBLIC CLASS VARIABLE LKEY block_code RKEY .
 
     $end            reduce using rule 3 (block_publicClass -> PUBLIC CLASS VARIABLE LKEY block_code RKEY .)
 
 
-state 16
-
-    (55) try_catch_simply -> TRY LKEY . block_code RKEY CATCH LPARENT EXCEPTION VARIABLE RPARENT LKEY block_code RKEY
-    (53) block_code -> . VARIABLE
-    (54) block_code -> . try_catch_simply
-    (55) try_catch_simply -> . TRY LKEY block_code RKEY CATCH LPARENT EXCEPTION VARIABLE RPARENT LKEY block_code RKEY
-
-    VARIABLE        shift and go to state 11
-    TRY             shift and go to state 14
-
-    block_code                     shift and go to state 17
-    try_catch_simply               shift and go to state 13
-
 state 17
 
-    (55) try_catch_simply -> TRY LKEY block_code . RKEY CATCH LPARENT EXCEPTION VARIABLE RPARENT LKEY block_code RKEY
+    (59) try_catch_simply -> TRY LKEY . block_code RKEY CATCH LPARENT EXCEPTION VARIABLE RPARENT LKEY block_code RKEY
+    (57) block_code -> . VARIABLE
+    (58) block_code -> . try_catch_simply
+    (59) try_catch_simply -> . TRY LKEY block_code RKEY CATCH LPARENT EXCEPTION VARIABLE RPARENT LKEY block_code RKEY
 
-    RKEY            shift and go to state 18
+    VARIABLE        shift and go to state 12
+    TRY             shift and go to state 15
 
+    block_code                     shift and go to state 18
+    try_catch_simply               shift and go to state 14
 
 state 18
 
-    (55) try_catch_simply -> TRY LKEY block_code RKEY . CATCH LPARENT EXCEPTION VARIABLE RPARENT LKEY block_code RKEY
+    (59) try_catch_simply -> TRY LKEY block_code . RKEY CATCH LPARENT EXCEPTION VARIABLE RPARENT LKEY block_code RKEY
 
-    CATCH           shift and go to state 19
+    RKEY            shift and go to state 19
 
 
 state 19
 
-    (55) try_catch_simply -> TRY LKEY block_code RKEY CATCH . LPARENT EXCEPTION VARIABLE RPARENT LKEY block_code RKEY
+    (59) try_catch_simply -> TRY LKEY block_code RKEY . CATCH LPARENT EXCEPTION VARIABLE RPARENT LKEY block_code RKEY
 
-    LPARENT         shift and go to state 20
+    CATCH           shift and go to state 20
 
 
 state 20
 
-    (55) try_catch_simply -> TRY LKEY block_code RKEY CATCH LPARENT . EXCEPTION VARIABLE RPARENT LKEY block_code RKEY
+    (59) try_catch_simply -> TRY LKEY block_code RKEY CATCH . LPARENT EXCEPTION VARIABLE RPARENT LKEY block_code RKEY
 
-    EXCEPTION       shift and go to state 21
+    LPARENT         shift and go to state 21
 
 
 state 21
 
-    (55) try_catch_simply -> TRY LKEY block_code RKEY CATCH LPARENT EXCEPTION . VARIABLE RPARENT LKEY block_code RKEY
+    (59) try_catch_simply -> TRY LKEY block_code RKEY CATCH LPARENT . EXCEPTION VARIABLE RPARENT LKEY block_code RKEY
 
-    VARIABLE        shift and go to state 22
+    EXCEPTION       shift and go to state 22
 
 
 state 22
 
-    (55) try_catch_simply -> TRY LKEY block_code RKEY CATCH LPARENT EXCEPTION VARIABLE . RPARENT LKEY block_code RKEY
+    (59) try_catch_simply -> TRY LKEY block_code RKEY CATCH LPARENT EXCEPTION . VARIABLE RPARENT LKEY block_code RKEY
 
-    RPARENT         shift and go to state 23
+    VARIABLE        shift and go to state 23
 
 
 state 23
 
-    (55) try_catch_simply -> TRY LKEY block_code RKEY CATCH LPARENT EXCEPTION VARIABLE RPARENT . LKEY block_code RKEY
+    (59) try_catch_simply -> TRY LKEY block_code RKEY CATCH LPARENT EXCEPTION VARIABLE . RPARENT LKEY block_code RKEY
 
-    LKEY            shift and go to state 24
+    RPARENT         shift and go to state 24
 
 
 state 24
 
-    (55) try_catch_simply -> TRY LKEY block_code RKEY CATCH LPARENT EXCEPTION VARIABLE RPARENT LKEY . block_code RKEY
-    (53) block_code -> . VARIABLE
-    (54) block_code -> . try_catch_simply
-    (55) try_catch_simply -> . TRY LKEY block_code RKEY CATCH LPARENT EXCEPTION VARIABLE RPARENT LKEY block_code RKEY
+    (59) try_catch_simply -> TRY LKEY block_code RKEY CATCH LPARENT EXCEPTION VARIABLE RPARENT . LKEY block_code RKEY
 
-    VARIABLE        shift and go to state 11
-    TRY             shift and go to state 14
+    LKEY            shift and go to state 25
 
-    block_code                     shift and go to state 25
-    try_catch_simply               shift and go to state 13
 
 state 25
 
-    (55) try_catch_simply -> TRY LKEY block_code RKEY CATCH LPARENT EXCEPTION VARIABLE RPARENT LKEY block_code . RKEY
+    (59) try_catch_simply -> TRY LKEY block_code RKEY CATCH LPARENT EXCEPTION VARIABLE RPARENT LKEY . block_code RKEY
+    (57) block_code -> . VARIABLE
+    (58) block_code -> . try_catch_simply
+    (59) try_catch_simply -> . TRY LKEY block_code RKEY CATCH LPARENT EXCEPTION VARIABLE RPARENT LKEY block_code RKEY
 
-    RKEY            shift and go to state 26
+    VARIABLE        shift and go to state 12
+    TRY             shift and go to state 15
 
+    block_code                     shift and go to state 26
+    try_catch_simply               shift and go to state 14
 
 state 26
 
-    (55) try_catch_simply -> TRY LKEY block_code RKEY CATCH LPARENT EXCEPTION VARIABLE RPARENT LKEY block_code RKEY .
+    (59) try_catch_simply -> TRY LKEY block_code RKEY CATCH LPARENT EXCEPTION VARIABLE RPARENT LKEY block_code . RKEY
 
-    RKEY            reduce using rule 55 (try_catch_simply -> TRY LKEY block_code RKEY CATCH LPARENT EXCEPTION VARIABLE RPARENT LKEY block_code RKEY .)
+    RKEY            shift and go to state 27
+
+
+state 27
+
+    (59) try_catch_simply -> TRY LKEY block_code RKEY CATCH LPARENT EXCEPTION VARIABLE RPARENT LKEY block_code RKEY .
+
+    RKEY            reduce using rule 59 (try_catch_simply -> TRY LKEY block_code RKEY CATCH LPARENT EXCEPTION VARIABLE RPARENT LKEY block_code RKEY .)
 
