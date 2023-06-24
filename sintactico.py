@@ -159,7 +159,48 @@ def p_arithmetic_operator(p):
 def p_variable_assignation_multiline(p):
     '''variable_assignation_multiline   : 
     '''
+def p_conditional(p):
+    'conditional : if else_if else'
 
+def p_if(p):
+    'if : IF LPARENT <condicion> RPARENT LKEY <bloque> RKEY'
+    
+def p_else_if(p):
+    'else_if : ELSE_IF < condicion > RPARENT LKEY < bloque > RKEY'
+
+def p_else(p):
+    'else : ELSE LKEY <bloque> RKEY'
+
+def p_block_code_if(p):
+    '''
+    block_code_if : VARIABLE |
+                    conditional
+    '''
+
+def p_condicion(p):
+    '''condicion : operandos comparation_oper operandos'|
+     logic_oper operandos comparation_oper operandos'''
+
+def p_bloque(p):
+    'bloque : value_string'
+
+def P_operandos(p):
+    'operandos : value_numeric'
+
+#siguuientes dos deficniones son de prueba. son divisones de logic_operator() de la linea 84
+def p_logic_oper(p):
+    '''logic_oper : LOGICAND |
+                    LOGICOR'''
+    
+def p_comparation_oper(p):
+    '''comparation_oper : EQUAL_COMPARATION |
+                            INEQUALITY |
+                            GREATER_THAN |
+                            SMALLER_THAN |
+                            GREATER_THAN_OR_EQUAL |
+                            SMALLER_THAN_OR_EQUAL'''
+
+#################################
 
 def p_error(p):
     if p:

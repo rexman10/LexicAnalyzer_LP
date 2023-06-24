@@ -16,3 +16,13 @@
 <block_code>				::= [a-z]*
 <finaly>					::= "finaly" <charact_ignore> "{" <charact_ignore> <block_code> <charact_ignore> "}"
 <charact_ignore>			::= " "* | "\n"
+
+<if_else>				::= <if>+ <else_if>* <else>
+<if>					::= "if(" <condicion> "){\n" <bloque> "\n} "
+<else_if>				::= "else if(" <condicion> "){\n" <bloque> "\n} "
+<else>					::= "else{\n" <bloque> "\n}"
+<condicion>				::= <operandos> <comparation_oper> <operandos> (<logic_oper> <operandos> <comparation_oper> <operandos>)*
+<bloque>				::= "Console.WriteLine(\"Dentro codicion if\")"
+<operandos>				::= [0-9]+
+<logic_oper>				::= "&&" | "||"
+<comparation_oper>			::= "==" | "!=" | ">" | "<" | ">=" | "<="
