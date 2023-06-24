@@ -11,7 +11,8 @@ using System; public class clase1 { const int var2 = 14 , var3 = 15 ; }
 using System; public class clase1 { int var2 = 14 ; }
 using System; public class clase1 { int var2 = 14 ; var3 = var2 ; }
 using System; public class clase1 { int var2 = 14 ; var3 = var2 ; var5 = 4 ; }
-este no vale aun : using System; public class clase1 { int var2 = 14 ; var3 = var2 ; int var5 = 4 ; }
+using System; public class clase1 { const int var2 = 14 ; var3 = var2 ; int var5 = 4 ; }
+using System; public class clase1 { const int var2 = 14 ; var3 = var2 ; const int var5 = 4 ; }
 """
  
 def p_program(p):
@@ -42,28 +43,37 @@ def p_def_const_or_var(p):
     '''
 
 def p_variable_assignation(p):
-    '''variable_assignation : access_modifiers data_type multi_or_one_assignation DOTANDCOMMA
-                                    | data_type multi_or_one_assignation DOTANDCOMMA
-                                    | data_type VARIABLE DOTANDCOMMA
-                                    | multi_or_one_assignation DOTANDCOMMA
-                                    | data_type block_assignations
+    '''variable_assignation : access_modifiers all_asignations
+                            | all_asignations
 
     '''
+
 def p_constant_assignation(p):
-    '''constant_assignation : access_modifiers CONST data_type multi_or_one_assignation DOTANDCOMMA
-                            | CONST data_type multi_or_one_assignation DOTANDCOMMA
-                            | CONST data_type VARIABLE DOTANDCOMMA
-                            | CONST data_type block_assignations
+    '''constant_assignation : access_modifiers CONST all_asignations
+                            | CONST all_asignations
+                            | CONST data_type assignation_key_value COMMA some_assignation_constant
     '''
 
-def p_block_assignations(p):
-    '''block_assignations : assignation_key_value DOTANDCOMMA
-                            | assignation_key_value DOTANDCOMMA block_assignations                       
+def p_all_asignations(p):
+    '''all_asignations : assignation_with_datatype
+                        | assignation_without_datatype
     '''
 
-def p_multi_or_one_assignation(p):
-    '''multi_or_one_assignation : assignation_key_value
-                                | assignation_key_value COMMA multi_or_one_assignation
+def p_assignation_with_datatype(p):
+    '''assignation_with_datatype : data_type assignation_key_value DOTANDCOMMA
+                            | data_type assignation_key_value DOTANDCOMMA assignation_with_datatype   
+                            | data_type assignation_key_value DOTANDCOMMA assignation_without_datatype                     
+    '''
+
+def p_assignation_without_datatype(p):
+    '''assignation_without_datatype : assignation_key_value DOTANDCOMMA
+                                    | assignation_key_value DOTANDCOMMA assignation_without_datatype
+                                    | assignation_key_value DOTANDCOMMA assignation_with_datatype
+    '''
+
+def p_some_assignation_constant(p):
+    '''some_assignation_constant : assignation_key_value DOTANDCOMMA
+                                | assignation_key_value COMMA some_assignation_constant
     '''
 
 def p_assignation_key_value(p):
@@ -175,7 +185,11 @@ def p_arithmetic_operator(p):
 def p_variable_assignation_multiline(p):
     '''variable_assignation_multiline   : 
     '''
-def p_conditional(p):
+
+
+
+
+""" def p_conditional(p):
     'conditional : if else_if else'
 
 def p_if(p):
@@ -214,10 +228,8 @@ def p_comparation_oper(p):
                             GREATER_THAN |
                             SMALLER_THAN |
                             GREATER_THAN_OR_EQUAL |
-                            SMALLER_THAN_OR_EQUAL'''
-
-#################################
-
+                            SMALLER_THAN_OR_EQUAL
+    ''' """
 
 
 
