@@ -12,9 +12,12 @@ using System; public class clase1 { int var2 = 14 ; }
 using System; public class clase1 { int var2 = 14 ; var3 = var2 ; }
 using System; public class clase1 { int var2 = 14 ; var3 = var2 ; var5 = 4 ; }
 using System; public class clase1 { const int var2 = 14 ; var3 = var2 ; int var5 = 4 ; }
-No sirve aun: using System; public class clase1 { const int var2 = 14 ; var3 = var2 ; const int var5 = 4 ; }
-using System; public class clase1 { List<string> nombres = new List<string>(); }
-No sirve aun: using System; public class clase1 { List<string> nombres = new List<string>(){"Adair" , "Juan", "Keneth", "David"} }
+using System; public class clase1 { const int var2 = 14 ; var3 = var2 ; const int var5 = 4 ; }
+
+using System; public class clase1 { List<string> nombres = new List<string>();}
+using System; public class clase1 { List<string> nombres = new List<string>(); nombres.Clear(); nombres.Count();}
+No sirve aun: using System; public class clase1 { List<string> nombres = new List<string>(); nombres.add(dgf);}
+No sirve aun: using System; public class clase1 { List<string> nombres = new List<string>(){"Adair"} }
 No sirve aun: using System; public class clase1 { List<string> nombres = new List<string>(){4} }
 No sirve aun: using System; public class clase1 { List<string> nombres = new List<string>(){4 , 5, 5, 6} }
 
@@ -34,9 +37,13 @@ def p_block_using(p):
     'block_using : USING SYSTEM DOTANDCOMMA'
 
 def p_block_publicClass(p):
-    'block_publicClass : PUBLIC CLASS VARIABLE LKEY block_code RKEY'
+    'block_publicClass : PUBLIC CLASS VARIABLE LKEY all_block_code RKEY'
 
 
+def p_all_block_code(p):
+    '''all_block_code : block_code
+                        | block_code all_block_code  
+    '''
 
 def p_block_code(p):
     '''block_code : def_const_or_var
@@ -44,10 +51,8 @@ def p_block_code(p):
                     | block_try_catch
                     | VARIABLE
                     | declaration_dict
+                    | functions_list
     '''
-
-
-
 
 """ Declaracion de variables y constantes """
 
@@ -222,6 +227,8 @@ def p_valueHash(p):
     '''valueHash : INTTYPE
              | STRING'''
 
+
+
 def p_estruct_of_data(p):
     '''estruct_of_data : list_empty
                         | list_full
@@ -233,10 +240,20 @@ def p_list_empty(p):
     '''
     
 def p_list_full(p):
-    '''list_full : LIST SMALLER_THAN STRINGTYPE GREATER_THAN VARIABLE ASSIGNATION NEW LIST SMALLER_THAN STRINGTYPE GREATER_THAN LPARENT RPARENT LKEY VARIABLE RKEY
-                    | LIST SMALLER_THAN INTTYPE GREATER_THAN VARIABLE ASSIGNATION NEW LIST SMALLER_THAN INTTYPE GREATER_THAN LPARENT RPARENT LKEY VARIABLE RKEY
+    '''list_full : LIST SMALLER_THAN STRINGTYPE GREATER_THAN VARIABLE ASSIGNATION NEW LIST SMALLER_THAN STRINGTYPE GREATER_THAN LPARENT RPARENT LKEY STRING VARIABLE STRING RKEY
+                    | LIST SMALLER_THAN INTTYPE GREATER_THAN VARIABLE ASSIGNATION NEW LIST SMALLER_THAN INTTYPE GREATER_THAN LPARENT RPARENT LKEY INTEGER RKEY
     '''
 
+def p_functions_list(p):
+    '''functions_list : list_func_clear
+                        | list_func_count
+    '''
+
+def p_list_func_clear(p):
+    "list_func_clear : VARIABLE DOT CLEAR LPARENT RPARENT DOTANDCOMMA"
+
+def p_list_func_count(p):
+    "list_func_count : VARIABLE DOT COUNT LPARENT RPARENT DOTANDCOMMA"
 
 def p_error(p):
     if p:

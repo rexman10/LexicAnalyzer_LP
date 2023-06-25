@@ -29,6 +29,10 @@ reserved = {
     "finally": "FINALLY",
     "exception": "EXCEPTION",
     "List":"LIST",
+    "Add":"ADD",
+    "Clear":"CLEAR",
+    "RemoveAt":"REMOVEAT",
+    "Count":"COUNT",
     #Fin aporte Adair Abrigo
 
     #Inicio aporte David Rivera
@@ -167,10 +171,11 @@ t_PIPE = r'\|'
 t_BACK_SLASH = r'\\'
 #Fin aporte Kenneth Pacheco
 
-def t_ID(t):
+""" def t_ID(t):
     r'[a-zA-Z0-9_]\w*'
     t.type = reserved.get(t.value, 'ID')
-    return t
+    return t """
+
 def t_PRINT(t):
     r'(Console\.WriteLine|Console\.Write|System\.Console\.WriteLine|System\.Console\.Write)'
     return t
