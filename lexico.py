@@ -28,6 +28,7 @@ reserved = {
     "for": "FOR",
     "finally": "FINALLY",
     "exception": "EXCEPTION",
+    "List":"LIST",
     #Fin aporte Adair Abrigo
 
     #Inicio aporte David Rivera

@@ -22,7 +22,6 @@ Unused terminals:
     MODULE_ASSIGNMENT
     MULTIPLICATION_ASSIGNMENT
     NAMESPACE
-    NEW
     PIPE
     PRINT
     RBRACKET
@@ -42,185 +41,191 @@ Rule 1     program -> block_using block_publicClass
 Rule 2     block_using -> USING SYSTEM DOTANDCOMMA
 Rule 3     block_publicClass -> PUBLIC CLASS VARIABLE LKEY block_code RKEY
 Rule 4     block_code -> def_const_or_var
-Rule 5     block_code -> block_try_catch
-Rule 6     block_code -> VARIABLE
-Rule 7     def_const_or_var -> constant_assignation
-Rule 8     def_const_or_var -> variable_assignation
-Rule 9     variable_assignation -> access_modifiers all_asignations
-Rule 10    variable_assignation -> all_asignations
-Rule 11    constant_assignation -> access_modifiers CONST all_asignations
-Rule 12    constant_assignation -> CONST all_asignations
-Rule 13    constant_assignation -> CONST data_type assignation_key_value COMMA some_assignation_constant
-Rule 14    all_asignations -> assignation_with_datatype
-Rule 15    all_asignations -> assignation_without_datatype
-Rule 16    assignation_with_datatype -> data_type assignation_key_value DOTANDCOMMA
-Rule 17    assignation_with_datatype -> data_type assignation_key_value DOTANDCOMMA assignation_with_datatype
-Rule 18    assignation_with_datatype -> data_type assignation_key_value DOTANDCOMMA assignation_without_datatype
-Rule 19    assignation_without_datatype -> assignation_key_value DOTANDCOMMA
-Rule 20    assignation_without_datatype -> assignation_key_value DOTANDCOMMA assignation_without_datatype
-Rule 21    assignation_without_datatype -> assignation_key_value DOTANDCOMMA assignation_with_datatype
-Rule 22    some_assignation_constant -> assignation_key_value DOTANDCOMMA
-Rule 23    some_assignation_constant -> assignation_key_value COMMA some_assignation_constant
-Rule 24    assignation_key_value -> VARIABLE ASSIGNATION value
-Rule 25    data_type -> CHARTYPE
-Rule 26    data_type -> STRINGTYPE
-Rule 27    data_type -> FLOATTYPE
-Rule 28    data_type -> DECIMALTYPE
-Rule 29    data_type -> INTTYPE
-Rule 30    data_type -> BOOLTYPE
-Rule 31    value -> value_numeric
-Rule 32    value -> value_logic
-Rule 33    value -> value_string
-Rule 34    value_string -> STRING
-Rule 35    value_string -> CHAR
-Rule 36    value_string -> VARIABLE
-Rule 37    value_string -> READ LPARENT RPARENT
-Rule 38    value_string -> concatenation
-Rule 39    value_logic -> BOOLTRUE
-Rule 40    value_logic -> BOOLFALSE
-Rule 41    value_numeric -> INTEGER
-Rule 42    value_numeric -> FLOAT_NUMBER
-Rule 43    value_numeric -> DECIMAL_NUMBER
-Rule 44    block_try_catch -> try_catch_simply
-Rule 45    block_try_catch -> try_catch_finally
-Rule 46    try_catch_simply -> TRY LKEY block_code RKEY CATCH LPARENT EXCEPTION VARIABLE RPARENT LKEY block_code RKEY
-Rule 47    try_catch_finally -> TRY LKEY block_code RKEY CATCH LPARENT EXCEPTION VARIABLE RPARENT LKEY block_code RKEY FINALLY LKEY block_code RKEY
-Rule 48    access_modifiers -> PUBLIC
-Rule 49    access_modifiers -> PRIVATE
-Rule 50    arithmetic_operation -> value_numeric
-Rule 51    arithmetic_operation -> value_numeric arithmetic_operator arithmetic_operation
-Rule 52    logic_operation -> value_logic
-Rule 53    logic_operation -> value_logic logic_operator logic_operation
-Rule 54    concatenation -> STRING
-Rule 55    concatenation -> STRING PLUS concatenation
-Rule 56    logic_operator -> GREATER_THAN
-Rule 57    logic_operator -> SMALLER_THAN
-Rule 58    logic_operator -> EQUAL_COMPARATION
-Rule 59    logic_operator -> INEQUALITY
-Rule 60    logic_operator -> GREATER_THAN_OR_EQUAL
-Rule 61    logic_operator -> SMALLER_THAN_OR_EQUAL
-Rule 62    logic_operator -> LOGICAND
-Rule 63    logic_operator -> LOGICOR
-Rule 64    logic_operator -> LOGICNOT
-Rule 65    logic_operator -> LOGICXOR
-Rule 66    arithmetic_operator -> PLUS
-Rule 67    arithmetic_operator -> MINUS
-Rule 68    arithmetic_operator -> TIMES
-Rule 69    arithmetic_operator -> DIVIDE
-Rule 70    arithmetic_operator -> PERCENT
-Rule 71    variable_assignation_multiline -> <empty>
+Rule 5     block_code -> estruct_of_data
+Rule 6     block_code -> block_try_catch
+Rule 7     block_code -> VARIABLE
+Rule 8     def_const_or_var -> constant_assignation
+Rule 9     def_const_or_var -> variable_assignation
+Rule 10    variable_assignation -> access_modifiers all_asignations
+Rule 11    variable_assignation -> all_asignations
+Rule 12    constant_assignation -> access_modifiers CONST all_asignations
+Rule 13    constant_assignation -> CONST all_asignations
+Rule 14    constant_assignation -> CONST data_type assignation_key_value COMMA some_assignation_constant
+Rule 15    all_asignations -> assignation_with_datatype
+Rule 16    all_asignations -> assignation_without_datatype
+Rule 17    assignation_with_datatype -> data_type assignation_key_value DOTANDCOMMA
+Rule 18    assignation_with_datatype -> data_type assignation_key_value DOTANDCOMMA assignation_with_datatype
+Rule 19    assignation_with_datatype -> data_type assignation_key_value DOTANDCOMMA assignation_without_datatype
+Rule 20    assignation_without_datatype -> assignation_key_value DOTANDCOMMA
+Rule 21    assignation_without_datatype -> assignation_key_value DOTANDCOMMA assignation_without_datatype
+Rule 22    assignation_without_datatype -> assignation_key_value DOTANDCOMMA assignation_with_datatype
+Rule 23    some_assignation_constant -> assignation_key_value DOTANDCOMMA
+Rule 24    some_assignation_constant -> assignation_key_value COMMA some_assignation_constant
+Rule 25    assignation_key_value -> VARIABLE ASSIGNATION value
+Rule 26    data_type -> CHARTYPE
+Rule 27    data_type -> STRINGTYPE
+Rule 28    data_type -> FLOATTYPE
+Rule 29    data_type -> DECIMALTYPE
+Rule 30    data_type -> INTTYPE
+Rule 31    data_type -> BOOLTYPE
+Rule 32    value -> value_numeric
+Rule 33    value -> value_logic
+Rule 34    value -> value_string
+Rule 35    value_string -> STRING
+Rule 36    value_string -> CHAR
+Rule 37    value_string -> VARIABLE
+Rule 38    value_string -> READ LPARENT RPARENT
+Rule 39    value_string -> concatenation
+Rule 40    value_logic -> BOOLTRUE
+Rule 41    value_logic -> BOOLFALSE
+Rule 42    value_numeric -> INTEGER
+Rule 43    value_numeric -> FLOAT_NUMBER
+Rule 44    value_numeric -> DECIMAL_NUMBER
+Rule 45    block_try_catch -> try_catch_simply
+Rule 46    block_try_catch -> try_catch_finally
+Rule 47    try_catch_simply -> TRY LKEY block_code RKEY CATCH LPARENT EXCEPTION VARIABLE RPARENT LKEY block_code RKEY
+Rule 48    try_catch_finally -> TRY LKEY block_code RKEY CATCH LPARENT EXCEPTION VARIABLE RPARENT LKEY block_code RKEY FINALLY LKEY block_code RKEY
+Rule 49    access_modifiers -> PUBLIC
+Rule 50    access_modifiers -> PRIVATE
+Rule 51    arithmetic_operation -> value_numeric
+Rule 52    arithmetic_operation -> value_numeric arithmetic_operator arithmetic_operation
+Rule 53    logic_operation -> value_logic
+Rule 54    logic_operation -> value_logic logic_operator logic_operation
+Rule 55    concatenation -> STRING
+Rule 56    concatenation -> STRING PLUS concatenation
+Rule 57    logic_operator -> GREATER_THAN
+Rule 58    logic_operator -> SMALLER_THAN
+Rule 59    logic_operator -> EQUAL_COMPARATION
+Rule 60    logic_operator -> INEQUALITY
+Rule 61    logic_operator -> GREATER_THAN_OR_EQUAL
+Rule 62    logic_operator -> SMALLER_THAN_OR_EQUAL
+Rule 63    logic_operator -> LOGICAND
+Rule 64    logic_operator -> LOGICOR
+Rule 65    logic_operator -> LOGICNOT
+Rule 66    logic_operator -> LOGICXOR
+Rule 67    arithmetic_operator -> PLUS
+Rule 68    arithmetic_operator -> MINUS
+Rule 69    arithmetic_operator -> TIMES
+Rule 70    arithmetic_operator -> DIVIDE
+Rule 71    arithmetic_operator -> PERCENT
+Rule 72    variable_assignation_multiline -> <empty>
+Rule 73    estruct_of_data -> list
+Rule 74    list -> LIST SMALLER_THAN data_type GREATER_THAN VARIABLE ASSIGNATION NEW LIST SMALLER_THAN data_type GREATER_THAN LPARENT RPARENT DOTANDCOMMA
 
 Terminals, with rules where they appear
 
 ADDITION_ASSIGNMENT  : 
-ASSIGNATION          : 24
+ASSIGNATION          : 25 74
 BACK_SLASH           : 
 BOOL                 : 
-BOOLFALSE            : 40
-BOOLTRUE             : 39
-BOOLTYPE             : 30
+BOOLFALSE            : 41
+BOOLTRUE             : 40
+BOOLTYPE             : 31
 BREAK                : 
-CATCH                : 46 47
-CHAR                 : 35
-CHARTYPE             : 25
+CATCH                : 47 48
+CHAR                 : 36
+CHARTYPE             : 26
 CLASS                : 3
-COMMA                : 13 23
-CONST                : 11 12 13
-DECIMALTYPE          : 28
-DECIMAL_NUMBER       : 43
+COMMA                : 14 24
+CONST                : 12 13 14
+DECIMALTYPE          : 29
+DECIMAL_NUMBER       : 44
 DECREMENT            : 
-DIVIDE               : 69
+DIVIDE               : 70
 DIVISION_ASSIGNMENT  : 
 DOLLARSIGN           : 
 DOT                  : 
-DOTANDCOMMA          : 2 16 17 18 19 20 21 22
+DOTANDCOMMA          : 2 17 18 19 20 21 22 23 74
 DOUBLEPOINT          : 
 DOUBLE_QUOTATION_MARKS : 
 ELSE                 : 
-EQUAL_COMPARATION    : 58
-EXCEPTION            : 46 47
-FINALLY              : 47
-FLOATTYPE            : 27
-FLOAT_NUMBER         : 42
+EQUAL_COMPARATION    : 59
+EXCEPTION            : 47 48
+FINALLY              : 48
+FLOATTYPE            : 28
+FLOAT_NUMBER         : 43
 FOR                  : 
-GREATER_THAN         : 56
-GREATER_THAN_OR_EQUAL : 60
+GREATER_THAN         : 57 74 74
+GREATER_THAN_OR_EQUAL : 61
 IF                   : 
 INCREMENT            : 
-INEQUALITY           : 59
-INTEGER              : 41
-INTTYPE              : 29
+INEQUALITY           : 60
+INTEGER              : 42
+INTTYPE              : 30
 JUMP_LINE            : 
 LBRACKET             : 
-LKEY                 : 3 46 46 47 47 47
-LOGICAND             : 62
-LOGICNOT             : 64
-LOGICOR              : 63
-LOGICXOR             : 65
+LIST                 : 74 74
+LKEY                 : 3 47 47 48 48 48
+LOGICAND             : 63
+LOGICNOT             : 65
+LOGICOR              : 64
+LOGICXOR             : 66
 LONG                 : 
-LPARENT              : 37 46 47
-MINUS                : 67
+LPARENT              : 38 47 48 74
+MINUS                : 68
 MODULE_ASSIGNMENT    : 
 MULTIPLICATION_ASSIGNMENT : 
 NAMESPACE            : 
-NEW                  : 
-PERCENT              : 70
+NEW                  : 74
+PERCENT              : 71
 PIPE                 : 
-PLUS                 : 55 66
+PLUS                 : 56 67
 PRINT                : 
-PRIVATE              : 49
-PUBLIC               : 3 48
+PRIVATE              : 50
+PUBLIC               : 3 49
 RBRACKET             : 
-READ                 : 37
+READ                 : 38
 RETURN               : 
-RKEY                 : 3 46 46 47 47 47
-RPARENT              : 37 46 47
+RKEY                 : 3 47 47 48 48 48
+RPARENT              : 38 47 48 74
 SIPLE_QUOTATION_MARKS : 
-SMALLER_THAN         : 57
-SMALLER_THAN_OR_EQUAL : 61
+SMALLER_THAN         : 58 74 74
+SMALLER_THAN_OR_EQUAL : 62
 STATIC               : 
-STRING               : 34 54 55
-STRINGTYPE           : 26
+STRING               : 35 55 56
+STRINGTYPE           : 27
 SUBTRACTION_ASSIGNMENT : 
 SWITCH               : 
 SYSTEM               : 2
 TABULATION           : 
-TIMES                : 68
-TRY                  : 46 47
+TIMES                : 69
+TRY                  : 47 48
 USING                : 2
-VARIABLE             : 3 6 24 36 46 47
+VARIABLE             : 3 7 25 37 47 48 74
 VOID                 : 
 WHILE                : 
 error                : 
 
 Nonterminals, with rules where they appear
 
-access_modifiers     : 9 11
-all_asignations      : 9 10 11 12
-arithmetic_operation : 51
-arithmetic_operator  : 51
-assignation_key_value : 13 16 17 18 19 20 21 22 23
-assignation_with_datatype : 14 17 21
-assignation_without_datatype : 15 18 20
-block_code           : 3 46 46 47 47 47
+access_modifiers     : 10 12
+all_asignations      : 10 11 12 13
+arithmetic_operation : 52
+arithmetic_operator  : 52
+assignation_key_value : 14 17 18 19 20 21 22 23 24
+assignation_with_datatype : 15 18 22
+assignation_without_datatype : 16 19 21
+block_code           : 3 47 47 48 48 48
 block_publicClass    : 1
-block_try_catch      : 5
+block_try_catch      : 6
 block_using          : 1
-concatenation        : 38 55
-constant_assignation : 7
-data_type            : 13 16 17 18
+concatenation        : 39 56
+constant_assignation : 8
+data_type            : 14 17 18 19 74 74
 def_const_or_var     : 4
-logic_operation      : 53
-logic_operator       : 53
+estruct_of_data      : 5
+list                 : 73
+logic_operation      : 54
+logic_operator       : 54
 program              : 0
-some_assignation_constant : 13 23
-try_catch_finally    : 45
-try_catch_simply     : 44
-value                : 24
-value_logic          : 32 52 53
-value_numeric        : 31 50 51
-value_string         : 33
-variable_assignation : 8
+some_assignation_constant : 14 24
+try_catch_finally    : 46
+try_catch_simply     : 45
+value                : 25
+value_logic          : 33 53 54
+value_numeric        : 32 51 52
+value_string         : 34
+variable_assignation : 9
 variable_assignation_multiline : 
 
 Parsing method: LALR
@@ -304,91 +309,97 @@ state 10
 
     (3) block_publicClass -> PUBLIC CLASS VARIABLE LKEY . block_code RKEY
     (4) block_code -> . def_const_or_var
-    (5) block_code -> . block_try_catch
-    (6) block_code -> . VARIABLE
-    (7) def_const_or_var -> . constant_assignation
-    (8) def_const_or_var -> . variable_assignation
-    (44) block_try_catch -> . try_catch_simply
-    (45) block_try_catch -> . try_catch_finally
-    (11) constant_assignation -> . access_modifiers CONST all_asignations
-    (12) constant_assignation -> . CONST all_asignations
-    (13) constant_assignation -> . CONST data_type assignation_key_value COMMA some_assignation_constant
-    (9) variable_assignation -> . access_modifiers all_asignations
-    (10) variable_assignation -> . all_asignations
-    (46) try_catch_simply -> . TRY LKEY block_code RKEY CATCH LPARENT EXCEPTION VARIABLE RPARENT LKEY block_code RKEY
-    (47) try_catch_finally -> . TRY LKEY block_code RKEY CATCH LPARENT EXCEPTION VARIABLE RPARENT LKEY block_code RKEY FINALLY LKEY block_code RKEY
-    (48) access_modifiers -> . PUBLIC
-    (49) access_modifiers -> . PRIVATE
-    (14) all_asignations -> . assignation_with_datatype
-    (15) all_asignations -> . assignation_without_datatype
-    (16) assignation_with_datatype -> . data_type assignation_key_value DOTANDCOMMA
-    (17) assignation_with_datatype -> . data_type assignation_key_value DOTANDCOMMA assignation_with_datatype
-    (18) assignation_with_datatype -> . data_type assignation_key_value DOTANDCOMMA assignation_without_datatype
-    (19) assignation_without_datatype -> . assignation_key_value DOTANDCOMMA
-    (20) assignation_without_datatype -> . assignation_key_value DOTANDCOMMA assignation_without_datatype
-    (21) assignation_without_datatype -> . assignation_key_value DOTANDCOMMA assignation_with_datatype
-    (25) data_type -> . CHARTYPE
-    (26) data_type -> . STRINGTYPE
-    (27) data_type -> . FLOATTYPE
-    (28) data_type -> . DECIMALTYPE
-    (29) data_type -> . INTTYPE
-    (30) data_type -> . BOOLTYPE
-    (24) assignation_key_value -> . VARIABLE ASSIGNATION value
+    (5) block_code -> . estruct_of_data
+    (6) block_code -> . block_try_catch
+    (7) block_code -> . VARIABLE
+    (8) def_const_or_var -> . constant_assignation
+    (9) def_const_or_var -> . variable_assignation
+    (73) estruct_of_data -> . list
+    (45) block_try_catch -> . try_catch_simply
+    (46) block_try_catch -> . try_catch_finally
+    (12) constant_assignation -> . access_modifiers CONST all_asignations
+    (13) constant_assignation -> . CONST all_asignations
+    (14) constant_assignation -> . CONST data_type assignation_key_value COMMA some_assignation_constant
+    (10) variable_assignation -> . access_modifiers all_asignations
+    (11) variable_assignation -> . all_asignations
+    (74) list -> . LIST SMALLER_THAN data_type GREATER_THAN VARIABLE ASSIGNATION NEW LIST SMALLER_THAN data_type GREATER_THAN LPARENT RPARENT DOTANDCOMMA
+    (47) try_catch_simply -> . TRY LKEY block_code RKEY CATCH LPARENT EXCEPTION VARIABLE RPARENT LKEY block_code RKEY
+    (48) try_catch_finally -> . TRY LKEY block_code RKEY CATCH LPARENT EXCEPTION VARIABLE RPARENT LKEY block_code RKEY FINALLY LKEY block_code RKEY
+    (49) access_modifiers -> . PUBLIC
+    (50) access_modifiers -> . PRIVATE
+    (15) all_asignations -> . assignation_with_datatype
+    (16) all_asignations -> . assignation_without_datatype
+    (17) assignation_with_datatype -> . data_type assignation_key_value DOTANDCOMMA
+    (18) assignation_with_datatype -> . data_type assignation_key_value DOTANDCOMMA assignation_with_datatype
+    (19) assignation_with_datatype -> . data_type assignation_key_value DOTANDCOMMA assignation_without_datatype
+    (20) assignation_without_datatype -> . assignation_key_value DOTANDCOMMA
+    (21) assignation_without_datatype -> . assignation_key_value DOTANDCOMMA assignation_without_datatype
+    (22) assignation_without_datatype -> . assignation_key_value DOTANDCOMMA assignation_with_datatype
+    (26) data_type -> . CHARTYPE
+    (27) data_type -> . STRINGTYPE
+    (28) data_type -> . FLOATTYPE
+    (29) data_type -> . DECIMALTYPE
+    (30) data_type -> . INTTYPE
+    (31) data_type -> . BOOLTYPE
+    (25) assignation_key_value -> . VARIABLE ASSIGNATION value
 
     VARIABLE        shift and go to state 12
-    CONST           shift and go to state 21
-    TRY             shift and go to state 25
+    CONST           shift and go to state 23
+    LIST            shift and go to state 27
+    TRY             shift and go to state 28
     PUBLIC          shift and go to state 11
-    PRIVATE         shift and go to state 26
-    CHARTYPE        shift and go to state 29
-    STRINGTYPE      shift and go to state 30
-    FLOATTYPE       shift and go to state 31
-    DECIMALTYPE     shift and go to state 32
-    INTTYPE         shift and go to state 33
-    BOOLTYPE        shift and go to state 34
+    PRIVATE         shift and go to state 29
+    CHARTYPE        shift and go to state 32
+    STRINGTYPE      shift and go to state 33
+    FLOATTYPE       shift and go to state 34
+    DECIMALTYPE     shift and go to state 35
+    INTTYPE         shift and go to state 36
+    BOOLTYPE        shift and go to state 37
 
     block_code                     shift and go to state 13
     def_const_or_var               shift and go to state 14
-    block_try_catch                shift and go to state 15
-    constant_assignation           shift and go to state 16
-    variable_assignation           shift and go to state 17
-    try_catch_simply               shift and go to state 18
-    try_catch_finally              shift and go to state 19
-    access_modifiers               shift and go to state 20
-    all_asignations                shift and go to state 22
-    data_type                      shift and go to state 23
-    assignation_key_value          shift and go to state 24
-    assignation_with_datatype      shift and go to state 27
-    assignation_without_datatype   shift and go to state 28
+    estruct_of_data                shift and go to state 15
+    block_try_catch                shift and go to state 16
+    constant_assignation           shift and go to state 17
+    variable_assignation           shift and go to state 18
+    list                           shift and go to state 19
+    try_catch_simply               shift and go to state 20
+    try_catch_finally              shift and go to state 21
+    access_modifiers               shift and go to state 22
+    all_asignations                shift and go to state 24
+    data_type                      shift and go to state 25
+    assignation_key_value          shift and go to state 26
+    assignation_with_datatype      shift and go to state 30
+    assignation_without_datatype   shift and go to state 31
 
 state 11
 
-    (48) access_modifiers -> PUBLIC .
+    (49) access_modifiers -> PUBLIC .
 
-    CONST           reduce using rule 48 (access_modifiers -> PUBLIC .)
-    CHARTYPE        reduce using rule 48 (access_modifiers -> PUBLIC .)
-    STRINGTYPE      reduce using rule 48 (access_modifiers -> PUBLIC .)
-    FLOATTYPE       reduce using rule 48 (access_modifiers -> PUBLIC .)
-    DECIMALTYPE     reduce using rule 48 (access_modifiers -> PUBLIC .)
-    INTTYPE         reduce using rule 48 (access_modifiers -> PUBLIC .)
-    BOOLTYPE        reduce using rule 48 (access_modifiers -> PUBLIC .)
-    VARIABLE        reduce using rule 48 (access_modifiers -> PUBLIC .)
+    CONST           reduce using rule 49 (access_modifiers -> PUBLIC .)
+    CHARTYPE        reduce using rule 49 (access_modifiers -> PUBLIC .)
+    STRINGTYPE      reduce using rule 49 (access_modifiers -> PUBLIC .)
+    FLOATTYPE       reduce using rule 49 (access_modifiers -> PUBLIC .)
+    DECIMALTYPE     reduce using rule 49 (access_modifiers -> PUBLIC .)
+    INTTYPE         reduce using rule 49 (access_modifiers -> PUBLIC .)
+    BOOLTYPE        reduce using rule 49 (access_modifiers -> PUBLIC .)
+    VARIABLE        reduce using rule 49 (access_modifiers -> PUBLIC .)
 
 
 state 12
 
-    (6) block_code -> VARIABLE .
-    (24) assignation_key_value -> VARIABLE . ASSIGNATION value
+    (7) block_code -> VARIABLE .
+    (25) assignation_key_value -> VARIABLE . ASSIGNATION value
 
-    RKEY            reduce using rule 6 (block_code -> VARIABLE .)
-    ASSIGNATION     shift and go to state 35
+    RKEY            reduce using rule 7 (block_code -> VARIABLE .)
+    ASSIGNATION     shift and go to state 38
 
 
 state 13
 
     (3) block_publicClass -> PUBLIC CLASS VARIABLE LKEY block_code . RKEY
 
-    RKEY            shift and go to state 36
+    RKEY            shift and go to state 39
 
 
 state 14
@@ -400,938 +411,1098 @@ state 14
 
 state 15
 
-    (5) block_code -> block_try_catch .
+    (5) block_code -> estruct_of_data .
 
-    RKEY            reduce using rule 5 (block_code -> block_try_catch .)
+    RKEY            reduce using rule 5 (block_code -> estruct_of_data .)
 
 
 state 16
 
-    (7) def_const_or_var -> constant_assignation .
+    (6) block_code -> block_try_catch .
 
-    RKEY            reduce using rule 7 (def_const_or_var -> constant_assignation .)
+    RKEY            reduce using rule 6 (block_code -> block_try_catch .)
 
 
 state 17
 
-    (8) def_const_or_var -> variable_assignation .
+    (8) def_const_or_var -> constant_assignation .
 
-    RKEY            reduce using rule 8 (def_const_or_var -> variable_assignation .)
+    RKEY            reduce using rule 8 (def_const_or_var -> constant_assignation .)
 
 
 state 18
 
-    (44) block_try_catch -> try_catch_simply .
+    (9) def_const_or_var -> variable_assignation .
 
-    RKEY            reduce using rule 44 (block_try_catch -> try_catch_simply .)
+    RKEY            reduce using rule 9 (def_const_or_var -> variable_assignation .)
 
 
 state 19
 
-    (45) block_try_catch -> try_catch_finally .
+    (73) estruct_of_data -> list .
 
-    RKEY            reduce using rule 45 (block_try_catch -> try_catch_finally .)
+    RKEY            reduce using rule 73 (estruct_of_data -> list .)
 
 
 state 20
 
-    (11) constant_assignation -> access_modifiers . CONST all_asignations
-    (9) variable_assignation -> access_modifiers . all_asignations
-    (14) all_asignations -> . assignation_with_datatype
-    (15) all_asignations -> . assignation_without_datatype
-    (16) assignation_with_datatype -> . data_type assignation_key_value DOTANDCOMMA
-    (17) assignation_with_datatype -> . data_type assignation_key_value DOTANDCOMMA assignation_with_datatype
-    (18) assignation_with_datatype -> . data_type assignation_key_value DOTANDCOMMA assignation_without_datatype
-    (19) assignation_without_datatype -> . assignation_key_value DOTANDCOMMA
-    (20) assignation_without_datatype -> . assignation_key_value DOTANDCOMMA assignation_without_datatype
-    (21) assignation_without_datatype -> . assignation_key_value DOTANDCOMMA assignation_with_datatype
-    (25) data_type -> . CHARTYPE
-    (26) data_type -> . STRINGTYPE
-    (27) data_type -> . FLOATTYPE
-    (28) data_type -> . DECIMALTYPE
-    (29) data_type -> . INTTYPE
-    (30) data_type -> . BOOLTYPE
-    (24) assignation_key_value -> . VARIABLE ASSIGNATION value
+    (45) block_try_catch -> try_catch_simply .
 
-    CONST           shift and go to state 37
-    CHARTYPE        shift and go to state 29
-    STRINGTYPE      shift and go to state 30
-    FLOATTYPE       shift and go to state 31
-    DECIMALTYPE     shift and go to state 32
-    INTTYPE         shift and go to state 33
-    BOOLTYPE        shift and go to state 34
-    VARIABLE        shift and go to state 39
+    RKEY            reduce using rule 45 (block_try_catch -> try_catch_simply .)
 
-    all_asignations                shift and go to state 38
-    assignation_with_datatype      shift and go to state 27
-    assignation_without_datatype   shift and go to state 28
-    data_type                      shift and go to state 23
-    assignation_key_value          shift and go to state 24
 
 state 21
 
-    (12) constant_assignation -> CONST . all_asignations
-    (13) constant_assignation -> CONST . data_type assignation_key_value COMMA some_assignation_constant
-    (14) all_asignations -> . assignation_with_datatype
-    (15) all_asignations -> . assignation_without_datatype
-    (25) data_type -> . CHARTYPE
-    (26) data_type -> . STRINGTYPE
-    (27) data_type -> . FLOATTYPE
-    (28) data_type -> . DECIMALTYPE
-    (29) data_type -> . INTTYPE
-    (30) data_type -> . BOOLTYPE
-    (16) assignation_with_datatype -> . data_type assignation_key_value DOTANDCOMMA
-    (17) assignation_with_datatype -> . data_type assignation_key_value DOTANDCOMMA assignation_with_datatype
-    (18) assignation_with_datatype -> . data_type assignation_key_value DOTANDCOMMA assignation_without_datatype
-    (19) assignation_without_datatype -> . assignation_key_value DOTANDCOMMA
-    (20) assignation_without_datatype -> . assignation_key_value DOTANDCOMMA assignation_without_datatype
-    (21) assignation_without_datatype -> . assignation_key_value DOTANDCOMMA assignation_with_datatype
-    (24) assignation_key_value -> . VARIABLE ASSIGNATION value
+    (46) block_try_catch -> try_catch_finally .
 
-    CHARTYPE        shift and go to state 29
-    STRINGTYPE      shift and go to state 30
-    FLOATTYPE       shift and go to state 31
-    DECIMALTYPE     shift and go to state 32
-    INTTYPE         shift and go to state 33
-    BOOLTYPE        shift and go to state 34
-    VARIABLE        shift and go to state 39
+    RKEY            reduce using rule 46 (block_try_catch -> try_catch_finally .)
 
-    all_asignations                shift and go to state 40
-    data_type                      shift and go to state 41
-    assignation_key_value          shift and go to state 24
-    assignation_with_datatype      shift and go to state 27
-    assignation_without_datatype   shift and go to state 28
 
 state 22
 
-    (10) variable_assignation -> all_asignations .
+    (12) constant_assignation -> access_modifiers . CONST all_asignations
+    (10) variable_assignation -> access_modifiers . all_asignations
+    (15) all_asignations -> . assignation_with_datatype
+    (16) all_asignations -> . assignation_without_datatype
+    (17) assignation_with_datatype -> . data_type assignation_key_value DOTANDCOMMA
+    (18) assignation_with_datatype -> . data_type assignation_key_value DOTANDCOMMA assignation_with_datatype
+    (19) assignation_with_datatype -> . data_type assignation_key_value DOTANDCOMMA assignation_without_datatype
+    (20) assignation_without_datatype -> . assignation_key_value DOTANDCOMMA
+    (21) assignation_without_datatype -> . assignation_key_value DOTANDCOMMA assignation_without_datatype
+    (22) assignation_without_datatype -> . assignation_key_value DOTANDCOMMA assignation_with_datatype
+    (26) data_type -> . CHARTYPE
+    (27) data_type -> . STRINGTYPE
+    (28) data_type -> . FLOATTYPE
+    (29) data_type -> . DECIMALTYPE
+    (30) data_type -> . INTTYPE
+    (31) data_type -> . BOOLTYPE
+    (25) assignation_key_value -> . VARIABLE ASSIGNATION value
 
-    RKEY            reduce using rule 10 (variable_assignation -> all_asignations .)
+    CONST           shift and go to state 40
+    CHARTYPE        shift and go to state 32
+    STRINGTYPE      shift and go to state 33
+    FLOATTYPE       shift and go to state 34
+    DECIMALTYPE     shift and go to state 35
+    INTTYPE         shift and go to state 36
+    BOOLTYPE        shift and go to state 37
+    VARIABLE        shift and go to state 42
 
+    all_asignations                shift and go to state 41
+    assignation_with_datatype      shift and go to state 30
+    assignation_without_datatype   shift and go to state 31
+    data_type                      shift and go to state 25
+    assignation_key_value          shift and go to state 26
 
 state 23
 
-    (16) assignation_with_datatype -> data_type . assignation_key_value DOTANDCOMMA
-    (17) assignation_with_datatype -> data_type . assignation_key_value DOTANDCOMMA assignation_with_datatype
-    (18) assignation_with_datatype -> data_type . assignation_key_value DOTANDCOMMA assignation_without_datatype
-    (24) assignation_key_value -> . VARIABLE ASSIGNATION value
+    (13) constant_assignation -> CONST . all_asignations
+    (14) constant_assignation -> CONST . data_type assignation_key_value COMMA some_assignation_constant
+    (15) all_asignations -> . assignation_with_datatype
+    (16) all_asignations -> . assignation_without_datatype
+    (26) data_type -> . CHARTYPE
+    (27) data_type -> . STRINGTYPE
+    (28) data_type -> . FLOATTYPE
+    (29) data_type -> . DECIMALTYPE
+    (30) data_type -> . INTTYPE
+    (31) data_type -> . BOOLTYPE
+    (17) assignation_with_datatype -> . data_type assignation_key_value DOTANDCOMMA
+    (18) assignation_with_datatype -> . data_type assignation_key_value DOTANDCOMMA assignation_with_datatype
+    (19) assignation_with_datatype -> . data_type assignation_key_value DOTANDCOMMA assignation_without_datatype
+    (20) assignation_without_datatype -> . assignation_key_value DOTANDCOMMA
+    (21) assignation_without_datatype -> . assignation_key_value DOTANDCOMMA assignation_without_datatype
+    (22) assignation_without_datatype -> . assignation_key_value DOTANDCOMMA assignation_with_datatype
+    (25) assignation_key_value -> . VARIABLE ASSIGNATION value
 
-    VARIABLE        shift and go to state 39
+    CHARTYPE        shift and go to state 32
+    STRINGTYPE      shift and go to state 33
+    FLOATTYPE       shift and go to state 34
+    DECIMALTYPE     shift and go to state 35
+    INTTYPE         shift and go to state 36
+    BOOLTYPE        shift and go to state 37
+    VARIABLE        shift and go to state 42
 
-    assignation_key_value          shift and go to state 42
+    all_asignations                shift and go to state 43
+    data_type                      shift and go to state 44
+    assignation_key_value          shift and go to state 26
+    assignation_with_datatype      shift and go to state 30
+    assignation_without_datatype   shift and go to state 31
 
 state 24
 
-    (19) assignation_without_datatype -> assignation_key_value . DOTANDCOMMA
-    (20) assignation_without_datatype -> assignation_key_value . DOTANDCOMMA assignation_without_datatype
-    (21) assignation_without_datatype -> assignation_key_value . DOTANDCOMMA assignation_with_datatype
+    (11) variable_assignation -> all_asignations .
 
-    DOTANDCOMMA     shift and go to state 43
+    RKEY            reduce using rule 11 (variable_assignation -> all_asignations .)
 
 
 state 25
 
-    (46) try_catch_simply -> TRY . LKEY block_code RKEY CATCH LPARENT EXCEPTION VARIABLE RPARENT LKEY block_code RKEY
-    (47) try_catch_finally -> TRY . LKEY block_code RKEY CATCH LPARENT EXCEPTION VARIABLE RPARENT LKEY block_code RKEY FINALLY LKEY block_code RKEY
+    (17) assignation_with_datatype -> data_type . assignation_key_value DOTANDCOMMA
+    (18) assignation_with_datatype -> data_type . assignation_key_value DOTANDCOMMA assignation_with_datatype
+    (19) assignation_with_datatype -> data_type . assignation_key_value DOTANDCOMMA assignation_without_datatype
+    (25) assignation_key_value -> . VARIABLE ASSIGNATION value
 
-    LKEY            shift and go to state 44
+    VARIABLE        shift and go to state 42
 
+    assignation_key_value          shift and go to state 45
 
 state 26
 
-    (49) access_modifiers -> PRIVATE .
+    (20) assignation_without_datatype -> assignation_key_value . DOTANDCOMMA
+    (21) assignation_without_datatype -> assignation_key_value . DOTANDCOMMA assignation_without_datatype
+    (22) assignation_without_datatype -> assignation_key_value . DOTANDCOMMA assignation_with_datatype
 
-    CONST           reduce using rule 49 (access_modifiers -> PRIVATE .)
-    CHARTYPE        reduce using rule 49 (access_modifiers -> PRIVATE .)
-    STRINGTYPE      reduce using rule 49 (access_modifiers -> PRIVATE .)
-    FLOATTYPE       reduce using rule 49 (access_modifiers -> PRIVATE .)
-    DECIMALTYPE     reduce using rule 49 (access_modifiers -> PRIVATE .)
-    INTTYPE         reduce using rule 49 (access_modifiers -> PRIVATE .)
-    BOOLTYPE        reduce using rule 49 (access_modifiers -> PRIVATE .)
-    VARIABLE        reduce using rule 49 (access_modifiers -> PRIVATE .)
+    DOTANDCOMMA     shift and go to state 46
 
 
 state 27
 
-    (14) all_asignations -> assignation_with_datatype .
+    (74) list -> LIST . SMALLER_THAN data_type GREATER_THAN VARIABLE ASSIGNATION NEW LIST SMALLER_THAN data_type GREATER_THAN LPARENT RPARENT DOTANDCOMMA
 
-    RKEY            reduce using rule 14 (all_asignations -> assignation_with_datatype .)
+    SMALLER_THAN    shift and go to state 47
 
 
 state 28
 
-    (15) all_asignations -> assignation_without_datatype .
+    (47) try_catch_simply -> TRY . LKEY block_code RKEY CATCH LPARENT EXCEPTION VARIABLE RPARENT LKEY block_code RKEY
+    (48) try_catch_finally -> TRY . LKEY block_code RKEY CATCH LPARENT EXCEPTION VARIABLE RPARENT LKEY block_code RKEY FINALLY LKEY block_code RKEY
 
-    RKEY            reduce using rule 15 (all_asignations -> assignation_without_datatype .)
+    LKEY            shift and go to state 48
 
 
 state 29
 
-    (25) data_type -> CHARTYPE .
+    (50) access_modifiers -> PRIVATE .
 
-    VARIABLE        reduce using rule 25 (data_type -> CHARTYPE .)
+    CONST           reduce using rule 50 (access_modifiers -> PRIVATE .)
+    CHARTYPE        reduce using rule 50 (access_modifiers -> PRIVATE .)
+    STRINGTYPE      reduce using rule 50 (access_modifiers -> PRIVATE .)
+    FLOATTYPE       reduce using rule 50 (access_modifiers -> PRIVATE .)
+    DECIMALTYPE     reduce using rule 50 (access_modifiers -> PRIVATE .)
+    INTTYPE         reduce using rule 50 (access_modifiers -> PRIVATE .)
+    BOOLTYPE        reduce using rule 50 (access_modifiers -> PRIVATE .)
+    VARIABLE        reduce using rule 50 (access_modifiers -> PRIVATE .)
 
 
 state 30
 
-    (26) data_type -> STRINGTYPE .
+    (15) all_asignations -> assignation_with_datatype .
 
-    VARIABLE        reduce using rule 26 (data_type -> STRINGTYPE .)
+    RKEY            reduce using rule 15 (all_asignations -> assignation_with_datatype .)
 
 
 state 31
 
-    (27) data_type -> FLOATTYPE .
+    (16) all_asignations -> assignation_without_datatype .
 
-    VARIABLE        reduce using rule 27 (data_type -> FLOATTYPE .)
+    RKEY            reduce using rule 16 (all_asignations -> assignation_without_datatype .)
 
 
 state 32
 
-    (28) data_type -> DECIMALTYPE .
+    (26) data_type -> CHARTYPE .
 
-    VARIABLE        reduce using rule 28 (data_type -> DECIMALTYPE .)
+    VARIABLE        reduce using rule 26 (data_type -> CHARTYPE .)
+    GREATER_THAN    reduce using rule 26 (data_type -> CHARTYPE .)
 
 
 state 33
 
-    (29) data_type -> INTTYPE .
+    (27) data_type -> STRINGTYPE .
 
-    VARIABLE        reduce using rule 29 (data_type -> INTTYPE .)
+    VARIABLE        reduce using rule 27 (data_type -> STRINGTYPE .)
+    GREATER_THAN    reduce using rule 27 (data_type -> STRINGTYPE .)
 
 
 state 34
 
-    (30) data_type -> BOOLTYPE .
+    (28) data_type -> FLOATTYPE .
 
-    VARIABLE        reduce using rule 30 (data_type -> BOOLTYPE .)
+    VARIABLE        reduce using rule 28 (data_type -> FLOATTYPE .)
+    GREATER_THAN    reduce using rule 28 (data_type -> FLOATTYPE .)
 
 
 state 35
 
-    (24) assignation_key_value -> VARIABLE ASSIGNATION . value
-    (31) value -> . value_numeric
-    (32) value -> . value_logic
-    (33) value -> . value_string
-    (41) value_numeric -> . INTEGER
-    (42) value_numeric -> . FLOAT_NUMBER
-    (43) value_numeric -> . DECIMAL_NUMBER
-    (39) value_logic -> . BOOLTRUE
-    (40) value_logic -> . BOOLFALSE
-    (34) value_string -> . STRING
-    (35) value_string -> . CHAR
-    (36) value_string -> . VARIABLE
-    (37) value_string -> . READ LPARENT RPARENT
-    (38) value_string -> . concatenation
-    (54) concatenation -> . STRING
-    (55) concatenation -> . STRING PLUS concatenation
+    (29) data_type -> DECIMALTYPE .
 
-    INTEGER         shift and go to state 50
-    FLOAT_NUMBER    shift and go to state 51
-    DECIMAL_NUMBER  shift and go to state 52
-    BOOLTRUE        shift and go to state 53
-    BOOLFALSE       shift and go to state 54
-    STRING          shift and go to state 55
-    CHAR            shift and go to state 56
-    VARIABLE        shift and go to state 45
-    READ            shift and go to state 57
+    VARIABLE        reduce using rule 29 (data_type -> DECIMALTYPE .)
+    GREATER_THAN    reduce using rule 29 (data_type -> DECIMALTYPE .)
 
-    value                          shift and go to state 46
-    value_numeric                  shift and go to state 47
-    value_logic                    shift and go to state 48
-    value_string                   shift and go to state 49
-    concatenation                  shift and go to state 58
 
 state 36
+
+    (30) data_type -> INTTYPE .
+
+    VARIABLE        reduce using rule 30 (data_type -> INTTYPE .)
+    GREATER_THAN    reduce using rule 30 (data_type -> INTTYPE .)
+
+
+state 37
+
+    (31) data_type -> BOOLTYPE .
+
+    VARIABLE        reduce using rule 31 (data_type -> BOOLTYPE .)
+    GREATER_THAN    reduce using rule 31 (data_type -> BOOLTYPE .)
+
+
+state 38
+
+    (25) assignation_key_value -> VARIABLE ASSIGNATION . value
+    (32) value -> . value_numeric
+    (33) value -> . value_logic
+    (34) value -> . value_string
+    (42) value_numeric -> . INTEGER
+    (43) value_numeric -> . FLOAT_NUMBER
+    (44) value_numeric -> . DECIMAL_NUMBER
+    (40) value_logic -> . BOOLTRUE
+    (41) value_logic -> . BOOLFALSE
+    (35) value_string -> . STRING
+    (36) value_string -> . CHAR
+    (37) value_string -> . VARIABLE
+    (38) value_string -> . READ LPARENT RPARENT
+    (39) value_string -> . concatenation
+    (55) concatenation -> . STRING
+    (56) concatenation -> . STRING PLUS concatenation
+
+    INTEGER         shift and go to state 54
+    FLOAT_NUMBER    shift and go to state 55
+    DECIMAL_NUMBER  shift and go to state 56
+    BOOLTRUE        shift and go to state 57
+    BOOLFALSE       shift and go to state 58
+    STRING          shift and go to state 59
+    CHAR            shift and go to state 60
+    VARIABLE        shift and go to state 49
+    READ            shift and go to state 61
+
+    value                          shift and go to state 50
+    value_numeric                  shift and go to state 51
+    value_logic                    shift and go to state 52
+    value_string                   shift and go to state 53
+    concatenation                  shift and go to state 62
+
+state 39
 
     (3) block_publicClass -> PUBLIC CLASS VARIABLE LKEY block_code RKEY .
 
     $end            reduce using rule 3 (block_publicClass -> PUBLIC CLASS VARIABLE LKEY block_code RKEY .)
 
 
-state 37
-
-    (11) constant_assignation -> access_modifiers CONST . all_asignations
-    (14) all_asignations -> . assignation_with_datatype
-    (15) all_asignations -> . assignation_without_datatype
-    (16) assignation_with_datatype -> . data_type assignation_key_value DOTANDCOMMA
-    (17) assignation_with_datatype -> . data_type assignation_key_value DOTANDCOMMA assignation_with_datatype
-    (18) assignation_with_datatype -> . data_type assignation_key_value DOTANDCOMMA assignation_without_datatype
-    (19) assignation_without_datatype -> . assignation_key_value DOTANDCOMMA
-    (20) assignation_without_datatype -> . assignation_key_value DOTANDCOMMA assignation_without_datatype
-    (21) assignation_without_datatype -> . assignation_key_value DOTANDCOMMA assignation_with_datatype
-    (25) data_type -> . CHARTYPE
-    (26) data_type -> . STRINGTYPE
-    (27) data_type -> . FLOATTYPE
-    (28) data_type -> . DECIMALTYPE
-    (29) data_type -> . INTTYPE
-    (30) data_type -> . BOOLTYPE
-    (24) assignation_key_value -> . VARIABLE ASSIGNATION value
-
-    CHARTYPE        shift and go to state 29
-    STRINGTYPE      shift and go to state 30
-    FLOATTYPE       shift and go to state 31
-    DECIMALTYPE     shift and go to state 32
-    INTTYPE         shift and go to state 33
-    BOOLTYPE        shift and go to state 34
-    VARIABLE        shift and go to state 39
-
-    all_asignations                shift and go to state 59
-    assignation_with_datatype      shift and go to state 27
-    assignation_without_datatype   shift and go to state 28
-    data_type                      shift and go to state 23
-    assignation_key_value          shift and go to state 24
-
-state 38
-
-    (9) variable_assignation -> access_modifiers all_asignations .
-
-    RKEY            reduce using rule 9 (variable_assignation -> access_modifiers all_asignations .)
-
-
-state 39
-
-    (24) assignation_key_value -> VARIABLE . ASSIGNATION value
-
-    ASSIGNATION     shift and go to state 35
-
-
 state 40
 
-    (12) constant_assignation -> CONST all_asignations .
+    (12) constant_assignation -> access_modifiers CONST . all_asignations
+    (15) all_asignations -> . assignation_with_datatype
+    (16) all_asignations -> . assignation_without_datatype
+    (17) assignation_with_datatype -> . data_type assignation_key_value DOTANDCOMMA
+    (18) assignation_with_datatype -> . data_type assignation_key_value DOTANDCOMMA assignation_with_datatype
+    (19) assignation_with_datatype -> . data_type assignation_key_value DOTANDCOMMA assignation_without_datatype
+    (20) assignation_without_datatype -> . assignation_key_value DOTANDCOMMA
+    (21) assignation_without_datatype -> . assignation_key_value DOTANDCOMMA assignation_without_datatype
+    (22) assignation_without_datatype -> . assignation_key_value DOTANDCOMMA assignation_with_datatype
+    (26) data_type -> . CHARTYPE
+    (27) data_type -> . STRINGTYPE
+    (28) data_type -> . FLOATTYPE
+    (29) data_type -> . DECIMALTYPE
+    (30) data_type -> . INTTYPE
+    (31) data_type -> . BOOLTYPE
+    (25) assignation_key_value -> . VARIABLE ASSIGNATION value
 
-    RKEY            reduce using rule 12 (constant_assignation -> CONST all_asignations .)
+    CHARTYPE        shift and go to state 32
+    STRINGTYPE      shift and go to state 33
+    FLOATTYPE       shift and go to state 34
+    DECIMALTYPE     shift and go to state 35
+    INTTYPE         shift and go to state 36
+    BOOLTYPE        shift and go to state 37
+    VARIABLE        shift and go to state 42
 
+    all_asignations                shift and go to state 63
+    assignation_with_datatype      shift and go to state 30
+    assignation_without_datatype   shift and go to state 31
+    data_type                      shift and go to state 25
+    assignation_key_value          shift and go to state 26
 
 state 41
 
-    (13) constant_assignation -> CONST data_type . assignation_key_value COMMA some_assignation_constant
-    (16) assignation_with_datatype -> data_type . assignation_key_value DOTANDCOMMA
-    (17) assignation_with_datatype -> data_type . assignation_key_value DOTANDCOMMA assignation_with_datatype
-    (18) assignation_with_datatype -> data_type . assignation_key_value DOTANDCOMMA assignation_without_datatype
-    (24) assignation_key_value -> . VARIABLE ASSIGNATION value
+    (10) variable_assignation -> access_modifiers all_asignations .
 
-    VARIABLE        shift and go to state 39
+    RKEY            reduce using rule 10 (variable_assignation -> access_modifiers all_asignations .)
 
-    assignation_key_value          shift and go to state 60
 
 state 42
 
-    (16) assignation_with_datatype -> data_type assignation_key_value . DOTANDCOMMA
-    (17) assignation_with_datatype -> data_type assignation_key_value . DOTANDCOMMA assignation_with_datatype
-    (18) assignation_with_datatype -> data_type assignation_key_value . DOTANDCOMMA assignation_without_datatype
+    (25) assignation_key_value -> VARIABLE . ASSIGNATION value
 
-    DOTANDCOMMA     shift and go to state 61
+    ASSIGNATION     shift and go to state 38
 
 
 state 43
 
-    (19) assignation_without_datatype -> assignation_key_value DOTANDCOMMA .
-    (20) assignation_without_datatype -> assignation_key_value DOTANDCOMMA . assignation_without_datatype
-    (21) assignation_without_datatype -> assignation_key_value DOTANDCOMMA . assignation_with_datatype
-    (19) assignation_without_datatype -> . assignation_key_value DOTANDCOMMA
-    (20) assignation_without_datatype -> . assignation_key_value DOTANDCOMMA assignation_without_datatype
-    (21) assignation_without_datatype -> . assignation_key_value DOTANDCOMMA assignation_with_datatype
-    (16) assignation_with_datatype -> . data_type assignation_key_value DOTANDCOMMA
-    (17) assignation_with_datatype -> . data_type assignation_key_value DOTANDCOMMA assignation_with_datatype
-    (18) assignation_with_datatype -> . data_type assignation_key_value DOTANDCOMMA assignation_without_datatype
-    (24) assignation_key_value -> . VARIABLE ASSIGNATION value
-    (25) data_type -> . CHARTYPE
-    (26) data_type -> . STRINGTYPE
-    (27) data_type -> . FLOATTYPE
-    (28) data_type -> . DECIMALTYPE
-    (29) data_type -> . INTTYPE
-    (30) data_type -> . BOOLTYPE
+    (13) constant_assignation -> CONST all_asignations .
 
-    RKEY            reduce using rule 19 (assignation_without_datatype -> assignation_key_value DOTANDCOMMA .)
-    VARIABLE        shift and go to state 39
-    CHARTYPE        shift and go to state 29
-    STRINGTYPE      shift and go to state 30
-    FLOATTYPE       shift and go to state 31
-    DECIMALTYPE     shift and go to state 32
-    INTTYPE         shift and go to state 33
-    BOOLTYPE        shift and go to state 34
+    RKEY            reduce using rule 13 (constant_assignation -> CONST all_asignations .)
 
-    assignation_key_value          shift and go to state 24
-    assignation_without_datatype   shift and go to state 62
-    assignation_with_datatype      shift and go to state 63
-    data_type                      shift and go to state 23
 
 state 44
 
-    (46) try_catch_simply -> TRY LKEY . block_code RKEY CATCH LPARENT EXCEPTION VARIABLE RPARENT LKEY block_code RKEY
-    (47) try_catch_finally -> TRY LKEY . block_code RKEY CATCH LPARENT EXCEPTION VARIABLE RPARENT LKEY block_code RKEY FINALLY LKEY block_code RKEY
-    (4) block_code -> . def_const_or_var
-    (5) block_code -> . block_try_catch
-    (6) block_code -> . VARIABLE
-    (7) def_const_or_var -> . constant_assignation
-    (8) def_const_or_var -> . variable_assignation
-    (44) block_try_catch -> . try_catch_simply
-    (45) block_try_catch -> . try_catch_finally
-    (11) constant_assignation -> . access_modifiers CONST all_asignations
-    (12) constant_assignation -> . CONST all_asignations
-    (13) constant_assignation -> . CONST data_type assignation_key_value COMMA some_assignation_constant
-    (9) variable_assignation -> . access_modifiers all_asignations
-    (10) variable_assignation -> . all_asignations
-    (46) try_catch_simply -> . TRY LKEY block_code RKEY CATCH LPARENT EXCEPTION VARIABLE RPARENT LKEY block_code RKEY
-    (47) try_catch_finally -> . TRY LKEY block_code RKEY CATCH LPARENT EXCEPTION VARIABLE RPARENT LKEY block_code RKEY FINALLY LKEY block_code RKEY
-    (48) access_modifiers -> . PUBLIC
-    (49) access_modifiers -> . PRIVATE
-    (14) all_asignations -> . assignation_with_datatype
-    (15) all_asignations -> . assignation_without_datatype
-    (16) assignation_with_datatype -> . data_type assignation_key_value DOTANDCOMMA
-    (17) assignation_with_datatype -> . data_type assignation_key_value DOTANDCOMMA assignation_with_datatype
-    (18) assignation_with_datatype -> . data_type assignation_key_value DOTANDCOMMA assignation_without_datatype
-    (19) assignation_without_datatype -> . assignation_key_value DOTANDCOMMA
-    (20) assignation_without_datatype -> . assignation_key_value DOTANDCOMMA assignation_without_datatype
-    (21) assignation_without_datatype -> . assignation_key_value DOTANDCOMMA assignation_with_datatype
-    (25) data_type -> . CHARTYPE
-    (26) data_type -> . STRINGTYPE
-    (27) data_type -> . FLOATTYPE
-    (28) data_type -> . DECIMALTYPE
-    (29) data_type -> . INTTYPE
-    (30) data_type -> . BOOLTYPE
-    (24) assignation_key_value -> . VARIABLE ASSIGNATION value
+    (14) constant_assignation -> CONST data_type . assignation_key_value COMMA some_assignation_constant
+    (17) assignation_with_datatype -> data_type . assignation_key_value DOTANDCOMMA
+    (18) assignation_with_datatype -> data_type . assignation_key_value DOTANDCOMMA assignation_with_datatype
+    (19) assignation_with_datatype -> data_type . assignation_key_value DOTANDCOMMA assignation_without_datatype
+    (25) assignation_key_value -> . VARIABLE ASSIGNATION value
 
-    VARIABLE        shift and go to state 12
-    CONST           shift and go to state 21
-    TRY             shift and go to state 25
-    PUBLIC          shift and go to state 11
-    PRIVATE         shift and go to state 26
-    CHARTYPE        shift and go to state 29
-    STRINGTYPE      shift and go to state 30
-    FLOATTYPE       shift and go to state 31
-    DECIMALTYPE     shift and go to state 32
-    INTTYPE         shift and go to state 33
-    BOOLTYPE        shift and go to state 34
+    VARIABLE        shift and go to state 42
 
-    block_code                     shift and go to state 64
-    def_const_or_var               shift and go to state 14
-    block_try_catch                shift and go to state 15
-    constant_assignation           shift and go to state 16
-    variable_assignation           shift and go to state 17
-    try_catch_simply               shift and go to state 18
-    try_catch_finally              shift and go to state 19
-    access_modifiers               shift and go to state 20
-    all_asignations                shift and go to state 22
-    data_type                      shift and go to state 23
-    assignation_key_value          shift and go to state 24
-    assignation_with_datatype      shift and go to state 27
-    assignation_without_datatype   shift and go to state 28
+    assignation_key_value          shift and go to state 64
 
 state 45
 
-    (36) value_string -> VARIABLE .
+    (17) assignation_with_datatype -> data_type assignation_key_value . DOTANDCOMMA
+    (18) assignation_with_datatype -> data_type assignation_key_value . DOTANDCOMMA assignation_with_datatype
+    (19) assignation_with_datatype -> data_type assignation_key_value . DOTANDCOMMA assignation_without_datatype
 
-    DOTANDCOMMA     reduce using rule 36 (value_string -> VARIABLE .)
-    COMMA           reduce using rule 36 (value_string -> VARIABLE .)
+    DOTANDCOMMA     shift and go to state 65
 
 
 state 46
 
-    (24) assignation_key_value -> VARIABLE ASSIGNATION value .
+    (20) assignation_without_datatype -> assignation_key_value DOTANDCOMMA .
+    (21) assignation_without_datatype -> assignation_key_value DOTANDCOMMA . assignation_without_datatype
+    (22) assignation_without_datatype -> assignation_key_value DOTANDCOMMA . assignation_with_datatype
+    (20) assignation_without_datatype -> . assignation_key_value DOTANDCOMMA
+    (21) assignation_without_datatype -> . assignation_key_value DOTANDCOMMA assignation_without_datatype
+    (22) assignation_without_datatype -> . assignation_key_value DOTANDCOMMA assignation_with_datatype
+    (17) assignation_with_datatype -> . data_type assignation_key_value DOTANDCOMMA
+    (18) assignation_with_datatype -> . data_type assignation_key_value DOTANDCOMMA assignation_with_datatype
+    (19) assignation_with_datatype -> . data_type assignation_key_value DOTANDCOMMA assignation_without_datatype
+    (25) assignation_key_value -> . VARIABLE ASSIGNATION value
+    (26) data_type -> . CHARTYPE
+    (27) data_type -> . STRINGTYPE
+    (28) data_type -> . FLOATTYPE
+    (29) data_type -> . DECIMALTYPE
+    (30) data_type -> . INTTYPE
+    (31) data_type -> . BOOLTYPE
 
-    DOTANDCOMMA     reduce using rule 24 (assignation_key_value -> VARIABLE ASSIGNATION value .)
-    COMMA           reduce using rule 24 (assignation_key_value -> VARIABLE ASSIGNATION value .)
+    RKEY            reduce using rule 20 (assignation_without_datatype -> assignation_key_value DOTANDCOMMA .)
+    VARIABLE        shift and go to state 42
+    CHARTYPE        shift and go to state 32
+    STRINGTYPE      shift and go to state 33
+    FLOATTYPE       shift and go to state 34
+    DECIMALTYPE     shift and go to state 35
+    INTTYPE         shift and go to state 36
+    BOOLTYPE        shift and go to state 37
 
+    assignation_key_value          shift and go to state 26
+    assignation_without_datatype   shift and go to state 66
+    assignation_with_datatype      shift and go to state 67
+    data_type                      shift and go to state 25
 
 state 47
 
-    (31) value -> value_numeric .
+    (74) list -> LIST SMALLER_THAN . data_type GREATER_THAN VARIABLE ASSIGNATION NEW LIST SMALLER_THAN data_type GREATER_THAN LPARENT RPARENT DOTANDCOMMA
+    (26) data_type -> . CHARTYPE
+    (27) data_type -> . STRINGTYPE
+    (28) data_type -> . FLOATTYPE
+    (29) data_type -> . DECIMALTYPE
+    (30) data_type -> . INTTYPE
+    (31) data_type -> . BOOLTYPE
 
-    DOTANDCOMMA     reduce using rule 31 (value -> value_numeric .)
-    COMMA           reduce using rule 31 (value -> value_numeric .)
+    CHARTYPE        shift and go to state 32
+    STRINGTYPE      shift and go to state 33
+    FLOATTYPE       shift and go to state 34
+    DECIMALTYPE     shift and go to state 35
+    INTTYPE         shift and go to state 36
+    BOOLTYPE        shift and go to state 37
 
+    data_type                      shift and go to state 68
 
 state 48
 
-    (32) value -> value_logic .
+    (47) try_catch_simply -> TRY LKEY . block_code RKEY CATCH LPARENT EXCEPTION VARIABLE RPARENT LKEY block_code RKEY
+    (48) try_catch_finally -> TRY LKEY . block_code RKEY CATCH LPARENT EXCEPTION VARIABLE RPARENT LKEY block_code RKEY FINALLY LKEY block_code RKEY
+    (4) block_code -> . def_const_or_var
+    (5) block_code -> . estruct_of_data
+    (6) block_code -> . block_try_catch
+    (7) block_code -> . VARIABLE
+    (8) def_const_or_var -> . constant_assignation
+    (9) def_const_or_var -> . variable_assignation
+    (73) estruct_of_data -> . list
+    (45) block_try_catch -> . try_catch_simply
+    (46) block_try_catch -> . try_catch_finally
+    (12) constant_assignation -> . access_modifiers CONST all_asignations
+    (13) constant_assignation -> . CONST all_asignations
+    (14) constant_assignation -> . CONST data_type assignation_key_value COMMA some_assignation_constant
+    (10) variable_assignation -> . access_modifiers all_asignations
+    (11) variable_assignation -> . all_asignations
+    (74) list -> . LIST SMALLER_THAN data_type GREATER_THAN VARIABLE ASSIGNATION NEW LIST SMALLER_THAN data_type GREATER_THAN LPARENT RPARENT DOTANDCOMMA
+    (47) try_catch_simply -> . TRY LKEY block_code RKEY CATCH LPARENT EXCEPTION VARIABLE RPARENT LKEY block_code RKEY
+    (48) try_catch_finally -> . TRY LKEY block_code RKEY CATCH LPARENT EXCEPTION VARIABLE RPARENT LKEY block_code RKEY FINALLY LKEY block_code RKEY
+    (49) access_modifiers -> . PUBLIC
+    (50) access_modifiers -> . PRIVATE
+    (15) all_asignations -> . assignation_with_datatype
+    (16) all_asignations -> . assignation_without_datatype
+    (17) assignation_with_datatype -> . data_type assignation_key_value DOTANDCOMMA
+    (18) assignation_with_datatype -> . data_type assignation_key_value DOTANDCOMMA assignation_with_datatype
+    (19) assignation_with_datatype -> . data_type assignation_key_value DOTANDCOMMA assignation_without_datatype
+    (20) assignation_without_datatype -> . assignation_key_value DOTANDCOMMA
+    (21) assignation_without_datatype -> . assignation_key_value DOTANDCOMMA assignation_without_datatype
+    (22) assignation_without_datatype -> . assignation_key_value DOTANDCOMMA assignation_with_datatype
+    (26) data_type -> . CHARTYPE
+    (27) data_type -> . STRINGTYPE
+    (28) data_type -> . FLOATTYPE
+    (29) data_type -> . DECIMALTYPE
+    (30) data_type -> . INTTYPE
+    (31) data_type -> . BOOLTYPE
+    (25) assignation_key_value -> . VARIABLE ASSIGNATION value
 
-    DOTANDCOMMA     reduce using rule 32 (value -> value_logic .)
-    COMMA           reduce using rule 32 (value -> value_logic .)
+    VARIABLE        shift and go to state 12
+    CONST           shift and go to state 23
+    LIST            shift and go to state 27
+    TRY             shift and go to state 28
+    PUBLIC          shift and go to state 11
+    PRIVATE         shift and go to state 29
+    CHARTYPE        shift and go to state 32
+    STRINGTYPE      shift and go to state 33
+    FLOATTYPE       shift and go to state 34
+    DECIMALTYPE     shift and go to state 35
+    INTTYPE         shift and go to state 36
+    BOOLTYPE        shift and go to state 37
 
+    block_code                     shift and go to state 69
+    def_const_or_var               shift and go to state 14
+    estruct_of_data                shift and go to state 15
+    block_try_catch                shift and go to state 16
+    constant_assignation           shift and go to state 17
+    variable_assignation           shift and go to state 18
+    list                           shift and go to state 19
+    try_catch_simply               shift and go to state 20
+    try_catch_finally              shift and go to state 21
+    access_modifiers               shift and go to state 22
+    all_asignations                shift and go to state 24
+    data_type                      shift and go to state 25
+    assignation_key_value          shift and go to state 26
+    assignation_with_datatype      shift and go to state 30
+    assignation_without_datatype   shift and go to state 31
 
 state 49
 
-    (33) value -> value_string .
+    (37) value_string -> VARIABLE .
 
-    DOTANDCOMMA     reduce using rule 33 (value -> value_string .)
-    COMMA           reduce using rule 33 (value -> value_string .)
+    DOTANDCOMMA     reduce using rule 37 (value_string -> VARIABLE .)
+    COMMA           reduce using rule 37 (value_string -> VARIABLE .)
 
 
 state 50
 
-    (41) value_numeric -> INTEGER .
+    (25) assignation_key_value -> VARIABLE ASSIGNATION value .
 
-    DOTANDCOMMA     reduce using rule 41 (value_numeric -> INTEGER .)
-    COMMA           reduce using rule 41 (value_numeric -> INTEGER .)
+    DOTANDCOMMA     reduce using rule 25 (assignation_key_value -> VARIABLE ASSIGNATION value .)
+    COMMA           reduce using rule 25 (assignation_key_value -> VARIABLE ASSIGNATION value .)
 
 
 state 51
 
-    (42) value_numeric -> FLOAT_NUMBER .
+    (32) value -> value_numeric .
 
-    DOTANDCOMMA     reduce using rule 42 (value_numeric -> FLOAT_NUMBER .)
-    COMMA           reduce using rule 42 (value_numeric -> FLOAT_NUMBER .)
+    DOTANDCOMMA     reduce using rule 32 (value -> value_numeric .)
+    COMMA           reduce using rule 32 (value -> value_numeric .)
 
 
 state 52
 
-    (43) value_numeric -> DECIMAL_NUMBER .
+    (33) value -> value_logic .
 
-    DOTANDCOMMA     reduce using rule 43 (value_numeric -> DECIMAL_NUMBER .)
-    COMMA           reduce using rule 43 (value_numeric -> DECIMAL_NUMBER .)
+    DOTANDCOMMA     reduce using rule 33 (value -> value_logic .)
+    COMMA           reduce using rule 33 (value -> value_logic .)
 
 
 state 53
 
-    (39) value_logic -> BOOLTRUE .
+    (34) value -> value_string .
 
-    DOTANDCOMMA     reduce using rule 39 (value_logic -> BOOLTRUE .)
-    COMMA           reduce using rule 39 (value_logic -> BOOLTRUE .)
+    DOTANDCOMMA     reduce using rule 34 (value -> value_string .)
+    COMMA           reduce using rule 34 (value -> value_string .)
 
 
 state 54
 
-    (40) value_logic -> BOOLFALSE .
+    (42) value_numeric -> INTEGER .
 
-    DOTANDCOMMA     reduce using rule 40 (value_logic -> BOOLFALSE .)
-    COMMA           reduce using rule 40 (value_logic -> BOOLFALSE .)
+    DOTANDCOMMA     reduce using rule 42 (value_numeric -> INTEGER .)
+    COMMA           reduce using rule 42 (value_numeric -> INTEGER .)
 
 
 state 55
 
-    (34) value_string -> STRING .
-    (54) concatenation -> STRING .
-    (55) concatenation -> STRING . PLUS concatenation
+    (43) value_numeric -> FLOAT_NUMBER .
 
-  ! reduce/reduce conflict for DOTANDCOMMA resolved using rule 34 (value_string -> STRING .)
-  ! reduce/reduce conflict for COMMA resolved using rule 34 (value_string -> STRING .)
-    DOTANDCOMMA     reduce using rule 34 (value_string -> STRING .)
-    COMMA           reduce using rule 34 (value_string -> STRING .)
-    PLUS            shift and go to state 65
-
-  ! DOTANDCOMMA     [ reduce using rule 54 (concatenation -> STRING .) ]
-  ! COMMA           [ reduce using rule 54 (concatenation -> STRING .) ]
+    DOTANDCOMMA     reduce using rule 43 (value_numeric -> FLOAT_NUMBER .)
+    COMMA           reduce using rule 43 (value_numeric -> FLOAT_NUMBER .)
 
 
 state 56
 
-    (35) value_string -> CHAR .
+    (44) value_numeric -> DECIMAL_NUMBER .
 
-    DOTANDCOMMA     reduce using rule 35 (value_string -> CHAR .)
-    COMMA           reduce using rule 35 (value_string -> CHAR .)
+    DOTANDCOMMA     reduce using rule 44 (value_numeric -> DECIMAL_NUMBER .)
+    COMMA           reduce using rule 44 (value_numeric -> DECIMAL_NUMBER .)
 
 
 state 57
 
-    (37) value_string -> READ . LPARENT RPARENT
+    (40) value_logic -> BOOLTRUE .
 
-    LPARENT         shift and go to state 66
+    DOTANDCOMMA     reduce using rule 40 (value_logic -> BOOLTRUE .)
+    COMMA           reduce using rule 40 (value_logic -> BOOLTRUE .)
 
 
 state 58
 
-    (38) value_string -> concatenation .
+    (41) value_logic -> BOOLFALSE .
 
-    DOTANDCOMMA     reduce using rule 38 (value_string -> concatenation .)
-    COMMA           reduce using rule 38 (value_string -> concatenation .)
+    DOTANDCOMMA     reduce using rule 41 (value_logic -> BOOLFALSE .)
+    COMMA           reduce using rule 41 (value_logic -> BOOLFALSE .)
 
 
 state 59
 
-    (11) constant_assignation -> access_modifiers CONST all_asignations .
+    (35) value_string -> STRING .
+    (55) concatenation -> STRING .
+    (56) concatenation -> STRING . PLUS concatenation
 
-    RKEY            reduce using rule 11 (constant_assignation -> access_modifiers CONST all_asignations .)
+  ! reduce/reduce conflict for DOTANDCOMMA resolved using rule 35 (value_string -> STRING .)
+  ! reduce/reduce conflict for COMMA resolved using rule 35 (value_string -> STRING .)
+    DOTANDCOMMA     reduce using rule 35 (value_string -> STRING .)
+    COMMA           reduce using rule 35 (value_string -> STRING .)
+    PLUS            shift and go to state 70
+
+  ! DOTANDCOMMA     [ reduce using rule 55 (concatenation -> STRING .) ]
+  ! COMMA           [ reduce using rule 55 (concatenation -> STRING .) ]
 
 
 state 60
 
-    (13) constant_assignation -> CONST data_type assignation_key_value . COMMA some_assignation_constant
-    (16) assignation_with_datatype -> data_type assignation_key_value . DOTANDCOMMA
-    (17) assignation_with_datatype -> data_type assignation_key_value . DOTANDCOMMA assignation_with_datatype
-    (18) assignation_with_datatype -> data_type assignation_key_value . DOTANDCOMMA assignation_without_datatype
+    (36) value_string -> CHAR .
 
-    COMMA           shift and go to state 67
-    DOTANDCOMMA     shift and go to state 61
+    DOTANDCOMMA     reduce using rule 36 (value_string -> CHAR .)
+    COMMA           reduce using rule 36 (value_string -> CHAR .)
 
 
 state 61
 
-    (16) assignation_with_datatype -> data_type assignation_key_value DOTANDCOMMA .
-    (17) assignation_with_datatype -> data_type assignation_key_value DOTANDCOMMA . assignation_with_datatype
-    (18) assignation_with_datatype -> data_type assignation_key_value DOTANDCOMMA . assignation_without_datatype
-    (16) assignation_with_datatype -> . data_type assignation_key_value DOTANDCOMMA
-    (17) assignation_with_datatype -> . data_type assignation_key_value DOTANDCOMMA assignation_with_datatype
-    (18) assignation_with_datatype -> . data_type assignation_key_value DOTANDCOMMA assignation_without_datatype
-    (19) assignation_without_datatype -> . assignation_key_value DOTANDCOMMA
-    (20) assignation_without_datatype -> . assignation_key_value DOTANDCOMMA assignation_without_datatype
-    (21) assignation_without_datatype -> . assignation_key_value DOTANDCOMMA assignation_with_datatype
-    (25) data_type -> . CHARTYPE
-    (26) data_type -> . STRINGTYPE
-    (27) data_type -> . FLOATTYPE
-    (28) data_type -> . DECIMALTYPE
-    (29) data_type -> . INTTYPE
-    (30) data_type -> . BOOLTYPE
-    (24) assignation_key_value -> . VARIABLE ASSIGNATION value
+    (38) value_string -> READ . LPARENT RPARENT
 
-    RKEY            reduce using rule 16 (assignation_with_datatype -> data_type assignation_key_value DOTANDCOMMA .)
-    CHARTYPE        shift and go to state 29
-    STRINGTYPE      shift and go to state 30
-    FLOATTYPE       shift and go to state 31
-    DECIMALTYPE     shift and go to state 32
-    INTTYPE         shift and go to state 33
-    BOOLTYPE        shift and go to state 34
-    VARIABLE        shift and go to state 39
+    LPARENT         shift and go to state 71
 
-    data_type                      shift and go to state 23
-    assignation_key_value          shift and go to state 24
-    assignation_with_datatype      shift and go to state 68
-    assignation_without_datatype   shift and go to state 69
 
 state 62
 
-    (20) assignation_without_datatype -> assignation_key_value DOTANDCOMMA assignation_without_datatype .
+    (39) value_string -> concatenation .
 
-    RKEY            reduce using rule 20 (assignation_without_datatype -> assignation_key_value DOTANDCOMMA assignation_without_datatype .)
+    DOTANDCOMMA     reduce using rule 39 (value_string -> concatenation .)
+    COMMA           reduce using rule 39 (value_string -> concatenation .)
 
 
 state 63
 
-    (21) assignation_without_datatype -> assignation_key_value DOTANDCOMMA assignation_with_datatype .
+    (12) constant_assignation -> access_modifiers CONST all_asignations .
 
-    RKEY            reduce using rule 21 (assignation_without_datatype -> assignation_key_value DOTANDCOMMA assignation_with_datatype .)
+    RKEY            reduce using rule 12 (constant_assignation -> access_modifiers CONST all_asignations .)
 
 
 state 64
 
-    (46) try_catch_simply -> TRY LKEY block_code . RKEY CATCH LPARENT EXCEPTION VARIABLE RPARENT LKEY block_code RKEY
-    (47) try_catch_finally -> TRY LKEY block_code . RKEY CATCH LPARENT EXCEPTION VARIABLE RPARENT LKEY block_code RKEY FINALLY LKEY block_code RKEY
+    (14) constant_assignation -> CONST data_type assignation_key_value . COMMA some_assignation_constant
+    (17) assignation_with_datatype -> data_type assignation_key_value . DOTANDCOMMA
+    (18) assignation_with_datatype -> data_type assignation_key_value . DOTANDCOMMA assignation_with_datatype
+    (19) assignation_with_datatype -> data_type assignation_key_value . DOTANDCOMMA assignation_without_datatype
 
-    RKEY            shift and go to state 70
+    COMMA           shift and go to state 72
+    DOTANDCOMMA     shift and go to state 65
 
 
 state 65
 
-    (55) concatenation -> STRING PLUS . concatenation
-    (54) concatenation -> . STRING
-    (55) concatenation -> . STRING PLUS concatenation
+    (17) assignation_with_datatype -> data_type assignation_key_value DOTANDCOMMA .
+    (18) assignation_with_datatype -> data_type assignation_key_value DOTANDCOMMA . assignation_with_datatype
+    (19) assignation_with_datatype -> data_type assignation_key_value DOTANDCOMMA . assignation_without_datatype
+    (17) assignation_with_datatype -> . data_type assignation_key_value DOTANDCOMMA
+    (18) assignation_with_datatype -> . data_type assignation_key_value DOTANDCOMMA assignation_with_datatype
+    (19) assignation_with_datatype -> . data_type assignation_key_value DOTANDCOMMA assignation_without_datatype
+    (20) assignation_without_datatype -> . assignation_key_value DOTANDCOMMA
+    (21) assignation_without_datatype -> . assignation_key_value DOTANDCOMMA assignation_without_datatype
+    (22) assignation_without_datatype -> . assignation_key_value DOTANDCOMMA assignation_with_datatype
+    (26) data_type -> . CHARTYPE
+    (27) data_type -> . STRINGTYPE
+    (28) data_type -> . FLOATTYPE
+    (29) data_type -> . DECIMALTYPE
+    (30) data_type -> . INTTYPE
+    (31) data_type -> . BOOLTYPE
+    (25) assignation_key_value -> . VARIABLE ASSIGNATION value
 
-    STRING          shift and go to state 71
+    RKEY            reduce using rule 17 (assignation_with_datatype -> data_type assignation_key_value DOTANDCOMMA .)
+    CHARTYPE        shift and go to state 32
+    STRINGTYPE      shift and go to state 33
+    FLOATTYPE       shift and go to state 34
+    DECIMALTYPE     shift and go to state 35
+    INTTYPE         shift and go to state 36
+    BOOLTYPE        shift and go to state 37
+    VARIABLE        shift and go to state 42
 
-    concatenation                  shift and go to state 72
+    data_type                      shift and go to state 25
+    assignation_key_value          shift and go to state 26
+    assignation_with_datatype      shift and go to state 73
+    assignation_without_datatype   shift and go to state 74
 
 state 66
 
-    (37) value_string -> READ LPARENT . RPARENT
+    (21) assignation_without_datatype -> assignation_key_value DOTANDCOMMA assignation_without_datatype .
 
-    RPARENT         shift and go to state 73
+    RKEY            reduce using rule 21 (assignation_without_datatype -> assignation_key_value DOTANDCOMMA assignation_without_datatype .)
 
 
 state 67
 
-    (13) constant_assignation -> CONST data_type assignation_key_value COMMA . some_assignation_constant
-    (22) some_assignation_constant -> . assignation_key_value DOTANDCOMMA
-    (23) some_assignation_constant -> . assignation_key_value COMMA some_assignation_constant
-    (24) assignation_key_value -> . VARIABLE ASSIGNATION value
+    (22) assignation_without_datatype -> assignation_key_value DOTANDCOMMA assignation_with_datatype .
 
-    VARIABLE        shift and go to state 39
+    RKEY            reduce using rule 22 (assignation_without_datatype -> assignation_key_value DOTANDCOMMA assignation_with_datatype .)
 
-    assignation_key_value          shift and go to state 74
-    some_assignation_constant      shift and go to state 75
 
 state 68
 
-    (17) assignation_with_datatype -> data_type assignation_key_value DOTANDCOMMA assignation_with_datatype .
+    (74) list -> LIST SMALLER_THAN data_type . GREATER_THAN VARIABLE ASSIGNATION NEW LIST SMALLER_THAN data_type GREATER_THAN LPARENT RPARENT DOTANDCOMMA
 
-    RKEY            reduce using rule 17 (assignation_with_datatype -> data_type assignation_key_value DOTANDCOMMA assignation_with_datatype .)
+    GREATER_THAN    shift and go to state 75
 
 
 state 69
 
-    (18) assignation_with_datatype -> data_type assignation_key_value DOTANDCOMMA assignation_without_datatype .
+    (47) try_catch_simply -> TRY LKEY block_code . RKEY CATCH LPARENT EXCEPTION VARIABLE RPARENT LKEY block_code RKEY
+    (48) try_catch_finally -> TRY LKEY block_code . RKEY CATCH LPARENT EXCEPTION VARIABLE RPARENT LKEY block_code RKEY FINALLY LKEY block_code RKEY
 
-    RKEY            reduce using rule 18 (assignation_with_datatype -> data_type assignation_key_value DOTANDCOMMA assignation_without_datatype .)
+    RKEY            shift and go to state 76
 
 
 state 70
 
-    (46) try_catch_simply -> TRY LKEY block_code RKEY . CATCH LPARENT EXCEPTION VARIABLE RPARENT LKEY block_code RKEY
-    (47) try_catch_finally -> TRY LKEY block_code RKEY . CATCH LPARENT EXCEPTION VARIABLE RPARENT LKEY block_code RKEY FINALLY LKEY block_code RKEY
+    (56) concatenation -> STRING PLUS . concatenation
+    (55) concatenation -> . STRING
+    (56) concatenation -> . STRING PLUS concatenation
 
-    CATCH           shift and go to state 76
+    STRING          shift and go to state 77
 
+    concatenation                  shift and go to state 78
 
 state 71
 
-    (54) concatenation -> STRING .
-    (55) concatenation -> STRING . PLUS concatenation
+    (38) value_string -> READ LPARENT . RPARENT
 
-    DOTANDCOMMA     reduce using rule 54 (concatenation -> STRING .)
-    COMMA           reduce using rule 54 (concatenation -> STRING .)
-    PLUS            shift and go to state 65
+    RPARENT         shift and go to state 79
 
 
 state 72
 
-    (55) concatenation -> STRING PLUS concatenation .
+    (14) constant_assignation -> CONST data_type assignation_key_value COMMA . some_assignation_constant
+    (23) some_assignation_constant -> . assignation_key_value DOTANDCOMMA
+    (24) some_assignation_constant -> . assignation_key_value COMMA some_assignation_constant
+    (25) assignation_key_value -> . VARIABLE ASSIGNATION value
 
-    DOTANDCOMMA     reduce using rule 55 (concatenation -> STRING PLUS concatenation .)
-    COMMA           reduce using rule 55 (concatenation -> STRING PLUS concatenation .)
+    VARIABLE        shift and go to state 42
 
+    assignation_key_value          shift and go to state 80
+    some_assignation_constant      shift and go to state 81
 
 state 73
 
-    (37) value_string -> READ LPARENT RPARENT .
+    (18) assignation_with_datatype -> data_type assignation_key_value DOTANDCOMMA assignation_with_datatype .
 
-    DOTANDCOMMA     reduce using rule 37 (value_string -> READ LPARENT RPARENT .)
-    COMMA           reduce using rule 37 (value_string -> READ LPARENT RPARENT .)
+    RKEY            reduce using rule 18 (assignation_with_datatype -> data_type assignation_key_value DOTANDCOMMA assignation_with_datatype .)
 
 
 state 74
 
-    (22) some_assignation_constant -> assignation_key_value . DOTANDCOMMA
-    (23) some_assignation_constant -> assignation_key_value . COMMA some_assignation_constant
+    (19) assignation_with_datatype -> data_type assignation_key_value DOTANDCOMMA assignation_without_datatype .
 
-    DOTANDCOMMA     shift and go to state 77
-    COMMA           shift and go to state 78
+    RKEY            reduce using rule 19 (assignation_with_datatype -> data_type assignation_key_value DOTANDCOMMA assignation_without_datatype .)
 
 
 state 75
 
-    (13) constant_assignation -> CONST data_type assignation_key_value COMMA some_assignation_constant .
-
-    RKEY            reduce using rule 13 (constant_assignation -> CONST data_type assignation_key_value COMMA some_assignation_constant .)
-
-
-state 76
-
-    (46) try_catch_simply -> TRY LKEY block_code RKEY CATCH . LPARENT EXCEPTION VARIABLE RPARENT LKEY block_code RKEY
-    (47) try_catch_finally -> TRY LKEY block_code RKEY CATCH . LPARENT EXCEPTION VARIABLE RPARENT LKEY block_code RKEY FINALLY LKEY block_code RKEY
-
-    LPARENT         shift and go to state 79
-
-
-state 77
-
-    (22) some_assignation_constant -> assignation_key_value DOTANDCOMMA .
-
-    RKEY            reduce using rule 22 (some_assignation_constant -> assignation_key_value DOTANDCOMMA .)
-
-
-state 78
-
-    (23) some_assignation_constant -> assignation_key_value COMMA . some_assignation_constant
-    (22) some_assignation_constant -> . assignation_key_value DOTANDCOMMA
-    (23) some_assignation_constant -> . assignation_key_value COMMA some_assignation_constant
-    (24) assignation_key_value -> . VARIABLE ASSIGNATION value
-
-    VARIABLE        shift and go to state 39
-
-    assignation_key_value          shift and go to state 74
-    some_assignation_constant      shift and go to state 80
-
-state 79
-
-    (46) try_catch_simply -> TRY LKEY block_code RKEY CATCH LPARENT . EXCEPTION VARIABLE RPARENT LKEY block_code RKEY
-    (47) try_catch_finally -> TRY LKEY block_code RKEY CATCH LPARENT . EXCEPTION VARIABLE RPARENT LKEY block_code RKEY FINALLY LKEY block_code RKEY
-
-    EXCEPTION       shift and go to state 81
-
-
-state 80
-
-    (23) some_assignation_constant -> assignation_key_value COMMA some_assignation_constant .
-
-    RKEY            reduce using rule 23 (some_assignation_constant -> assignation_key_value COMMA some_assignation_constant .)
-
-
-state 81
-
-    (46) try_catch_simply -> TRY LKEY block_code RKEY CATCH LPARENT EXCEPTION . VARIABLE RPARENT LKEY block_code RKEY
-    (47) try_catch_finally -> TRY LKEY block_code RKEY CATCH LPARENT EXCEPTION . VARIABLE RPARENT LKEY block_code RKEY FINALLY LKEY block_code RKEY
+    (74) list -> LIST SMALLER_THAN data_type GREATER_THAN . VARIABLE ASSIGNATION NEW LIST SMALLER_THAN data_type GREATER_THAN LPARENT RPARENT DOTANDCOMMA
 
     VARIABLE        shift and go to state 82
 
 
+state 76
+
+    (47) try_catch_simply -> TRY LKEY block_code RKEY . CATCH LPARENT EXCEPTION VARIABLE RPARENT LKEY block_code RKEY
+    (48) try_catch_finally -> TRY LKEY block_code RKEY . CATCH LPARENT EXCEPTION VARIABLE RPARENT LKEY block_code RKEY FINALLY LKEY block_code RKEY
+
+    CATCH           shift and go to state 83
+
+
+state 77
+
+    (55) concatenation -> STRING .
+    (56) concatenation -> STRING . PLUS concatenation
+
+    DOTANDCOMMA     reduce using rule 55 (concatenation -> STRING .)
+    COMMA           reduce using rule 55 (concatenation -> STRING .)
+    PLUS            shift and go to state 70
+
+
+state 78
+
+    (56) concatenation -> STRING PLUS concatenation .
+
+    DOTANDCOMMA     reduce using rule 56 (concatenation -> STRING PLUS concatenation .)
+    COMMA           reduce using rule 56 (concatenation -> STRING PLUS concatenation .)
+
+
+state 79
+
+    (38) value_string -> READ LPARENT RPARENT .
+
+    DOTANDCOMMA     reduce using rule 38 (value_string -> READ LPARENT RPARENT .)
+    COMMA           reduce using rule 38 (value_string -> READ LPARENT RPARENT .)
+
+
+state 80
+
+    (23) some_assignation_constant -> assignation_key_value . DOTANDCOMMA
+    (24) some_assignation_constant -> assignation_key_value . COMMA some_assignation_constant
+
+    DOTANDCOMMA     shift and go to state 84
+    COMMA           shift and go to state 85
+
+
+state 81
+
+    (14) constant_assignation -> CONST data_type assignation_key_value COMMA some_assignation_constant .
+
+    RKEY            reduce using rule 14 (constant_assignation -> CONST data_type assignation_key_value COMMA some_assignation_constant .)
+
+
 state 82
 
-    (46) try_catch_simply -> TRY LKEY block_code RKEY CATCH LPARENT EXCEPTION VARIABLE . RPARENT LKEY block_code RKEY
-    (47) try_catch_finally -> TRY LKEY block_code RKEY CATCH LPARENT EXCEPTION VARIABLE . RPARENT LKEY block_code RKEY FINALLY LKEY block_code RKEY
+    (74) list -> LIST SMALLER_THAN data_type GREATER_THAN VARIABLE . ASSIGNATION NEW LIST SMALLER_THAN data_type GREATER_THAN LPARENT RPARENT DOTANDCOMMA
 
-    RPARENT         shift and go to state 83
+    ASSIGNATION     shift and go to state 86
 
 
 state 83
 
-    (46) try_catch_simply -> TRY LKEY block_code RKEY CATCH LPARENT EXCEPTION VARIABLE RPARENT . LKEY block_code RKEY
-    (47) try_catch_finally -> TRY LKEY block_code RKEY CATCH LPARENT EXCEPTION VARIABLE RPARENT . LKEY block_code RKEY FINALLY LKEY block_code RKEY
+    (47) try_catch_simply -> TRY LKEY block_code RKEY CATCH . LPARENT EXCEPTION VARIABLE RPARENT LKEY block_code RKEY
+    (48) try_catch_finally -> TRY LKEY block_code RKEY CATCH . LPARENT EXCEPTION VARIABLE RPARENT LKEY block_code RKEY FINALLY LKEY block_code RKEY
 
-    LKEY            shift and go to state 84
+    LPARENT         shift and go to state 87
 
 
 state 84
 
-    (46) try_catch_simply -> TRY LKEY block_code RKEY CATCH LPARENT EXCEPTION VARIABLE RPARENT LKEY . block_code RKEY
-    (47) try_catch_finally -> TRY LKEY block_code RKEY CATCH LPARENT EXCEPTION VARIABLE RPARENT LKEY . block_code RKEY FINALLY LKEY block_code RKEY
-    (4) block_code -> . def_const_or_var
-    (5) block_code -> . block_try_catch
-    (6) block_code -> . VARIABLE
-    (7) def_const_or_var -> . constant_assignation
-    (8) def_const_or_var -> . variable_assignation
-    (44) block_try_catch -> . try_catch_simply
-    (45) block_try_catch -> . try_catch_finally
-    (11) constant_assignation -> . access_modifiers CONST all_asignations
-    (12) constant_assignation -> . CONST all_asignations
-    (13) constant_assignation -> . CONST data_type assignation_key_value COMMA some_assignation_constant
-    (9) variable_assignation -> . access_modifiers all_asignations
-    (10) variable_assignation -> . all_asignations
-    (46) try_catch_simply -> . TRY LKEY block_code RKEY CATCH LPARENT EXCEPTION VARIABLE RPARENT LKEY block_code RKEY
-    (47) try_catch_finally -> . TRY LKEY block_code RKEY CATCH LPARENT EXCEPTION VARIABLE RPARENT LKEY block_code RKEY FINALLY LKEY block_code RKEY
-    (48) access_modifiers -> . PUBLIC
-    (49) access_modifiers -> . PRIVATE
-    (14) all_asignations -> . assignation_with_datatype
-    (15) all_asignations -> . assignation_without_datatype
-    (16) assignation_with_datatype -> . data_type assignation_key_value DOTANDCOMMA
-    (17) assignation_with_datatype -> . data_type assignation_key_value DOTANDCOMMA assignation_with_datatype
-    (18) assignation_with_datatype -> . data_type assignation_key_value DOTANDCOMMA assignation_without_datatype
-    (19) assignation_without_datatype -> . assignation_key_value DOTANDCOMMA
-    (20) assignation_without_datatype -> . assignation_key_value DOTANDCOMMA assignation_without_datatype
-    (21) assignation_without_datatype -> . assignation_key_value DOTANDCOMMA assignation_with_datatype
-    (25) data_type -> . CHARTYPE
-    (26) data_type -> . STRINGTYPE
-    (27) data_type -> . FLOATTYPE
-    (28) data_type -> . DECIMALTYPE
-    (29) data_type -> . INTTYPE
-    (30) data_type -> . BOOLTYPE
-    (24) assignation_key_value -> . VARIABLE ASSIGNATION value
+    (23) some_assignation_constant -> assignation_key_value DOTANDCOMMA .
 
-    VARIABLE        shift and go to state 12
-    CONST           shift and go to state 21
-    TRY             shift and go to state 25
-    PUBLIC          shift and go to state 11
-    PRIVATE         shift and go to state 26
-    CHARTYPE        shift and go to state 29
-    STRINGTYPE      shift and go to state 30
-    FLOATTYPE       shift and go to state 31
-    DECIMALTYPE     shift and go to state 32
-    INTTYPE         shift and go to state 33
-    BOOLTYPE        shift and go to state 34
+    RKEY            reduce using rule 23 (some_assignation_constant -> assignation_key_value DOTANDCOMMA .)
 
-    block_code                     shift and go to state 85
-    def_const_or_var               shift and go to state 14
-    block_try_catch                shift and go to state 15
-    constant_assignation           shift and go to state 16
-    variable_assignation           shift and go to state 17
-    try_catch_simply               shift and go to state 18
-    try_catch_finally              shift and go to state 19
-    access_modifiers               shift and go to state 20
-    all_asignations                shift and go to state 22
-    data_type                      shift and go to state 23
-    assignation_key_value          shift and go to state 24
-    assignation_with_datatype      shift and go to state 27
-    assignation_without_datatype   shift and go to state 28
 
 state 85
 
-    (46) try_catch_simply -> TRY LKEY block_code RKEY CATCH LPARENT EXCEPTION VARIABLE RPARENT LKEY block_code . RKEY
-    (47) try_catch_finally -> TRY LKEY block_code RKEY CATCH LPARENT EXCEPTION VARIABLE RPARENT LKEY block_code . RKEY FINALLY LKEY block_code RKEY
+    (24) some_assignation_constant -> assignation_key_value COMMA . some_assignation_constant
+    (23) some_assignation_constant -> . assignation_key_value DOTANDCOMMA
+    (24) some_assignation_constant -> . assignation_key_value COMMA some_assignation_constant
+    (25) assignation_key_value -> . VARIABLE ASSIGNATION value
 
-    RKEY            shift and go to state 86
+    VARIABLE        shift and go to state 42
 
+    assignation_key_value          shift and go to state 80
+    some_assignation_constant      shift and go to state 88
 
 state 86
 
-    (46) try_catch_simply -> TRY LKEY block_code RKEY CATCH LPARENT EXCEPTION VARIABLE RPARENT LKEY block_code RKEY .
-    (47) try_catch_finally -> TRY LKEY block_code RKEY CATCH LPARENT EXCEPTION VARIABLE RPARENT LKEY block_code RKEY . FINALLY LKEY block_code RKEY
+    (74) list -> LIST SMALLER_THAN data_type GREATER_THAN VARIABLE ASSIGNATION . NEW LIST SMALLER_THAN data_type GREATER_THAN LPARENT RPARENT DOTANDCOMMA
 
-    RKEY            reduce using rule 46 (try_catch_simply -> TRY LKEY block_code RKEY CATCH LPARENT EXCEPTION VARIABLE RPARENT LKEY block_code RKEY .)
-    FINALLY         shift and go to state 87
+    NEW             shift and go to state 89
 
 
 state 87
 
-    (47) try_catch_finally -> TRY LKEY block_code RKEY CATCH LPARENT EXCEPTION VARIABLE RPARENT LKEY block_code RKEY FINALLY . LKEY block_code RKEY
+    (47) try_catch_simply -> TRY LKEY block_code RKEY CATCH LPARENT . EXCEPTION VARIABLE RPARENT LKEY block_code RKEY
+    (48) try_catch_finally -> TRY LKEY block_code RKEY CATCH LPARENT . EXCEPTION VARIABLE RPARENT LKEY block_code RKEY FINALLY LKEY block_code RKEY
 
-    LKEY            shift and go to state 88
+    EXCEPTION       shift and go to state 90
 
 
 state 88
 
-    (47) try_catch_finally -> TRY LKEY block_code RKEY CATCH LPARENT EXCEPTION VARIABLE RPARENT LKEY block_code RKEY FINALLY LKEY . block_code RKEY
-    (4) block_code -> . def_const_or_var
-    (5) block_code -> . block_try_catch
-    (6) block_code -> . VARIABLE
-    (7) def_const_or_var -> . constant_assignation
-    (8) def_const_or_var -> . variable_assignation
-    (44) block_try_catch -> . try_catch_simply
-    (45) block_try_catch -> . try_catch_finally
-    (11) constant_assignation -> . access_modifiers CONST all_asignations
-    (12) constant_assignation -> . CONST all_asignations
-    (13) constant_assignation -> . CONST data_type assignation_key_value COMMA some_assignation_constant
-    (9) variable_assignation -> . access_modifiers all_asignations
-    (10) variable_assignation -> . all_asignations
-    (46) try_catch_simply -> . TRY LKEY block_code RKEY CATCH LPARENT EXCEPTION VARIABLE RPARENT LKEY block_code RKEY
-    (47) try_catch_finally -> . TRY LKEY block_code RKEY CATCH LPARENT EXCEPTION VARIABLE RPARENT LKEY block_code RKEY FINALLY LKEY block_code RKEY
-    (48) access_modifiers -> . PUBLIC
-    (49) access_modifiers -> . PRIVATE
-    (14) all_asignations -> . assignation_with_datatype
-    (15) all_asignations -> . assignation_without_datatype
-    (16) assignation_with_datatype -> . data_type assignation_key_value DOTANDCOMMA
-    (17) assignation_with_datatype -> . data_type assignation_key_value DOTANDCOMMA assignation_with_datatype
-    (18) assignation_with_datatype -> . data_type assignation_key_value DOTANDCOMMA assignation_without_datatype
-    (19) assignation_without_datatype -> . assignation_key_value DOTANDCOMMA
-    (20) assignation_without_datatype -> . assignation_key_value DOTANDCOMMA assignation_without_datatype
-    (21) assignation_without_datatype -> . assignation_key_value DOTANDCOMMA assignation_with_datatype
-    (25) data_type -> . CHARTYPE
-    (26) data_type -> . STRINGTYPE
-    (27) data_type -> . FLOATTYPE
-    (28) data_type -> . DECIMALTYPE
-    (29) data_type -> . INTTYPE
-    (30) data_type -> . BOOLTYPE
-    (24) assignation_key_value -> . VARIABLE ASSIGNATION value
+    (24) some_assignation_constant -> assignation_key_value COMMA some_assignation_constant .
 
-    VARIABLE        shift and go to state 12
-    CONST           shift and go to state 21
-    TRY             shift and go to state 25
-    PUBLIC          shift and go to state 11
-    PRIVATE         shift and go to state 26
-    CHARTYPE        shift and go to state 29
-    STRINGTYPE      shift and go to state 30
-    FLOATTYPE       shift and go to state 31
-    DECIMALTYPE     shift and go to state 32
-    INTTYPE         shift and go to state 33
-    BOOLTYPE        shift and go to state 34
+    RKEY            reduce using rule 24 (some_assignation_constant -> assignation_key_value COMMA some_assignation_constant .)
 
-    block_code                     shift and go to state 89
-    def_const_or_var               shift and go to state 14
-    block_try_catch                shift and go to state 15
-    constant_assignation           shift and go to state 16
-    variable_assignation           shift and go to state 17
-    try_catch_simply               shift and go to state 18
-    try_catch_finally              shift and go to state 19
-    access_modifiers               shift and go to state 20
-    all_asignations                shift and go to state 22
-    data_type                      shift and go to state 23
-    assignation_key_value          shift and go to state 24
-    assignation_with_datatype      shift and go to state 27
-    assignation_without_datatype   shift and go to state 28
 
 state 89
 
-    (47) try_catch_finally -> TRY LKEY block_code RKEY CATCH LPARENT EXCEPTION VARIABLE RPARENT LKEY block_code RKEY FINALLY LKEY block_code . RKEY
+    (74) list -> LIST SMALLER_THAN data_type GREATER_THAN VARIABLE ASSIGNATION NEW . LIST SMALLER_THAN data_type GREATER_THAN LPARENT RPARENT DOTANDCOMMA
 
-    RKEY            shift and go to state 90
+    LIST            shift and go to state 91
 
 
 state 90
 
-    (47) try_catch_finally -> TRY LKEY block_code RKEY CATCH LPARENT EXCEPTION VARIABLE RPARENT LKEY block_code RKEY FINALLY LKEY block_code RKEY .
+    (47) try_catch_simply -> TRY LKEY block_code RKEY CATCH LPARENT EXCEPTION . VARIABLE RPARENT LKEY block_code RKEY
+    (48) try_catch_finally -> TRY LKEY block_code RKEY CATCH LPARENT EXCEPTION . VARIABLE RPARENT LKEY block_code RKEY FINALLY LKEY block_code RKEY
 
-    RKEY            reduce using rule 47 (try_catch_finally -> TRY LKEY block_code RKEY CATCH LPARENT EXCEPTION VARIABLE RPARENT LKEY block_code RKEY FINALLY LKEY block_code RKEY .)
+    VARIABLE        shift and go to state 92
+
+
+state 91
+
+    (74) list -> LIST SMALLER_THAN data_type GREATER_THAN VARIABLE ASSIGNATION NEW LIST . SMALLER_THAN data_type GREATER_THAN LPARENT RPARENT DOTANDCOMMA
+
+    SMALLER_THAN    shift and go to state 93
+
+
+state 92
+
+    (47) try_catch_simply -> TRY LKEY block_code RKEY CATCH LPARENT EXCEPTION VARIABLE . RPARENT LKEY block_code RKEY
+    (48) try_catch_finally -> TRY LKEY block_code RKEY CATCH LPARENT EXCEPTION VARIABLE . RPARENT LKEY block_code RKEY FINALLY LKEY block_code RKEY
+
+    RPARENT         shift and go to state 94
+
+
+state 93
+
+    (74) list -> LIST SMALLER_THAN data_type GREATER_THAN VARIABLE ASSIGNATION NEW LIST SMALLER_THAN . data_type GREATER_THAN LPARENT RPARENT DOTANDCOMMA
+    (26) data_type -> . CHARTYPE
+    (27) data_type -> . STRINGTYPE
+    (28) data_type -> . FLOATTYPE
+    (29) data_type -> . DECIMALTYPE
+    (30) data_type -> . INTTYPE
+    (31) data_type -> . BOOLTYPE
+
+    CHARTYPE        shift and go to state 32
+    STRINGTYPE      shift and go to state 33
+    FLOATTYPE       shift and go to state 34
+    DECIMALTYPE     shift and go to state 35
+    INTTYPE         shift and go to state 36
+    BOOLTYPE        shift and go to state 37
+
+    data_type                      shift and go to state 95
+
+state 94
+
+    (47) try_catch_simply -> TRY LKEY block_code RKEY CATCH LPARENT EXCEPTION VARIABLE RPARENT . LKEY block_code RKEY
+    (48) try_catch_finally -> TRY LKEY block_code RKEY CATCH LPARENT EXCEPTION VARIABLE RPARENT . LKEY block_code RKEY FINALLY LKEY block_code RKEY
+
+    LKEY            shift and go to state 96
+
+
+state 95
+
+    (74) list -> LIST SMALLER_THAN data_type GREATER_THAN VARIABLE ASSIGNATION NEW LIST SMALLER_THAN data_type . GREATER_THAN LPARENT RPARENT DOTANDCOMMA
+
+    GREATER_THAN    shift and go to state 97
+
+
+state 96
+
+    (47) try_catch_simply -> TRY LKEY block_code RKEY CATCH LPARENT EXCEPTION VARIABLE RPARENT LKEY . block_code RKEY
+    (48) try_catch_finally -> TRY LKEY block_code RKEY CATCH LPARENT EXCEPTION VARIABLE RPARENT LKEY . block_code RKEY FINALLY LKEY block_code RKEY
+    (4) block_code -> . def_const_or_var
+    (5) block_code -> . estruct_of_data
+    (6) block_code -> . block_try_catch
+    (7) block_code -> . VARIABLE
+    (8) def_const_or_var -> . constant_assignation
+    (9) def_const_or_var -> . variable_assignation
+    (73) estruct_of_data -> . list
+    (45) block_try_catch -> . try_catch_simply
+    (46) block_try_catch -> . try_catch_finally
+    (12) constant_assignation -> . access_modifiers CONST all_asignations
+    (13) constant_assignation -> . CONST all_asignations
+    (14) constant_assignation -> . CONST data_type assignation_key_value COMMA some_assignation_constant
+    (10) variable_assignation -> . access_modifiers all_asignations
+    (11) variable_assignation -> . all_asignations
+    (74) list -> . LIST SMALLER_THAN data_type GREATER_THAN VARIABLE ASSIGNATION NEW LIST SMALLER_THAN data_type GREATER_THAN LPARENT RPARENT DOTANDCOMMA
+    (47) try_catch_simply -> . TRY LKEY block_code RKEY CATCH LPARENT EXCEPTION VARIABLE RPARENT LKEY block_code RKEY
+    (48) try_catch_finally -> . TRY LKEY block_code RKEY CATCH LPARENT EXCEPTION VARIABLE RPARENT LKEY block_code RKEY FINALLY LKEY block_code RKEY
+    (49) access_modifiers -> . PUBLIC
+    (50) access_modifiers -> . PRIVATE
+    (15) all_asignations -> . assignation_with_datatype
+    (16) all_asignations -> . assignation_without_datatype
+    (17) assignation_with_datatype -> . data_type assignation_key_value DOTANDCOMMA
+    (18) assignation_with_datatype -> . data_type assignation_key_value DOTANDCOMMA assignation_with_datatype
+    (19) assignation_with_datatype -> . data_type assignation_key_value DOTANDCOMMA assignation_without_datatype
+    (20) assignation_without_datatype -> . assignation_key_value DOTANDCOMMA
+    (21) assignation_without_datatype -> . assignation_key_value DOTANDCOMMA assignation_without_datatype
+    (22) assignation_without_datatype -> . assignation_key_value DOTANDCOMMA assignation_with_datatype
+    (26) data_type -> . CHARTYPE
+    (27) data_type -> . STRINGTYPE
+    (28) data_type -> . FLOATTYPE
+    (29) data_type -> . DECIMALTYPE
+    (30) data_type -> . INTTYPE
+    (31) data_type -> . BOOLTYPE
+    (25) assignation_key_value -> . VARIABLE ASSIGNATION value
+
+    VARIABLE        shift and go to state 12
+    CONST           shift and go to state 23
+    LIST            shift and go to state 27
+    TRY             shift and go to state 28
+    PUBLIC          shift and go to state 11
+    PRIVATE         shift and go to state 29
+    CHARTYPE        shift and go to state 32
+    STRINGTYPE      shift and go to state 33
+    FLOATTYPE       shift and go to state 34
+    DECIMALTYPE     shift and go to state 35
+    INTTYPE         shift and go to state 36
+    BOOLTYPE        shift and go to state 37
+
+    block_code                     shift and go to state 98
+    def_const_or_var               shift and go to state 14
+    estruct_of_data                shift and go to state 15
+    block_try_catch                shift and go to state 16
+    constant_assignation           shift and go to state 17
+    variable_assignation           shift and go to state 18
+    list                           shift and go to state 19
+    try_catch_simply               shift and go to state 20
+    try_catch_finally              shift and go to state 21
+    access_modifiers               shift and go to state 22
+    all_asignations                shift and go to state 24
+    data_type                      shift and go to state 25
+    assignation_key_value          shift and go to state 26
+    assignation_with_datatype      shift and go to state 30
+    assignation_without_datatype   shift and go to state 31
+
+state 97
+
+    (74) list -> LIST SMALLER_THAN data_type GREATER_THAN VARIABLE ASSIGNATION NEW LIST SMALLER_THAN data_type GREATER_THAN . LPARENT RPARENT DOTANDCOMMA
+
+    LPARENT         shift and go to state 99
+
+
+state 98
+
+    (47) try_catch_simply -> TRY LKEY block_code RKEY CATCH LPARENT EXCEPTION VARIABLE RPARENT LKEY block_code . RKEY
+    (48) try_catch_finally -> TRY LKEY block_code RKEY CATCH LPARENT EXCEPTION VARIABLE RPARENT LKEY block_code . RKEY FINALLY LKEY block_code RKEY
+
+    RKEY            shift and go to state 100
+
+
+state 99
+
+    (74) list -> LIST SMALLER_THAN data_type GREATER_THAN VARIABLE ASSIGNATION NEW LIST SMALLER_THAN data_type GREATER_THAN LPARENT . RPARENT DOTANDCOMMA
+
+    RPARENT         shift and go to state 101
+
+
+state 100
+
+    (47) try_catch_simply -> TRY LKEY block_code RKEY CATCH LPARENT EXCEPTION VARIABLE RPARENT LKEY block_code RKEY .
+    (48) try_catch_finally -> TRY LKEY block_code RKEY CATCH LPARENT EXCEPTION VARIABLE RPARENT LKEY block_code RKEY . FINALLY LKEY block_code RKEY
+
+    RKEY            reduce using rule 47 (try_catch_simply -> TRY LKEY block_code RKEY CATCH LPARENT EXCEPTION VARIABLE RPARENT LKEY block_code RKEY .)
+    FINALLY         shift and go to state 102
+
+
+state 101
+
+    (74) list -> LIST SMALLER_THAN data_type GREATER_THAN VARIABLE ASSIGNATION NEW LIST SMALLER_THAN data_type GREATER_THAN LPARENT RPARENT . DOTANDCOMMA
+
+    DOTANDCOMMA     shift and go to state 103
+
+
+state 102
+
+    (48) try_catch_finally -> TRY LKEY block_code RKEY CATCH LPARENT EXCEPTION VARIABLE RPARENT LKEY block_code RKEY FINALLY . LKEY block_code RKEY
+
+    LKEY            shift and go to state 104
+
+
+state 103
+
+    (74) list -> LIST SMALLER_THAN data_type GREATER_THAN VARIABLE ASSIGNATION NEW LIST SMALLER_THAN data_type GREATER_THAN LPARENT RPARENT DOTANDCOMMA .
+
+    RKEY            reduce using rule 74 (list -> LIST SMALLER_THAN data_type GREATER_THAN VARIABLE ASSIGNATION NEW LIST SMALLER_THAN data_type GREATER_THAN LPARENT RPARENT DOTANDCOMMA .)
+
+
+state 104
+
+    (48) try_catch_finally -> TRY LKEY block_code RKEY CATCH LPARENT EXCEPTION VARIABLE RPARENT LKEY block_code RKEY FINALLY LKEY . block_code RKEY
+    (4) block_code -> . def_const_or_var
+    (5) block_code -> . estruct_of_data
+    (6) block_code -> . block_try_catch
+    (7) block_code -> . VARIABLE
+    (8) def_const_or_var -> . constant_assignation
+    (9) def_const_or_var -> . variable_assignation
+    (73) estruct_of_data -> . list
+    (45) block_try_catch -> . try_catch_simply
+    (46) block_try_catch -> . try_catch_finally
+    (12) constant_assignation -> . access_modifiers CONST all_asignations
+    (13) constant_assignation -> . CONST all_asignations
+    (14) constant_assignation -> . CONST data_type assignation_key_value COMMA some_assignation_constant
+    (10) variable_assignation -> . access_modifiers all_asignations
+    (11) variable_assignation -> . all_asignations
+    (74) list -> . LIST SMALLER_THAN data_type GREATER_THAN VARIABLE ASSIGNATION NEW LIST SMALLER_THAN data_type GREATER_THAN LPARENT RPARENT DOTANDCOMMA
+    (47) try_catch_simply -> . TRY LKEY block_code RKEY CATCH LPARENT EXCEPTION VARIABLE RPARENT LKEY block_code RKEY
+    (48) try_catch_finally -> . TRY LKEY block_code RKEY CATCH LPARENT EXCEPTION VARIABLE RPARENT LKEY block_code RKEY FINALLY LKEY block_code RKEY
+    (49) access_modifiers -> . PUBLIC
+    (50) access_modifiers -> . PRIVATE
+    (15) all_asignations -> . assignation_with_datatype
+    (16) all_asignations -> . assignation_without_datatype
+    (17) assignation_with_datatype -> . data_type assignation_key_value DOTANDCOMMA
+    (18) assignation_with_datatype -> . data_type assignation_key_value DOTANDCOMMA assignation_with_datatype
+    (19) assignation_with_datatype -> . data_type assignation_key_value DOTANDCOMMA assignation_without_datatype
+    (20) assignation_without_datatype -> . assignation_key_value DOTANDCOMMA
+    (21) assignation_without_datatype -> . assignation_key_value DOTANDCOMMA assignation_without_datatype
+    (22) assignation_without_datatype -> . assignation_key_value DOTANDCOMMA assignation_with_datatype
+    (26) data_type -> . CHARTYPE
+    (27) data_type -> . STRINGTYPE
+    (28) data_type -> . FLOATTYPE
+    (29) data_type -> . DECIMALTYPE
+    (30) data_type -> . INTTYPE
+    (31) data_type -> . BOOLTYPE
+    (25) assignation_key_value -> . VARIABLE ASSIGNATION value
+
+    VARIABLE        shift and go to state 12
+    CONST           shift and go to state 23
+    LIST            shift and go to state 27
+    TRY             shift and go to state 28
+    PUBLIC          shift and go to state 11
+    PRIVATE         shift and go to state 29
+    CHARTYPE        shift and go to state 32
+    STRINGTYPE      shift and go to state 33
+    FLOATTYPE       shift and go to state 34
+    DECIMALTYPE     shift and go to state 35
+    INTTYPE         shift and go to state 36
+    BOOLTYPE        shift and go to state 37
+
+    block_code                     shift and go to state 105
+    def_const_or_var               shift and go to state 14
+    estruct_of_data                shift and go to state 15
+    block_try_catch                shift and go to state 16
+    constant_assignation           shift and go to state 17
+    variable_assignation           shift and go to state 18
+    list                           shift and go to state 19
+    try_catch_simply               shift and go to state 20
+    try_catch_finally              shift and go to state 21
+    access_modifiers               shift and go to state 22
+    all_asignations                shift and go to state 24
+    data_type                      shift and go to state 25
+    assignation_key_value          shift and go to state 26
+    assignation_with_datatype      shift and go to state 30
+    assignation_without_datatype   shift and go to state 31
+
+state 105
+
+    (48) try_catch_finally -> TRY LKEY block_code RKEY CATCH LPARENT EXCEPTION VARIABLE RPARENT LKEY block_code RKEY FINALLY LKEY block_code . RKEY
+
+    RKEY            shift and go to state 106
+
+
+state 106
+
+    (48) try_catch_finally -> TRY LKEY block_code RKEY CATCH LPARENT EXCEPTION VARIABLE RPARENT LKEY block_code RKEY FINALLY LKEY block_code RKEY .
+
+    RKEY            reduce using rule 48 (try_catch_finally -> TRY LKEY block_code RKEY CATCH LPARENT EXCEPTION VARIABLE RPARENT LKEY block_code RKEY FINALLY LKEY block_code RKEY .)
 
 WARNING: 
 WARNING: Conflicts:
 WARNING: 
-WARNING: reduce/reduce conflict in state 55 resolved using rule (value_string -> STRING)
-WARNING: rejected rule (concatenation -> STRING) in state 55
+WARNING: reduce/reduce conflict in state 59 resolved using rule (value_string -> STRING)
+WARNING: rejected rule (concatenation -> STRING) in state 59

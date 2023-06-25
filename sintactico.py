@@ -1,6 +1,6 @@
 import ply.yacc as yacc
 
-from main import tokens
+from lexico import tokens
 
 """ Ejemplos con los que probar:
 using System; public class clase1 { adas } 
@@ -12,7 +12,9 @@ using System; public class clase1 { int var2 = 14 ; }
 using System; public class clase1 { int var2 = 14 ; var3 = var2 ; }
 using System; public class clase1 { int var2 = 14 ; var3 = var2 ; var5 = 4 ; }
 using System; public class clase1 { const int var2 = 14 ; var3 = var2 ; int var5 = 4 ; }
-using System; public class clase1 { const int var2 = 14 ; var3 = var2 ; const int var5 = 4 ; }
+No sirve aun: using System; public class clase1 { const int var2 = 14 ; var3 = var2 ; const int var5 = 4 ; }
+using System; public class clase1 { List<string> nombres = new List<string>(); }
+
 """
  
 def p_program(p):
@@ -28,6 +30,7 @@ def p_block_publicClass(p):
 
 def p_block_code(p):
     '''block_code : def_const_or_var
+                    | estruct_of_data
                     | block_try_catch
                     | VARIABLE
     '''
@@ -235,6 +238,12 @@ def p_comparation_oper(p):
 
 """ Estructura de datos """
 
+def p_estruct_of_data(p):
+    '''estruct_of_data : list
+    '''
+
+def p_list(p):
+    "list : LIST SMALLER_THAN data_type GREATER_THAN VARIABLE ASSIGNATION NEW LIST SMALLER_THAN data_type GREATER_THAN LPARENT RPARENT DOTANDCOMMA"
 
 
 
