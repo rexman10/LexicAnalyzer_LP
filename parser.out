@@ -109,13 +109,17 @@ Rule 69    arithmetic_operator -> TIMES
 Rule 70    arithmetic_operator -> DIVIDE
 Rule 71    arithmetic_operator -> PERCENT
 Rule 72    variable_assignation_multiline -> <empty>
-Rule 73    estruct_of_data -> list
-Rule 74    list -> LIST SMALLER_THAN data_type GREATER_THAN VARIABLE ASSIGNATION NEW LIST SMALLER_THAN data_type GREATER_THAN LPARENT RPARENT DOTANDCOMMA
+Rule 73    estruct_of_data -> list_empty
+Rule 74    estruct_of_data -> list_full
+Rule 75    list_empty -> LIST SMALLER_THAN STRINGTYPE GREATER_THAN VARIABLE ASSIGNATION NEW LIST SMALLER_THAN STRINGTYPE GREATER_THAN LPARENT RPARENT DOTANDCOMMA
+Rule 76    list_empty -> LIST SMALLER_THAN INTTYPE GREATER_THAN VARIABLE ASSIGNATION NEW LIST SMALLER_THAN INTTYPE GREATER_THAN LPARENT RPARENT DOTANDCOMMA
+Rule 77    list_full -> LIST SMALLER_THAN STRINGTYPE GREATER_THAN VARIABLE ASSIGNATION NEW LIST SMALLER_THAN STRINGTYPE GREATER_THAN LPARENT RPARENT LKEY VARIABLE RKEY
+Rule 78    list_full -> LIST SMALLER_THAN INTTYPE GREATER_THAN VARIABLE ASSIGNATION NEW LIST SMALLER_THAN INTTYPE GREATER_THAN LPARENT RPARENT LKEY VARIABLE RKEY
 
 Terminals, with rules where they appear
 
 ADDITION_ASSIGNMENT  : 
-ASSIGNATION          : 25 74
+ASSIGNATION          : 25 75 76 77 78
 BACK_SLASH           : 
 BOOL                 : 
 BOOLFALSE            : 41
@@ -135,7 +139,7 @@ DIVIDE               : 70
 DIVISION_ASSIGNMENT  : 
 DOLLARSIGN           : 
 DOT                  : 
-DOTANDCOMMA          : 2 17 18 19 20 21 22 23 74
+DOTANDCOMMA          : 2 17 18 19 20 21 22 23 75 76
 DOUBLEPOINT          : 
 DOUBLE_QUOTATION_MARKS : 
 ELSE                 : 
@@ -145,28 +149,28 @@ FINALLY              : 48
 FLOATTYPE            : 28
 FLOAT_NUMBER         : 43
 FOR                  : 
-GREATER_THAN         : 57 74 74
+GREATER_THAN         : 57 75 75 76 76 77 77 78 78
 GREATER_THAN_OR_EQUAL : 61
 IF                   : 
 INCREMENT            : 
 INEQUALITY           : 60
 INTEGER              : 42
-INTTYPE              : 30
+INTTYPE              : 30 76 76 78 78
 JUMP_LINE            : 
 LBRACKET             : 
-LIST                 : 74 74
-LKEY                 : 3 47 47 48 48 48
+LIST                 : 75 75 76 76 77 77 78 78
+LKEY                 : 3 47 47 48 48 48 77 78
 LOGICAND             : 63
 LOGICNOT             : 65
 LOGICOR              : 64
 LOGICXOR             : 66
 LONG                 : 
-LPARENT              : 38 47 48 74
+LPARENT              : 38 47 48 75 76 77 78
 MINUS                : 68
 MODULE_ASSIGNMENT    : 
 MULTIPLICATION_ASSIGNMENT : 
 NAMESPACE            : 
-NEW                  : 74
+NEW                  : 75 76 77 78
 PERCENT              : 71
 PIPE                 : 
 PLUS                 : 56 67
@@ -176,14 +180,14 @@ PUBLIC               : 3 49
 RBRACKET             : 
 READ                 : 38
 RETURN               : 
-RKEY                 : 3 47 47 48 48 48
-RPARENT              : 38 47 48 74
+RKEY                 : 3 47 47 48 48 48 77 78
+RPARENT              : 38 47 48 75 76 77 78
 SIPLE_QUOTATION_MARKS : 
-SMALLER_THAN         : 58 74 74
+SMALLER_THAN         : 58 75 75 76 76 77 77 78 78
 SMALLER_THAN_OR_EQUAL : 62
 STATIC               : 
 STRING               : 35 55 56
-STRINGTYPE           : 27
+STRINGTYPE           : 27 75 75 77 77
 SUBTRACTION_ASSIGNMENT : 
 SWITCH               : 
 SYSTEM               : 2
@@ -191,7 +195,7 @@ TABULATION           :
 TIMES                : 69
 TRY                  : 47 48
 USING                : 2
-VARIABLE             : 3 7 25 37 47 48 74
+VARIABLE             : 3 7 25 37 47 48 75 76 77 77 78 78
 VOID                 : 
 WHILE                : 
 error                : 
@@ -211,10 +215,11 @@ block_try_catch      : 6
 block_using          : 1
 concatenation        : 39 56
 constant_assignation : 8
-data_type            : 14 17 18 19 74 74
+data_type            : 14 17 18 19
 def_const_or_var     : 4
 estruct_of_data      : 5
-list                 : 73
+list_empty           : 73
+list_full            : 74
 logic_operation      : 54
 logic_operator       : 54
 program              : 0
@@ -314,7 +319,8 @@ state 10
     (7) block_code -> . VARIABLE
     (8) def_const_or_var -> . constant_assignation
     (9) def_const_or_var -> . variable_assignation
-    (73) estruct_of_data -> . list
+    (73) estruct_of_data -> . list_empty
+    (74) estruct_of_data -> . list_full
     (45) block_try_catch -> . try_catch_simply
     (46) block_try_catch -> . try_catch_finally
     (12) constant_assignation -> . access_modifiers CONST all_asignations
@@ -322,7 +328,10 @@ state 10
     (14) constant_assignation -> . CONST data_type assignation_key_value COMMA some_assignation_constant
     (10) variable_assignation -> . access_modifiers all_asignations
     (11) variable_assignation -> . all_asignations
-    (74) list -> . LIST SMALLER_THAN data_type GREATER_THAN VARIABLE ASSIGNATION NEW LIST SMALLER_THAN data_type GREATER_THAN LPARENT RPARENT DOTANDCOMMA
+    (75) list_empty -> . LIST SMALLER_THAN STRINGTYPE GREATER_THAN VARIABLE ASSIGNATION NEW LIST SMALLER_THAN STRINGTYPE GREATER_THAN LPARENT RPARENT DOTANDCOMMA
+    (76) list_empty -> . LIST SMALLER_THAN INTTYPE GREATER_THAN VARIABLE ASSIGNATION NEW LIST SMALLER_THAN INTTYPE GREATER_THAN LPARENT RPARENT DOTANDCOMMA
+    (77) list_full -> . LIST SMALLER_THAN STRINGTYPE GREATER_THAN VARIABLE ASSIGNATION NEW LIST SMALLER_THAN STRINGTYPE GREATER_THAN LPARENT RPARENT LKEY VARIABLE RKEY
+    (78) list_full -> . LIST SMALLER_THAN INTTYPE GREATER_THAN VARIABLE ASSIGNATION NEW LIST SMALLER_THAN INTTYPE GREATER_THAN LPARENT RPARENT LKEY VARIABLE RKEY
     (47) try_catch_simply -> . TRY LKEY block_code RKEY CATCH LPARENT EXCEPTION VARIABLE RPARENT LKEY block_code RKEY
     (48) try_catch_finally -> . TRY LKEY block_code RKEY CATCH LPARENT EXCEPTION VARIABLE RPARENT LKEY block_code RKEY FINALLY LKEY block_code RKEY
     (49) access_modifiers -> . PUBLIC
@@ -344,17 +353,17 @@ state 10
     (25) assignation_key_value -> . VARIABLE ASSIGNATION value
 
     VARIABLE        shift and go to state 12
-    CONST           shift and go to state 23
-    LIST            shift and go to state 27
-    TRY             shift and go to state 28
+    CONST           shift and go to state 24
+    LIST            shift and go to state 28
+    TRY             shift and go to state 31
     PUBLIC          shift and go to state 11
-    PRIVATE         shift and go to state 29
-    CHARTYPE        shift and go to state 32
-    STRINGTYPE      shift and go to state 33
-    FLOATTYPE       shift and go to state 34
-    DECIMALTYPE     shift and go to state 35
-    INTTYPE         shift and go to state 36
-    BOOLTYPE        shift and go to state 37
+    PRIVATE         shift and go to state 32
+    CHARTYPE        shift and go to state 35
+    STRINGTYPE      shift and go to state 29
+    FLOATTYPE       shift and go to state 36
+    DECIMALTYPE     shift and go to state 37
+    INTTYPE         shift and go to state 30
+    BOOLTYPE        shift and go to state 38
 
     block_code                     shift and go to state 13
     def_const_or_var               shift and go to state 14
@@ -362,15 +371,16 @@ state 10
     block_try_catch                shift and go to state 16
     constant_assignation           shift and go to state 17
     variable_assignation           shift and go to state 18
-    list                           shift and go to state 19
-    try_catch_simply               shift and go to state 20
-    try_catch_finally              shift and go to state 21
-    access_modifiers               shift and go to state 22
-    all_asignations                shift and go to state 24
-    data_type                      shift and go to state 25
-    assignation_key_value          shift and go to state 26
-    assignation_with_datatype      shift and go to state 30
-    assignation_without_datatype   shift and go to state 31
+    list_empty                     shift and go to state 19
+    list_full                      shift and go to state 20
+    try_catch_simply               shift and go to state 21
+    try_catch_finally              shift and go to state 22
+    access_modifiers               shift and go to state 23
+    all_asignations                shift and go to state 25
+    data_type                      shift and go to state 26
+    assignation_key_value          shift and go to state 27
+    assignation_with_datatype      shift and go to state 33
+    assignation_without_datatype   shift and go to state 34
 
 state 11
 
@@ -392,14 +402,14 @@ state 12
     (25) assignation_key_value -> VARIABLE . ASSIGNATION value
 
     RKEY            reduce using rule 7 (block_code -> VARIABLE .)
-    ASSIGNATION     shift and go to state 38
+    ASSIGNATION     shift and go to state 39
 
 
 state 13
 
     (3) block_publicClass -> PUBLIC CLASS VARIABLE LKEY block_code . RKEY
 
-    RKEY            shift and go to state 39
+    RKEY            shift and go to state 40
 
 
 state 14
@@ -439,26 +449,33 @@ state 18
 
 state 19
 
-    (73) estruct_of_data -> list .
+    (73) estruct_of_data -> list_empty .
 
-    RKEY            reduce using rule 73 (estruct_of_data -> list .)
+    RKEY            reduce using rule 73 (estruct_of_data -> list_empty .)
 
 
 state 20
+
+    (74) estruct_of_data -> list_full .
+
+    RKEY            reduce using rule 74 (estruct_of_data -> list_full .)
+
+
+state 21
 
     (45) block_try_catch -> try_catch_simply .
 
     RKEY            reduce using rule 45 (block_try_catch -> try_catch_simply .)
 
 
-state 21
+state 22
 
     (46) block_try_catch -> try_catch_finally .
 
     RKEY            reduce using rule 46 (block_try_catch -> try_catch_finally .)
 
 
-state 22
+state 23
 
     (12) constant_assignation -> access_modifiers . CONST all_asignations
     (10) variable_assignation -> access_modifiers . all_asignations
@@ -478,22 +495,22 @@ state 22
     (31) data_type -> . BOOLTYPE
     (25) assignation_key_value -> . VARIABLE ASSIGNATION value
 
-    CONST           shift and go to state 40
-    CHARTYPE        shift and go to state 32
-    STRINGTYPE      shift and go to state 33
-    FLOATTYPE       shift and go to state 34
-    DECIMALTYPE     shift and go to state 35
-    INTTYPE         shift and go to state 36
-    BOOLTYPE        shift and go to state 37
-    VARIABLE        shift and go to state 42
+    CONST           shift and go to state 41
+    CHARTYPE        shift and go to state 35
+    STRINGTYPE      shift and go to state 29
+    FLOATTYPE       shift and go to state 36
+    DECIMALTYPE     shift and go to state 37
+    INTTYPE         shift and go to state 30
+    BOOLTYPE        shift and go to state 38
+    VARIABLE        shift and go to state 43
 
-    all_asignations                shift and go to state 41
-    assignation_with_datatype      shift and go to state 30
-    assignation_without_datatype   shift and go to state 31
-    data_type                      shift and go to state 25
-    assignation_key_value          shift and go to state 26
+    all_asignations                shift and go to state 42
+    assignation_with_datatype      shift and go to state 33
+    assignation_without_datatype   shift and go to state 34
+    data_type                      shift and go to state 26
+    assignation_key_value          shift and go to state 27
 
-state 23
+state 24
 
     (13) constant_assignation -> CONST . all_asignations
     (14) constant_assignation -> CONST . data_type assignation_key_value COMMA some_assignation_constant
@@ -513,63 +530,80 @@ state 23
     (22) assignation_without_datatype -> . assignation_key_value DOTANDCOMMA assignation_with_datatype
     (25) assignation_key_value -> . VARIABLE ASSIGNATION value
 
-    CHARTYPE        shift and go to state 32
-    STRINGTYPE      shift and go to state 33
-    FLOATTYPE       shift and go to state 34
-    DECIMALTYPE     shift and go to state 35
-    INTTYPE         shift and go to state 36
-    BOOLTYPE        shift and go to state 37
-    VARIABLE        shift and go to state 42
+    CHARTYPE        shift and go to state 35
+    STRINGTYPE      shift and go to state 29
+    FLOATTYPE       shift and go to state 36
+    DECIMALTYPE     shift and go to state 37
+    INTTYPE         shift and go to state 30
+    BOOLTYPE        shift and go to state 38
+    VARIABLE        shift and go to state 43
 
-    all_asignations                shift and go to state 43
-    data_type                      shift and go to state 44
-    assignation_key_value          shift and go to state 26
-    assignation_with_datatype      shift and go to state 30
-    assignation_without_datatype   shift and go to state 31
+    all_asignations                shift and go to state 44
+    data_type                      shift and go to state 45
+    assignation_key_value          shift and go to state 27
+    assignation_with_datatype      shift and go to state 33
+    assignation_without_datatype   shift and go to state 34
 
-state 24
+state 25
 
     (11) variable_assignation -> all_asignations .
 
     RKEY            reduce using rule 11 (variable_assignation -> all_asignations .)
 
 
-state 25
+state 26
 
     (17) assignation_with_datatype -> data_type . assignation_key_value DOTANDCOMMA
     (18) assignation_with_datatype -> data_type . assignation_key_value DOTANDCOMMA assignation_with_datatype
     (19) assignation_with_datatype -> data_type . assignation_key_value DOTANDCOMMA assignation_without_datatype
     (25) assignation_key_value -> . VARIABLE ASSIGNATION value
 
-    VARIABLE        shift and go to state 42
+    VARIABLE        shift and go to state 43
 
-    assignation_key_value          shift and go to state 45
+    assignation_key_value          shift and go to state 46
 
-state 26
+state 27
 
     (20) assignation_without_datatype -> assignation_key_value . DOTANDCOMMA
     (21) assignation_without_datatype -> assignation_key_value . DOTANDCOMMA assignation_without_datatype
     (22) assignation_without_datatype -> assignation_key_value . DOTANDCOMMA assignation_with_datatype
 
-    DOTANDCOMMA     shift and go to state 46
-
-
-state 27
-
-    (74) list -> LIST . SMALLER_THAN data_type GREATER_THAN VARIABLE ASSIGNATION NEW LIST SMALLER_THAN data_type GREATER_THAN LPARENT RPARENT DOTANDCOMMA
-
-    SMALLER_THAN    shift and go to state 47
+    DOTANDCOMMA     shift and go to state 47
 
 
 state 28
 
-    (47) try_catch_simply -> TRY . LKEY block_code RKEY CATCH LPARENT EXCEPTION VARIABLE RPARENT LKEY block_code RKEY
-    (48) try_catch_finally -> TRY . LKEY block_code RKEY CATCH LPARENT EXCEPTION VARIABLE RPARENT LKEY block_code RKEY FINALLY LKEY block_code RKEY
+    (75) list_empty -> LIST . SMALLER_THAN STRINGTYPE GREATER_THAN VARIABLE ASSIGNATION NEW LIST SMALLER_THAN STRINGTYPE GREATER_THAN LPARENT RPARENT DOTANDCOMMA
+    (76) list_empty -> LIST . SMALLER_THAN INTTYPE GREATER_THAN VARIABLE ASSIGNATION NEW LIST SMALLER_THAN INTTYPE GREATER_THAN LPARENT RPARENT DOTANDCOMMA
+    (77) list_full -> LIST . SMALLER_THAN STRINGTYPE GREATER_THAN VARIABLE ASSIGNATION NEW LIST SMALLER_THAN STRINGTYPE GREATER_THAN LPARENT RPARENT LKEY VARIABLE RKEY
+    (78) list_full -> LIST . SMALLER_THAN INTTYPE GREATER_THAN VARIABLE ASSIGNATION NEW LIST SMALLER_THAN INTTYPE GREATER_THAN LPARENT RPARENT LKEY VARIABLE RKEY
 
-    LKEY            shift and go to state 48
+    SMALLER_THAN    shift and go to state 48
 
 
 state 29
+
+    (27) data_type -> STRINGTYPE .
+
+    VARIABLE        reduce using rule 27 (data_type -> STRINGTYPE .)
+
+
+state 30
+
+    (30) data_type -> INTTYPE .
+
+    VARIABLE        reduce using rule 30 (data_type -> INTTYPE .)
+
+
+state 31
+
+    (47) try_catch_simply -> TRY . LKEY block_code RKEY CATCH LPARENT EXCEPTION VARIABLE RPARENT LKEY block_code RKEY
+    (48) try_catch_finally -> TRY . LKEY block_code RKEY CATCH LPARENT EXCEPTION VARIABLE RPARENT LKEY block_code RKEY FINALLY LKEY block_code RKEY
+
+    LKEY            shift and go to state 49
+
+
+state 32
 
     (50) access_modifiers -> PRIVATE .
 
@@ -583,69 +617,49 @@ state 29
     VARIABLE        reduce using rule 50 (access_modifiers -> PRIVATE .)
 
 
-state 30
+state 33
 
     (15) all_asignations -> assignation_with_datatype .
 
     RKEY            reduce using rule 15 (all_asignations -> assignation_with_datatype .)
 
 
-state 31
+state 34
 
     (16) all_asignations -> assignation_without_datatype .
 
     RKEY            reduce using rule 16 (all_asignations -> assignation_without_datatype .)
 
 
-state 32
+state 35
 
     (26) data_type -> CHARTYPE .
 
     VARIABLE        reduce using rule 26 (data_type -> CHARTYPE .)
-    GREATER_THAN    reduce using rule 26 (data_type -> CHARTYPE .)
-
-
-state 33
-
-    (27) data_type -> STRINGTYPE .
-
-    VARIABLE        reduce using rule 27 (data_type -> STRINGTYPE .)
-    GREATER_THAN    reduce using rule 27 (data_type -> STRINGTYPE .)
-
-
-state 34
-
-    (28) data_type -> FLOATTYPE .
-
-    VARIABLE        reduce using rule 28 (data_type -> FLOATTYPE .)
-    GREATER_THAN    reduce using rule 28 (data_type -> FLOATTYPE .)
-
-
-state 35
-
-    (29) data_type -> DECIMALTYPE .
-
-    VARIABLE        reduce using rule 29 (data_type -> DECIMALTYPE .)
-    GREATER_THAN    reduce using rule 29 (data_type -> DECIMALTYPE .)
 
 
 state 36
 
-    (30) data_type -> INTTYPE .
+    (28) data_type -> FLOATTYPE .
 
-    VARIABLE        reduce using rule 30 (data_type -> INTTYPE .)
-    GREATER_THAN    reduce using rule 30 (data_type -> INTTYPE .)
+    VARIABLE        reduce using rule 28 (data_type -> FLOATTYPE .)
 
 
 state 37
 
-    (31) data_type -> BOOLTYPE .
+    (29) data_type -> DECIMALTYPE .
 
-    VARIABLE        reduce using rule 31 (data_type -> BOOLTYPE .)
-    GREATER_THAN    reduce using rule 31 (data_type -> BOOLTYPE .)
+    VARIABLE        reduce using rule 29 (data_type -> DECIMALTYPE .)
 
 
 state 38
+
+    (31) data_type -> BOOLTYPE .
+
+    VARIABLE        reduce using rule 31 (data_type -> BOOLTYPE .)
+
+
+state 39
 
     (25) assignation_key_value -> VARIABLE ASSIGNATION . value
     (32) value -> . value_numeric
@@ -664,30 +678,30 @@ state 38
     (55) concatenation -> . STRING
     (56) concatenation -> . STRING PLUS concatenation
 
-    INTEGER         shift and go to state 54
-    FLOAT_NUMBER    shift and go to state 55
-    DECIMAL_NUMBER  shift and go to state 56
-    BOOLTRUE        shift and go to state 57
-    BOOLFALSE       shift and go to state 58
-    STRING          shift and go to state 59
-    CHAR            shift and go to state 60
-    VARIABLE        shift and go to state 49
-    READ            shift and go to state 61
+    INTEGER         shift and go to state 55
+    FLOAT_NUMBER    shift and go to state 56
+    DECIMAL_NUMBER  shift and go to state 57
+    BOOLTRUE        shift and go to state 58
+    BOOLFALSE       shift and go to state 59
+    STRING          shift and go to state 60
+    CHAR            shift and go to state 61
+    VARIABLE        shift and go to state 50
+    READ            shift and go to state 62
 
-    value                          shift and go to state 50
-    value_numeric                  shift and go to state 51
-    value_logic                    shift and go to state 52
-    value_string                   shift and go to state 53
-    concatenation                  shift and go to state 62
+    value                          shift and go to state 51
+    value_numeric                  shift and go to state 52
+    value_logic                    shift and go to state 53
+    value_string                   shift and go to state 54
+    concatenation                  shift and go to state 63
 
-state 39
+state 40
 
     (3) block_publicClass -> PUBLIC CLASS VARIABLE LKEY block_code RKEY .
 
     $end            reduce using rule 3 (block_publicClass -> PUBLIC CLASS VARIABLE LKEY block_code RKEY .)
 
 
-state 40
+state 41
 
     (12) constant_assignation -> access_modifiers CONST . all_asignations
     (15) all_asignations -> . assignation_with_datatype
@@ -706,42 +720,42 @@ state 40
     (31) data_type -> . BOOLTYPE
     (25) assignation_key_value -> . VARIABLE ASSIGNATION value
 
-    CHARTYPE        shift and go to state 32
-    STRINGTYPE      shift and go to state 33
-    FLOATTYPE       shift and go to state 34
-    DECIMALTYPE     shift and go to state 35
-    INTTYPE         shift and go to state 36
-    BOOLTYPE        shift and go to state 37
-    VARIABLE        shift and go to state 42
+    CHARTYPE        shift and go to state 35
+    STRINGTYPE      shift and go to state 29
+    FLOATTYPE       shift and go to state 36
+    DECIMALTYPE     shift and go to state 37
+    INTTYPE         shift and go to state 30
+    BOOLTYPE        shift and go to state 38
+    VARIABLE        shift and go to state 43
 
-    all_asignations                shift and go to state 63
-    assignation_with_datatype      shift and go to state 30
-    assignation_without_datatype   shift and go to state 31
-    data_type                      shift and go to state 25
-    assignation_key_value          shift and go to state 26
+    all_asignations                shift and go to state 64
+    assignation_with_datatype      shift and go to state 33
+    assignation_without_datatype   shift and go to state 34
+    data_type                      shift and go to state 26
+    assignation_key_value          shift and go to state 27
 
-state 41
+state 42
 
     (10) variable_assignation -> access_modifiers all_asignations .
 
     RKEY            reduce using rule 10 (variable_assignation -> access_modifiers all_asignations .)
 
 
-state 42
+state 43
 
     (25) assignation_key_value -> VARIABLE . ASSIGNATION value
 
-    ASSIGNATION     shift and go to state 38
+    ASSIGNATION     shift and go to state 39
 
 
-state 43
+state 44
 
     (13) constant_assignation -> CONST all_asignations .
 
     RKEY            reduce using rule 13 (constant_assignation -> CONST all_asignations .)
 
 
-state 44
+state 45
 
     (14) constant_assignation -> CONST data_type . assignation_key_value COMMA some_assignation_constant
     (17) assignation_with_datatype -> data_type . assignation_key_value DOTANDCOMMA
@@ -749,20 +763,20 @@ state 44
     (19) assignation_with_datatype -> data_type . assignation_key_value DOTANDCOMMA assignation_without_datatype
     (25) assignation_key_value -> . VARIABLE ASSIGNATION value
 
-    VARIABLE        shift and go to state 42
+    VARIABLE        shift and go to state 43
 
-    assignation_key_value          shift and go to state 64
+    assignation_key_value          shift and go to state 65
 
-state 45
+state 46
 
     (17) assignation_with_datatype -> data_type assignation_key_value . DOTANDCOMMA
     (18) assignation_with_datatype -> data_type assignation_key_value . DOTANDCOMMA assignation_with_datatype
     (19) assignation_with_datatype -> data_type assignation_key_value . DOTANDCOMMA assignation_without_datatype
 
-    DOTANDCOMMA     shift and go to state 65
+    DOTANDCOMMA     shift and go to state 66
 
 
-state 46
+state 47
 
     (20) assignation_without_datatype -> assignation_key_value DOTANDCOMMA .
     (21) assignation_without_datatype -> assignation_key_value DOTANDCOMMA . assignation_without_datatype
@@ -782,39 +796,31 @@ state 46
     (31) data_type -> . BOOLTYPE
 
     RKEY            reduce using rule 20 (assignation_without_datatype -> assignation_key_value DOTANDCOMMA .)
-    VARIABLE        shift and go to state 42
-    CHARTYPE        shift and go to state 32
-    STRINGTYPE      shift and go to state 33
-    FLOATTYPE       shift and go to state 34
-    DECIMALTYPE     shift and go to state 35
-    INTTYPE         shift and go to state 36
-    BOOLTYPE        shift and go to state 37
+    VARIABLE        shift and go to state 43
+    CHARTYPE        shift and go to state 35
+    STRINGTYPE      shift and go to state 29
+    FLOATTYPE       shift and go to state 36
+    DECIMALTYPE     shift and go to state 37
+    INTTYPE         shift and go to state 30
+    BOOLTYPE        shift and go to state 38
 
-    assignation_key_value          shift and go to state 26
-    assignation_without_datatype   shift and go to state 66
-    assignation_with_datatype      shift and go to state 67
-    data_type                      shift and go to state 25
-
-state 47
-
-    (74) list -> LIST SMALLER_THAN . data_type GREATER_THAN VARIABLE ASSIGNATION NEW LIST SMALLER_THAN data_type GREATER_THAN LPARENT RPARENT DOTANDCOMMA
-    (26) data_type -> . CHARTYPE
-    (27) data_type -> . STRINGTYPE
-    (28) data_type -> . FLOATTYPE
-    (29) data_type -> . DECIMALTYPE
-    (30) data_type -> . INTTYPE
-    (31) data_type -> . BOOLTYPE
-
-    CHARTYPE        shift and go to state 32
-    STRINGTYPE      shift and go to state 33
-    FLOATTYPE       shift and go to state 34
-    DECIMALTYPE     shift and go to state 35
-    INTTYPE         shift and go to state 36
-    BOOLTYPE        shift and go to state 37
-
-    data_type                      shift and go to state 68
+    assignation_key_value          shift and go to state 27
+    assignation_without_datatype   shift and go to state 67
+    assignation_with_datatype      shift and go to state 68
+    data_type                      shift and go to state 26
 
 state 48
+
+    (75) list_empty -> LIST SMALLER_THAN . STRINGTYPE GREATER_THAN VARIABLE ASSIGNATION NEW LIST SMALLER_THAN STRINGTYPE GREATER_THAN LPARENT RPARENT DOTANDCOMMA
+    (76) list_empty -> LIST SMALLER_THAN . INTTYPE GREATER_THAN VARIABLE ASSIGNATION NEW LIST SMALLER_THAN INTTYPE GREATER_THAN LPARENT RPARENT DOTANDCOMMA
+    (77) list_full -> LIST SMALLER_THAN . STRINGTYPE GREATER_THAN VARIABLE ASSIGNATION NEW LIST SMALLER_THAN STRINGTYPE GREATER_THAN LPARENT RPARENT LKEY VARIABLE RKEY
+    (78) list_full -> LIST SMALLER_THAN . INTTYPE GREATER_THAN VARIABLE ASSIGNATION NEW LIST SMALLER_THAN INTTYPE GREATER_THAN LPARENT RPARENT LKEY VARIABLE RKEY
+
+    STRINGTYPE      shift and go to state 69
+    INTTYPE         shift and go to state 70
+
+
+state 49
 
     (47) try_catch_simply -> TRY LKEY . block_code RKEY CATCH LPARENT EXCEPTION VARIABLE RPARENT LKEY block_code RKEY
     (48) try_catch_finally -> TRY LKEY . block_code RKEY CATCH LPARENT EXCEPTION VARIABLE RPARENT LKEY block_code RKEY FINALLY LKEY block_code RKEY
@@ -824,7 +830,8 @@ state 48
     (7) block_code -> . VARIABLE
     (8) def_const_or_var -> . constant_assignation
     (9) def_const_or_var -> . variable_assignation
-    (73) estruct_of_data -> . list
+    (73) estruct_of_data -> . list_empty
+    (74) estruct_of_data -> . list_full
     (45) block_try_catch -> . try_catch_simply
     (46) block_try_catch -> . try_catch_finally
     (12) constant_assignation -> . access_modifiers CONST all_asignations
@@ -832,7 +839,10 @@ state 48
     (14) constant_assignation -> . CONST data_type assignation_key_value COMMA some_assignation_constant
     (10) variable_assignation -> . access_modifiers all_asignations
     (11) variable_assignation -> . all_asignations
-    (74) list -> . LIST SMALLER_THAN data_type GREATER_THAN VARIABLE ASSIGNATION NEW LIST SMALLER_THAN data_type GREATER_THAN LPARENT RPARENT DOTANDCOMMA
+    (75) list_empty -> . LIST SMALLER_THAN STRINGTYPE GREATER_THAN VARIABLE ASSIGNATION NEW LIST SMALLER_THAN STRINGTYPE GREATER_THAN LPARENT RPARENT DOTANDCOMMA
+    (76) list_empty -> . LIST SMALLER_THAN INTTYPE GREATER_THAN VARIABLE ASSIGNATION NEW LIST SMALLER_THAN INTTYPE GREATER_THAN LPARENT RPARENT DOTANDCOMMA
+    (77) list_full -> . LIST SMALLER_THAN STRINGTYPE GREATER_THAN VARIABLE ASSIGNATION NEW LIST SMALLER_THAN STRINGTYPE GREATER_THAN LPARENT RPARENT LKEY VARIABLE RKEY
+    (78) list_full -> . LIST SMALLER_THAN INTTYPE GREATER_THAN VARIABLE ASSIGNATION NEW LIST SMALLER_THAN INTTYPE GREATER_THAN LPARENT RPARENT LKEY VARIABLE RKEY
     (47) try_catch_simply -> . TRY LKEY block_code RKEY CATCH LPARENT EXCEPTION VARIABLE RPARENT LKEY block_code RKEY
     (48) try_catch_finally -> . TRY LKEY block_code RKEY CATCH LPARENT EXCEPTION VARIABLE RPARENT LKEY block_code RKEY FINALLY LKEY block_code RKEY
     (49) access_modifiers -> . PUBLIC
@@ -854,35 +864,36 @@ state 48
     (25) assignation_key_value -> . VARIABLE ASSIGNATION value
 
     VARIABLE        shift and go to state 12
-    CONST           shift and go to state 23
-    LIST            shift and go to state 27
-    TRY             shift and go to state 28
+    CONST           shift and go to state 24
+    LIST            shift and go to state 28
+    TRY             shift and go to state 31
     PUBLIC          shift and go to state 11
-    PRIVATE         shift and go to state 29
-    CHARTYPE        shift and go to state 32
-    STRINGTYPE      shift and go to state 33
-    FLOATTYPE       shift and go to state 34
-    DECIMALTYPE     shift and go to state 35
-    INTTYPE         shift and go to state 36
-    BOOLTYPE        shift and go to state 37
+    PRIVATE         shift and go to state 32
+    CHARTYPE        shift and go to state 35
+    STRINGTYPE      shift and go to state 29
+    FLOATTYPE       shift and go to state 36
+    DECIMALTYPE     shift and go to state 37
+    INTTYPE         shift and go to state 30
+    BOOLTYPE        shift and go to state 38
 
-    block_code                     shift and go to state 69
+    block_code                     shift and go to state 71
     def_const_or_var               shift and go to state 14
     estruct_of_data                shift and go to state 15
     block_try_catch                shift and go to state 16
     constant_assignation           shift and go to state 17
     variable_assignation           shift and go to state 18
-    list                           shift and go to state 19
-    try_catch_simply               shift and go to state 20
-    try_catch_finally              shift and go to state 21
-    access_modifiers               shift and go to state 22
-    all_asignations                shift and go to state 24
-    data_type                      shift and go to state 25
-    assignation_key_value          shift and go to state 26
-    assignation_with_datatype      shift and go to state 30
-    assignation_without_datatype   shift and go to state 31
+    list_empty                     shift and go to state 19
+    list_full                      shift and go to state 20
+    try_catch_simply               shift and go to state 21
+    try_catch_finally              shift and go to state 22
+    access_modifiers               shift and go to state 23
+    all_asignations                shift and go to state 25
+    data_type                      shift and go to state 26
+    assignation_key_value          shift and go to state 27
+    assignation_with_datatype      shift and go to state 33
+    assignation_without_datatype   shift and go to state 34
 
-state 49
+state 50
 
     (37) value_string -> VARIABLE .
 
@@ -890,7 +901,7 @@ state 49
     COMMA           reduce using rule 37 (value_string -> VARIABLE .)
 
 
-state 50
+state 51
 
     (25) assignation_key_value -> VARIABLE ASSIGNATION value .
 
@@ -898,7 +909,7 @@ state 50
     COMMA           reduce using rule 25 (assignation_key_value -> VARIABLE ASSIGNATION value .)
 
 
-state 51
+state 52
 
     (32) value -> value_numeric .
 
@@ -906,7 +917,7 @@ state 51
     COMMA           reduce using rule 32 (value -> value_numeric .)
 
 
-state 52
+state 53
 
     (33) value -> value_logic .
 
@@ -914,7 +925,7 @@ state 52
     COMMA           reduce using rule 33 (value -> value_logic .)
 
 
-state 53
+state 54
 
     (34) value -> value_string .
 
@@ -922,7 +933,7 @@ state 53
     COMMA           reduce using rule 34 (value -> value_string .)
 
 
-state 54
+state 55
 
     (42) value_numeric -> INTEGER .
 
@@ -930,7 +941,7 @@ state 54
     COMMA           reduce using rule 42 (value_numeric -> INTEGER .)
 
 
-state 55
+state 56
 
     (43) value_numeric -> FLOAT_NUMBER .
 
@@ -938,7 +949,7 @@ state 55
     COMMA           reduce using rule 43 (value_numeric -> FLOAT_NUMBER .)
 
 
-state 56
+state 57
 
     (44) value_numeric -> DECIMAL_NUMBER .
 
@@ -946,7 +957,7 @@ state 56
     COMMA           reduce using rule 44 (value_numeric -> DECIMAL_NUMBER .)
 
 
-state 57
+state 58
 
     (40) value_logic -> BOOLTRUE .
 
@@ -954,7 +965,7 @@ state 57
     COMMA           reduce using rule 40 (value_logic -> BOOLTRUE .)
 
 
-state 58
+state 59
 
     (41) value_logic -> BOOLFALSE .
 
@@ -962,7 +973,7 @@ state 58
     COMMA           reduce using rule 41 (value_logic -> BOOLFALSE .)
 
 
-state 59
+state 60
 
     (35) value_string -> STRING .
     (55) concatenation -> STRING .
@@ -972,13 +983,13 @@ state 59
   ! reduce/reduce conflict for COMMA resolved using rule 35 (value_string -> STRING .)
     DOTANDCOMMA     reduce using rule 35 (value_string -> STRING .)
     COMMA           reduce using rule 35 (value_string -> STRING .)
-    PLUS            shift and go to state 70
+    PLUS            shift and go to state 72
 
   ! DOTANDCOMMA     [ reduce using rule 55 (concatenation -> STRING .) ]
   ! COMMA           [ reduce using rule 55 (concatenation -> STRING .) ]
 
 
-state 60
+state 61
 
     (36) value_string -> CHAR .
 
@@ -986,14 +997,14 @@ state 60
     COMMA           reduce using rule 36 (value_string -> CHAR .)
 
 
-state 61
+state 62
 
     (38) value_string -> READ . LPARENT RPARENT
 
-    LPARENT         shift and go to state 71
+    LPARENT         shift and go to state 73
 
 
-state 62
+state 63
 
     (39) value_string -> concatenation .
 
@@ -1001,25 +1012,25 @@ state 62
     COMMA           reduce using rule 39 (value_string -> concatenation .)
 
 
-state 63
+state 64
 
     (12) constant_assignation -> access_modifiers CONST all_asignations .
 
     RKEY            reduce using rule 12 (constant_assignation -> access_modifiers CONST all_asignations .)
 
 
-state 64
+state 65
 
     (14) constant_assignation -> CONST data_type assignation_key_value . COMMA some_assignation_constant
     (17) assignation_with_datatype -> data_type assignation_key_value . DOTANDCOMMA
     (18) assignation_with_datatype -> data_type assignation_key_value . DOTANDCOMMA assignation_with_datatype
     (19) assignation_with_datatype -> data_type assignation_key_value . DOTANDCOMMA assignation_without_datatype
 
-    COMMA           shift and go to state 72
-    DOTANDCOMMA     shift and go to state 65
+    COMMA           shift and go to state 74
+    DOTANDCOMMA     shift and go to state 66
 
 
-state 65
+state 66
 
     (17) assignation_with_datatype -> data_type assignation_key_value DOTANDCOMMA .
     (18) assignation_with_datatype -> data_type assignation_key_value DOTANDCOMMA . assignation_with_datatype
@@ -1039,117 +1050,135 @@ state 65
     (25) assignation_key_value -> . VARIABLE ASSIGNATION value
 
     RKEY            reduce using rule 17 (assignation_with_datatype -> data_type assignation_key_value DOTANDCOMMA .)
-    CHARTYPE        shift and go to state 32
-    STRINGTYPE      shift and go to state 33
-    FLOATTYPE       shift and go to state 34
-    DECIMALTYPE     shift and go to state 35
-    INTTYPE         shift and go to state 36
-    BOOLTYPE        shift and go to state 37
-    VARIABLE        shift and go to state 42
+    CHARTYPE        shift and go to state 35
+    STRINGTYPE      shift and go to state 29
+    FLOATTYPE       shift and go to state 36
+    DECIMALTYPE     shift and go to state 37
+    INTTYPE         shift and go to state 30
+    BOOLTYPE        shift and go to state 38
+    VARIABLE        shift and go to state 43
 
-    data_type                      shift and go to state 25
-    assignation_key_value          shift and go to state 26
-    assignation_with_datatype      shift and go to state 73
-    assignation_without_datatype   shift and go to state 74
+    data_type                      shift and go to state 26
+    assignation_key_value          shift and go to state 27
+    assignation_with_datatype      shift and go to state 75
+    assignation_without_datatype   shift and go to state 76
 
-state 66
+state 67
 
     (21) assignation_without_datatype -> assignation_key_value DOTANDCOMMA assignation_without_datatype .
 
     RKEY            reduce using rule 21 (assignation_without_datatype -> assignation_key_value DOTANDCOMMA assignation_without_datatype .)
 
 
-state 67
+state 68
 
     (22) assignation_without_datatype -> assignation_key_value DOTANDCOMMA assignation_with_datatype .
 
     RKEY            reduce using rule 22 (assignation_without_datatype -> assignation_key_value DOTANDCOMMA assignation_with_datatype .)
 
 
-state 68
-
-    (74) list -> LIST SMALLER_THAN data_type . GREATER_THAN VARIABLE ASSIGNATION NEW LIST SMALLER_THAN data_type GREATER_THAN LPARENT RPARENT DOTANDCOMMA
-
-    GREATER_THAN    shift and go to state 75
-
-
 state 69
+
+    (75) list_empty -> LIST SMALLER_THAN STRINGTYPE . GREATER_THAN VARIABLE ASSIGNATION NEW LIST SMALLER_THAN STRINGTYPE GREATER_THAN LPARENT RPARENT DOTANDCOMMA
+    (77) list_full -> LIST SMALLER_THAN STRINGTYPE . GREATER_THAN VARIABLE ASSIGNATION NEW LIST SMALLER_THAN STRINGTYPE GREATER_THAN LPARENT RPARENT LKEY VARIABLE RKEY
+
+    GREATER_THAN    shift and go to state 77
+
+
+state 70
+
+    (76) list_empty -> LIST SMALLER_THAN INTTYPE . GREATER_THAN VARIABLE ASSIGNATION NEW LIST SMALLER_THAN INTTYPE GREATER_THAN LPARENT RPARENT DOTANDCOMMA
+    (78) list_full -> LIST SMALLER_THAN INTTYPE . GREATER_THAN VARIABLE ASSIGNATION NEW LIST SMALLER_THAN INTTYPE GREATER_THAN LPARENT RPARENT LKEY VARIABLE RKEY
+
+    GREATER_THAN    shift and go to state 78
+
+
+state 71
 
     (47) try_catch_simply -> TRY LKEY block_code . RKEY CATCH LPARENT EXCEPTION VARIABLE RPARENT LKEY block_code RKEY
     (48) try_catch_finally -> TRY LKEY block_code . RKEY CATCH LPARENT EXCEPTION VARIABLE RPARENT LKEY block_code RKEY FINALLY LKEY block_code RKEY
 
-    RKEY            shift and go to state 76
+    RKEY            shift and go to state 79
 
 
-state 70
+state 72
 
     (56) concatenation -> STRING PLUS . concatenation
     (55) concatenation -> . STRING
     (56) concatenation -> . STRING PLUS concatenation
 
-    STRING          shift and go to state 77
+    STRING          shift and go to state 80
 
-    concatenation                  shift and go to state 78
+    concatenation                  shift and go to state 81
 
-state 71
+state 73
 
     (38) value_string -> READ LPARENT . RPARENT
 
-    RPARENT         shift and go to state 79
+    RPARENT         shift and go to state 82
 
 
-state 72
+state 74
 
     (14) constant_assignation -> CONST data_type assignation_key_value COMMA . some_assignation_constant
     (23) some_assignation_constant -> . assignation_key_value DOTANDCOMMA
     (24) some_assignation_constant -> . assignation_key_value COMMA some_assignation_constant
     (25) assignation_key_value -> . VARIABLE ASSIGNATION value
 
-    VARIABLE        shift and go to state 42
+    VARIABLE        shift and go to state 43
 
-    assignation_key_value          shift and go to state 80
-    some_assignation_constant      shift and go to state 81
+    assignation_key_value          shift and go to state 83
+    some_assignation_constant      shift and go to state 84
 
-state 73
+state 75
 
     (18) assignation_with_datatype -> data_type assignation_key_value DOTANDCOMMA assignation_with_datatype .
 
     RKEY            reduce using rule 18 (assignation_with_datatype -> data_type assignation_key_value DOTANDCOMMA assignation_with_datatype .)
 
 
-state 74
+state 76
 
     (19) assignation_with_datatype -> data_type assignation_key_value DOTANDCOMMA assignation_without_datatype .
 
     RKEY            reduce using rule 19 (assignation_with_datatype -> data_type assignation_key_value DOTANDCOMMA assignation_without_datatype .)
 
 
-state 75
+state 77
 
-    (74) list -> LIST SMALLER_THAN data_type GREATER_THAN . VARIABLE ASSIGNATION NEW LIST SMALLER_THAN data_type GREATER_THAN LPARENT RPARENT DOTANDCOMMA
+    (75) list_empty -> LIST SMALLER_THAN STRINGTYPE GREATER_THAN . VARIABLE ASSIGNATION NEW LIST SMALLER_THAN STRINGTYPE GREATER_THAN LPARENT RPARENT DOTANDCOMMA
+    (77) list_full -> LIST SMALLER_THAN STRINGTYPE GREATER_THAN . VARIABLE ASSIGNATION NEW LIST SMALLER_THAN STRINGTYPE GREATER_THAN LPARENT RPARENT LKEY VARIABLE RKEY
 
-    VARIABLE        shift and go to state 82
+    VARIABLE        shift and go to state 85
 
 
-state 76
+state 78
+
+    (76) list_empty -> LIST SMALLER_THAN INTTYPE GREATER_THAN . VARIABLE ASSIGNATION NEW LIST SMALLER_THAN INTTYPE GREATER_THAN LPARENT RPARENT DOTANDCOMMA
+    (78) list_full -> LIST SMALLER_THAN INTTYPE GREATER_THAN . VARIABLE ASSIGNATION NEW LIST SMALLER_THAN INTTYPE GREATER_THAN LPARENT RPARENT LKEY VARIABLE RKEY
+
+    VARIABLE        shift and go to state 86
+
+
+state 79
 
     (47) try_catch_simply -> TRY LKEY block_code RKEY . CATCH LPARENT EXCEPTION VARIABLE RPARENT LKEY block_code RKEY
     (48) try_catch_finally -> TRY LKEY block_code RKEY . CATCH LPARENT EXCEPTION VARIABLE RPARENT LKEY block_code RKEY FINALLY LKEY block_code RKEY
 
-    CATCH           shift and go to state 83
+    CATCH           shift and go to state 87
 
 
-state 77
+state 80
 
     (55) concatenation -> STRING .
     (56) concatenation -> STRING . PLUS concatenation
 
     DOTANDCOMMA     reduce using rule 55 (concatenation -> STRING .)
     COMMA           reduce using rule 55 (concatenation -> STRING .)
-    PLUS            shift and go to state 70
+    PLUS            shift and go to state 72
 
 
-state 78
+state 81
 
     (56) concatenation -> STRING PLUS concatenation .
 
@@ -1157,7 +1186,7 @@ state 78
     COMMA           reduce using rule 56 (concatenation -> STRING PLUS concatenation .)
 
 
-state 79
+state 82
 
     (38) value_string -> READ LPARENT RPARENT .
 
@@ -1165,143 +1194,185 @@ state 79
     COMMA           reduce using rule 38 (value_string -> READ LPARENT RPARENT .)
 
 
-state 80
+state 83
 
     (23) some_assignation_constant -> assignation_key_value . DOTANDCOMMA
     (24) some_assignation_constant -> assignation_key_value . COMMA some_assignation_constant
 
-    DOTANDCOMMA     shift and go to state 84
-    COMMA           shift and go to state 85
+    DOTANDCOMMA     shift and go to state 88
+    COMMA           shift and go to state 89
 
 
-state 81
+state 84
 
     (14) constant_assignation -> CONST data_type assignation_key_value COMMA some_assignation_constant .
 
     RKEY            reduce using rule 14 (constant_assignation -> CONST data_type assignation_key_value COMMA some_assignation_constant .)
 
 
-state 82
+state 85
 
-    (74) list -> LIST SMALLER_THAN data_type GREATER_THAN VARIABLE . ASSIGNATION NEW LIST SMALLER_THAN data_type GREATER_THAN LPARENT RPARENT DOTANDCOMMA
+    (75) list_empty -> LIST SMALLER_THAN STRINGTYPE GREATER_THAN VARIABLE . ASSIGNATION NEW LIST SMALLER_THAN STRINGTYPE GREATER_THAN LPARENT RPARENT DOTANDCOMMA
+    (77) list_full -> LIST SMALLER_THAN STRINGTYPE GREATER_THAN VARIABLE . ASSIGNATION NEW LIST SMALLER_THAN STRINGTYPE GREATER_THAN LPARENT RPARENT LKEY VARIABLE RKEY
 
-    ASSIGNATION     shift and go to state 86
+    ASSIGNATION     shift and go to state 90
 
 
-state 83
+state 86
+
+    (76) list_empty -> LIST SMALLER_THAN INTTYPE GREATER_THAN VARIABLE . ASSIGNATION NEW LIST SMALLER_THAN INTTYPE GREATER_THAN LPARENT RPARENT DOTANDCOMMA
+    (78) list_full -> LIST SMALLER_THAN INTTYPE GREATER_THAN VARIABLE . ASSIGNATION NEW LIST SMALLER_THAN INTTYPE GREATER_THAN LPARENT RPARENT LKEY VARIABLE RKEY
+
+    ASSIGNATION     shift and go to state 91
+
+
+state 87
 
     (47) try_catch_simply -> TRY LKEY block_code RKEY CATCH . LPARENT EXCEPTION VARIABLE RPARENT LKEY block_code RKEY
     (48) try_catch_finally -> TRY LKEY block_code RKEY CATCH . LPARENT EXCEPTION VARIABLE RPARENT LKEY block_code RKEY FINALLY LKEY block_code RKEY
 
-    LPARENT         shift and go to state 87
+    LPARENT         shift and go to state 92
 
 
-state 84
+state 88
 
     (23) some_assignation_constant -> assignation_key_value DOTANDCOMMA .
 
     RKEY            reduce using rule 23 (some_assignation_constant -> assignation_key_value DOTANDCOMMA .)
 
 
-state 85
+state 89
 
     (24) some_assignation_constant -> assignation_key_value COMMA . some_assignation_constant
     (23) some_assignation_constant -> . assignation_key_value DOTANDCOMMA
     (24) some_assignation_constant -> . assignation_key_value COMMA some_assignation_constant
     (25) assignation_key_value -> . VARIABLE ASSIGNATION value
 
-    VARIABLE        shift and go to state 42
+    VARIABLE        shift and go to state 43
 
-    assignation_key_value          shift and go to state 80
-    some_assignation_constant      shift and go to state 88
+    assignation_key_value          shift and go to state 83
+    some_assignation_constant      shift and go to state 93
 
-state 86
+state 90
 
-    (74) list -> LIST SMALLER_THAN data_type GREATER_THAN VARIABLE ASSIGNATION . NEW LIST SMALLER_THAN data_type GREATER_THAN LPARENT RPARENT DOTANDCOMMA
+    (75) list_empty -> LIST SMALLER_THAN STRINGTYPE GREATER_THAN VARIABLE ASSIGNATION . NEW LIST SMALLER_THAN STRINGTYPE GREATER_THAN LPARENT RPARENT DOTANDCOMMA
+    (77) list_full -> LIST SMALLER_THAN STRINGTYPE GREATER_THAN VARIABLE ASSIGNATION . NEW LIST SMALLER_THAN STRINGTYPE GREATER_THAN LPARENT RPARENT LKEY VARIABLE RKEY
 
-    NEW             shift and go to state 89
+    NEW             shift and go to state 94
 
 
-state 87
+state 91
+
+    (76) list_empty -> LIST SMALLER_THAN INTTYPE GREATER_THAN VARIABLE ASSIGNATION . NEW LIST SMALLER_THAN INTTYPE GREATER_THAN LPARENT RPARENT DOTANDCOMMA
+    (78) list_full -> LIST SMALLER_THAN INTTYPE GREATER_THAN VARIABLE ASSIGNATION . NEW LIST SMALLER_THAN INTTYPE GREATER_THAN LPARENT RPARENT LKEY VARIABLE RKEY
+
+    NEW             shift and go to state 95
+
+
+state 92
 
     (47) try_catch_simply -> TRY LKEY block_code RKEY CATCH LPARENT . EXCEPTION VARIABLE RPARENT LKEY block_code RKEY
     (48) try_catch_finally -> TRY LKEY block_code RKEY CATCH LPARENT . EXCEPTION VARIABLE RPARENT LKEY block_code RKEY FINALLY LKEY block_code RKEY
 
-    EXCEPTION       shift and go to state 90
+    EXCEPTION       shift and go to state 96
 
 
-state 88
+state 93
 
     (24) some_assignation_constant -> assignation_key_value COMMA some_assignation_constant .
 
     RKEY            reduce using rule 24 (some_assignation_constant -> assignation_key_value COMMA some_assignation_constant .)
 
 
-state 89
-
-    (74) list -> LIST SMALLER_THAN data_type GREATER_THAN VARIABLE ASSIGNATION NEW . LIST SMALLER_THAN data_type GREATER_THAN LPARENT RPARENT DOTANDCOMMA
-
-    LIST            shift and go to state 91
-
-
-state 90
-
-    (47) try_catch_simply -> TRY LKEY block_code RKEY CATCH LPARENT EXCEPTION . VARIABLE RPARENT LKEY block_code RKEY
-    (48) try_catch_finally -> TRY LKEY block_code RKEY CATCH LPARENT EXCEPTION . VARIABLE RPARENT LKEY block_code RKEY FINALLY LKEY block_code RKEY
-
-    VARIABLE        shift and go to state 92
-
-
-state 91
-
-    (74) list -> LIST SMALLER_THAN data_type GREATER_THAN VARIABLE ASSIGNATION NEW LIST . SMALLER_THAN data_type GREATER_THAN LPARENT RPARENT DOTANDCOMMA
-
-    SMALLER_THAN    shift and go to state 93
-
-
-state 92
-
-    (47) try_catch_simply -> TRY LKEY block_code RKEY CATCH LPARENT EXCEPTION VARIABLE . RPARENT LKEY block_code RKEY
-    (48) try_catch_finally -> TRY LKEY block_code RKEY CATCH LPARENT EXCEPTION VARIABLE . RPARENT LKEY block_code RKEY FINALLY LKEY block_code RKEY
-
-    RPARENT         shift and go to state 94
-
-
-state 93
-
-    (74) list -> LIST SMALLER_THAN data_type GREATER_THAN VARIABLE ASSIGNATION NEW LIST SMALLER_THAN . data_type GREATER_THAN LPARENT RPARENT DOTANDCOMMA
-    (26) data_type -> . CHARTYPE
-    (27) data_type -> . STRINGTYPE
-    (28) data_type -> . FLOATTYPE
-    (29) data_type -> . DECIMALTYPE
-    (30) data_type -> . INTTYPE
-    (31) data_type -> . BOOLTYPE
-
-    CHARTYPE        shift and go to state 32
-    STRINGTYPE      shift and go to state 33
-    FLOATTYPE       shift and go to state 34
-    DECIMALTYPE     shift and go to state 35
-    INTTYPE         shift and go to state 36
-    BOOLTYPE        shift and go to state 37
-
-    data_type                      shift and go to state 95
-
 state 94
 
-    (47) try_catch_simply -> TRY LKEY block_code RKEY CATCH LPARENT EXCEPTION VARIABLE RPARENT . LKEY block_code RKEY
-    (48) try_catch_finally -> TRY LKEY block_code RKEY CATCH LPARENT EXCEPTION VARIABLE RPARENT . LKEY block_code RKEY FINALLY LKEY block_code RKEY
+    (75) list_empty -> LIST SMALLER_THAN STRINGTYPE GREATER_THAN VARIABLE ASSIGNATION NEW . LIST SMALLER_THAN STRINGTYPE GREATER_THAN LPARENT RPARENT DOTANDCOMMA
+    (77) list_full -> LIST SMALLER_THAN STRINGTYPE GREATER_THAN VARIABLE ASSIGNATION NEW . LIST SMALLER_THAN STRINGTYPE GREATER_THAN LPARENT RPARENT LKEY VARIABLE RKEY
 
-    LKEY            shift and go to state 96
+    LIST            shift and go to state 97
 
 
 state 95
 
-    (74) list -> LIST SMALLER_THAN data_type GREATER_THAN VARIABLE ASSIGNATION NEW LIST SMALLER_THAN data_type . GREATER_THAN LPARENT RPARENT DOTANDCOMMA
+    (76) list_empty -> LIST SMALLER_THAN INTTYPE GREATER_THAN VARIABLE ASSIGNATION NEW . LIST SMALLER_THAN INTTYPE GREATER_THAN LPARENT RPARENT DOTANDCOMMA
+    (78) list_full -> LIST SMALLER_THAN INTTYPE GREATER_THAN VARIABLE ASSIGNATION NEW . LIST SMALLER_THAN INTTYPE GREATER_THAN LPARENT RPARENT LKEY VARIABLE RKEY
 
-    GREATER_THAN    shift and go to state 97
+    LIST            shift and go to state 98
 
 
 state 96
+
+    (47) try_catch_simply -> TRY LKEY block_code RKEY CATCH LPARENT EXCEPTION . VARIABLE RPARENT LKEY block_code RKEY
+    (48) try_catch_finally -> TRY LKEY block_code RKEY CATCH LPARENT EXCEPTION . VARIABLE RPARENT LKEY block_code RKEY FINALLY LKEY block_code RKEY
+
+    VARIABLE        shift and go to state 99
+
+
+state 97
+
+    (75) list_empty -> LIST SMALLER_THAN STRINGTYPE GREATER_THAN VARIABLE ASSIGNATION NEW LIST . SMALLER_THAN STRINGTYPE GREATER_THAN LPARENT RPARENT DOTANDCOMMA
+    (77) list_full -> LIST SMALLER_THAN STRINGTYPE GREATER_THAN VARIABLE ASSIGNATION NEW LIST . SMALLER_THAN STRINGTYPE GREATER_THAN LPARENT RPARENT LKEY VARIABLE RKEY
+
+    SMALLER_THAN    shift and go to state 100
+
+
+state 98
+
+    (76) list_empty -> LIST SMALLER_THAN INTTYPE GREATER_THAN VARIABLE ASSIGNATION NEW LIST . SMALLER_THAN INTTYPE GREATER_THAN LPARENT RPARENT DOTANDCOMMA
+    (78) list_full -> LIST SMALLER_THAN INTTYPE GREATER_THAN VARIABLE ASSIGNATION NEW LIST . SMALLER_THAN INTTYPE GREATER_THAN LPARENT RPARENT LKEY VARIABLE RKEY
+
+    SMALLER_THAN    shift and go to state 101
+
+
+state 99
+
+    (47) try_catch_simply -> TRY LKEY block_code RKEY CATCH LPARENT EXCEPTION VARIABLE . RPARENT LKEY block_code RKEY
+    (48) try_catch_finally -> TRY LKEY block_code RKEY CATCH LPARENT EXCEPTION VARIABLE . RPARENT LKEY block_code RKEY FINALLY LKEY block_code RKEY
+
+    RPARENT         shift and go to state 102
+
+
+state 100
+
+    (75) list_empty -> LIST SMALLER_THAN STRINGTYPE GREATER_THAN VARIABLE ASSIGNATION NEW LIST SMALLER_THAN . STRINGTYPE GREATER_THAN LPARENT RPARENT DOTANDCOMMA
+    (77) list_full -> LIST SMALLER_THAN STRINGTYPE GREATER_THAN VARIABLE ASSIGNATION NEW LIST SMALLER_THAN . STRINGTYPE GREATER_THAN LPARENT RPARENT LKEY VARIABLE RKEY
+
+    STRINGTYPE      shift and go to state 103
+
+
+state 101
+
+    (76) list_empty -> LIST SMALLER_THAN INTTYPE GREATER_THAN VARIABLE ASSIGNATION NEW LIST SMALLER_THAN . INTTYPE GREATER_THAN LPARENT RPARENT DOTANDCOMMA
+    (78) list_full -> LIST SMALLER_THAN INTTYPE GREATER_THAN VARIABLE ASSIGNATION NEW LIST SMALLER_THAN . INTTYPE GREATER_THAN LPARENT RPARENT LKEY VARIABLE RKEY
+
+    INTTYPE         shift and go to state 104
+
+
+state 102
+
+    (47) try_catch_simply -> TRY LKEY block_code RKEY CATCH LPARENT EXCEPTION VARIABLE RPARENT . LKEY block_code RKEY
+    (48) try_catch_finally -> TRY LKEY block_code RKEY CATCH LPARENT EXCEPTION VARIABLE RPARENT . LKEY block_code RKEY FINALLY LKEY block_code RKEY
+
+    LKEY            shift and go to state 105
+
+
+state 103
+
+    (75) list_empty -> LIST SMALLER_THAN STRINGTYPE GREATER_THAN VARIABLE ASSIGNATION NEW LIST SMALLER_THAN STRINGTYPE . GREATER_THAN LPARENT RPARENT DOTANDCOMMA
+    (77) list_full -> LIST SMALLER_THAN STRINGTYPE GREATER_THAN VARIABLE ASSIGNATION NEW LIST SMALLER_THAN STRINGTYPE . GREATER_THAN LPARENT RPARENT LKEY VARIABLE RKEY
+
+    GREATER_THAN    shift and go to state 106
+
+
+state 104
+
+    (76) list_empty -> LIST SMALLER_THAN INTTYPE GREATER_THAN VARIABLE ASSIGNATION NEW LIST SMALLER_THAN INTTYPE . GREATER_THAN LPARENT RPARENT DOTANDCOMMA
+    (78) list_full -> LIST SMALLER_THAN INTTYPE GREATER_THAN VARIABLE ASSIGNATION NEW LIST SMALLER_THAN INTTYPE . GREATER_THAN LPARENT RPARENT LKEY VARIABLE RKEY
+
+    GREATER_THAN    shift and go to state 107
+
+
+state 105
 
     (47) try_catch_simply -> TRY LKEY block_code RKEY CATCH LPARENT EXCEPTION VARIABLE RPARENT LKEY . block_code RKEY
     (48) try_catch_finally -> TRY LKEY block_code RKEY CATCH LPARENT EXCEPTION VARIABLE RPARENT LKEY . block_code RKEY FINALLY LKEY block_code RKEY
@@ -1311,7 +1382,8 @@ state 96
     (7) block_code -> . VARIABLE
     (8) def_const_or_var -> . constant_assignation
     (9) def_const_or_var -> . variable_assignation
-    (73) estruct_of_data -> . list
+    (73) estruct_of_data -> . list_empty
+    (74) estruct_of_data -> . list_full
     (45) block_try_catch -> . try_catch_simply
     (46) block_try_catch -> . try_catch_finally
     (12) constant_assignation -> . access_modifiers CONST all_asignations
@@ -1319,7 +1391,10 @@ state 96
     (14) constant_assignation -> . CONST data_type assignation_key_value COMMA some_assignation_constant
     (10) variable_assignation -> . access_modifiers all_asignations
     (11) variable_assignation -> . all_asignations
-    (74) list -> . LIST SMALLER_THAN data_type GREATER_THAN VARIABLE ASSIGNATION NEW LIST SMALLER_THAN data_type GREATER_THAN LPARENT RPARENT DOTANDCOMMA
+    (75) list_empty -> . LIST SMALLER_THAN STRINGTYPE GREATER_THAN VARIABLE ASSIGNATION NEW LIST SMALLER_THAN STRINGTYPE GREATER_THAN LPARENT RPARENT DOTANDCOMMA
+    (76) list_empty -> . LIST SMALLER_THAN INTTYPE GREATER_THAN VARIABLE ASSIGNATION NEW LIST SMALLER_THAN INTTYPE GREATER_THAN LPARENT RPARENT DOTANDCOMMA
+    (77) list_full -> . LIST SMALLER_THAN STRINGTYPE GREATER_THAN VARIABLE ASSIGNATION NEW LIST SMALLER_THAN STRINGTYPE GREATER_THAN LPARENT RPARENT LKEY VARIABLE RKEY
+    (78) list_full -> . LIST SMALLER_THAN INTTYPE GREATER_THAN VARIABLE ASSIGNATION NEW LIST SMALLER_THAN INTTYPE GREATER_THAN LPARENT RPARENT LKEY VARIABLE RKEY
     (47) try_catch_simply -> . TRY LKEY block_code RKEY CATCH LPARENT EXCEPTION VARIABLE RPARENT LKEY block_code RKEY
     (48) try_catch_finally -> . TRY LKEY block_code RKEY CATCH LPARENT EXCEPTION VARIABLE RPARENT LKEY block_code RKEY FINALLY LKEY block_code RKEY
     (49) access_modifiers -> . PUBLIC
@@ -1341,87 +1416,138 @@ state 96
     (25) assignation_key_value -> . VARIABLE ASSIGNATION value
 
     VARIABLE        shift and go to state 12
-    CONST           shift and go to state 23
-    LIST            shift and go to state 27
-    TRY             shift and go to state 28
+    CONST           shift and go to state 24
+    LIST            shift and go to state 28
+    TRY             shift and go to state 31
     PUBLIC          shift and go to state 11
-    PRIVATE         shift and go to state 29
-    CHARTYPE        shift and go to state 32
-    STRINGTYPE      shift and go to state 33
-    FLOATTYPE       shift and go to state 34
-    DECIMALTYPE     shift and go to state 35
-    INTTYPE         shift and go to state 36
-    BOOLTYPE        shift and go to state 37
+    PRIVATE         shift and go to state 32
+    CHARTYPE        shift and go to state 35
+    STRINGTYPE      shift and go to state 29
+    FLOATTYPE       shift and go to state 36
+    DECIMALTYPE     shift and go to state 37
+    INTTYPE         shift and go to state 30
+    BOOLTYPE        shift and go to state 38
 
-    block_code                     shift and go to state 98
+    block_code                     shift and go to state 108
     def_const_or_var               shift and go to state 14
     estruct_of_data                shift and go to state 15
     block_try_catch                shift and go to state 16
     constant_assignation           shift and go to state 17
     variable_assignation           shift and go to state 18
-    list                           shift and go to state 19
-    try_catch_simply               shift and go to state 20
-    try_catch_finally              shift and go to state 21
-    access_modifiers               shift and go to state 22
-    all_asignations                shift and go to state 24
-    data_type                      shift and go to state 25
-    assignation_key_value          shift and go to state 26
-    assignation_with_datatype      shift and go to state 30
-    assignation_without_datatype   shift and go to state 31
+    list_empty                     shift and go to state 19
+    list_full                      shift and go to state 20
+    try_catch_simply               shift and go to state 21
+    try_catch_finally              shift and go to state 22
+    access_modifiers               shift and go to state 23
+    all_asignations                shift and go to state 25
+    data_type                      shift and go to state 26
+    assignation_key_value          shift and go to state 27
+    assignation_with_datatype      shift and go to state 33
+    assignation_without_datatype   shift and go to state 34
 
-state 97
+state 106
 
-    (74) list -> LIST SMALLER_THAN data_type GREATER_THAN VARIABLE ASSIGNATION NEW LIST SMALLER_THAN data_type GREATER_THAN . LPARENT RPARENT DOTANDCOMMA
+    (75) list_empty -> LIST SMALLER_THAN STRINGTYPE GREATER_THAN VARIABLE ASSIGNATION NEW LIST SMALLER_THAN STRINGTYPE GREATER_THAN . LPARENT RPARENT DOTANDCOMMA
+    (77) list_full -> LIST SMALLER_THAN STRINGTYPE GREATER_THAN VARIABLE ASSIGNATION NEW LIST SMALLER_THAN STRINGTYPE GREATER_THAN . LPARENT RPARENT LKEY VARIABLE RKEY
 
-    LPARENT         shift and go to state 99
+    LPARENT         shift and go to state 109
 
 
-state 98
+state 107
+
+    (76) list_empty -> LIST SMALLER_THAN INTTYPE GREATER_THAN VARIABLE ASSIGNATION NEW LIST SMALLER_THAN INTTYPE GREATER_THAN . LPARENT RPARENT DOTANDCOMMA
+    (78) list_full -> LIST SMALLER_THAN INTTYPE GREATER_THAN VARIABLE ASSIGNATION NEW LIST SMALLER_THAN INTTYPE GREATER_THAN . LPARENT RPARENT LKEY VARIABLE RKEY
+
+    LPARENT         shift and go to state 110
+
+
+state 108
 
     (47) try_catch_simply -> TRY LKEY block_code RKEY CATCH LPARENT EXCEPTION VARIABLE RPARENT LKEY block_code . RKEY
     (48) try_catch_finally -> TRY LKEY block_code RKEY CATCH LPARENT EXCEPTION VARIABLE RPARENT LKEY block_code . RKEY FINALLY LKEY block_code RKEY
 
-    RKEY            shift and go to state 100
+    RKEY            shift and go to state 111
 
 
-state 99
+state 109
 
-    (74) list -> LIST SMALLER_THAN data_type GREATER_THAN VARIABLE ASSIGNATION NEW LIST SMALLER_THAN data_type GREATER_THAN LPARENT . RPARENT DOTANDCOMMA
+    (75) list_empty -> LIST SMALLER_THAN STRINGTYPE GREATER_THAN VARIABLE ASSIGNATION NEW LIST SMALLER_THAN STRINGTYPE GREATER_THAN LPARENT . RPARENT DOTANDCOMMA
+    (77) list_full -> LIST SMALLER_THAN STRINGTYPE GREATER_THAN VARIABLE ASSIGNATION NEW LIST SMALLER_THAN STRINGTYPE GREATER_THAN LPARENT . RPARENT LKEY VARIABLE RKEY
 
-    RPARENT         shift and go to state 101
+    RPARENT         shift and go to state 112
 
 
-state 100
+state 110
+
+    (76) list_empty -> LIST SMALLER_THAN INTTYPE GREATER_THAN VARIABLE ASSIGNATION NEW LIST SMALLER_THAN INTTYPE GREATER_THAN LPARENT . RPARENT DOTANDCOMMA
+    (78) list_full -> LIST SMALLER_THAN INTTYPE GREATER_THAN VARIABLE ASSIGNATION NEW LIST SMALLER_THAN INTTYPE GREATER_THAN LPARENT . RPARENT LKEY VARIABLE RKEY
+
+    RPARENT         shift and go to state 113
+
+
+state 111
 
     (47) try_catch_simply -> TRY LKEY block_code RKEY CATCH LPARENT EXCEPTION VARIABLE RPARENT LKEY block_code RKEY .
     (48) try_catch_finally -> TRY LKEY block_code RKEY CATCH LPARENT EXCEPTION VARIABLE RPARENT LKEY block_code RKEY . FINALLY LKEY block_code RKEY
 
     RKEY            reduce using rule 47 (try_catch_simply -> TRY LKEY block_code RKEY CATCH LPARENT EXCEPTION VARIABLE RPARENT LKEY block_code RKEY .)
-    FINALLY         shift and go to state 102
+    FINALLY         shift and go to state 114
 
 
-state 101
+state 112
 
-    (74) list -> LIST SMALLER_THAN data_type GREATER_THAN VARIABLE ASSIGNATION NEW LIST SMALLER_THAN data_type GREATER_THAN LPARENT RPARENT . DOTANDCOMMA
+    (75) list_empty -> LIST SMALLER_THAN STRINGTYPE GREATER_THAN VARIABLE ASSIGNATION NEW LIST SMALLER_THAN STRINGTYPE GREATER_THAN LPARENT RPARENT . DOTANDCOMMA
+    (77) list_full -> LIST SMALLER_THAN STRINGTYPE GREATER_THAN VARIABLE ASSIGNATION NEW LIST SMALLER_THAN STRINGTYPE GREATER_THAN LPARENT RPARENT . LKEY VARIABLE RKEY
 
-    DOTANDCOMMA     shift and go to state 103
+    DOTANDCOMMA     shift and go to state 115
+    LKEY            shift and go to state 116
 
 
-state 102
+state 113
+
+    (76) list_empty -> LIST SMALLER_THAN INTTYPE GREATER_THAN VARIABLE ASSIGNATION NEW LIST SMALLER_THAN INTTYPE GREATER_THAN LPARENT RPARENT . DOTANDCOMMA
+    (78) list_full -> LIST SMALLER_THAN INTTYPE GREATER_THAN VARIABLE ASSIGNATION NEW LIST SMALLER_THAN INTTYPE GREATER_THAN LPARENT RPARENT . LKEY VARIABLE RKEY
+
+    DOTANDCOMMA     shift and go to state 117
+    LKEY            shift and go to state 118
+
+
+state 114
 
     (48) try_catch_finally -> TRY LKEY block_code RKEY CATCH LPARENT EXCEPTION VARIABLE RPARENT LKEY block_code RKEY FINALLY . LKEY block_code RKEY
 
-    LKEY            shift and go to state 104
+    LKEY            shift and go to state 119
 
 
-state 103
+state 115
 
-    (74) list -> LIST SMALLER_THAN data_type GREATER_THAN VARIABLE ASSIGNATION NEW LIST SMALLER_THAN data_type GREATER_THAN LPARENT RPARENT DOTANDCOMMA .
+    (75) list_empty -> LIST SMALLER_THAN STRINGTYPE GREATER_THAN VARIABLE ASSIGNATION NEW LIST SMALLER_THAN STRINGTYPE GREATER_THAN LPARENT RPARENT DOTANDCOMMA .
 
-    RKEY            reduce using rule 74 (list -> LIST SMALLER_THAN data_type GREATER_THAN VARIABLE ASSIGNATION NEW LIST SMALLER_THAN data_type GREATER_THAN LPARENT RPARENT DOTANDCOMMA .)
+    RKEY            reduce using rule 75 (list_empty -> LIST SMALLER_THAN STRINGTYPE GREATER_THAN VARIABLE ASSIGNATION NEW LIST SMALLER_THAN STRINGTYPE GREATER_THAN LPARENT RPARENT DOTANDCOMMA .)
 
 
-state 104
+state 116
+
+    (77) list_full -> LIST SMALLER_THAN STRINGTYPE GREATER_THAN VARIABLE ASSIGNATION NEW LIST SMALLER_THAN STRINGTYPE GREATER_THAN LPARENT RPARENT LKEY . VARIABLE RKEY
+
+    VARIABLE        shift and go to state 120
+
+
+state 117
+
+    (76) list_empty -> LIST SMALLER_THAN INTTYPE GREATER_THAN VARIABLE ASSIGNATION NEW LIST SMALLER_THAN INTTYPE GREATER_THAN LPARENT RPARENT DOTANDCOMMA .
+
+    RKEY            reduce using rule 76 (list_empty -> LIST SMALLER_THAN INTTYPE GREATER_THAN VARIABLE ASSIGNATION NEW LIST SMALLER_THAN INTTYPE GREATER_THAN LPARENT RPARENT DOTANDCOMMA .)
+
+
+state 118
+
+    (78) list_full -> LIST SMALLER_THAN INTTYPE GREATER_THAN VARIABLE ASSIGNATION NEW LIST SMALLER_THAN INTTYPE GREATER_THAN LPARENT RPARENT LKEY . VARIABLE RKEY
+
+    VARIABLE        shift and go to state 121
+
+
+state 119
 
     (48) try_catch_finally -> TRY LKEY block_code RKEY CATCH LPARENT EXCEPTION VARIABLE RPARENT LKEY block_code RKEY FINALLY LKEY . block_code RKEY
     (4) block_code -> . def_const_or_var
@@ -1430,7 +1556,8 @@ state 104
     (7) block_code -> . VARIABLE
     (8) def_const_or_var -> . constant_assignation
     (9) def_const_or_var -> . variable_assignation
-    (73) estruct_of_data -> . list
+    (73) estruct_of_data -> . list_empty
+    (74) estruct_of_data -> . list_full
     (45) block_try_catch -> . try_catch_simply
     (46) block_try_catch -> . try_catch_finally
     (12) constant_assignation -> . access_modifiers CONST all_asignations
@@ -1438,7 +1565,10 @@ state 104
     (14) constant_assignation -> . CONST data_type assignation_key_value COMMA some_assignation_constant
     (10) variable_assignation -> . access_modifiers all_asignations
     (11) variable_assignation -> . all_asignations
-    (74) list -> . LIST SMALLER_THAN data_type GREATER_THAN VARIABLE ASSIGNATION NEW LIST SMALLER_THAN data_type GREATER_THAN LPARENT RPARENT DOTANDCOMMA
+    (75) list_empty -> . LIST SMALLER_THAN STRINGTYPE GREATER_THAN VARIABLE ASSIGNATION NEW LIST SMALLER_THAN STRINGTYPE GREATER_THAN LPARENT RPARENT DOTANDCOMMA
+    (76) list_empty -> . LIST SMALLER_THAN INTTYPE GREATER_THAN VARIABLE ASSIGNATION NEW LIST SMALLER_THAN INTTYPE GREATER_THAN LPARENT RPARENT DOTANDCOMMA
+    (77) list_full -> . LIST SMALLER_THAN STRINGTYPE GREATER_THAN VARIABLE ASSIGNATION NEW LIST SMALLER_THAN STRINGTYPE GREATER_THAN LPARENT RPARENT LKEY VARIABLE RKEY
+    (78) list_full -> . LIST SMALLER_THAN INTTYPE GREATER_THAN VARIABLE ASSIGNATION NEW LIST SMALLER_THAN INTTYPE GREATER_THAN LPARENT RPARENT LKEY VARIABLE RKEY
     (47) try_catch_simply -> . TRY LKEY block_code RKEY CATCH LPARENT EXCEPTION VARIABLE RPARENT LKEY block_code RKEY
     (48) try_catch_finally -> . TRY LKEY block_code RKEY CATCH LPARENT EXCEPTION VARIABLE RPARENT LKEY block_code RKEY FINALLY LKEY block_code RKEY
     (49) access_modifiers -> . PUBLIC
@@ -1460,42 +1590,71 @@ state 104
     (25) assignation_key_value -> . VARIABLE ASSIGNATION value
 
     VARIABLE        shift and go to state 12
-    CONST           shift and go to state 23
-    LIST            shift and go to state 27
-    TRY             shift and go to state 28
+    CONST           shift and go to state 24
+    LIST            shift and go to state 28
+    TRY             shift and go to state 31
     PUBLIC          shift and go to state 11
-    PRIVATE         shift and go to state 29
-    CHARTYPE        shift and go to state 32
-    STRINGTYPE      shift and go to state 33
-    FLOATTYPE       shift and go to state 34
-    DECIMALTYPE     shift and go to state 35
-    INTTYPE         shift and go to state 36
-    BOOLTYPE        shift and go to state 37
+    PRIVATE         shift and go to state 32
+    CHARTYPE        shift and go to state 35
+    STRINGTYPE      shift and go to state 29
+    FLOATTYPE       shift and go to state 36
+    DECIMALTYPE     shift and go to state 37
+    INTTYPE         shift and go to state 30
+    BOOLTYPE        shift and go to state 38
 
-    block_code                     shift and go to state 105
+    block_code                     shift and go to state 122
     def_const_or_var               shift and go to state 14
     estruct_of_data                shift and go to state 15
     block_try_catch                shift and go to state 16
     constant_assignation           shift and go to state 17
     variable_assignation           shift and go to state 18
-    list                           shift and go to state 19
-    try_catch_simply               shift and go to state 20
-    try_catch_finally              shift and go to state 21
-    access_modifiers               shift and go to state 22
-    all_asignations                shift and go to state 24
-    data_type                      shift and go to state 25
-    assignation_key_value          shift and go to state 26
-    assignation_with_datatype      shift and go to state 30
-    assignation_without_datatype   shift and go to state 31
+    list_empty                     shift and go to state 19
+    list_full                      shift and go to state 20
+    try_catch_simply               shift and go to state 21
+    try_catch_finally              shift and go to state 22
+    access_modifiers               shift and go to state 23
+    all_asignations                shift and go to state 25
+    data_type                      shift and go to state 26
+    assignation_key_value          shift and go to state 27
+    assignation_with_datatype      shift and go to state 33
+    assignation_without_datatype   shift and go to state 34
 
-state 105
+state 120
+
+    (77) list_full -> LIST SMALLER_THAN STRINGTYPE GREATER_THAN VARIABLE ASSIGNATION NEW LIST SMALLER_THAN STRINGTYPE GREATER_THAN LPARENT RPARENT LKEY VARIABLE . RKEY
+
+    RKEY            shift and go to state 123
+
+
+state 121
+
+    (78) list_full -> LIST SMALLER_THAN INTTYPE GREATER_THAN VARIABLE ASSIGNATION NEW LIST SMALLER_THAN INTTYPE GREATER_THAN LPARENT RPARENT LKEY VARIABLE . RKEY
+
+    RKEY            shift and go to state 124
+
+
+state 122
 
     (48) try_catch_finally -> TRY LKEY block_code RKEY CATCH LPARENT EXCEPTION VARIABLE RPARENT LKEY block_code RKEY FINALLY LKEY block_code . RKEY
 
-    RKEY            shift and go to state 106
+    RKEY            shift and go to state 125
 
 
-state 106
+state 123
+
+    (77) list_full -> LIST SMALLER_THAN STRINGTYPE GREATER_THAN VARIABLE ASSIGNATION NEW LIST SMALLER_THAN STRINGTYPE GREATER_THAN LPARENT RPARENT LKEY VARIABLE RKEY .
+
+    RKEY            reduce using rule 77 (list_full -> LIST SMALLER_THAN STRINGTYPE GREATER_THAN VARIABLE ASSIGNATION NEW LIST SMALLER_THAN STRINGTYPE GREATER_THAN LPARENT RPARENT LKEY VARIABLE RKEY .)
+
+
+state 124
+
+    (78) list_full -> LIST SMALLER_THAN INTTYPE GREATER_THAN VARIABLE ASSIGNATION NEW LIST SMALLER_THAN INTTYPE GREATER_THAN LPARENT RPARENT LKEY VARIABLE RKEY .
+
+    RKEY            reduce using rule 78 (list_full -> LIST SMALLER_THAN INTTYPE GREATER_THAN VARIABLE ASSIGNATION NEW LIST SMALLER_THAN INTTYPE GREATER_THAN LPARENT RPARENT LKEY VARIABLE RKEY .)
+
+
+state 125
 
     (48) try_catch_finally -> TRY LKEY block_code RKEY CATCH LPARENT EXCEPTION VARIABLE RPARENT LKEY block_code RKEY FINALLY LKEY block_code RKEY .
 
@@ -1504,5 +1663,5 @@ state 106
 WARNING: 
 WARNING: Conflicts:
 WARNING: 
-WARNING: reduce/reduce conflict in state 59 resolved using rule (value_string -> STRING)
-WARNING: rejected rule (concatenation -> STRING) in state 59
+WARNING: reduce/reduce conflict in state 60 resolved using rule (value_string -> STRING)
+WARNING: rejected rule (concatenation -> STRING) in state 60

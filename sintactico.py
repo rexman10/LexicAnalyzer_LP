@@ -14,6 +14,9 @@ using System; public class clase1 { int var2 = 14 ; var3 = var2 ; var5 = 4 ; }
 using System; public class clase1 { const int var2 = 14 ; var3 = var2 ; int var5 = 4 ; }
 No sirve aun: using System; public class clase1 { const int var2 = 14 ; var3 = var2 ; const int var5 = 4 ; }
 using System; public class clase1 { List<string> nombres = new List<string>(); }
+No sirve aun: using System; public class clase1 { List<string> nombres = new List<string>(){"Adair" , "Juan", "Keneth", "David"} }
+No sirve aun: using System; public class clase1 { List<string> nombres = new List<string>(){4} }
+No sirve aun: using System; public class clase1 { List<string> nombres = new List<string>(){4 , 5, 5, 6} }
 
 """
  
@@ -239,12 +242,19 @@ def p_comparation_oper(p):
 """ Estructura de datos """
 
 def p_estruct_of_data(p):
-    '''estruct_of_data : list
+    '''estruct_of_data : list_empty
+                        | list_full
     '''
 
-def p_list(p):
-    "list : LIST SMALLER_THAN data_type GREATER_THAN VARIABLE ASSIGNATION NEW LIST SMALLER_THAN data_type GREATER_THAN LPARENT RPARENT DOTANDCOMMA"
-
+def p_list_empty(p):
+    '''list_empty : LIST SMALLER_THAN STRINGTYPE GREATER_THAN VARIABLE ASSIGNATION NEW LIST SMALLER_THAN STRINGTYPE GREATER_THAN LPARENT RPARENT DOTANDCOMMA
+                    | LIST SMALLER_THAN INTTYPE GREATER_THAN VARIABLE ASSIGNATION NEW LIST SMALLER_THAN INTTYPE GREATER_THAN LPARENT RPARENT DOTANDCOMMA
+    '''
+    
+def p_list_full(p):
+    '''list_full : LIST SMALLER_THAN STRINGTYPE GREATER_THAN VARIABLE ASSIGNATION NEW LIST SMALLER_THAN STRINGTYPE GREATER_THAN LPARENT RPARENT LKEY VARIABLE RKEY
+                    | LIST SMALLER_THAN INTTYPE GREATER_THAN VARIABLE ASSIGNATION NEW LIST SMALLER_THAN INTTYPE GREATER_THAN LPARENT RPARENT LKEY VARIABLE RKEY
+    '''
 
 
 def p_error(p):
