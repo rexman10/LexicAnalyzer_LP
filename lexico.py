@@ -33,6 +33,7 @@ reserved = {
     "Clear":"CLEAR",
     "RemoveAt":"REMOVEAT",
     "Count":"COUNT",
+    "Action":"ACTION",
     #Fin aporte Adair Abrigo
 
     #Inicio aporte David Rivera
@@ -90,6 +91,7 @@ tokens = (
     'ASSIGNATION',
     'COMMA',
     'DOTANDCOMMA',
+    'ARROW',
     #Fin aporte Adair Abrigo
     #Inicio aporte David Rivera
     #Operadores de comparacion
@@ -147,6 +149,7 @@ t_SMALLER_THAN = r'\<'
 t_EQUAL_COMPARATION = r'=='
 t_ASSIGNATION = r'\='
 t_DOTANDCOMMA = r'\;'
+t_ARROW = r'\=\>' 
 #Fin aporte Adair Abrigo
 #Inicio aporte David Rivera
 t_INEQUALITY = r'!='

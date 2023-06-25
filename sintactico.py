@@ -23,6 +23,7 @@ using System; public class clase1 { List<int> nombres = new List<int>(){4} }
 using System; public class clase1 { List<int> nombres = new List<int>(){4 , 5, 5, 6} }
 
 using System; public class clase1 { int var2 = 14 ; var3 = var2 ; List<string> nombres = new List<string>(){"Adair"} }
+using System; public class clase1 { Action<string> clase = x => {} }
 
 Implementacion sencilla IF por pruebas
 using System; public class clase1 { if(52) {44} else if (52) {514} else {52} }
@@ -55,6 +56,7 @@ def p_block_code(p):
                     | VARIABLE
                     | declaration_dict
                     | functions_list
+                    | declaration_lambda
     '''
 
 """ Declaracion de variables y constantes """
@@ -275,6 +277,16 @@ def p_list_func_add(p):
 
 def p_list_func_removeat(p):
     "list_func_removeat : VARIABLE DOT REMOVEAT LPARENT INTEGER RPARENT DOTANDCOMMA"
+
+
+
+
+
+""" Declaración de funciones """
+def p_declration_lambda(p):
+    "declaration_lambda : ACTION SMALLER_THAN STRINGTYPE GREATER_THAN VARIABLE ASSIGNATION VARIABLE ARROW LKEY RKEY"
+
+
 
 def p_error(p):
     if p:
