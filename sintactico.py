@@ -18,6 +18,13 @@ No sirve aun: using System; public class clase1 { List<string> nombres = new Lis
 No sirve aun: using System; public class clase1 { List<string> nombres = new List<string>(){4} }
 No sirve aun: using System; public class clase1 { List<string> nombres = new List<string>(){4 , 5, 5, 6} }
 
+Implementacion sencilla IF por pruebas
+using System; public class clase1 { if(52) {44} else if (52) {514} else {52} }
+using System; public class clase1 { if(52) {44} else {52} }
+
+Por el momento falla por un token
+using System; public class clase1 { Dictionary<string, int> myDict = new Dictionary<string, int>() { { "key1", 1 }, { "key2", 2 } }; }
+using System; public class clase1 { Dictionary<string, int> myDict = new Dictionary<string, int>() { { key1, 1 }, { key2, 2 } }; }
 """
  
 def p_program(p):
@@ -36,6 +43,7 @@ def p_block_code(p):
                     | estruct_of_data
                     | block_try_catch
                     | VARIABLE
+                    | declaration_dict
     '''
 
 
@@ -194,52 +202,25 @@ def p_variable_assignation_multiline(p):
 
 
 
-
-""" def p_conditional(p):
-    'conditional : if else_if else'
-
-def p_if(p):
-    'if : IF LPARENT <condicion> RPARENT LKEY <bloque> RKEY'
-    
-def p_else_if(p):
-    'else_if : ELSE_IF < condicion > RPARENT LKEY < bloque > RKEY'
-
-def p_else(p):
-    'else : ELSE LKEY <bloque> RKEY'
-
-def p_block_code_if(p):
-    '''
-    block_code_if : VARIABLE |
-                    conditional
-    '''
-
-def p_condicion(p):
-    '''condicion : operandos comparation_oper operandos'|
-     logic_oper operandos comparation_oper operandos'''
-
-def p_bloque(p):
-    'bloque : value_string'
-
-def P_operandos(p):
-    'operandos : value_numeric'
-
-#siguuientes dos deficniones son de prueba. son divisones de logic_operator() de la linea 84
-def p_logic_oper(p):
-    '''logic_oper : LOGICAND |
-                    LOGICOR'''
-    
-def p_comparation_oper(p):
-    '''comparation_oper : EQUAL_COMPARATION |
-                            INEQUALITY |
-                            GREATER_THAN |
-                            SMALLER_THAN |
-                            GREATER_THAN_OR_EQUAL |
-                            SMALLER_THAN_OR_EQUAL
-    ''' """
-
-
-
 """ Estructura de datos """
+
+def p_declaration_dict(p):
+    '''declaration_dict : DICTIONARY VARIABLE ASSIGNATION dictionary_value'''
+
+def p_dictionary_value(p):
+    '''dictionary_value : LKEY key_value_pairs RKEY'''
+
+def p_key_value_pairs(p):
+    '''key_value_pairs : key_value_pair
+                       | key_value_pair COMMA key_value_pairs'''
+
+def p_key_value_pair(p):
+    '''key_value_pair : STRING DOUBLEPOINT value'''
+
+#definicion repetida, para prueba
+def p_valueHash(p):
+    '''valueHash : INTTYPE
+             | STRING'''
 
 def p_estruct_of_data(p):
     '''estruct_of_data : list_empty

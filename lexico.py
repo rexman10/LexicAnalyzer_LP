@@ -32,6 +32,8 @@ reserved = {
     #Fin aporte Adair Abrigo
 
     #Inicio aporte David Rivera
+    "dictionary": "DICTIONARY",
+
     "break": "BREAK",
     "try": "TRY",
     "new": "NEW",
@@ -57,6 +59,7 @@ tokens = (
     'LKEY',
     'RKEY',
     'DOT',
+    'ID',
     'DOUBLEPOINT',
     'PRINT',
     'READ',
@@ -164,6 +167,10 @@ t_PIPE = r'\|'
 t_BACK_SLASH = r'\\'
 #Fin aporte Kenneth Pacheco
 
+def t_ID(t):
+    r'[a-zA-Z0-9_]\w*'
+    t.type = reserved.get(t.value, 'ID')
+    return t
 def t_PRINT(t):
     r'(Console\.WriteLine|Console\.Write|System\.Console\.WriteLine|System\.Console\.Write)'
     return t
