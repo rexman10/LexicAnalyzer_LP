@@ -16,10 +16,13 @@ using System; public class clase1 { const int var2 = 14 ; var3 = var2 ; const in
 
 using System; public class clase1 { List<string> nombres = new List<string>();}
 using System; public class clase1 { List<string> nombres = new List<string>(); nombres.Clear(); nombres.Count();}
-No sirve aun: using System; public class clase1 { List<string> nombres = new List<string>(); nombres.add(dgf);}
-No sirve aun: using System; public class clase1 { List<string> nombres = new List<string>(){"Adair"} }
-No sirve aun: using System; public class clase1 { List<string> nombres = new List<string>(){4} }
-No sirve aun: using System; public class clase1 { List<string> nombres = new List<string>(){4 , 5, 5, 6} }
+
+using System; public class clase1 { List<string> nombres = new List<string>(); nombres.Add("dgf"); nombres.RemoveAt(0);}
+using System; public class clase1 { List<string> nombres = new List<string>(){"Adair"} }
+using System; public class clase1 { List<int> nombres = new List<int>(){4} }
+using System; public class clase1 { List<int> nombres = new List<int>(){4 , 5, 5, 6} }
+
+using System; public class clase1 { int var2 = 14 ; var3 = var2 ; List<string> nombres = new List<string>(){"Adair"} }
 
 Implementacion sencilla IF por pruebas
 using System; public class clase1 { if(52) {44} else if (52) {514} else {52} }
@@ -240,13 +243,25 @@ def p_list_empty(p):
     '''
     
 def p_list_full(p):
-    '''list_full : LIST SMALLER_THAN STRINGTYPE GREATER_THAN VARIABLE ASSIGNATION NEW LIST SMALLER_THAN STRINGTYPE GREATER_THAN LPARENT RPARENT LKEY STRING VARIABLE STRING RKEY
-                    | LIST SMALLER_THAN INTTYPE GREATER_THAN VARIABLE ASSIGNATION NEW LIST SMALLER_THAN INTTYPE GREATER_THAN LPARENT RPARENT LKEY INTEGER RKEY
+    '''list_full : LIST SMALLER_THAN STRINGTYPE GREATER_THAN VARIABLE ASSIGNATION NEW LIST SMALLER_THAN STRINGTYPE GREATER_THAN LPARENT RPARENT LKEY strings_list RKEY
+                    | LIST SMALLER_THAN INTTYPE GREATER_THAN VARIABLE ASSIGNATION NEW LIST SMALLER_THAN INTTYPE GREATER_THAN LPARENT RPARENT LKEY ints_list RKEY
+    '''
+
+def p_strings_list(p):
+    '''strings_list : STRING
+                    | STRING COMMA strings_list
+    '''
+
+def p_ints_list(p):
+    '''ints_list : INTEGER
+                | INTEGER COMMA ints_list
     '''
 
 def p_functions_list(p):
     '''functions_list : list_func_clear
                         | list_func_count
+                        | list_func_add
+                        | list_func_removeat
     '''
 
 def p_list_func_clear(p):
@@ -254,6 +269,12 @@ def p_list_func_clear(p):
 
 def p_list_func_count(p):
     "list_func_count : VARIABLE DOT COUNT LPARENT RPARENT DOTANDCOMMA"
+
+def p_list_func_add(p):
+    "list_func_add : VARIABLE DOT ADD LPARENT STRING RPARENT DOTANDCOMMA"
+
+def p_list_func_removeat(p):
+    "list_func_removeat : VARIABLE DOT REMOVEAT LPARENT INTEGER RPARENT DOTANDCOMMA"
 
 def p_error(p):
     if p:
