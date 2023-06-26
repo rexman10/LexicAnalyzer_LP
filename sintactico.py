@@ -32,6 +32,13 @@ using System; public class clase1 { if(52) {44} else {52} }
 using System; public class clase1 { Dictionary<> myDict = new Dictionary<>(); }
 using System; public class clase1 { Dictionary<string, int> myDict = new Dictionary<string, int>() { { key, 1 }, { key, 2 } }; 
 using System; public class clase1 { Dictionary<> myDict = new Dictionary<>() { { key1, 1 }, { key2, 2 } }; 
+
+Pruebas condicionales
+using System; public class clase1 { if(){} else_if (){} else_if(){} else{}} 
+using System; public class clase1 { if(){mama} else_if (){mama} else_if(){nana} else{kaka}} 
+    if anidado, cada vez auentar un nivel
+using System; public class clase1 { if(){if(){mama} else{msms} } else_if (){if(){hfghg} else{ghfhgf}} else_if(){dfds} else{kaka}}
+
 """
  
 def p_program(p):
@@ -57,6 +64,7 @@ def p_block_code(p):
                     | dict_estruct
                     | functions_list
                     | declaration_lambda
+                    | block_if
     '''
 
 """ Declaracion de variables y constantes """
@@ -165,10 +173,22 @@ def p_access_modifiers(p):
     '''
 
 
+def p_block_if(p):
+    'block_if : IF LPARENT VARIABLE RPARENT LKEY not_yes_nested_if RKEY other_if'
 
+def p_other_if(p):
+    '''
+    other_if : ELSE LKEY not_yes_nested_if RKEY
+               | ELSE_IF LPARENT VARIABLE RPARENT LKEY not_yes_nested_if RKEY other_if
+    '''
 
+def p_not_yes_nested_if(p):
+    '''
+    not_yes_nested_if : block_if
+                       | block_code
+    '''
 
-""" Oeraciones """
+""" Operaciones """
 
 def p_arithmetic_operation(p):
     '''arithmetic_operation : value_numeric
@@ -231,7 +251,6 @@ def p_dict_full(p):
     dict_full : DICTIONARY SMALLER_THAN GREATER_THAN VARIABLE ASSIGNATION NEW DICTIONARY SMALLER_THAN GREATER_THAN LPARENT RPARENT LKEY dictionary_value RKEY DOTANDCOMMA
     '''
 
-
 def p_dictionary_value(p):
     '''dictionary_value : LKEY key_value_pair RKEY'''
 
@@ -247,9 +266,6 @@ def p_key_value_pair(p):
 def p_valueHash(p):
     '''valueHash : INTTYPE
                 '''
-
-
-
 def p_estruct_of_data(p):
     '''estruct_of_data : list_empty
                         | list_full
