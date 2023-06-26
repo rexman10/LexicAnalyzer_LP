@@ -39,6 +39,8 @@ reserved = {
     #Inicio aporte David Rivera
     "Dictionary": "DICTIONARY",
     "else_if": "ELSE_IF",
+    "put": "PUT",
+    "remove": "REMOVE",
 
     "break": "BREAK",
     "try": "TRY",

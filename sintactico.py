@@ -30,6 +30,9 @@ using System; public class clase1 { if(52) {44} else if (52) {514} else {52} }
 using System; public class clase1 { if(52) {44} else {52} }
 
 using System; public class clase1 { Dictionary<> myDict = new Dictionary<>(); }
+using System; public class clase1 { Dictionary<> myDict = new Dictionary<>(); myDict.put(key, value);}
+using System; public class clase1 { Dictionary<> myDict = new Dictionary<>(); myDict.remove(key);}
+
 using System; public class clase1 { Dictionary<string, int> myDict = new Dictionary<string, int>() { { key, 1 }, { key, 2 } }; 
 using System; public class clase1 { Dictionary<> myDict = new Dictionary<>() { { key1, 1 }, { key2, 2 } }; 
 
@@ -62,6 +65,7 @@ def p_block_code(p):
                     | block_try_catch
                     | VARIABLE
                     | dict_estruct
+                    | functions_dict
                     | functions_list
                     | declaration_lambda
                     | block_if
@@ -270,6 +274,24 @@ def p_estruct_of_data(p):
     '''estruct_of_data : list_empty
                         | list_full
     '''
+
+def p_functions_dict(p):
+    '''
+    functions_dict : dict_func_put
+                    | dict_func_remove
+    '''
+
+def p_dict_func_put(p):
+    '''
+    dict_func_put : STRING DOT PUT LPARENT STRING COMMA STRING RPARENT DOTANDCOMMA
+    '''
+
+def p_dict_func_remove(p):
+    '''
+    dict_func_remove : STRING DOT REMOVE LPARENT STRING RPARENT DOTANDCOMMA
+    '''
+
+#Agg la funcion Valueof
 
 def p_list_empty(p):
     '''list_empty : LIST SMALLER_THAN STRINGTYPE GREATER_THAN VARIABLE ASSIGNATION NEW LIST SMALLER_THAN STRINGTYPE GREATER_THAN LPARENT RPARENT DOTANDCOMMA
