@@ -29,9 +29,9 @@ Implementacion sencilla IF por pruebas
 using System; public class clase1 { if(52) {44} else if (52) {514} else {52} }
 using System; public class clase1 { if(52) {44} else {52} }
 
-Por el momento falla por un token
-using System; public class clase1 { Dictionary<string, int> myDict = new Dictionary<string, int>() { { "key1", 1 }, { "key2", 2 } }; }
-using System; public class clase1 { Dictionary<string, int> myDict = new Dictionary<string, int>() { { key1, 1 }, { key2, 2 } }; }
+using System; public class clase1 { Dictionary<> myDict = new Dictionary<>(); }
+using System; public class clase1 { Dictionary<string, int> myDict = new Dictionary<string, int>() { { key, 1 }, { key, 2 } }; 
+using System; public class clase1 { Dictionary<> myDict = new Dictionary<>() { { key1, 1 }, { key2, 2 } }; 
 """
  
 def p_program(p):
@@ -54,7 +54,7 @@ def p_block_code(p):
                     | estruct_of_data
                     | block_try_catch
                     | VARIABLE
-                    | declaration_dict
+                    | dict_estruct
                     | functions_list
                     | declaration_lambda
     '''
@@ -214,23 +214,39 @@ def p_variable_assignation_multiline(p):
 
 """ Estructura de datos """
 
-def p_declaration_dict(p):
-    '''declaration_dict : DICTIONARY VARIABLE ASSIGNATION dictionary_value'''
+def p_dict_estruct(p):
+    '''
+    dict_estruct : dict_empty
+                   | dict_full
+    '''
+
+#variable = random mix
+def p_dict_empty(p):
+    '''
+    dict_empty : DICTIONARY SMALLER_THAN GREATER_THAN VARIABLE ASSIGNATION NEW DICTIONARY SMALLER_THAN GREATER_THAN LPARENT RPARENT DOTANDCOMMA
+    '''
+
+def p_dict_full(p):
+    '''
+    dict_full : DICTIONARY SMALLER_THAN GREATER_THAN VARIABLE ASSIGNATION NEW DICTIONARY SMALLER_THAN GREATER_THAN LPARENT RPARENT LKEY dictionary_value RKEY DOTANDCOMMA
+    '''
+
 
 def p_dictionary_value(p):
-    '''dictionary_value : LKEY key_value_pairs RKEY'''
+    '''dictionary_value : LKEY key_value_pair RKEY'''
 
 def p_key_value_pairs(p):
     '''key_value_pairs : key_value_pair
                        | key_value_pair COMMA key_value_pairs'''
 
+#Key: String Value: String | int
 def p_key_value_pair(p):
-    '''key_value_pair : STRING DOUBLEPOINT value'''
+    '''key_value_pair : STRING DOUBLEPOINT valueHash'''
 
 #definicion repetida, para prueba
 def p_valueHash(p):
     '''valueHash : INTTYPE
-             | STRING'''
+                '''
 
 
 

@@ -37,7 +37,8 @@ reserved = {
     #Fin aporte Adair Abrigo
 
     #Inicio aporte David Rivera
-    "dictionary": "DICTIONARY",
+    "Dictionary": "DICTIONARY",
+
 
     "break": "BREAK",
     "try": "TRY",
