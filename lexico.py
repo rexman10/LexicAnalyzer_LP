@@ -50,6 +50,7 @@ reserved = {
     "catch": "CATCH",
     #Fin aporte David Rivera
     #Inicio aporte Kenneth Pacheco
+    'do': 'DO',
     "using": "USING",
     "System": "SYSTEM"
     #Fin aporte Kenneth Pacheco

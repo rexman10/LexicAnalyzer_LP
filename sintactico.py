@@ -63,6 +63,8 @@ def p_block_code(p):
     '''block_code : def_const_or_var
                     | estruct_of_data
                     | block_try_catch
+                    | block_while
+                    | block_if
                     | VARIABLE
                     | dict_estruct
                     | functions_dict
@@ -176,6 +178,10 @@ def p_access_modifiers(p):
                         | PRIVATE
     '''
 
+def p_block_while(p):
+    '''block_while : normal_while
+                   | do_while             
+    '''
 
 def p_block_if(p):
     'block_if : IF LPARENT VARIABLE RPARENT LKEY not_yes_nested_if RKEY other_if'
