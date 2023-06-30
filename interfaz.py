@@ -13,64 +13,77 @@ ventana.resizable(1, 1)
 # Contenedor Izquierdo de la ventana que servirá para los INPUTS
 contenedorIzq = tk.Frame(ventana)
 contenedorIzq.grid(row=0, column=0, sticky="nswe")
+contenedorIzq.configure(padx=20, pady=20)
 
-# Agregar relleno interno y externo al contenedorIzq
-contenedorIzq.configure(padx=10, pady=10)
+cuadroIzqInput = tk.Frame(contenedorIzq, bg="black")
+cuadroIzqInput.pack(fill="both", expand=True)
 
-cuadroInput = tk.Frame(contenedorIzq, bg="black")
-cuadroInput.place(relx=0.05, rely=0.05, relwidth=0.9, relheight=0.9)
 
-# Contenedor de contenido dentro de cuadroInput
-contenidoInput = tk.Label(cuadroInput, text="Contenido del cuadroInput", fg="white", bg="black")
-contenidoInput.pack()
+# Botón dentro de contenedorDerSupIzq
+botonIzqUpload = tk.Button(contenedorIzq, text="Subir Archivo")
+botonIzqUpload.pack(pady=10)
 
+# Botón dentro de contenedorDerSupIzq
+botonIzqClean = tk.Button(contenedorIzq, text="Limpiar")
+botonIzqClean.pack(pady=10)
 
 # Contenedor derecho de la ventana
 contenedorDer = tk.Frame(ventana)
 contenedorDer.grid(row=0, column=1, sticky="nswe")
+contenedorDer.configure(padx=10, pady=10)
 
-# Establecer el peso de las filas en el contenedorDer
 contenedorDer.grid_rowconfigure(0, weight=1)
 contenedorDer.grid_rowconfigure(1, weight=1)
+contenedorDer.grid_columnconfigure(0, weight=1)
 
 # Contenedor que será para la parte léxica y sintáctica
 contenedorDerSup = tk.Frame(contenedorDer)
 contenedorDerSup.grid(row=0, column=0, sticky="nswe")
+contenedorDerSup.configure(padx=10, pady=10)
 
-# Establecer el peso de las columnas en el contenedorDerSup
+contenedorDerSup.grid_rowconfigure(0, weight=1)
 contenedorDerSup.grid_columnconfigure(0, weight=1)
 contenedorDerSup.grid_columnconfigure(1, weight=1)
+contenedorDerSup.grid_columnconfigure(2, weight=1)
 
 # Contenedor que será para la parte sintáctica
-contenedorDerSupIzq = tk.Frame(contenedorDerSup, bg="black")
+contenedorDerSupIzq = tk.Frame(contenedorDerSup)
 contenedorDerSupIzq.grid(row=0, column=0, sticky="nswe")
 
-# Contenedor de contenido dentro de contenedorDerSupIzq
-contenidoDerSupIzq = tk.Label(contenedorDerSupIzq, text="Contenido del cuadroDerSupIzq", fg="white", bg="black")
-contenidoDerSupIzq.pack()
+# Contenedor negro dentro de contenedorDerSupIzq
+contenedorNegroDerSupIzq = tk.Frame(contenedorDerSupIzq, bg="black")
+contenedorNegroDerSupIzq.pack(fill="both", expand=True)
+
+# Botón dentro de contenedorDerSupIzq
+botonDerSupIzq = tk.Button(contenedorDerSupIzq, text="Lexico")
+botonDerSupIzq.pack(pady=10)
+
+# Separación entre contenedorDerSupIzq y contenedorDerSupDer
+separador = tk.Frame(contenedorDerSup, width=2, bg="white")
+separador.grid(row=0, column=1, sticky="ns")
 
 # Contenedor que será para la parte léxica
-contenedorDerSupDer = tk.Frame(contenedorDerSup, bg="black")
-contenedorDerSupDer.grid(row=0, column=1, sticky="nswe")
+contenedorDerSupDer = tk.Frame(contenedorDerSup)
+contenedorDerSupDer.grid(row=0, column=2, sticky="nswe")
 
-# Contenedor de contenido dentro de contenedorDerSupDer
-contenidoDerSupDer = tk.Label(contenedorDerSupDer, text="Contenido del cuadroDerSupDer", fg="white", bg="black")
-contenidoDerSupDer.pack()
+# Contenedor negro dentro de contenedorDerSupDer
+contenedorNegroDerSupDer = tk.Frame(contenedorDerSupDer, bg="black")
+contenedorNegroDerSupDer.pack(fill="both", expand=True)
+
+# Botón dentro de contenedorDerSupDer
+botonDerSupDer = tk.Button(contenedorDerSupDer, text="Sintatico")
+botonDerSupDer.pack(pady=10)
 
 # Contenedor que será para la parte semántica
 contenedorDerInf = tk.Frame(contenedorDer)
 contenedorDerInf.grid(row=1, column=0, sticky="nswe")
-
-# Agregar relleno interno y externo al contenedorIzq
 contenedorDerInf.configure(padx=10, pady=10)
 
 cuadroDerInf = tk.Frame(contenedorDerInf, bg="black")
-cuadroDerInf.place(relx=0.05, rely=0.05, relwidth=0.9, relheight=0.9)
+cuadroDerInf.pack(fill="both", expand=True)
 
-# Contenedor de contenido dentro de cuadroInput
-contenidoDerInf = tk.Label(cuadroDerInf, text="Contenido del cuadroDerInf", fg="white", bg="black")
-contenidoDerInf.pack()
-
-
+# Botón dentro de contenedorDerSupIzq
+botonDerInf = tk.Button(contenedorDerInf, text="Semantico")
+botonDerInf.pack(pady=10)
 
 ventana.mainloop()
