@@ -189,12 +189,12 @@ def p_do_while(p):
     'do_while : DO LKEY block_code RKEY WHILE LPARENT logic_operation RPARENT'
 
 def p_block_if(p):
-    'block_if : IF LPARENT VARIABLE RPARENT LKEY not_yes_nested_if RKEY other_if'
+    'block_if : IF LPARENT logic_operation RPARENT LKEY not_yes_nested_if RKEY other_if'
 
 def p_other_if(p):
     '''
     other_if : ELSE LKEY not_yes_nested_if RKEY
-               | ELSE_IF LPARENT VARIABLE RPARENT LKEY not_yes_nested_if RKEY other_if
+               | ELSE_IF LPARENT logic_operation RPARENT LKEY not_yes_nested_if RKEY other_if
     '''
 
 def p_not_yes_nested_if(p):
