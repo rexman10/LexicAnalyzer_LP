@@ -64,7 +64,6 @@ def p_block_code(p):
                     | estruct_of_data
                     | block_try_catch
                     | block_while
-                    | block_if
                     | VARIABLE
                     | dict_estruct
                     | functions_dict
@@ -182,6 +181,12 @@ def p_block_while(p):
     '''block_while : normal_while
                    | do_while             
     '''
+
+def p_normal_while(p):
+    'normal_while : WHILE LPARENT logic_operation RPARENT LKEY block_code RKEY'
+
+def p_do_while(p):
+    'do_while : DO LKEY block_code RKEY WHILE LPARENT logic_operation RPARENT'
 
 def p_block_if(p):
     'block_if : IF LPARENT VARIABLE RPARENT LKEY not_yes_nested_if RKEY other_if'
