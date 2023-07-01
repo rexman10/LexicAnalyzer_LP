@@ -70,6 +70,8 @@ def p_block_code(p):
                     | functions_list
                     | declaration_lambda
                     | block_if
+                    | print_data
+                    | block_for
     '''
 
 """ Declaracion de variables y constantes """
@@ -129,11 +131,19 @@ def p_data_type(p):
 
 
 """ Tipo de valores validos para asignar """
+def p_print_data(p):
+    '''print_data       : PRINT RPARENT STRING LPARENT DOTANDCOMMA
+    '''
+
+def p_read_data(p):
+    '''read_data        : READ RPARENT LPARENT
+    '''
 
 def p_value(p):
     '''value    : value_numeric
                 | value_logic
                 | value_string
+                | read_data
     '''
 
 def p_value_string(p):
@@ -159,6 +169,27 @@ def p_value_numeric(p):
 
 
 """ Estructuras de control """
+
+def p_block_for(p):
+    '''block_for        : for_anidado
+                        | for_each
+    '''
+
+def p_for_simple(p):
+    '''for_simple       : FOR LPARENT assignation_with_datatype logic_operation DOTANDCOMMA VARIABLE INCREMENT RPARENT LKEY block_code RKEY
+                        | FOR LPARENT assignation_with_datatype logic_operation DOTANDCOMMA VARIABLE DECREMENT RPARENT LKEY block_code RKEY
+
+    '''
+
+def p_for_anidado(p):
+    '''for_anidado      : for_simple
+                        | FOR LPARENT assignation_with_datatype logic_operation DOTANDCOMMA VARIABLE INCREMENT RPARENT LKEY for_anidado RKEY
+                        | FOR LPARENT assignation_with_datatype logic_operation DOTANDCOMMA VARIABLE DECREMENT RPARENT LKEY for_anidado RKEY 
+    '''
+
+def p_for_each(p):
+    '''for_each         : FOREACH LPARENT data_type VARIABLE IN VARIABLE RPARENT LKEY block_code RKEY
+    '''
 
 def p_block_try_catch(p):
     '''block_try_catch : try_catch_simply

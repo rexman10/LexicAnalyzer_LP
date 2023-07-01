@@ -26,6 +26,8 @@ reserved = {
     "long": "LONG",
     "return": "RETURN",
     "for": "FOR",
+    "foreach": "FOREACH",
+    "in": "IN",
     "finally": "FINALLY",
     "exception": "EXCEPTION",
     "List":"LIST",
