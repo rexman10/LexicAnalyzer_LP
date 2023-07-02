@@ -14,6 +14,8 @@ reserved = {
     'class':'CLASS',
     'string':'STRINGTYPE',
     'namespace':'NAMESPACE',
+    'Task':'TASK',
+    'async':'ASYNC',
     #Fin aporte Juan Guadalupe
 
     #Inicio aporte Adair Abrigo
@@ -36,6 +38,7 @@ reserved = {
     "RemoveAt":"REMOVEAT",
     "Count":"COUNT",
     "Action":"ACTION",
+    "await":"AWAIT",
     #Fin aporte Adair Abrigo
 
     #Inicio aporte David Rivera
@@ -74,6 +77,7 @@ tokens = (
     'DOUBLEPOINT',
     'PRINT',
     'READ',
+    'METHOD',
     #Fin aporte Juan Guadalupe
 
     #Inicio aporte Adair Abrigo
@@ -199,8 +203,11 @@ def t_newline(t):
   t.lexer.lineno += len(t.value)
 
 #Inicio aporte Juan Guadalupe
+def t_METHOD(t):
+  r'[A-Z]\w*'
+  return t
 def t_VARIABLE(t):
-  r'[a-zA-Z\_]\w*'
+  r'[a-z\_]\w*'
   t.type = reserved.get(t.value,'VARIABLE')
   return t
 #Fin aporte Juan Guadalupe

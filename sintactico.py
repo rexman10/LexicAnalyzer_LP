@@ -60,7 +60,7 @@ def p_all_block_code(p):
     '''
 
 def p_block_code(p):
-    '''block_code : def_const_or_var
+    '''block_code   : def_const_or_var
                     | estruct_of_data
                     | block_try_catch
                     | block_while
@@ -379,8 +379,12 @@ def p_list_func_removeat(p):
 
 
 """ Declaración de funciones """
+def p_declaration_async(p):
+    '''declaration_async    : PUBLIC STATIC ASYNC TASK METHOD LPARENT RPARENT LKEY AWAIT TASK DOT METHOD LPARENT LPARENT RPARENT ARROW LKEY block_code RKEY RPARENT DOTANDCOMMA RKEY
+    '''
+
 def p_declration_lambda(p):
-    "declaration_lambda : ACTION SMALLER_THAN STRINGTYPE GREATER_THAN VARIABLE ASSIGNATION VARIABLE ARROW LKEY RKEY"
+    "declaration_lambda : ACTION SMALLER_THAN STRINGTYPE GREATER_THAN VARIABLE ASSIGNATION VARIABLE ARROW LKEY block_code RKEY"
 
 
 
