@@ -1,4 +1,16 @@
 import tkinter as tk
+import lexico
+import os
+
+def analizar_lexico():
+    file_path = os.path.join(os.path.dirname(__file__), "algoritmo3.txt")  # Ruta del archivo de texto
+    result = lexico.analyze_lexical(file_path)  # Realizar el análisis léxico
+
+    resultado_lexico.delete(1.0, tk.END)  # Borrar el contenido existente en el widget de texto
+    for token in result:
+        linea = str(token.lineno) + ": " + str(token.value) + " - " + str(token.type)
+        print(linea)
+        resultado_lexico.insert(tk.END, linea + "\n")
 
 ventana = tk.Tk()
 ventana.configure(bg="blue")
@@ -18,12 +30,15 @@ contenedorIzq.configure(padx=20, pady=20)
 cuadroIzqInput = tk.Frame(contenedorIzq, bg="black")
 cuadroIzqInput.pack(fill="both", expand=True)
 
+# Espacio para insertar texto en el contenedor cuadroIzqInput
+labelIzqInput = tk.Label(cuadroIzqInput, text="Texto de ejemplo")
+labelIzqInput.pack()
 
-# Botón dentro de contenedorDerSupIzq
+# Botón dentro de contenedorIzq
 botonIzqUpload = tk.Button(contenedorIzq, text="Subir Archivo")
 botonIzqUpload.pack(pady=10)
 
-# Botón dentro de contenedorDerSupIzq
+# Botón dentro de contenedorIzq
 botonIzqClean = tk.Button(contenedorIzq, text="Limpiar")
 botonIzqClean.pack(pady=10)
 
@@ -54,8 +69,12 @@ contenedorDerSupIzq.grid(row=0, column=0, sticky="nswe")
 contenedorNegroDerSupIzq = tk.Frame(contenedorDerSupIzq, bg="black")
 contenedorNegroDerSupIzq.pack(fill="both", expand=True)
 
+# Espacio para insertar texto en el contenedor contenedorNegroDerSupIzq
+resultado_lexico = tk.Text(contenedorNegroDerSupIzq, bg="black", fg="white")
+resultado_lexico.pack(fill="both", expand=True)
+
 # Botón dentro de contenedorDerSupIzq
-botonDerSupIzq = tk.Button(contenedorDerSupIzq, text="Lexico")
+botonDerSupIzq = tk.Button(contenedorDerSupIzq, text="Lexico", command=analizar_lexico)
 botonDerSupIzq.pack(pady=10)
 
 # Separación entre contenedorDerSupIzq y contenedorDerSupDer
@@ -74,6 +93,10 @@ contenedorNegroDerSupDer.pack(fill="both", expand=True)
 botonDerSupDer = tk.Button(contenedorDerSupDer, text="Sintatico")
 botonDerSupDer.pack(pady=10)
 
+# Espacio para insertar texto en el contenedor contenedorNegroDerSupDer
+labelDerSupDer = tk.Label(contenedorNegroDerSupDer, text="Texto de ejemplo")
+labelDerSupDer.pack()
+
 # Contenedor que será para la parte semántica
 contenedorDerInf = tk.Frame(contenedorDer)
 contenedorDerInf.grid(row=1, column=0, sticky="nswe")
@@ -82,8 +105,16 @@ contenedorDerInf.configure(padx=10, pady=10)
 cuadroDerInf = tk.Frame(contenedorDerInf, bg="black")
 cuadroDerInf.pack(fill="both", expand=True)
 
-# Botón dentro de contenedorDerSupIzq
+# Espacio para insertar texto en el contenedor cuadroDerInf
+labelDerInf = tk.Label(cuadroDerInf, text="Texto de ejemplo")
+labelDerInf.pack()
+
+# Botón dentro de contenedorDerInf
 botonDerInf = tk.Button(contenedorDerInf, text="Semantico")
 botonDerInf.pack(pady=10)
+
+# Función para realizar el análisis léxico y actualizar la etiqueta
+
+
 
 ventana.mainloop()

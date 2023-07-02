@@ -1,5 +1,5 @@
 import ply.lex as lex
-
+lexical_result = []
 #Diccionario de palabras reservadas
 reserved = {
     #Inicio aporte Juan Guadalupe
@@ -249,19 +249,7 @@ def t_COMMENT(t):
 lexer = lex.lex()
 
 
-#Datos de entrada
-def analizar(data):
-    lexer.input(data)
-    while True:
-        tok = lexer.token()
-        if not tok:
-            break
 
-archivo = open("algoritmo3.txt")
-for linea in archivo:
-    analizar(linea)
-    if len(linea)==0:
-        break
 
  # Tokenizador
 #while True:
@@ -269,3 +257,19 @@ for linea in archivo:
 #  if not tok: 
 #    break      #Rompe
 #  print(tok)
+
+
+# Realizar el análisis léxico
+def analyze_lexical(file_path):
+    archivo = open(file_path)
+    for linea in archivo:
+        lexer.input(linea)
+        while True:
+            tok = lexer.token()
+            if not tok:
+                break
+            lexical_result.append(tok)
+    archivo.close()
+
+    return lexical_result
+
