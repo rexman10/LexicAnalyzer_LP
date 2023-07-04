@@ -1,5 +1,4 @@
 import ply.yacc as yacc
-
 from lexico import tokens
 
 """ Ejemplos con los que probar:
@@ -398,11 +397,11 @@ def p_error(p):
 # Build the parser
 sintactico = yacc.yacc()
 
-while True:
-   try:
-       s = input('C# > ')
-   except EOFError:
-       break
-   if not s: continue
-   result = sintactico.parse(s)
-   if result!=None: print(result)
+def analizar_sintactico(file_path):
+    with open(file_path, "r") as file:
+        lines = file.readlines()  # Leer todas las líneas del archivo
+
+    for line in lines:
+        result = sintactico.parse(line)
+        if result is not None:
+            print(result)  # Imprimir el resultado del análisis sintáctico

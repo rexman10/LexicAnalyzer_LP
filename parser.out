@@ -161,7 +161,7 @@ Rule 130   list_func_clear -> VARIABLE DOT CLEAR LPARENT RPARENT DOTANDCOMMA
 Rule 131   list_func_count -> VARIABLE DOT COUNT LPARENT RPARENT DOTANDCOMMA
 Rule 132   list_func_add -> VARIABLE DOT ADD LPARENT STRING RPARENT DOTANDCOMMA
 Rule 133   list_func_removeat -> VARIABLE DOT REMOVEAT LPARENT INTEGER RPARENT DOTANDCOMMA
-Rule 134   declaration_async -> PUBLIC STATIC ASYNC TASK METHOD LPARENT RPARENT LKEY AWAIT TASK DOT METHOD LPARENT LPARENT RPARENT ARROW LKEY all_block_code RKEY RPARENT DOTANDCOMMA RKEY
+Rule 134   declaration_async -> PUBLIC STATIC ASYNC TASK METHOD LPARENT RPARENT LKEY AWAIT TASK DOT METHOD LPARENT LPARENT RPARENT ARROW LKEY block_code RKEY RPARENT DOTANDCOMMA RKEY
 Rule 135   declaration_lambda -> ACTION SMALLER_THAN STRINGTYPE GREATER_THAN VARIABLE ASSIGNATION VARIABLE ARROW LKEY block_code RKEY
 
 Terminals, with rules where they appear
@@ -270,13 +270,13 @@ Nonterminals, with rules where they appear
 
 access_modifiers     : 20 22
 all_asignations      : 20 21 22 23
-all_block_code       : 3 5 134
+all_block_code       : 3 5
 arithmetic_operation : 82
 arithmetic_operator  : 82
 assignation_key_value : 24 27 28 29 30 31 32 33 34
 assignation_with_datatype : 25 28 32 60 61 63 64
 assignation_without_datatype : 26 29 31
-block_code           : 4 5 60 61 65 68 68 69 69 69 74 75 80 135
+block_code           : 4 5 60 61 65 68 68 69 69 69 74 75 80 134 135
 block_for            : 17
 block_if             : 15 79
 block_publicClass    : 1
