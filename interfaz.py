@@ -2,19 +2,49 @@ import tkinter as tk
 import lexico
 import sintactico
 import os
+from tkinter import filedialog
+
 
 def analizar_sintactico():
-    file_path = os.path.join(os.path.dirname(__file__), "algoritmo3.txt")  # Ruta del archivo de texto
-    sintactico.analizar_sintactico(file_path)  # Llamar a la función de análisis sintáctico
-def analizar_lexico():
-    file_path = os.path.join(os.path.dirname(__file__), "algoritmo3.txt")  # Ruta del archivo de texto
-    result = lexico.analyze_lexical(file_path)  # Realizar el análisis léxico
+    contenido_texto = espacioTexto.get("1.0", tk.END)  # Obtener el contenido
 
-    espacioTextoSupIzq.delete(1.0, tk.END)  # Borrar el contenido existente
+    result = sintactico.analizar_sintactico_string(contenido_texto)  # Realizar el análisis sintáctico con el contenido
+
+    if result:
+        mensaje = "Análisis sintáctico exitoso"
+    else:
+        mensaje = "Error de sintaxis"
+
+    espacioTextoSupDer.delete("1.0", tk.END)
+    espacioTextoSupDer.insert(tk.END, mensaje)
+
+def analizar_lexico():
+    contenido_texto = espacioTexto.get("1.0", tk.END)  # Obtener el contenido
+
+    result = lexico.analyze_lexical_string(contenido_texto)  # Realizar el análisis léxico con el contenido
+
+    print(result)
+
+    espacioTextoSupIzq.delete("1.0", tk.END)
     for token in result:
         linea = str(token.lineno) + ": " + str(token.value) + " - " + str(token.type)
         print(linea)
         espacioTextoSupIzq.insert(tk.END, linea + "\n")
+
+# Función para cargar y mostrar el contenido del archivo de texto
+
+def cargar_contenido():
+    global contenido_archivo
+
+    archivo = filedialog.askopenfilename(initialdir=os.path.dirname(__file__), title="Seleccionar archivo",
+                                         filetypes=(("Archivos de texto", "*.txt"), ("Todos los archivos", "*.*")))
+    if archivo:
+        with open(archivo, "r") as f:
+            contenido_archivo = f.read()
+
+        espacioTexto.delete("1.0", tk.END)  # Limpiar el contenido existente en el widget
+        espacioTexto.insert(tk.END, contenido_archivo)  # Insertar el contenido del archivo en el widget
+        print(contenido_archivo)
 
 #ventana principal
 ventana = tk.Tk()
@@ -38,7 +68,7 @@ espacioTexto.pack(fill="both", expand=True)
 contenedorBotones = tk.Frame(contenedorIzq, padx=20)
 contenedorBotones.pack()
 
-boton1 = tk.Button(contenedorBotones, text="Subir", padx=10)
+boton1 = tk.Button(contenedorBotones, text="Subir", padx=10, command=cargar_contenido)
 boton1.pack(side="left", padx=(0, 10))
 
 boton2 = tk.Button(contenedorBotones, text="Limpiar", padx=10)

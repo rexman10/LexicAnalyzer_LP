@@ -397,6 +397,7 @@ def p_error(p):
 # Build the parser
 sintactico = yacc.yacc()
 
+'''
 def analizar_sintactico(file_path):
     with open(file_path, "r") as file:
         lines = file.readlines()  # Leer todas las líneas del archivo
@@ -405,3 +406,8 @@ def analizar_sintactico(file_path):
         result = sintactico.parse(line)
         if result is not None:
             print(result)  # Imprimir el resultado del análisis sintáctico
+'''
+
+def analizar_sintactico_string(content):
+    result = sintactico.parse(content)
+    return result is not None

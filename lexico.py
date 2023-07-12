@@ -159,7 +159,7 @@ t_SMALLER_THAN = r'\<'
 t_EQUAL_COMPARATION = r'=='
 t_ASSIGNATION = r'\='
 t_DOTANDCOMMA = r'\;'
-t_ARROW = r'\=\>' 
+t_ARROW = r'\=\>'
 #Fin aporte Adair Abrigo
 #Inicio aporte David Rivera
 t_INEQUALITY = r'!='
@@ -254,9 +254,35 @@ lexer = lex.lex()
  # Tokenizador
 #while True:
 #  tok = lexer.token()
-#  if not tok: 
+#  if not tok:
 #    break      #Rompe
 #  print(tok)
+
+codigo = """
+public static long Factorial(int n)
+{
+    if (n==1)
+        return 1;
+    return n * Factorial(n-1);
+}
+"""
+
+#Datos de entrada
+'''
+def analizar(data):
+    lexer.input(data)
+    while True:
+        tok = lexer.token()
+        print(tok)
+        if not tok:
+            break
+
+archivo = open("algoritmo5.txt")
+for linea in archivo:
+    analizar(linea)
+    if len(linea)==0:
+        break
+
 
 
 # Realizar el análisis léxico
@@ -272,4 +298,17 @@ def analyze_lexical(file_path):
     archivo.close()
 
     return lexical_result
+'''
+
+def analyze_lexical_string(content):
+    lexer.input(content)
+    lexical_result = []
+    while True:
+        tok = lexer.token()
+        if not tok:
+            break
+        lexical_result.append(tok)
+    return lexical_result
+
+
 
