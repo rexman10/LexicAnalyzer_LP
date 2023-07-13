@@ -17,11 +17,11 @@ using System; public class clase1 { List<string> nombres = new List<string>();}
 using System; public class clase1 { List<string> nombres = new List<string>(); nombres.Clear(); nombres.Count();}
 
 using System; public class clase1 { List<string> nombres = new List<string>(); nombres.Add("dgf"); nombres.RemoveAt(0);}
-using System; public class clase1 { List<string> nombres = new List<string>(){"Adair"} }
-using System; public class clase1 { List<int> nombres = new List<int>(){4} }
-using System; public class clase1 { List<int> nombres = new List<int>(){4 , 5, 5, 6} }
+using System; public class clase1 { List<string> nombres = new List<string>(){"Adair"}; }
+using System; public class clase1 { List<int> nombres = new List<int>(){4}; }
+using System; public class clase1 { List<int> nombres = new List<int>(){4 , 5, 5, 6}; }
 
-using System; public class clase1 { int var2 = 14 ; var3 = var2 ; List<string> nombres = new List<string>(){"Adair"} }
+using System; public class clase1 { int var2 = 14 ; var3 = var2 ; List<string> nombres = new List<string>(){"Adair"}; }
 using System; public class clase1 { Action<string> clase = x => {} }
 
 Implementacion sencilla IF por pruebas
@@ -32,8 +32,8 @@ using System; public class clase1 { Dictionary<> myDict = new Dictionary<>(); }
 using System; public class clase1 { Dictionary<> myDict = new Dictionary<>(); myDict.put(key, value);}
 using System; public class clase1 { Dictionary<> myDict = new Dictionary<>(); myDict.remove(key);}
 
-using System; public class clase1 { Dictionary<string, int> myDict = new Dictionary<string, int>() { { key, 1 }, { key, 2 } }; 
-using System; public class clase1 { Dictionary<> myDict = new Dictionary<>() { { key1, 1 }, { key2, 2 } }; 
+using System; public class clase1 { Dictionary<string, int> myDict = new Dictionary<string, int>() { { key, 1 }, { key, 2 } }; }
+using System; public class clase1 { Dictionary<> myDict = new Dictionary<>() { { key1, 1 }, { key2, 2 } }; }
 
 Pruebas condicionales
 using System; public class clase1 { if(){} else_if (){} else_if(){} else{}} 
@@ -41,6 +41,27 @@ using System; public class clase1 { if(){mama} else_if (){mama} else_if(){nana} 
     if anidado, cada vez auentar un nivel
 using System; public class clase1 { if(){if(){mama} else{msms} } else_if (){if(){hfghg} else{ghfhgf}} else_if(){dfds} else{kaka}}
 
+using System; 
+public class clase1 {
+    for(int ida=0; i < 0; i++){
+        Console.WriteLine(ida);
+    }
+}
+
+using System; 
+public class clase1 { 
+    const int var2 = 14 , var3 = 15 ;
+    List<int> nombres = new List<int>(){4 , 5, 5, 6}; 
+    nombres.Add("dgf"); 
+    nombres.RemoveAt(0);
+    int var2 = 14; 
+    var3 = var2 ; 
+    var5 = 4 ;
+    Dictionary<> myDict = new Dictionary<>(); myDict.remove(key);
+    Dictionary<> myDict2 = new Dictionary<>() { { key1, 1 }, { key2, 2 } };
+    Console.WriteLine("hasta luego");
+    Console.WriteLine(myDict2);
+}
 """
  
 def p_program(p):
@@ -77,6 +98,7 @@ def p_all_block_code(p):
 """ Tipo de valores validos para asignar """
 def p_print_data(p):
     '''print_data               : PRINT LPARENT STRING RPARENT DOTANDCOMMA
+                                | PRINT LPARENT VARIABLE RPARENT DOTANDCOMMA
     '''
 
 def p_read_data(p):
@@ -124,10 +146,8 @@ def p_arithmetic_operation(p):
     '''
 
 def p_logic_operation(p):
-    '''logic_operation          : value_numeric
-                                | VARIABLE
-                                | value_numeric logic_operator logic_operation
-                                | VARIABLE logic_operator logic_operation
+    '''logic_operation          : value_numeric logic_operator INTEGER 
+                                | VARIABLE logic_operator INTEGER
     '''
 
 def p_logic_operator(p):
@@ -189,13 +209,13 @@ def p_assignation_key_value(p):
     '''
 
 def p_assignation_key_value_multiple(p):
-    '''assignation_key_value_multiple   : VARIABLE ASSIGNATION value
-                                        | VARIABLE ASSIGNATION value COMMA assignation_key_value_multiple   
+    '''assignation_key_value_multiple   : assignation_key_value
+                                        | assignation_key_value COMMA assignation_key_value_multiple   
     '''
 
 def p_assignation_with_datatype(p):
     '''assignation_with_datatype        : data_type assignation_key_value DOTANDCOMMA
-                                        | data_type assignation_key_value DOTANDCOMMA assignation_with_datatype                    
+                                        | data_type assignation_key_value COMMA assignation_with_datatype                    
     '''
 
 def p_data_type(p):
@@ -209,21 +229,26 @@ def p_data_type(p):
 
 """ Estructuras de control """
 
+def p_logic_operations(p):
+    '''logic_operations         : logic_operation DOTANDCOMMA
+                                | logic_operation COMMA logic_operations
+    '''
+
 def p_block_for(p):
     '''block_for                : for_anidado
                                 | for_each
     '''
 
 def p_for_simple(p):
-    '''for_simple               : FOR LPARENT assignation_with_datatype logic_operation DOTANDCOMMA VARIABLE INCREMENT RPARENT LKEY all_block_code RKEY
-                                | FOR LPARENT assignation_with_datatype logic_operation DOTANDCOMMA VARIABLE DECREMENT RPARENT LKEY all_block_code RKEY
+    '''for_simple               : FOR LPARENT assignation_with_datatype logic_operations DOTANDCOMMA VARIABLE INCREMENT RPARENT LKEY all_block_code RKEY
+                                | FOR LPARENT assignation_with_datatype logic_operations DOTANDCOMMA VARIABLE DECREMENT RPARENT LKEY all_block_code RKEY
 
     '''
 
 def p_for_anidado(p):
     '''for_anidado              : for_simple
-                                | FOR LPARENT assignation_with_datatype logic_operation DOTANDCOMMA VARIABLE INCREMENT RPARENT LKEY for_anidado RKEY
-                                | FOR LPARENT assignation_with_datatype logic_operation DOTANDCOMMA VARIABLE DECREMENT RPARENT LKEY for_anidado RKEY 
+                                | FOR LPARENT assignation_with_datatype logic_operations DOTANDCOMMA VARIABLE INCREMENT RPARENT LKEY for_anidado RKEY
+                                | FOR LPARENT assignation_with_datatype logic_operations DOTANDCOMMA VARIABLE DECREMENT RPARENT LKEY for_anidado RKEY 
     '''
 
 def p_for_each(p):
@@ -286,12 +311,9 @@ def p_dict_empty(p):
 
 def p_dict_full(p):
     '''
-    dict_full                   : DICTIONARY SMALLER_THAN GREATER_THAN VARIABLE ASSIGNATION NEW DICTIONARY SMALLER_THAN GREATER_THAN LPARENT RPARENT LKEY dictionary_value RKEY DOTANDCOMMA
+    dict_full                   : DICTIONARY SMALLER_THAN GREATER_THAN VARIABLE ASSIGNATION NEW DICTIONARY SMALLER_THAN GREATER_THAN LPARENT RPARENT LKEY key_value_pairs RKEY DOTANDCOMMA
     '''
 
-def p_dictionary_value(p):
-    '''dictionary_value         : LKEY key_value_pair RKEY
-    '''
 
 def p_key_value_pairs(p):
     '''key_value_pairs          : key_value_pair
@@ -300,13 +322,10 @@ def p_key_value_pairs(p):
 
 #Key: String Value: String | int
 def p_key_value_pair(p):
-    '''key_value_pair           : STRING DOUBLEPOINT valueHash
+    '''key_value_pair           : LKEY VARIABLE COMMA value RKEY
     '''
 
-#definicion repetida, para prueba
-def p_valueHash(p):
-    '''valueHash                : INTTYPE
-    '''
+
 def p_estruct_of_data(p):
     '''estruct_of_data          : list_empty
                                 | list_full
@@ -341,8 +360,8 @@ def p_list_empty(p):
     '''
     
 def p_list_full(p):
-    '''list_full                : LIST SMALLER_THAN STRINGTYPE GREATER_THAN VARIABLE ASSIGNATION NEW LIST SMALLER_THAN STRINGTYPE GREATER_THAN LPARENT RPARENT LKEY strings_list RKEY
-                                | LIST SMALLER_THAN INTTYPE GREATER_THAN VARIABLE ASSIGNATION NEW LIST SMALLER_THAN INTTYPE GREATER_THAN LPARENT RPARENT LKEY ints_list RKEY
+    '''list_full                : LIST SMALLER_THAN STRINGTYPE GREATER_THAN VARIABLE ASSIGNATION NEW LIST SMALLER_THAN STRINGTYPE GREATER_THAN LPARENT RPARENT LKEY strings_list RKEY DOTANDCOMMA
+                                | LIST SMALLER_THAN INTTYPE GREATER_THAN VARIABLE ASSIGNATION NEW LIST SMALLER_THAN INTTYPE GREATER_THAN LPARENT RPARENT LKEY ints_list RKEY DOTANDCOMMA
     '''
 
 def p_strings_list(p):
@@ -439,7 +458,13 @@ def analizar_sintactico(file_path):
             print(result)  # Imprimir el resultado del análisis sintáctico
 '''
 
-datos = '''using System; public class clase1 { Dictionary<> myDict = new Dictionary<>(); myDict.remove(key);}
+datos = '''
+using System; 
+public class clase1 {
+    for(int ida=0; ida < 0; ida++){
+        Console.WriteLine(ida);
+    }
+}
     '''
 
 print(datos)
