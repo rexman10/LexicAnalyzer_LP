@@ -202,6 +202,9 @@ def t_READ(t):
 def t_newline(t):
   r'\n+'
   t.lexer.lineno += len(t.value)
+  global numero_linea
+  numero_linea = t.lexer.lineno
+
 
 #Inicio aporte Juan Guadalupe
 def t_METHOD(t):
@@ -232,6 +235,15 @@ def t_CHAR(t):
     r'[a-zA-Z]'
     t.value = int(t.value)
     return t
+
+#Para reestablecer el numero delineas al analizar nuevo archivo
+def reseteo_numero_linea():
+    global numero_linea
+    numero_linea = 1
+
+def obtener_numero_linea():
+    return numero_linea
+
 #Fin aporte David Rivera
 
  # Ignorar lo que no sea un token en mi LP
@@ -284,25 +296,10 @@ for linea in archivo:
     analizar(linea)
     if len(linea)==0:
         break
-
-
-
-# Realizar el análisis léxico
-def analyze_lexical(file_path):
-    archivo = open(file_path)
-    for linea in archivo:
-        lexer.input(linea)
-        while True:
-            tok = lexer.token()
-            if not tok:
-                break
-            lexical_result.append(tok)
-    archivo.close()
-
-    return lexical_result
 '''
 
-def analyze_lexical_string(content):
+def analyze_lexical_string(content, numero_linea_inicial=1):
+    lexer.lineno = numero_linea_inicial
     lexer.input(content)
     lexical_result = []
     while True:
@@ -311,6 +308,7 @@ def analyze_lexical_string(content):
             break
         lexical_result.append(tok)
     return lexical_result
+
 
 
 

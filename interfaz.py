@@ -20,8 +20,8 @@ def analizar_sintactico():
 
 def analizar_lexico():
     contenido_texto = espacioTexto.get("1.0", tk.END)  # Obtener el contenido
-
-    result = lexico.analyze_lexical_string(contenido_texto)  # Realizar el análisis léxico con el contenido
+    numero_linea_inicial = lexico.obtener_numero_linea()
+    result = lexico.analyze_lexical_string(contenido_texto, numero_linea_inicial)  # Realizar el análisis léxico con el contenido
 
     print(result)
 
@@ -34,6 +34,7 @@ def analizar_lexico():
 # Función para cargar y mostrar el contenido del archivo de texto
 
 def cargar_contenido():
+    lexico.reseteo_numero_linea()
     global contenido_archivo
 
     archivo = filedialog.askopenfilename(initialdir=os.path.dirname(__file__), title="Seleccionar archivo",
@@ -45,6 +46,12 @@ def cargar_contenido():
         espacioTexto.delete("1.0", tk.END)  # Limpiar el contenido existente en el widget
         espacioTexto.insert(tk.END, contenido_archivo)  # Insertar el contenido del archivo en el widget
         print(contenido_archivo)
+
+def limpiar_contenido():
+    espacioTexto.delete("1.0", tk.END)
+    espacioTextoSupIzq.delete("1.0", tk.END)
+    espacioTextoSupDer.delete("1.0", tk.END)
+    espacioTextoInf.delete("1.0", tk.END)
 
 #ventana principal
 ventana = tk.Tk()
@@ -71,7 +78,7 @@ contenedorBotones.pack()
 boton1 = tk.Button(contenedorBotones, text="Subir", padx=10, command=cargar_contenido)
 boton1.pack(side="left", padx=(0, 10))
 
-boton2 = tk.Button(contenedorBotones, text="Limpiar", padx=10)
+boton2 = tk.Button(contenedorBotones, text="Limpiar", padx=10, command=limpiar_contenido)
 boton2.pack(side="left")
 
 contenedorDer = tk.Frame(ventana, bg="blue")
