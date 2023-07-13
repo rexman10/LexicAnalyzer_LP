@@ -17,9 +17,9 @@ reserved = {
     'Task':'TASK',
     'async':'ASYNC',
     'Queue':'QUEUE',
-    'Enqueue':'ENQUEUE',
-    'Dequeue':'DEQUEUE',
-    'Peek':'PEEK',
+    'enQueue':'ENQUEUE',
+    'deQueue':'DEQUEUE',
+    'peek':'PEEK',
     'isEmpty':'ISEMPTY',
     #Fin aporte Juan Guadalupe
 

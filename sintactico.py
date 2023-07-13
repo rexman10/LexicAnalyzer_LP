@@ -83,6 +83,9 @@ def p_block_code(p):
                                 | dict_estruct
                                 | functions_dict
 
+                                | queue_struct
+                                | functions_queue
+
                                 | block_for
 
                                 | block_try_catch
@@ -198,8 +201,8 @@ def p_variable_assignation(p):
     '''
 
 def p_late_initialization(p):
-    '''late_initialization      : access_modifiers VARIABLE DOTANDCOMMA
-                                | VARIABLE DOTANDCOMMA
+    '''late_initialization      : access_modifiers data_type VARIABLE DOTANDCOMMA
+                                | data_type VARIABLE DOTANDCOMMA
                                 | assignation_key_value DOTANDCOMMA
     '''
 
@@ -406,6 +409,13 @@ def p_queue_struct(p):
     '''queue_struct             : QUEUE SMALLER_THAN data_type GREATER_THAN VARIABLE ASSIGNATION NEW QUEUE SMALLER_THAN data_type GREATER_THAN LPARENT RPARENT DOTANDCOMMA
     '''
 
+def p_functions_queue(p):
+    '''functions_queue          : queue_enqueue
+                                | queue_dequeue
+                                | queue_clear
+                                | queue_isEmpty
+    '''
+
 def p_queue_enqueue(p):
     '''queue_enqueue            : VARIABLE DOT ENQUEUE LPARENT value RPARENT DOTANDCOMMA
     '''
@@ -429,11 +439,11 @@ def p_queue_isEmpty(p):
 
 """ Declaración de funciones """
 def p_declaration_async(p):
-    '''declaration_async    : PUBLIC STATIC ASYNC TASK METHOD LPARENT RPARENT LKEY AWAIT TASK DOT METHOD LPARENT LPARENT RPARENT ARROW LKEY block_code RKEY RPARENT DOTANDCOMMA RKEY
+    '''declaration_async        : PUBLIC STATIC ASYNC TASK METHOD LPARENT RPARENT LKEY AWAIT TASK DOT METHOD LPARENT LPARENT RPARENT ARROW LKEY block_code RKEY RPARENT DOTANDCOMMA RKEY
     '''
 
 def p_declration_lambda(p):
-    "declaration_lambda : ACTION SMALLER_THAN STRINGTYPE GREATER_THAN VARIABLE ASSIGNATION VARIABLE ARROW LKEY block_code RKEY"
+    "declaration_lambda         : ACTION SMALLER_THAN STRINGTYPE GREATER_THAN VARIABLE ASSIGNATION VARIABLE ARROW LKEY block_code RKEY"
 
 
 
@@ -458,14 +468,26 @@ def analizar_sintactico(file_path):
             print(result)  # Imprimir el resultado del análisis sintáctico
 '''
 
-datos = '''
-using System; 
-public class clase1 {
-    for(int ida=0; ida < 0; ida++){
-        Console.WriteLine(ida);
-    }
-}
-    '''
+datos = '''using System; 
+public class clase1 { 
+    const int var2 = 14 , var3 = 15 ;
+    List<int> nombres = new List<int>(){4 , 5, 5, 6}; 
+    nombres.Add("dgf"); 
+    nombres.RemoveAt(0);
+    int var2 = 14; 
+    var3 = var2 ; 
+    var5 = 4 ;
+    Dictionary<> myDict = new Dictionary<>(); myDict.remove(key);
+    Dictionary<> myDict2 = new Dictionary<>() { { key1, 1 }, { key2, 2 } };
+    Console.WriteLine("hasta luego");
+    Console.WriteLine(myDict2);
+    Queue<string> cola1 = new Queue<string>();
+    cola1.enQueue("soda");
+    cola1.deQueue();
+    cola1.peek();
+    cola1.Clear();
+    cola1.isEmpty();
+}'''
 
 print(datos)
 
