@@ -46,7 +46,6 @@ reserved = {
     "else_if": "ELSE_IF",
     "put": "PUT",
     "remove": "REMOVE",
-
     "break": "BREAK",
     "try": "TRY",
     "new": "NEW",
@@ -57,7 +56,13 @@ reserved = {
     #Inicio aporte Kenneth Pacheco
     'do': 'DO',
     "using": "USING",
-    "System": "SYSTEM"
+    "System": "SYSTEM",
+    "Stack": "STACK",
+    "Push": "PUSH",
+    "Pop": "POP",
+    "Queue": "QUEUE",
+    "Enqueue": "ENQUEUE",
+    "Dequeue": "DEQUEUE"
     #Fin aporte Kenneth Pacheco
 
 }

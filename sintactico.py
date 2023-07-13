@@ -355,7 +355,37 @@ def p_list_func_add(p):
     "list_func_add              : VARIABLE DOT ADD LPARENT STRING RPARENT DOTANDCOMMA"
 
 def p_list_func_removeat(p):
-    "list_func_removeat         : VARIABLE DOT REMOVEAT LPARENT INTEGER RPARENT DOTANDCOMMA"
+    "list_func_removeat : VARIABLE DOT REMOVEAT LPARENT INTEGER RPARENT DOTANDCOMMA"
+
+def p_stack_assignation(p):
+    'stack_assignation : STACK VARIABLE ASSIGNATION NEW STACK LPARENT RPARENT DOTANDCOMMA'
+
+def p_stack_push(p):
+    'stack_push : VARIABLE DOT PUSH LPARENT value RPARENT DOTANDCOMMA'
+
+def p_stack_pop(p):
+    'stack_pop : VARIABLE DOT POP LPARENT RPARENT DOTANDCOMMA'
+
+def p_queue_assignation(p):
+    'queue_assignation : QUEUE VARIABLE ASSIGNATION NEW QUEUE LPARENT RPARENT DOTANDCOMMA'
+
+def p_queue_enqueue(p):
+    'queue_push : VARIABLE DOT ENQUEUE LPARENT value RPARENT DOTANDCOMMA'
+
+def p_queue_dequeue(p):
+    'queue_pop : VARIABLE DOT DEQUEUE LPARENT RPARENT DOTANDCOMMA'
+
+
+
+
+""" Declaración de funciones """
+def p_declaration_async(p):
+    '''declaration_async    : PUBLIC STATIC ASYNC TASK METHOD LPARENT RPARENT LKEY AWAIT TASK DOT METHOD LPARENT LPARENT RPARENT ARROW LKEY block_code RKEY RPARENT DOTANDCOMMA RKEY
+    '''
+
+def p_declration_lambda(p):
+    "declaration_lambda : ACTION SMALLER_THAN STRINGTYPE GREATER_THAN VARIABLE ASSIGNATION VARIABLE ARROW LKEY block_code RKEY"
+
 
 
 def p_error(p):
