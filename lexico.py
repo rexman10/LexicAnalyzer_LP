@@ -116,6 +116,8 @@ tokens = (
     'INEQUALITY',
     'GREATER_THAN_OR_EQUAL',
     'SMALLER_THAN_OR_EQUAL',
+    'CONCURRENT',
+    'IDENTIFIER',
     #Operadores logicos
     'LOGICAND',
     'LOGICOR',
@@ -177,6 +179,8 @@ t_LOGICAND = r'\&\&'
 t_LOGICOR = r'\|\|'
 t_LOGICNOT = r'\!'
 t_LOGICXOR = r'\^'
+t_CONCURRENT = r'CONCURRENT'
+t_IDENTIFIER = r'[a-zA-Z_][a-zA-Z0-9_]*'
 #Fin aporte David Rivera
 #Inicio aporte Kenneth Pacheco
 t_ADDITION_ASSIGNMENT = r'\+='

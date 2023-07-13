@@ -91,6 +91,7 @@ def p_block_code(p):
 
                                 | dict_estruct
                                 | functions_dict
+                                | concurrent_method
 
                                 | queue_struct
                                 | functions_queue
@@ -542,7 +543,64 @@ def p_declaration_async(p):
 def p_declration_lambda(p):
     "declaration_lambda         : ACTION SMALLER_THAN STRINGTYPE GREATER_THAN VARIABLE ASSIGNATION VARIABLE ARROW LKEY block_code RKEY"
 
+def p_concurrent_method(p):
+    '''concurrent_method : method_declaration CONCURRENT LKEY concurrent_block RKEY'''
+    # Realizar acciones semánticas correspondientes
 
+def p_method_declaration(p):
+    '''method_declaration : METHOD IDENTIFIER LPARENT RPARENT DOTANDCOMMA'''
+    # Realizar acciones semánticas correspondientes
+
+def p_concurrent_block(p):
+    '''concurrent_block : statement_list'''
+    # Realizar acciones semánticas correspondientes
+
+def p_statement_list(p):
+    '''statement_list : statement
+                      | statement_list statement'''
+    # Realizar acciones semánticas correspondientes
+
+def p_statement(p):
+    '''statement : assignment_concurrent
+                 | if_statement_concurrent
+                 | while_loop_concurrent
+                 | method_call_concurrent
+                 | return_statement_concurrent'''
+    # Realizar acciones semánticas correspondientes
+
+def p_assignment_concurrent(p):
+    '''assignment_concurrent : VARIABLE ASSIGNATION expression DOTANDCOMMA'''
+    # Realizar acciones semánticas correspondientes
+
+def p_if_statement_concurrent(p):
+    '''if_statement_concurrent : IF LPARENT condition RPARENT LKEY concurrent_block RKEY'''
+    # Realizar acciones semánticas correspondientes
+
+def p_while_loop_concurrent(p):
+    '''while_loop_concurrent : WHILE LPARENT condition RPARENT LKEY concurrent_block RKEY'''
+    # Realizar acciones semánticas correspondientes
+
+def p_method_call_concurrent(p):
+    '''method_call_concurrent : IDENTIFIER LPARENT RPARENT DOTANDCOMMA'''
+    # Realizar acciones semánticas correspondientes
+
+def p_return_statement_concurrent(p):
+    '''return_statement_concurrent : RETURN expression DOTANDCOMMA'''
+    # Realizar acciones semánticas correspondientes
+
+def p_expression(p):
+    '''expression : value_numeric
+                  | VARIABLE
+                  | value_numeric arithmetic_operator expression
+                  | VARIABLE arithmetic_operator expression
+    '''
+
+def p_condition(p):
+    '''condition : value_numeric logic_operator value_numeric
+                 | VARIABLE logic_operator value_numeric
+                 | value_numeric logic_operator VARIABLE
+                 | VARIABLE logic_operator VARIABLE
+    '''
 
 def p_error(p):
     if p:
