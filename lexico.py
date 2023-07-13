@@ -66,9 +66,6 @@ reserved = {
     "Stack": "STACK",
     "Push": "PUSH",
     "Pop": "POP",
-    "Queue": "QUEUE",
-    "Enqueue": "ENQUEUE",
-    "Dequeue": "DEQUEUE"
     #Fin aporte Kenneth Pacheco
 
 }

@@ -82,6 +82,9 @@ def p_block_code(p):
                                 | read_data
                                 | arithmetic_operation
                                 | logic_operation
+                                | array_assignation
+                                | array_value_assign
+                                | array_indexing
 
                                 | lists
                                 | functions_list
@@ -94,6 +97,8 @@ def p_block_code(p):
 
                                 | stack_struct
                                 | functions_stack
+
+                                | block_if
 
                                 | block_for
 
@@ -138,6 +143,29 @@ def p_value(p):
                                 | value_logic
                                 | value_string
                                 | read_data
+                                | METHOD
+                                | array
+    '''
+
+def p_array_assignation(p):
+    'array_assignation          : array_type VARIABLE ASSIGNATION LBRACKET array_content RBRACKET DOTANDCOMMA'
+
+def p_array(p):
+    'array                      : LBRACKET array_content RBRACKET'
+
+def p_array_content(p):
+    '''array_content            : value
+                                | value COMMA array_content
+    '''
+
+def p_array_indexing(p):
+    '''array_indexing           : VARIABLE LBRACKET VARIABLE RBRACKET
+                                | VARIABLE LBRACKET INTEGER RBRACKET
+    '''
+
+def p_array_value_assign(p):
+    '''array_value_assign       : VARIABLE LBRACKET VARIABLE RBRACKET ASSIGNATION value DOTANDCOMMA
+                                | VARIABLE LBRACKET INTEGER RBRACKET ASSIGNATION value DOTANDCOMMA
     '''
 
 def p_value_string(p):
@@ -248,6 +276,16 @@ def p_data_type(p):
                                 | DECIMALTYPE
                                 | INTTYPE
                                 | BOOLTYPE
+                                | array_type
+    '''
+
+def p_array_type(p):
+    '''array_type               : CHARTYPE LBRACKET RBRACKET
+                                | STRINGTYPE LBRACKET RBRACKET
+                                | FLOATTYPE LBRACKET RBRACKET
+                                | DECIMALTYPE LBRACKET RBRACKET
+                                | INTTYPE LBRACKET RBRACKET
+                                | BOOLTYPE LBRACKET RBRACKET
     '''
 
 """ Estructuras de control """
@@ -528,7 +566,15 @@ def analizar_sintactico(file_path):
 '''
 
 datos = '''using System; 
-public class clase1 { 
+public class clase1 {
+    public static void BFS(Graph graph, int v, boolean[] discovered){
+        // crea una queue para hacer BFS
+        Queue<Integer> q = new Queue<>();
+        // marca el vértice de origen como descubierto
+        discovered[v] = true;
+        // poner en queue el vértice fuente
+        q.enqueue(v);
+    }
     static void Main(string[] args){
         const int var2 = 14 , var3 = 15 ;
         List<int> nombres = new List<int>(){4 , 5, 5, 6}; 
