@@ -44,235 +44,216 @@ using System; public class clase1 { if(){if(){mama} else{msms} } else_if (){if()
 """
  
 def p_program(p):
-    'program : block_using block_publicClass'
-
-def p_block_using(p):
-    'block_using : USING SYSTEM DOTANDCOMMA'
+    'program                    : USING SYSTEM DOTANDCOMMA block_publicClass'
 
 def p_block_publicClass(p):
-    'block_publicClass : PUBLIC CLASS VARIABLE LKEY all_block_code RKEY'
-
-
-def p_all_block_code(p):
-    '''all_block_code : block_code
-                        | block_code all_block_code  
-    '''
+    'block_publicClass          : PUBLIC CLASS VARIABLE LKEY all_block_code RKEY'
 
 def p_block_code(p):
-    '''block_code   : def_const_or_var
-                    | estruct_of_data
-                    | block_try_catch
-                    | block_while
-                    | VARIABLE
-                    | dict_estruct
-                    | functions_dict
-                    | functions_list
-                    | declaration_lambda
-                    | block_if
-                    | print_data
-                    | block_for
+    '''block_code               : def_const_or_var
+                                | print_data
+                                | read_data
+                                | arithmetic_operation
+                                | logic_operation
     '''
 
-""" Declaracion de variables y constantes """
-
-def p_def_const_or_var(p):
-    '''def_const_or_var : constant_assignation
-                        | variable_assignation
+def p_all_block_code(p):
+    '''all_block_code           : block_code
+                                | block_code all_block_code  
     '''
-
-def p_variable_assignation(p):
-    '''variable_assignation : access_modifiers all_asignations
-                            | all_asignations
-
-    '''
-
-def p_constant_assignation(p):
-    '''constant_assignation : access_modifiers CONST all_asignations
-                            | CONST all_asignations
-                            | CONST data_type assignation_key_value COMMA some_assignation_constant
-    '''
-
-def p_all_asignations(p):
-    '''all_asignations : assignation_with_datatype
-                        | assignation_without_datatype
-    '''
-
-def p_assignation_with_datatype(p):
-    '''assignation_with_datatype : data_type assignation_key_value DOTANDCOMMA
-                            | data_type assignation_key_value DOTANDCOMMA assignation_with_datatype   
-                            | data_type assignation_key_value DOTANDCOMMA assignation_without_datatype                     
-    '''
-
-def p_assignation_without_datatype(p):
-    '''assignation_without_datatype : assignation_key_value DOTANDCOMMA
-                                    | assignation_key_value DOTANDCOMMA assignation_without_datatype
-                                    | assignation_key_value DOTANDCOMMA assignation_with_datatype
-    '''
-
-def p_some_assignation_constant(p):
-    '''some_assignation_constant : assignation_key_value DOTANDCOMMA
-                                | assignation_key_value COMMA some_assignation_constant
-    '''
-
-def p_assignation_key_value(p):
-    'assignation_key_value : VARIABLE ASSIGNATION value'
-
-def p_data_type(p):
-    '''data_type    : CHARTYPE
-                    | STRINGTYPE
-                    | FLOATTYPE
-                    | DECIMALTYPE
-                    | INTTYPE
-                    | BOOLTYPE
-    '''
-
-
-
 
 """ Tipo de valores validos para asignar """
 def p_print_data(p):
-    '''print_data       : PRINT RPARENT STRING LPARENT DOTANDCOMMA
+    '''print_data               : PRINT LPARENT STRING RPARENT DOTANDCOMMA
     '''
 
 def p_read_data(p):
-    '''read_data        : READ RPARENT LPARENT
+    '''read_data                : READ LPARENT RPARENT DOTANDCOMMA
+    '''
+
+def p_concatenation(p):
+    '''concatenation            : STRING
+                                | STRING PLUS concatenation
     '''
 
 def p_value(p):
-    '''value    : value_numeric
-                | value_logic
-                | value_string
-                | read_data
+    '''value                    : value_numeric
+                                | value_logic
+                                | value_string
+                                | read_data
     '''
 
 def p_value_string(p):
-    '''value_string : STRING
-                    | CHAR
-                    | VARIABLE
-                    | READ LPARENT RPARENT
-                    | concatenation
+    '''value_string             : STRING
+                                | CHAR
+                                | VARIABLE
+                                | concatenation
     '''
 
 def p_value_logic(p):
-    '''value_logic  : BOOLTRUE
-                    | BOOLFALSE
+    '''value_logic              : BOOLTRUE
+                                | BOOLFALSE
+                                | logic_operation
     '''
 
 def p_value_numeric(p):
-    '''value_numeric    : INTEGER
-                        | FLOAT_NUMBER
-                        | DECIMAL_NUMBER
+    '''value_numeric            : INTEGER
+                                | FLOAT_NUMBER
+                                | DECIMAL_NUMBER
+                                | arithmetic_operation
     '''
 
+""" Operaciones logicas y aritmeticas"""
+def p_arithmetic_operation(p):
+    '''arithmetic_operation     : value_numeric
+                                | VARIABLE
+                                | value_numeric arithmetic_operator arithmetic_operation
+                                | VARIABLE arithmetic_operator arithmetic_operation
+    '''
 
+def p_logic_operation(p):
+    '''logic_operation          : value_numeric
+                                | VARIABLE
+                                | value_numeric logic_operator logic_operation
+                                | VARIABLE logic_operator logic_operation
+    '''
 
+def p_logic_operator(p):
+    '''logic_operator           : GREATER_THAN
+                                | SMALLER_THAN
+                                | EQUAL_COMPARATION
+                                | INEQUALITY
+                                | GREATER_THAN_OR_EQUAL
+                                | SMALLER_THAN_OR_EQUAL
+                                | LOGICAND
+                                | LOGICOR
+                                | LOGICNOT
+                                | LOGICXOR
+    '''
+
+def p_arithmetic_operator(p):
+    '''arithmetic_operator      : PLUS
+                                | MINUS
+                                | TIMES
+                                | DIVIDE
+                                | PERCENT
+    '''
+
+""" Declaracion de variables y constantes """
+def p_access_modifiers(p):
+    '''access_modifiers         : PUBLIC
+                                | PRIVATE
+    '''
+
+def p_def_const_or_var(p):
+    '''def_const_or_var         : constant_assignation
+                                | variable_assignation
+                                | late_initialization
+    '''
+
+def p_constant_assignation(p):
+    '''constant_assignation     : access_modifiers CONST data_type assignation_key_value DOTANDCOMMA
+                                | CONST data_type assignation_key_value DOTANDCOMMA
+                                | access_modifiers CONST data_type assignation_key_value_multiple DOTANDCOMMA
+                                | CONST data_type assignation_key_value_multiple DOTANDCOMMA
+    '''
+
+def p_variable_assignation(p):
+    '''variable_assignation     : access_modifiers data_type assignation_key_value DOTANDCOMMA
+                                | data_type assignation_key_value DOTANDCOMMA
+                                | access_modifiers data_type assignation_key_value_multiple DOTANDCOMMA
+                                | data_type assignation_key_value_multiple DOTANDCOMMA
+    '''
+
+def p_late_initialization(p):
+    '''late_initialization      : access_modifiers VARIABLE DOTANDCOMMA
+                                | VARIABLE DOTANDCOMMA
+                                | assignation_key_value DOTANDCOMMA
+    '''
+
+def p_assignation_key_value(p):
+    '''assignation_key_value    : VARIABLE ASSIGNATION value
+                                | READ LPARENT RPARENT
+    '''
+
+def p_assignation_key_value_multiple(p):
+    '''assignation_key_value_multiple   : VARIABLE ASSIGNATION value
+                                        | VARIABLE ASSIGNATION value COMMA assignation_key_value_multiple   
+    '''
+
+def p_assignation_with_datatype(p):
+    '''assignation_with_datatype        : data_type assignation_key_value DOTANDCOMMA
+                                        | data_type assignation_key_value DOTANDCOMMA assignation_with_datatype                    
+    '''
+
+def p_data_type(p):
+    '''data_type                : CHARTYPE
+                                | STRINGTYPE
+                                | FLOATTYPE
+                                | DECIMALTYPE
+                                | INTTYPE
+                                | BOOLTYPE
+    '''
 
 """ Estructuras de control """
 
 def p_block_for(p):
-    '''block_for        : for_anidado
-                        | for_each
+    '''block_for                : for_anidado
+                                | for_each
     '''
 
 def p_for_simple(p):
-    '''for_simple       : FOR LPARENT assignation_with_datatype logic_operation DOTANDCOMMA VARIABLE INCREMENT RPARENT LKEY block_code RKEY
-                        | FOR LPARENT assignation_with_datatype logic_operation DOTANDCOMMA VARIABLE DECREMENT RPARENT LKEY block_code RKEY
+    '''for_simple               : FOR LPARENT assignation_with_datatype logic_operation DOTANDCOMMA VARIABLE INCREMENT RPARENT LKEY all_block_code RKEY
+                                | FOR LPARENT assignation_with_datatype logic_operation DOTANDCOMMA VARIABLE DECREMENT RPARENT LKEY all_block_code RKEY
 
     '''
 
 def p_for_anidado(p):
-    '''for_anidado      : for_simple
-                        | FOR LPARENT assignation_with_datatype logic_operation DOTANDCOMMA VARIABLE INCREMENT RPARENT LKEY for_anidado RKEY
-                        | FOR LPARENT assignation_with_datatype logic_operation DOTANDCOMMA VARIABLE DECREMENT RPARENT LKEY for_anidado RKEY 
+    '''for_anidado              : for_simple
+                                | FOR LPARENT assignation_with_datatype logic_operation DOTANDCOMMA VARIABLE INCREMENT RPARENT LKEY for_anidado RKEY
+                                | FOR LPARENT assignation_with_datatype logic_operation DOTANDCOMMA VARIABLE DECREMENT RPARENT LKEY for_anidado RKEY 
     '''
 
 def p_for_each(p):
-    '''for_each         : FOREACH LPARENT data_type VARIABLE IN VARIABLE RPARENT LKEY block_code RKEY
+    '''for_each                 : FOREACH LPARENT data_type VARIABLE IN VARIABLE RPARENT LKEY all_block_code RKEY
     '''
 
 def p_block_try_catch(p):
-    '''block_try_catch : try_catch_simply
-                        | try_catch_finally
+    '''block_try_catch          : try_catch_simply
+                                | try_catch_finally
     '''
 
 def p_try_catch_simply(p):
-    'try_catch_simply : TRY LKEY block_code RKEY CATCH LPARENT EXCEPTION VARIABLE RPARENT LKEY block_code RKEY'
+    'try_catch_simply           : TRY LKEY all_block_code RKEY CATCH LPARENT EXCEPTION VARIABLE RPARENT LKEY all_block_code RKEY'
     
 def p_try_catch_finally(p):
-    'try_catch_finally : TRY LKEY block_code RKEY CATCH LPARENT EXCEPTION VARIABLE RPARENT LKEY block_code RKEY FINALLY LKEY block_code RKEY'
+    'try_catch_finally          : TRY LKEY all_block_code RKEY CATCH LPARENT EXCEPTION VARIABLE RPARENT LKEY all_block_code RKEY FINALLY LKEY all_block_code RKEY'
 
-
-def p_access_modifiers(p):
-    '''access_modifiers : PUBLIC
-                        | PRIVATE
-    '''
 
 def p_block_while(p):
-    '''block_while : normal_while
-                   | do_while             
+    '''block_while              : normal_while
+                                | do_while             
     '''
 
 def p_normal_while(p):
-    'normal_while : WHILE LPARENT logic_operation RPARENT LKEY block_code RKEY'
+    'normal_while               : WHILE LPARENT logic_operation RPARENT LKEY all_block_code RKEY'
 
 def p_do_while(p):
-    'do_while : DO LKEY block_code RKEY WHILE LPARENT logic_operation RPARENT'
+    'do_while                   : DO LKEY all_block_code RKEY WHILE LPARENT logic_operation RPARENT'
 
 def p_block_if(p):
-    'block_if : IF LPARENT logic_operation RPARENT LKEY not_yes_nested_if RKEY other_if'
+    'block_if                   : IF LPARENT logic_operation RPARENT LKEY not_yes_nested_if RKEY other_if'
 
 def p_other_if(p):
     '''
-    other_if : ELSE LKEY not_yes_nested_if RKEY
-               | ELSE_IF LPARENT logic_operation RPARENT LKEY not_yes_nested_if RKEY other_if
+    other_if                    : ELSE LKEY not_yes_nested_if RKEY
+                                | ELSE_IF LPARENT logic_operation RPARENT LKEY not_yes_nested_if RKEY other_if
     '''
 
 def p_not_yes_nested_if(p):
     '''
-    not_yes_nested_if : block_if
-                       | block_code
-    '''
-
-""" Operaciones """
-
-def p_arithmetic_operation(p):
-    '''arithmetic_operation : value_numeric
-                            | value_numeric arithmetic_operator arithmetic_operation
-    '''
-
-def p_logic_operation(p):
-    '''logic_operation  : value_logic
-                        | value_logic logic_operator logic_operation
-    '''
-
-def p_concatenation(p):
-    '''concatenation    : STRING
-                        | STRING PLUS concatenation
-    '''
-
-def p_logic_operator(p):
-    '''logic_operator   : GREATER_THAN
-                        | SMALLER_THAN
-                        | EQUAL_COMPARATION
-                        | INEQUALITY
-                        | GREATER_THAN_OR_EQUAL
-                        | SMALLER_THAN_OR_EQUAL
-                        | LOGICAND
-                        | LOGICOR
-                        | LOGICNOT
-                        | LOGICXOR
-    '''
-
-def p_arithmetic_operator(p):
-    '''arithmetic_operator  : PLUS
-                            | MINUS
-                            | TIMES
-                            | DIVIDE
-                            | PERCENT
-    '''
-
-def p_variable_assignation_multiline(p):
-    '''variable_assignation_multiline   : 
+    not_yes_nested_if           : block_if
+                                | block_code
     '''
 
 
@@ -281,110 +262,100 @@ def p_variable_assignation_multiline(p):
 
 def p_dict_estruct(p):
     '''
-    dict_estruct : dict_empty
-                   | dict_full
+    dict_estruct                : dict_empty
+                                | dict_full
     '''
 
 #variable = random mix
 def p_dict_empty(p):
     '''
-    dict_empty : DICTIONARY SMALLER_THAN GREATER_THAN VARIABLE ASSIGNATION NEW DICTIONARY SMALLER_THAN GREATER_THAN LPARENT RPARENT DOTANDCOMMA
+    dict_empty                  : DICTIONARY SMALLER_THAN GREATER_THAN VARIABLE ASSIGNATION NEW DICTIONARY SMALLER_THAN GREATER_THAN LPARENT RPARENT DOTANDCOMMA
     '''
 
 def p_dict_full(p):
     '''
-    dict_full : DICTIONARY SMALLER_THAN GREATER_THAN VARIABLE ASSIGNATION NEW DICTIONARY SMALLER_THAN GREATER_THAN LPARENT RPARENT LKEY dictionary_value RKEY DOTANDCOMMA
+    dict_full                   : DICTIONARY SMALLER_THAN GREATER_THAN VARIABLE ASSIGNATION NEW DICTIONARY SMALLER_THAN GREATER_THAN LPARENT RPARENT LKEY dictionary_value RKEY DOTANDCOMMA
     '''
 
 def p_dictionary_value(p):
-    '''dictionary_value : LKEY key_value_pair RKEY'''
+    '''dictionary_value         : LKEY key_value_pair RKEY
+    '''
 
 def p_key_value_pairs(p):
-    '''key_value_pairs : key_value_pair
-                       | key_value_pair COMMA key_value_pairs'''
+    '''key_value_pairs          : key_value_pair
+                                | key_value_pair COMMA key_value_pairs
+    '''
 
 #Key: String Value: String | int
 def p_key_value_pair(p):
-    '''key_value_pair : STRING DOUBLEPOINT valueHash'''
+    '''key_value_pair           : STRING DOUBLEPOINT valueHash
+    '''
 
 #definicion repetida, para prueba
 def p_valueHash(p):
-    '''valueHash : INTTYPE
-                '''
+    '''valueHash                : INTTYPE
+    '''
 def p_estruct_of_data(p):
-    '''estruct_of_data : list_empty
-                        | list_full
+    '''estruct_of_data          : list_empty
+                                | list_full
     '''
 
 def p_functions_dict(p):
     '''
-    functions_dict : dict_func_put
-                    | dict_func_remove
+    functions_dict              : dict_func_put
+                                | dict_func_remove
     '''
 
 def p_dict_func_put(p):
     '''
-    dict_func_put : STRING DOT PUT LPARENT STRING COMMA STRING RPARENT DOTANDCOMMA
+    dict_func_put               : STRING DOT PUT LPARENT STRING COMMA STRING RPARENT DOTANDCOMMA
     '''
 
 def p_dict_func_remove(p):
     '''
-    dict_func_remove : STRING DOT REMOVE LPARENT STRING RPARENT DOTANDCOMMA
+    dict_func_remove            : STRING DOT REMOVE LPARENT STRING RPARENT DOTANDCOMMA
     '''
 
 #Agg la funcion Valueof
 
 def p_list_empty(p):
-    '''list_empty : LIST SMALLER_THAN STRINGTYPE GREATER_THAN VARIABLE ASSIGNATION NEW LIST SMALLER_THAN STRINGTYPE GREATER_THAN LPARENT RPARENT DOTANDCOMMA
-                    | LIST SMALLER_THAN INTTYPE GREATER_THAN VARIABLE ASSIGNATION NEW LIST SMALLER_THAN INTTYPE GREATER_THAN LPARENT RPARENT DOTANDCOMMA
+    '''list_empty               : LIST SMALLER_THAN STRINGTYPE GREATER_THAN VARIABLE ASSIGNATION NEW LIST SMALLER_THAN STRINGTYPE GREATER_THAN LPARENT RPARENT DOTANDCOMMA
+                                | LIST SMALLER_THAN INTTYPE GREATER_THAN VARIABLE ASSIGNATION NEW LIST SMALLER_THAN INTTYPE GREATER_THAN LPARENT RPARENT DOTANDCOMMA
     '''
     
 def p_list_full(p):
-    '''list_full : LIST SMALLER_THAN STRINGTYPE GREATER_THAN VARIABLE ASSIGNATION NEW LIST SMALLER_THAN STRINGTYPE GREATER_THAN LPARENT RPARENT LKEY strings_list RKEY
-                    | LIST SMALLER_THAN INTTYPE GREATER_THAN VARIABLE ASSIGNATION NEW LIST SMALLER_THAN INTTYPE GREATER_THAN LPARENT RPARENT LKEY ints_list RKEY
+    '''list_full                : LIST SMALLER_THAN STRINGTYPE GREATER_THAN VARIABLE ASSIGNATION NEW LIST SMALLER_THAN STRINGTYPE GREATER_THAN LPARENT RPARENT LKEY strings_list RKEY
+                                | LIST SMALLER_THAN INTTYPE GREATER_THAN VARIABLE ASSIGNATION NEW LIST SMALLER_THAN INTTYPE GREATER_THAN LPARENT RPARENT LKEY ints_list RKEY
     '''
 
 def p_strings_list(p):
-    '''strings_list : STRING
-                    | STRING COMMA strings_list
+    '''strings_list             : STRING
+                                | STRING COMMA strings_list
     '''
 
 def p_ints_list(p):
-    '''ints_list : INTEGER
-                | INTEGER COMMA ints_list
+    '''ints_list                : INTEGER
+                                | INTEGER COMMA ints_list
     '''
 
 def p_functions_list(p):
-    '''functions_list : list_func_clear
-                        | list_func_count
-                        | list_func_add
-                        | list_func_removeat
+    '''functions_list           : list_func_clear
+                                | list_func_count
+                                | list_func_add
+                                | list_func_removeat
     '''
 
 def p_list_func_clear(p):
-    "list_func_clear : VARIABLE DOT CLEAR LPARENT RPARENT DOTANDCOMMA"
+    "list_func_clear            : VARIABLE DOT CLEAR LPARENT RPARENT DOTANDCOMMA"
 
 def p_list_func_count(p):
-    "list_func_count : VARIABLE DOT COUNT LPARENT RPARENT DOTANDCOMMA"
+    "list_func_count            : VARIABLE DOT COUNT LPARENT RPARENT DOTANDCOMMA"
 
 def p_list_func_add(p):
-    "list_func_add : VARIABLE DOT ADD LPARENT STRING RPARENT DOTANDCOMMA"
+    "list_func_add              : VARIABLE DOT ADD LPARENT STRING RPARENT DOTANDCOMMA"
 
 def p_list_func_removeat(p):
-    "list_func_removeat : VARIABLE DOT REMOVEAT LPARENT INTEGER RPARENT DOTANDCOMMA"
-
-
-
-
-
-""" Declaración de funciones """
-def p_declaration_async(p):
-    '''declaration_async    : PUBLIC STATIC ASYNC TASK METHOD LPARENT RPARENT LKEY AWAIT TASK DOT METHOD LPARENT LPARENT RPARENT ARROW LKEY block_code RKEY RPARENT DOTANDCOMMA RKEY
-    '''
-
-def p_declration_lambda(p):
-    "declaration_lambda : ACTION SMALLER_THAN STRINGTYPE GREATER_THAN VARIABLE ASSIGNATION VARIABLE ARROW LKEY block_code RKEY"
-
+    "list_func_removeat         : VARIABLE DOT REMOVEAT LPARENT INTEGER RPARENT DOTANDCOMMA"
 
 
 def p_error(p):
@@ -408,6 +379,21 @@ def analizar_sintactico(file_path):
             print(result)  # Imprimir el resultado del análisis sintáctico
 '''
 
+datos = '''using System;
+public class clase {
+    int num = 10;
+    string texto = "Hola";
+    Console.WriteLine("Ingrese un numero: ");
+    string input = Console.ReadLine();
+}'''
+
+print(datos)
+
 def analizar_sintactico_string(content):
     result = sintactico.parse(content)
-    return result is not None
+    #return result is not None
+    if result!=None:
+        print(result)
+        return result
+
+var = analizar_sintactico_string(datos)

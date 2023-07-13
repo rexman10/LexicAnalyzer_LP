@@ -184,13 +184,9 @@ t_PIPE = r'\|'
 t_BACK_SLASH = r'\\'
 #Fin aporte Kenneth Pacheco
 
-""" def t_ID(t):
-    r'[a-zA-Z0-9_]\w*'
-    t.type = reserved.get(t.value, 'ID')
-    return t """
 
 def t_PRINT(t):
-    r'(Console\.WriteLine|Console\.Write|System\.Console\.WriteLine|System\.Console\.Write)'
+    r'Console\.WriteLine'
     return t
 
 def t_READ(t):
@@ -205,6 +201,7 @@ def t_newline(t):
 #Inicio aporte Juan Guadalupe
 def t_METHOD(t):
   r'[A-Z]\w*'
+  t.type = reserved.get(t.value,'METHOD')
   return t
 def t_VARIABLE(t):
   r'[a-z\_]\w*'
@@ -215,15 +212,15 @@ def t_VARIABLE(t):
 #Inicio aporte David Rivera
 # #Para validar los tipos de datos
 def t_DECIMAL_NUMBER(t):
-    r'\d+\.\d+m'
-    t.value = float(t.value)
+    r'\-?\d+\.\d+m'
+    t.value = float(str(t.value)[0:-2])
     return t
 def t_FLOAT_NUMBER(t):
-    r'\d+\.\d+'
+    r'\-?\d+\.\d+'
     t.value = float(t.value)
     return t
 def t_INTEGER(t):
-    r'\d+'
+    r'\-?\d+'
     t.value = int(t.value)
     return t
 def t_CHAR(t):
