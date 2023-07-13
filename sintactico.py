@@ -567,7 +567,7 @@ def analizar_sintactico(file_path):
 
 datos = '''using System; 
 public class clase1 {
-    public static void BFS(Graph graph, int v, boolean[] discovered){
+    public static void Bfs(Graph graph, int v, boolean[] discovered){
         // crea una queue para hacer BFS
         Queue<Integer> q = new Queue<>();
         // marca el vértice de origen como descubierto
