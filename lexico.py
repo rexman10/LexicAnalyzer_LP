@@ -16,6 +16,11 @@ reserved = {
     'namespace':'NAMESPACE',
     'Task':'TASK',
     'async':'ASYNC',
+    'Queue':'QUEUE',
+    'Enqueue':'ENQUEUE',
+    'Dequeue':'DEQUEUE',
+    'Peek':'PEEK',
+    'isEmpty':'ISEMPTY',
     #Fin aporte Juan Guadalupe
 
     #Inicio aporte Adair Abrigo
