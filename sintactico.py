@@ -55,6 +55,18 @@ def p_block_code(p):
                                 | read_data
                                 | arithmetic_operation
                                 | logic_operation
+
+                                | lists
+                                | functions_list
+
+                                | dict_estruct
+                                | functions_dict
+
+                                | block_for
+
+                                | block_try_catch
+
+                                | block_while
     '''
 
 def p_all_block_code(p):
@@ -308,15 +320,20 @@ def p_functions_dict(p):
 
 def p_dict_func_put(p):
     '''
-    dict_func_put               : STRING DOT PUT LPARENT STRING COMMA STRING RPARENT DOTANDCOMMA
+    dict_func_put               : VARIABLE DOT PUT LPARENT STRING COMMA VARIABLE RPARENT DOTANDCOMMA
     '''
 
 def p_dict_func_remove(p):
     '''
-    dict_func_remove            : STRING DOT REMOVE LPARENT STRING RPARENT DOTANDCOMMA
+    dict_func_remove            : VARIABLE DOT REMOVE LPARENT VARIABLE RPARENT DOTANDCOMMA
     '''
 
 #Agg la funcion Valueof
+
+def p_lists(p):
+    ''' lists                   : list_empty
+                                | list_full
+    '''
 
 def p_list_empty(p):
     '''list_empty               : LIST SMALLER_THAN STRINGTYPE GREATER_THAN VARIABLE ASSIGNATION NEW LIST SMALLER_THAN STRINGTYPE GREATER_THAN LPARENT RPARENT DOTANDCOMMA
@@ -422,13 +439,8 @@ def analizar_sintactico(file_path):
             print(result)  # Imprimir el resultado del análisis sintáctico
 '''
 
-datos = '''using System;
-public class clase {
-    int num = 10;
-    string texto = "Hola";
-    Console.WriteLine("Ingrese un numero: ");
-    string input = Console.ReadLine();
-}'''
+datos = '''using System; public class clase1 { Dictionary<> myDict = new Dictionary<>(); myDict.remove(key);}
+    '''
 
 print(datos)
 
