@@ -373,6 +373,23 @@ def p_list_func_add(p):
 def p_list_func_removeat(p):
     "list_func_removeat : VARIABLE DOT REMOVEAT LPARENT INTEGER RPARENT DOTANDCOMMA"
 
+def p_stack_assignation(p):
+    'stack_assignation : STACK VARIABLE ASSIGNATION NEW STACK LPARENT RPARENT DOTANDCOMMA'
+
+def p_stack_push(p):
+    'stack_push : VARIABLE DOT PUSH LPARENT value RPARENT DOTANDCOMMA'
+
+def p_stack_pop(p):
+    'stack_pop : VARIABLE DOT POP LPARENT RPARENT DOTANDCOMMA'
+
+def p_queue_assignation(p):
+    'queue_assignation : QUEUE VARIABLE ASSIGNATION NEW QUEUE LPARENT RPARENT DOTANDCOMMA'
+
+def p_queue_enqueue(p):
+    'queue_push : VARIABLE DOT ENQUEUE LPARENT value RPARENT DOTANDCOMMA'
+
+def p_queue_dequeue(p):
+    'queue_pop : VARIABLE DOT DEQUEUE LPARENT RPARENT DOTANDCOMMA'
 
 
 

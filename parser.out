@@ -161,18 +161,24 @@ Rule 130   list_func_clear -> VARIABLE DOT CLEAR LPARENT RPARENT DOTANDCOMMA
 Rule 131   list_func_count -> VARIABLE DOT COUNT LPARENT RPARENT DOTANDCOMMA
 Rule 132   list_func_add -> VARIABLE DOT ADD LPARENT STRING RPARENT DOTANDCOMMA
 Rule 133   list_func_removeat -> VARIABLE DOT REMOVEAT LPARENT INTEGER RPARENT DOTANDCOMMA
-Rule 134   declaration_async -> PUBLIC STATIC ASYNC TASK METHOD LPARENT RPARENT LKEY AWAIT TASK DOT METHOD LPARENT LPARENT RPARENT ARROW LKEY block_code RKEY RPARENT DOTANDCOMMA RKEY
-Rule 135   declaration_lambda -> ACTION SMALLER_THAN STRINGTYPE GREATER_THAN VARIABLE ASSIGNATION VARIABLE ARROW LKEY block_code RKEY
+Rule 134   stack_assignation -> STACK VARIABLE ASSIGNATION NEW STACK LPARENT RPARENT DOTANDCOMMA
+Rule 135   stack_push -> VARIABLE DOT PUSH LPARENT value RPARENT DOTANDCOMMA
+Rule 136   stack_pop -> VARIABLE DOT POP LPARENT RPARENT DOTANDCOMMA
+Rule 137   queue_assignation -> QUEUE VARIABLE ASSIGNATION NEW QUEUE LPARENT RPARENT DOTANDCOMMA
+Rule 138   queue_push -> VARIABLE DOT ENQUEUE LPARENT value RPARENT DOTANDCOMMA
+Rule 139   queue_pop -> VARIABLE DOT DEQUEUE LPARENT RPARENT DOTANDCOMMA
+Rule 140   declaration_async -> PUBLIC STATIC ASYNC TASK METHOD LPARENT RPARENT LKEY AWAIT TASK DOT METHOD LPARENT LPARENT RPARENT ARROW LKEY block_code RKEY RPARENT DOTANDCOMMA RKEY
+Rule 141   declaration_lambda -> ACTION SMALLER_THAN STRINGTYPE GREATER_THAN VARIABLE ASSIGNATION VARIABLE ARROW LKEY block_code RKEY
 
 Terminals, with rules where they appear
 
-ACTION               : 135
+ACTION               : 141
 ADD                  : 132
 ADDITION_ASSIGNMENT  : 
-ARROW                : 134 135
-ASSIGNATION          : 35 105 106 118 119 120 121 135
-ASYNC                : 134
-AWAIT                : 134
+ARROW                : 140 141
+ASSIGNATION          : 35 105 106 118 119 120 121 134 137 141
+ASYNC                : 140
+AWAIT                : 140
 BACK_SLASH           : 
 BOOL                 : 
 BOOLFALSE            : 54
@@ -190,17 +196,19 @@ COUNT                : 131
 DECIMALTYPE          : 39
 DECIMAL_NUMBER       : 57
 DECREMENT            : 61 64
+DEQUEUE              : 139
 DICTIONARY           : 105 105 106 106
 DIVIDE               : 100
 DIVISION_ASSIGNMENT  : 
 DO                   : 75
 DOLLARSIGN           : 
-DOT                  : 116 117 130 131 132 133 134
-DOTANDCOMMA          : 2 27 28 29 30 31 32 33 42 60 61 63 64 105 106 116 117 118 119 130 131 132 133 134
+DOT                  : 116 117 130 131 132 133 135 136 138 139 140
+DOTANDCOMMA          : 2 27 28 29 30 31 32 33 42 60 61 63 64 105 106 116 117 118 119 130 131 132 133 134 135 136 137 138 139 140
 DOUBLEPOINT          : 110
 DOUBLE_QUOTATION_MARKS : 
 ELSE                 : 77
 ELSE_IF              : 78
+ENQUEUE              : 138
 EQUAL_COMPARATION    : 89
 EXCEPTION            : 68 69
 FINALLY              : 69
@@ -208,7 +216,7 @@ FLOATTYPE            : 38
 FLOAT_NUMBER         : 56
 FOR                  : 60 61 63 64
 FOREACH              : 65
-GREATER_THAN         : 87 105 105 106 106 118 118 119 119 120 120 121 121 135
+GREATER_THAN         : 87 105 105 106 106 118 118 119 119 120 120 121 121 141
 GREATER_THAN_OR_EQUAL : 91
 ID                   : 
 IF                   : 76
@@ -220,48 +228,52 @@ INTTYPE              : 40 111 119 119 121 121
 JUMP_LINE            : 
 LBRACKET             : 
 LIST                 : 118 118 119 119 120 120 121 121
-LKEY                 : 3 60 61 63 64 65 68 68 69 69 69 74 75 76 77 78 106 107 120 121 134 134 135
+LKEY                 : 3 60 61 63 64 65 68 68 69 69 69 74 75 76 77 78 106 107 120 121 140 140 141
 LOGICAND             : 93
 LOGICNOT             : 95
 LOGICOR              : 94
 LOGICXOR             : 96
 LONG                 : 
-LPARENT              : 42 43 51 60 61 63 64 65 68 69 74 75 76 78 105 106 116 117 118 119 120 121 130 131 132 133 134 134 134
-METHOD               : 134 134
+LPARENT              : 42 43 51 60 61 63 64 65 68 69 74 75 76 78 105 106 116 117 118 119 120 121 130 131 132 133 134 135 136 137 138 139 140 140 140
+METHOD               : 140 140
 MINUS                : 98
 MODULE_ASSIGNMENT    : 
 MULTIPLICATION_ASSIGNMENT : 
 NAMESPACE            : 
-NEW                  : 105 106 118 119 120 121
+NEW                  : 105 106 118 119 120 121 134 137
 PERCENT              : 101
 PIPE                 : 
 PLUS                 : 86 97
+POP                  : 136
 PRINT                : 42
 PRIVATE              : 71
-PUBLIC               : 3 70 134
+PUBLIC               : 3 70 140
+PUSH                 : 135
 PUT                  : 116
+QUEUE                : 137 137
 RBRACKET             : 
 READ                 : 43 51
 REMOVE               : 117
 REMOVEAT             : 133
 RETURN               : 
-RKEY                 : 3 60 61 63 64 65 68 68 69 69 69 74 75 76 77 78 106 107 120 121 134 134 135
-RPARENT              : 42 43 51 60 61 63 64 65 68 69 74 75 76 78 105 106 116 117 118 119 120 121 130 131 132 133 134 134 134
+RKEY                 : 3 60 61 63 64 65 68 68 69 69 69 74 75 76 77 78 106 107 120 121 140 140 141
+RPARENT              : 42 43 51 60 61 63 64 65 68 69 74 75 76 78 105 106 116 117 118 119 120 121 130 131 132 133 134 135 136 137 138 139 140 140 140
 SIPLE_QUOTATION_MARKS : 
-SMALLER_THAN         : 88 105 105 106 106 118 118 119 119 120 120 121 121 135
+SMALLER_THAN         : 88 105 105 106 106 118 118 119 119 120 120 121 121 141
 SMALLER_THAN_OR_EQUAL : 92
-STATIC               : 134
+STACK                : 134 134
+STATIC               : 140
 STRING               : 42 48 85 86 110 116 116 116 117 117 122 123 132
-STRINGTYPE           : 37 118 118 120 120 135
+STRINGTYPE           : 37 118 118 120 120 141
 SUBTRACTION_ASSIGNMENT : 
 SWITCH               : 
 SYSTEM               : 2
 TABULATION           : 
-TASK                 : 134 134
+TASK                 : 140 140
 TIMES                : 99
 TRY                  : 68 69
 USING                : 2
-VARIABLE             : 3 10 35 50 60 61 63 64 65 65 68 69 105 106 118 119 120 121 130 131 132 133 135 135
+VARIABLE             : 3 10 35 50 60 61 63 64 65 65 68 69 105 106 118 119 120 121 130 131 132 133 134 135 136 137 138 139 141 141
 VOID                 : 
 WHILE                : 74 75
 error                : 
@@ -276,7 +288,7 @@ arithmetic_operator  : 82
 assignation_key_value : 24 27 28 29 30 31 32 33 34
 assignation_with_datatype : 25 28 32 60 61 63 64
 assignation_without_datatype : 26 29 31
-block_code           : 4 5 60 61 65 68 68 69 69 69 74 75 80 134 135
+block_code           : 4 5 60 61 65 68 68 69 69 69 74 75 80 140 141
 block_for            : 17
 block_if             : 15 79
 block_publicClass    : 1
@@ -318,12 +330,18 @@ not_yes_nested_if    : 76 77 78
 other_if             : 76 78
 print_data           : 16
 program              : 0
+queue_assignation    : 
+queue_pop            : 
+queue_push           : 
 read_data            : 47
 some_assignation_constant : 24 34
+stack_assignation    : 
+stack_pop            : 
+stack_push           : 
 strings_list         : 120 123
 try_catch_finally    : 67
 try_catch_simply     : 66
-value                : 35
+value                : 35 135 138
 valueHash            : 110
 value_logic          : 45 83 84
 value_numeric        : 44 81 82
@@ -441,7 +459,7 @@ state 10
     (127) functions_list -> . list_func_count
     (128) functions_list -> . list_func_add
     (129) functions_list -> . list_func_removeat
-    (135) declaration_lambda -> . ACTION SMALLER_THAN STRINGTYPE GREATER_THAN VARIABLE ASSIGNATION VARIABLE ARROW LKEY block_code RKEY
+    (141) declaration_lambda -> . ACTION SMALLER_THAN STRINGTYPE GREATER_THAN VARIABLE ASSIGNATION VARIABLE ARROW LKEY block_code RKEY
     (76) block_if -> . IF LPARENT logic_operation RPARENT LKEY not_yes_nested_if RKEY other_if
     (42) print_data -> . PRINT RPARENT STRING LPARENT DOTANDCOMMA
     (58) block_for -> . for_anidado
@@ -642,7 +660,7 @@ state 14
     (127) functions_list -> . list_func_count
     (128) functions_list -> . list_func_add
     (129) functions_list -> . list_func_removeat
-    (135) declaration_lambda -> . ACTION SMALLER_THAN STRINGTYPE GREATER_THAN VARIABLE ASSIGNATION VARIABLE ARROW LKEY block_code RKEY
+    (141) declaration_lambda -> . ACTION SMALLER_THAN STRINGTYPE GREATER_THAN VARIABLE ASSIGNATION VARIABLE ARROW LKEY block_code RKEY
     (76) block_if -> . IF LPARENT logic_operation RPARENT LKEY not_yes_nested_if RKEY other_if
     (42) print_data -> . PRINT RPARENT STRING LPARENT DOTANDCOMMA
     (58) block_for -> . for_anidado
@@ -1512,7 +1530,7 @@ state 41
 
 state 42
 
-    (135) declaration_lambda -> ACTION . SMALLER_THAN STRINGTYPE GREATER_THAN VARIABLE ASSIGNATION VARIABLE ARROW LKEY block_code RKEY
+    (141) declaration_lambda -> ACTION . SMALLER_THAN STRINGTYPE GREATER_THAN VARIABLE ASSIGNATION VARIABLE ARROW LKEY block_code RKEY
 
     SMALLER_THAN    shift and go to state 74
 
@@ -1976,7 +1994,7 @@ state 73
 
 state 74
 
-    (135) declaration_lambda -> ACTION SMALLER_THAN . STRINGTYPE GREATER_THAN VARIABLE ASSIGNATION VARIABLE ARROW LKEY block_code RKEY
+    (141) declaration_lambda -> ACTION SMALLER_THAN . STRINGTYPE GREATER_THAN VARIABLE ASSIGNATION VARIABLE ARROW LKEY block_code RKEY
 
     STRINGTYPE      shift and go to state 111
 
@@ -2235,7 +2253,7 @@ state 86
     (127) functions_list -> . list_func_count
     (128) functions_list -> . list_func_add
     (129) functions_list -> . list_func_removeat
-    (135) declaration_lambda -> . ACTION SMALLER_THAN STRINGTYPE GREATER_THAN VARIABLE ASSIGNATION VARIABLE ARROW LKEY block_code RKEY
+    (141) declaration_lambda -> . ACTION SMALLER_THAN STRINGTYPE GREATER_THAN VARIABLE ASSIGNATION VARIABLE ARROW LKEY block_code RKEY
     (76) block_if -> . IF LPARENT logic_operation RPARENT LKEY not_yes_nested_if RKEY other_if
     (42) print_data -> . PRINT RPARENT STRING LPARENT DOTANDCOMMA
     (58) block_for -> . for_anidado
@@ -2390,7 +2408,7 @@ state 88
     (127) functions_list -> . list_func_count
     (128) functions_list -> . list_func_add
     (129) functions_list -> . list_func_removeat
-    (135) declaration_lambda -> . ACTION SMALLER_THAN STRINGTYPE GREATER_THAN VARIABLE ASSIGNATION VARIABLE ARROW LKEY block_code RKEY
+    (141) declaration_lambda -> . ACTION SMALLER_THAN STRINGTYPE GREATER_THAN VARIABLE ASSIGNATION VARIABLE ARROW LKEY block_code RKEY
     (76) block_if -> . IF LPARENT logic_operation RPARENT LKEY not_yes_nested_if RKEY other_if
     (42) print_data -> . PRINT RPARENT STRING LPARENT DOTANDCOMMA
     (58) block_for -> . for_anidado
@@ -2734,7 +2752,7 @@ state 110
 
 state 111
 
-    (135) declaration_lambda -> ACTION SMALLER_THAN STRINGTYPE . GREATER_THAN VARIABLE ASSIGNATION VARIABLE ARROW LKEY block_code RKEY
+    (141) declaration_lambda -> ACTION SMALLER_THAN STRINGTYPE . GREATER_THAN VARIABLE ASSIGNATION VARIABLE ARROW LKEY block_code RKEY
 
     GREATER_THAN    shift and go to state 137
 
@@ -3084,7 +3102,7 @@ state 136
 
 state 137
 
-    (135) declaration_lambda -> ACTION SMALLER_THAN STRINGTYPE GREATER_THAN . VARIABLE ASSIGNATION VARIABLE ARROW LKEY block_code RKEY
+    (141) declaration_lambda -> ACTION SMALLER_THAN STRINGTYPE GREATER_THAN . VARIABLE ASSIGNATION VARIABLE ARROW LKEY block_code RKEY
 
     VARIABLE        shift and go to state 172
 
@@ -3410,7 +3428,7 @@ state 171
 
 state 172
 
-    (135) declaration_lambda -> ACTION SMALLER_THAN STRINGTYPE GREATER_THAN VARIABLE . ASSIGNATION VARIABLE ARROW LKEY block_code RKEY
+    (141) declaration_lambda -> ACTION SMALLER_THAN STRINGTYPE GREATER_THAN VARIABLE . ASSIGNATION VARIABLE ARROW LKEY block_code RKEY
 
     ASSIGNATION     shift and go to state 192
 
@@ -3449,7 +3467,7 @@ state 173
     (127) functions_list -> . list_func_count
     (128) functions_list -> . list_func_add
     (129) functions_list -> . list_func_removeat
-    (135) declaration_lambda -> . ACTION SMALLER_THAN STRINGTYPE GREATER_THAN VARIABLE ASSIGNATION VARIABLE ARROW LKEY block_code RKEY
+    (141) declaration_lambda -> . ACTION SMALLER_THAN STRINGTYPE GREATER_THAN VARIABLE ASSIGNATION VARIABLE ARROW LKEY block_code RKEY
     (42) print_data -> . PRINT RPARENT STRING LPARENT DOTANDCOMMA
     (58) block_for -> . for_anidado
     (59) block_for -> . for_each
@@ -3701,7 +3719,7 @@ state 183
     (127) functions_list -> . list_func_count
     (128) functions_list -> . list_func_add
     (129) functions_list -> . list_func_removeat
-    (135) declaration_lambda -> . ACTION SMALLER_THAN STRINGTYPE GREATER_THAN VARIABLE ASSIGNATION VARIABLE ARROW LKEY block_code RKEY
+    (141) declaration_lambda -> . ACTION SMALLER_THAN STRINGTYPE GREATER_THAN VARIABLE ASSIGNATION VARIABLE ARROW LKEY block_code RKEY
     (76) block_if -> . IF LPARENT logic_operation RPARENT LKEY not_yes_nested_if RKEY other_if
     (42) print_data -> . PRINT RPARENT STRING LPARENT DOTANDCOMMA
     (58) block_for -> . for_anidado
@@ -3915,7 +3933,7 @@ state 191
 
 state 192
 
-    (135) declaration_lambda -> ACTION SMALLER_THAN STRINGTYPE GREATER_THAN VARIABLE ASSIGNATION . VARIABLE ARROW LKEY block_code RKEY
+    (141) declaration_lambda -> ACTION SMALLER_THAN STRINGTYPE GREATER_THAN VARIABLE ASSIGNATION . VARIABLE ARROW LKEY block_code RKEY
 
     VARIABLE        shift and go to state 210
 
@@ -4128,7 +4146,7 @@ state 209
 
 state 210
 
-    (135) declaration_lambda -> ACTION SMALLER_THAN STRINGTYPE GREATER_THAN VARIABLE ASSIGNATION VARIABLE . ARROW LKEY block_code RKEY
+    (141) declaration_lambda -> ACTION SMALLER_THAN STRINGTYPE GREATER_THAN VARIABLE ASSIGNATION VARIABLE . ARROW LKEY block_code RKEY
 
     ARROW           shift and go to state 224
 
@@ -4299,7 +4317,7 @@ state 223
 
 state 224
 
-    (135) declaration_lambda -> ACTION SMALLER_THAN STRINGTYPE GREATER_THAN VARIABLE ASSIGNATION VARIABLE ARROW . LKEY block_code RKEY
+    (141) declaration_lambda -> ACTION SMALLER_THAN STRINGTYPE GREATER_THAN VARIABLE ASSIGNATION VARIABLE ARROW . LKEY block_code RKEY
 
     LKEY            shift and go to state 237
 
@@ -4460,7 +4478,7 @@ state 236
     (127) functions_list -> . list_func_count
     (128) functions_list -> . list_func_add
     (129) functions_list -> . list_func_removeat
-    (135) declaration_lambda -> . ACTION SMALLER_THAN STRINGTYPE GREATER_THAN VARIABLE ASSIGNATION VARIABLE ARROW LKEY block_code RKEY
+    (141) declaration_lambda -> . ACTION SMALLER_THAN STRINGTYPE GREATER_THAN VARIABLE ASSIGNATION VARIABLE ARROW LKEY block_code RKEY
     (76) block_if -> . IF LPARENT logic_operation RPARENT LKEY not_yes_nested_if RKEY other_if
     (42) print_data -> . PRINT RPARENT STRING LPARENT DOTANDCOMMA
     (58) block_for -> . for_anidado
@@ -4572,7 +4590,7 @@ state 236
 
 state 237
 
-    (135) declaration_lambda -> ACTION SMALLER_THAN STRINGTYPE GREATER_THAN VARIABLE ASSIGNATION VARIABLE ARROW LKEY . block_code RKEY
+    (141) declaration_lambda -> ACTION SMALLER_THAN STRINGTYPE GREATER_THAN VARIABLE ASSIGNATION VARIABLE ARROW LKEY . block_code RKEY
     (6) block_code -> . def_const_or_var
     (7) block_code -> . estruct_of_data
     (8) block_code -> . block_try_catch
@@ -4601,7 +4619,7 @@ state 237
     (127) functions_list -> . list_func_count
     (128) functions_list -> . list_func_add
     (129) functions_list -> . list_func_removeat
-    (135) declaration_lambda -> . ACTION SMALLER_THAN STRINGTYPE GREATER_THAN VARIABLE ASSIGNATION VARIABLE ARROW LKEY block_code RKEY
+    (141) declaration_lambda -> . ACTION SMALLER_THAN STRINGTYPE GREATER_THAN VARIABLE ASSIGNATION VARIABLE ARROW LKEY block_code RKEY
     (76) block_if -> . IF LPARENT logic_operation RPARENT LKEY not_yes_nested_if RKEY other_if
     (42) print_data -> . PRINT RPARENT STRING LPARENT DOTANDCOMMA
     (58) block_for -> . for_anidado
@@ -4745,7 +4763,7 @@ state 238
     (127) functions_list -> . list_func_count
     (128) functions_list -> . list_func_add
     (129) functions_list -> . list_func_removeat
-    (135) declaration_lambda -> . ACTION SMALLER_THAN STRINGTYPE GREATER_THAN VARIABLE ASSIGNATION VARIABLE ARROW LKEY block_code RKEY
+    (141) declaration_lambda -> . ACTION SMALLER_THAN STRINGTYPE GREATER_THAN VARIABLE ASSIGNATION VARIABLE ARROW LKEY block_code RKEY
     (42) print_data -> . PRINT RPARENT STRING LPARENT DOTANDCOMMA
     (58) block_for -> . for_anidado
     (59) block_for -> . for_each
@@ -4966,7 +4984,7 @@ state 245
     (127) functions_list -> . list_func_count
     (128) functions_list -> . list_func_add
     (129) functions_list -> . list_func_removeat
-    (135) declaration_lambda -> . ACTION SMALLER_THAN STRINGTYPE GREATER_THAN VARIABLE ASSIGNATION VARIABLE ARROW LKEY block_code RKEY
+    (141) declaration_lambda -> . ACTION SMALLER_THAN STRINGTYPE GREATER_THAN VARIABLE ASSIGNATION VARIABLE ARROW LKEY block_code RKEY
     (76) block_if -> . IF LPARENT logic_operation RPARENT LKEY not_yes_nested_if RKEY other_if
     (42) print_data -> . PRINT RPARENT STRING LPARENT DOTANDCOMMA
     (58) block_for -> . for_anidado
@@ -5108,7 +5126,7 @@ state 246
     (127) functions_list -> . list_func_count
     (128) functions_list -> . list_func_add
     (129) functions_list -> . list_func_removeat
-    (135) declaration_lambda -> . ACTION SMALLER_THAN STRINGTYPE GREATER_THAN VARIABLE ASSIGNATION VARIABLE ARROW LKEY block_code RKEY
+    (141) declaration_lambda -> . ACTION SMALLER_THAN STRINGTYPE GREATER_THAN VARIABLE ASSIGNATION VARIABLE ARROW LKEY block_code RKEY
     (76) block_if -> . IF LPARENT logic_operation RPARENT LKEY not_yes_nested_if RKEY other_if
     (42) print_data -> . PRINT RPARENT STRING LPARENT DOTANDCOMMA
     (58) block_for -> . for_anidado
@@ -5222,7 +5240,7 @@ state 247
 
 state 248
 
-    (135) declaration_lambda -> ACTION SMALLER_THAN STRINGTYPE GREATER_THAN VARIABLE ASSIGNATION VARIABLE ARROW LKEY block_code . RKEY
+    (141) declaration_lambda -> ACTION SMALLER_THAN STRINGTYPE GREATER_THAN VARIABLE ASSIGNATION VARIABLE ARROW LKEY block_code . RKEY
 
     RKEY            shift and go to state 260
 
@@ -5289,7 +5307,7 @@ state 253
     (127) functions_list -> . list_func_count
     (128) functions_list -> . list_func_add
     (129) functions_list -> . list_func_removeat
-    (135) declaration_lambda -> . ACTION SMALLER_THAN STRINGTYPE GREATER_THAN VARIABLE ASSIGNATION VARIABLE ARROW LKEY block_code RKEY
+    (141) declaration_lambda -> . ACTION SMALLER_THAN STRINGTYPE GREATER_THAN VARIABLE ASSIGNATION VARIABLE ARROW LKEY block_code RKEY
     (76) block_if -> . IF LPARENT logic_operation RPARENT LKEY not_yes_nested_if RKEY other_if
     (42) print_data -> . PRINT RPARENT STRING LPARENT DOTANDCOMMA
     (58) block_for -> . for_anidado
@@ -5473,30 +5491,30 @@ state 259
 
 state 260
 
-    (135) declaration_lambda -> ACTION SMALLER_THAN STRINGTYPE GREATER_THAN VARIABLE ASSIGNATION VARIABLE ARROW LKEY block_code RKEY .
+    (141) declaration_lambda -> ACTION SMALLER_THAN STRINGTYPE GREATER_THAN VARIABLE ASSIGNATION VARIABLE ARROW LKEY block_code RKEY .
 
-    VARIABLE        reduce using rule 135 (declaration_lambda -> ACTION SMALLER_THAN STRINGTYPE GREATER_THAN VARIABLE ASSIGNATION VARIABLE ARROW LKEY block_code RKEY .)
-    ACTION          reduce using rule 135 (declaration_lambda -> ACTION SMALLER_THAN STRINGTYPE GREATER_THAN VARIABLE ASSIGNATION VARIABLE ARROW LKEY block_code RKEY .)
-    IF              reduce using rule 135 (declaration_lambda -> ACTION SMALLER_THAN STRINGTYPE GREATER_THAN VARIABLE ASSIGNATION VARIABLE ARROW LKEY block_code RKEY .)
-    PRINT           reduce using rule 135 (declaration_lambda -> ACTION SMALLER_THAN STRINGTYPE GREATER_THAN VARIABLE ASSIGNATION VARIABLE ARROW LKEY block_code RKEY .)
-    CONST           reduce using rule 135 (declaration_lambda -> ACTION SMALLER_THAN STRINGTYPE GREATER_THAN VARIABLE ASSIGNATION VARIABLE ARROW LKEY block_code RKEY .)
-    LIST            reduce using rule 135 (declaration_lambda -> ACTION SMALLER_THAN STRINGTYPE GREATER_THAN VARIABLE ASSIGNATION VARIABLE ARROW LKEY block_code RKEY .)
-    TRY             reduce using rule 135 (declaration_lambda -> ACTION SMALLER_THAN STRINGTYPE GREATER_THAN VARIABLE ASSIGNATION VARIABLE ARROW LKEY block_code RKEY .)
-    WHILE           reduce using rule 135 (declaration_lambda -> ACTION SMALLER_THAN STRINGTYPE GREATER_THAN VARIABLE ASSIGNATION VARIABLE ARROW LKEY block_code RKEY .)
-    DO              reduce using rule 135 (declaration_lambda -> ACTION SMALLER_THAN STRINGTYPE GREATER_THAN VARIABLE ASSIGNATION VARIABLE ARROW LKEY block_code RKEY .)
-    DICTIONARY      reduce using rule 135 (declaration_lambda -> ACTION SMALLER_THAN STRINGTYPE GREATER_THAN VARIABLE ASSIGNATION VARIABLE ARROW LKEY block_code RKEY .)
-    STRING          reduce using rule 135 (declaration_lambda -> ACTION SMALLER_THAN STRINGTYPE GREATER_THAN VARIABLE ASSIGNATION VARIABLE ARROW LKEY block_code RKEY .)
-    FOR             reduce using rule 135 (declaration_lambda -> ACTION SMALLER_THAN STRINGTYPE GREATER_THAN VARIABLE ASSIGNATION VARIABLE ARROW LKEY block_code RKEY .)
-    FOREACH         reduce using rule 135 (declaration_lambda -> ACTION SMALLER_THAN STRINGTYPE GREATER_THAN VARIABLE ASSIGNATION VARIABLE ARROW LKEY block_code RKEY .)
-    PUBLIC          reduce using rule 135 (declaration_lambda -> ACTION SMALLER_THAN STRINGTYPE GREATER_THAN VARIABLE ASSIGNATION VARIABLE ARROW LKEY block_code RKEY .)
-    PRIVATE         reduce using rule 135 (declaration_lambda -> ACTION SMALLER_THAN STRINGTYPE GREATER_THAN VARIABLE ASSIGNATION VARIABLE ARROW LKEY block_code RKEY .)
-    CHARTYPE        reduce using rule 135 (declaration_lambda -> ACTION SMALLER_THAN STRINGTYPE GREATER_THAN VARIABLE ASSIGNATION VARIABLE ARROW LKEY block_code RKEY .)
-    STRINGTYPE      reduce using rule 135 (declaration_lambda -> ACTION SMALLER_THAN STRINGTYPE GREATER_THAN VARIABLE ASSIGNATION VARIABLE ARROW LKEY block_code RKEY .)
-    FLOATTYPE       reduce using rule 135 (declaration_lambda -> ACTION SMALLER_THAN STRINGTYPE GREATER_THAN VARIABLE ASSIGNATION VARIABLE ARROW LKEY block_code RKEY .)
-    DECIMALTYPE     reduce using rule 135 (declaration_lambda -> ACTION SMALLER_THAN STRINGTYPE GREATER_THAN VARIABLE ASSIGNATION VARIABLE ARROW LKEY block_code RKEY .)
-    INTTYPE         reduce using rule 135 (declaration_lambda -> ACTION SMALLER_THAN STRINGTYPE GREATER_THAN VARIABLE ASSIGNATION VARIABLE ARROW LKEY block_code RKEY .)
-    BOOLTYPE        reduce using rule 135 (declaration_lambda -> ACTION SMALLER_THAN STRINGTYPE GREATER_THAN VARIABLE ASSIGNATION VARIABLE ARROW LKEY block_code RKEY .)
-    RKEY            reduce using rule 135 (declaration_lambda -> ACTION SMALLER_THAN STRINGTYPE GREATER_THAN VARIABLE ASSIGNATION VARIABLE ARROW LKEY block_code RKEY .)
+    VARIABLE        reduce using rule 141 (declaration_lambda -> ACTION SMALLER_THAN STRINGTYPE GREATER_THAN VARIABLE ASSIGNATION VARIABLE ARROW LKEY block_code RKEY .)
+    ACTION          reduce using rule 141 (declaration_lambda -> ACTION SMALLER_THAN STRINGTYPE GREATER_THAN VARIABLE ASSIGNATION VARIABLE ARROW LKEY block_code RKEY .)
+    IF              reduce using rule 141 (declaration_lambda -> ACTION SMALLER_THAN STRINGTYPE GREATER_THAN VARIABLE ASSIGNATION VARIABLE ARROW LKEY block_code RKEY .)
+    PRINT           reduce using rule 141 (declaration_lambda -> ACTION SMALLER_THAN STRINGTYPE GREATER_THAN VARIABLE ASSIGNATION VARIABLE ARROW LKEY block_code RKEY .)
+    CONST           reduce using rule 141 (declaration_lambda -> ACTION SMALLER_THAN STRINGTYPE GREATER_THAN VARIABLE ASSIGNATION VARIABLE ARROW LKEY block_code RKEY .)
+    LIST            reduce using rule 141 (declaration_lambda -> ACTION SMALLER_THAN STRINGTYPE GREATER_THAN VARIABLE ASSIGNATION VARIABLE ARROW LKEY block_code RKEY .)
+    TRY             reduce using rule 141 (declaration_lambda -> ACTION SMALLER_THAN STRINGTYPE GREATER_THAN VARIABLE ASSIGNATION VARIABLE ARROW LKEY block_code RKEY .)
+    WHILE           reduce using rule 141 (declaration_lambda -> ACTION SMALLER_THAN STRINGTYPE GREATER_THAN VARIABLE ASSIGNATION VARIABLE ARROW LKEY block_code RKEY .)
+    DO              reduce using rule 141 (declaration_lambda -> ACTION SMALLER_THAN STRINGTYPE GREATER_THAN VARIABLE ASSIGNATION VARIABLE ARROW LKEY block_code RKEY .)
+    DICTIONARY      reduce using rule 141 (declaration_lambda -> ACTION SMALLER_THAN STRINGTYPE GREATER_THAN VARIABLE ASSIGNATION VARIABLE ARROW LKEY block_code RKEY .)
+    STRING          reduce using rule 141 (declaration_lambda -> ACTION SMALLER_THAN STRINGTYPE GREATER_THAN VARIABLE ASSIGNATION VARIABLE ARROW LKEY block_code RKEY .)
+    FOR             reduce using rule 141 (declaration_lambda -> ACTION SMALLER_THAN STRINGTYPE GREATER_THAN VARIABLE ASSIGNATION VARIABLE ARROW LKEY block_code RKEY .)
+    FOREACH         reduce using rule 141 (declaration_lambda -> ACTION SMALLER_THAN STRINGTYPE GREATER_THAN VARIABLE ASSIGNATION VARIABLE ARROW LKEY block_code RKEY .)
+    PUBLIC          reduce using rule 141 (declaration_lambda -> ACTION SMALLER_THAN STRINGTYPE GREATER_THAN VARIABLE ASSIGNATION VARIABLE ARROW LKEY block_code RKEY .)
+    PRIVATE         reduce using rule 141 (declaration_lambda -> ACTION SMALLER_THAN STRINGTYPE GREATER_THAN VARIABLE ASSIGNATION VARIABLE ARROW LKEY block_code RKEY .)
+    CHARTYPE        reduce using rule 141 (declaration_lambda -> ACTION SMALLER_THAN STRINGTYPE GREATER_THAN VARIABLE ASSIGNATION VARIABLE ARROW LKEY block_code RKEY .)
+    STRINGTYPE      reduce using rule 141 (declaration_lambda -> ACTION SMALLER_THAN STRINGTYPE GREATER_THAN VARIABLE ASSIGNATION VARIABLE ARROW LKEY block_code RKEY .)
+    FLOATTYPE       reduce using rule 141 (declaration_lambda -> ACTION SMALLER_THAN STRINGTYPE GREATER_THAN VARIABLE ASSIGNATION VARIABLE ARROW LKEY block_code RKEY .)
+    DECIMALTYPE     reduce using rule 141 (declaration_lambda -> ACTION SMALLER_THAN STRINGTYPE GREATER_THAN VARIABLE ASSIGNATION VARIABLE ARROW LKEY block_code RKEY .)
+    INTTYPE         reduce using rule 141 (declaration_lambda -> ACTION SMALLER_THAN STRINGTYPE GREATER_THAN VARIABLE ASSIGNATION VARIABLE ARROW LKEY block_code RKEY .)
+    BOOLTYPE        reduce using rule 141 (declaration_lambda -> ACTION SMALLER_THAN STRINGTYPE GREATER_THAN VARIABLE ASSIGNATION VARIABLE ARROW LKEY block_code RKEY .)
+    RKEY            reduce using rule 141 (declaration_lambda -> ACTION SMALLER_THAN STRINGTYPE GREATER_THAN VARIABLE ASSIGNATION VARIABLE ARROW LKEY block_code RKEY .)
 
 
 state 261
@@ -5713,7 +5731,7 @@ state 271
     (127) functions_list -> . list_func_count
     (128) functions_list -> . list_func_add
     (129) functions_list -> . list_func_removeat
-    (135) declaration_lambda -> . ACTION SMALLER_THAN STRINGTYPE GREATER_THAN VARIABLE ASSIGNATION VARIABLE ARROW LKEY block_code RKEY
+    (141) declaration_lambda -> . ACTION SMALLER_THAN STRINGTYPE GREATER_THAN VARIABLE ASSIGNATION VARIABLE ARROW LKEY block_code RKEY
     (42) print_data -> . PRINT RPARENT STRING LPARENT DOTANDCOMMA
     (58) block_for -> . for_anidado
     (59) block_for -> . for_each
@@ -6072,7 +6090,7 @@ state 288
     (127) functions_list -> . list_func_count
     (128) functions_list -> . list_func_add
     (129) functions_list -> . list_func_removeat
-    (135) declaration_lambda -> . ACTION SMALLER_THAN STRINGTYPE GREATER_THAN VARIABLE ASSIGNATION VARIABLE ARROW LKEY block_code RKEY
+    (141) declaration_lambda -> . ACTION SMALLER_THAN STRINGTYPE GREATER_THAN VARIABLE ASSIGNATION VARIABLE ARROW LKEY block_code RKEY
     (76) block_if -> . IF LPARENT logic_operation RPARENT LKEY not_yes_nested_if RKEY other_if
     (42) print_data -> . PRINT RPARENT STRING LPARENT DOTANDCOMMA
     (58) block_for -> . for_anidado
