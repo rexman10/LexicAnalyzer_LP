@@ -44,6 +44,7 @@ reserved = {
     "Count":"COUNT",
     "Action":"ACTION",
     "await":"AWAIT",
+    "Main":"MAIN",
     #Fin aporte Adair Abrigo
 
     #Inicio aporte David Rivera

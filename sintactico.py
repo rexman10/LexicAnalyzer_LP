@@ -68,7 +68,13 @@ def p_program(p):
     'program                    : USING SYSTEM DOTANDCOMMA block_publicClass'
 
 def p_block_publicClass(p):
-    'block_publicClass          : PUBLIC CLASS VARIABLE LKEY all_block_code RKEY'
+    '''block_publicClass        : PUBLIC CLASS VARIABLE LKEY all_method_definitions block_main_method RKEY
+                                | PUBLIC CLASS VARIABLE LKEY block_main_method RKEY
+    '''
+
+def p_block_main_method(p):
+    '''block_main_method        : STATIC VOID MAIN LPARENT STRINGTYPE LBRACKET RBRACKET VARIABLE RPARENT LKEY all_block_code RKEY
+    '''
 
 def p_block_code(p):
     '''block_code               : def_const_or_var
@@ -86,6 +92,9 @@ def p_block_code(p):
                                 | queue_struct
                                 | functions_queue
 
+                                | stack_struct
+                                | functions_stack
+
                                 | block_for
 
                                 | block_try_catch
@@ -96,6 +105,17 @@ def p_block_code(p):
 def p_all_block_code(p):
     '''all_block_code           : block_code
                                 | block_code all_block_code  
+    '''
+
+def p_method_definition(p):
+    '''method_definition        : simple_method
+                                | declaration_async
+                                | declaration_lambda
+    '''
+
+def p_all_method_definitions(p):
+    '''all_method_definitions   : method_definition
+                                | method_definition all_method_definitions  
     '''
 
 """ Tipo de valores validos para asignar """
@@ -396,14 +416,31 @@ def p_list_func_add(p):
 def p_list_func_removeat(p):
     "list_func_removeat         : VARIABLE DOT REMOVEAT LPARENT INTEGER RPARENT DOTANDCOMMA"
 
-def p_stack_assignation(p):
-    'stack_assignation          : STACK VARIABLE ASSIGNATION NEW STACK LPARENT RPARENT DOTANDCOMMA'
+def p_stack_struct(p):
+    'stack_struct               : STACK VARIABLE ASSIGNATION NEW STACK LPARENT RPARENT DOTANDCOMMA'
+
+def p_functions_stack(p):
+    '''functions_stack          : stack_push
+                                | stack_pop
+                                | stack_clear
+                                | stack_peek
+                                | stack_isEmpty
+    '''
 
 def p_stack_push(p):
     'stack_push                 : VARIABLE DOT PUSH LPARENT value RPARENT DOTANDCOMMA'
 
 def p_stack_pop(p):
     'stack_pop                  : VARIABLE DOT POP LPARENT RPARENT DOTANDCOMMA'
+
+def p_stack_clear(p):
+    'stack_clear                : VARIABLE DOT CLEAR LPARENT RPARENT DOTANDCOMMA'
+
+def p_stack_peek(p):
+    'stack_peek                 : VARIABLE DOT PEEK LPARENT RPARENT DOTANDCOMMA'
+
+def p_stack_isEmpty(p):
+    'stack_isEmpty              : VARIABLE DOT ISEMPTY LPARENT RPARENT DOTANDCOMMA'
 
 def p_queue_struct(p):
     '''queue_struct             : QUEUE SMALLER_THAN data_type GREATER_THAN VARIABLE ASSIGNATION NEW QUEUE SMALLER_THAN data_type GREATER_THAN LPARENT RPARENT DOTANDCOMMA
@@ -429,7 +466,7 @@ def p_queue_clear(p):
     '''
 
 def p_queue_peek(p):
-    '''queue_clear              : VARIABLE DOT PEEK LPARENT RPARENT DOTANDCOMMA
+    '''queue_peek               : VARIABLE DOT PEEK LPARENT RPARENT DOTANDCOMMA
     '''
 
 def p_queue_isEmpty(p):
@@ -438,6 +475,28 @@ def p_queue_isEmpty(p):
 
 
 """ Declaración de funciones """
+
+def p_simple_method(p):
+    '''simple_method            : STATIC data_type METHOD LPARENT function_arguments RPARENT LKEY all_block_code function_return RKEY
+                                | STATIC VOID METHOD LPARENT function_arguments RPARENT LKEY all_block_code RKEY
+                                | access_modifiers STATIC data_type METHOD LPARENT function_arguments RPARENT LKEY all_block_code function_return RKEY
+                                | access_modifiers STATIC VOID METHOD LPARENT function_arguments RPARENT LKEY all_block_code RKEY
+    '''
+
+def p_function_return(p):
+    '''function_return          : RETURN value DOTANDCOMMA
+    '''
+
+def p_function_argument(p):
+    '''function_argument        : data_type VARIABLE
+                                | METHOD VARIABLE
+    '''
+
+def p_function_arguments(p):
+    '''function_arguments       : function_argument
+                                | function_argument COMMA function_arguments
+    '''
+
 def p_declaration_async(p):
     '''declaration_async        : PUBLIC STATIC ASYNC TASK METHOD LPARENT RPARENT LKEY AWAIT TASK DOT METHOD LPARENT LPARENT RPARENT ARROW LKEY block_code RKEY RPARENT DOTANDCOMMA RKEY
     '''
@@ -470,23 +529,25 @@ def analizar_sintactico(file_path):
 
 datos = '''using System; 
 public class clase1 { 
-    const int var2 = 14 , var3 = 15 ;
-    List<int> nombres = new List<int>(){4 , 5, 5, 6}; 
-    nombres.Add("dgf"); 
-    nombres.RemoveAt(0);
-    int var2 = 14; 
-    var3 = var2 ; 
-    var5 = 4 ;
-    Dictionary<> myDict = new Dictionary<>(); myDict.remove(key);
-    Dictionary<> myDict2 = new Dictionary<>() { { key1, 1 }, { key2, 2 } };
-    Console.WriteLine("hasta luego");
-    Console.WriteLine(myDict2);
-    Queue<string> cola1 = new Queue<string>();
-    cola1.EnQueue("soda");
-    cola1.DeQueue();
-    cola1.Peek();
-    cola1.Clear();
-    cola1.IsEmpty();
+    static void Main(string[] args){
+        const int var2 = 14 , var3 = 15 ;
+        List<int> nombres = new List<int>(){4 , 5, 5, 6}; 
+        nombres.Add("dgf"); 
+        nombres.RemoveAt(0);
+        int var2 = 14; 
+        var3 = var2 ; 
+        var5 = 4 ;
+        Dictionary<> myDict = new Dictionary<>(); myDict.remove(key);
+        Dictionary<> myDict2 = new Dictionary<>() { { key1, 1 }, { key2, 2 } };
+        Console.WriteLine("hasta luego");
+        Console.WriteLine(myDict2);
+        Queue<string> cola1 = new Queue<string>();
+        cola1.EnQueue("soda");
+        cola1.DeQueue();
+        cola1.Peek();
+        cola1.Clear();
+        cola1.IsEmpty();        
+    }
 }'''
 
 print(datos)
