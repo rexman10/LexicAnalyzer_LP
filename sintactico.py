@@ -482,11 +482,11 @@ public class clase1 {
     Console.WriteLine("hasta luego");
     Console.WriteLine(myDict2);
     Queue<string> cola1 = new Queue<string>();
-    cola1.enQueue("soda");
-    cola1.deQueue();
-    cola1.peek();
+    cola1.EnQueue("soda");
+    cola1.DeQueue();
+    cola1.Peek();
     cola1.Clear();
-    cola1.isEmpty();
+    cola1.IsEmpty();
 }'''
 
 print(datos)

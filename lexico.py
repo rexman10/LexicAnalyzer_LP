@@ -17,10 +17,10 @@ reserved = {
     'Task':'TASK',
     'async':'ASYNC',
     'Queue':'QUEUE',
-    'enQueue':'ENQUEUE',
-    'deQueue':'DEQUEUE',
-    'peek':'PEEK',
-    'isEmpty':'ISEMPTY',
+    'EnQueue':'ENQUEUE',
+    'DeQueue':'DEQUEUE',
+    'Peek':'PEEK',
+    'IsEmpty':'ISEMPTY',
     #Fin aporte Juan Guadalupe
 
     #Inicio aporte Adair Abrigo
