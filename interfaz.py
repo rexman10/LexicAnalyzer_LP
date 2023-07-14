@@ -5,14 +5,15 @@ import os
 from tkinter import filedialog
 
 
+
 def analizar_sintactico():
     contenido_texto = espacioTexto.get("1.0", tk.END)
     result = sintactico.analizar_sintactico_string(contenido_texto)
 
-    if result:
+    if result is not None:
         mensaje = "Análisis sintáctico exitoso"
     else:
-        mensaje = "Error de sintaxis"
+        mensaje = sintactico.p_error_message
 
     espacioTextoDerDer.delete("1.0", tk.END)
     espacioTextoDerDer.insert(tk.END, mensaje)

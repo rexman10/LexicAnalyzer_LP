@@ -545,20 +545,16 @@ def p_declration_lambda(p):
 
 def p_concurrent_method(p):
     '''concurrent_method        : method_declaration CONCURRENT LKEY concurrent_block RKEY'''
-    # Realizar acciones semánticas correspondientes
 
 def p_method_declaration(p):
     '''method_declaration       : METHOD IDENTIFIER LPARENT RPARENT DOTANDCOMMA'''
-    # Realizar acciones semánticas correspondientes
 
 def p_concurrent_block(p):
     '''concurrent_block         : statement_list'''
-    # Realizar acciones semánticas correspondientes
 
 def p_statement_list(p):
     '''statement_list           : statement
                                 | statement_list statement'''
-    # Realizar acciones semánticas correspondientes
 
 def p_statement(p):
     '''statement                : assignment_concurrent
@@ -566,27 +562,21 @@ def p_statement(p):
                                 | while_loop_concurrent
                                 | method_call_concurrent
                                 | return_statement_concurrent'''
-    # Realizar acciones semánticas correspondientes
 
 def p_assignment_concurrent(p):
     '''assignment_concurrent    : VARIABLE ASSIGNATION expression DOTANDCOMMA'''
-    # Realizar acciones semánticas correspondientes
 
 def p_if_statement_concurrent(p):
     '''if_statement_concurrent  : IF LPARENT condition RPARENT LKEY concurrent_block RKEY'''
-    # Realizar acciones semánticas correspondientes
 
 def p_while_loop_concurrent(p):
     '''while_loop_concurrent    : WHILE LPARENT condition RPARENT LKEY concurrent_block RKEY'''
-    # Realizar acciones semánticas correspondientes
 
 def p_method_call_concurrent(p):
     '''method_call_concurrent   : IDENTIFIER LPARENT RPARENT DOTANDCOMMA'''
-    # Realizar acciones semánticas correspondientes
 
 def p_return_statement_concurrent(p):
     '''return_statement_concurrent : RETURN expression DOTANDCOMMA'''
-    # Realizar acciones semánticas correspondientes
 
 def p_expression(p):
     '''expression               : value_numeric
@@ -602,26 +592,28 @@ def p_condition(p):
                                 | VARIABLE logic_operator VARIABLE
     '''
 
+#El metodo para imprimir en consola al ejecutar solo el archivo sintactico.py
+'''
 def p_error(p):
     if p:
          print("Error de sintaxis en token:", p.type)
          #sintactico.errok()
     else:
          print("Syntax error at EOF")
+'''
+
+p_error_message = None
+def p_error(p):
+    global p_error_message
+    if p:
+        p_error_message = "Error de sintaxis en token: " + str(p.type)
+    else:
+        p_error_message = "Syntax error at EOF"
 
 # Build the parser
 sintactico = yacc.yacc()
 
-'''
-def analizar_sintactico(file_path):
-    with open(file_path, "r") as file:
-        lines = file.readlines()  # Leer todas las líneas del archivo
 
-    for line in lines:
-        result = sintactico.parse(line)
-        if result is not None:
-            print(result)  # Imprimir el resultado del análisis sintáctico
-'''
 
 datos = '''using System; 
 public class clase1 {
