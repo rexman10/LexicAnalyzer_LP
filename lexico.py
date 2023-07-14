@@ -269,42 +269,6 @@ def t_COMMENT(t):
  #Contruir analizador
 lexer = lex.lex()
 
-
-
-
- # Tokenizador
-#while True:
-#  tok = lexer.token()
-#  if not tok:
-#    break      #Rompe
-#  print(tok)
-
-codigo = """
-public static long Factorial(int n)
-{
-    if (n==1)
-        return 1;
-    return n * Factorial(n-1);
-}
-"""
-
-#Datos de entrada
-'''
-def analizar(data):
-    lexer.input(data)
-    while True:
-        tok = lexer.token()
-        print(tok)
-        if not tok:
-            break
-
-archivo = open("algoritmo5.txt")
-for linea in archivo:
-    analizar(linea)
-    if len(linea)==0:
-        break
-'''
-
 def analyze_lexical_string(content, numero_linea_inicial=1):
     lexer.lineno = numero_linea_inicial
     lexer.input(content)

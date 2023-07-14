@@ -70,6 +70,7 @@ def p_program(p):
 def p_block_publicClass(p):
     '''block_publicClass        : PUBLIC CLASS VARIABLE LKEY all_method_definitions block_main_method RKEY
                                 | PUBLIC CLASS VARIABLE LKEY block_main_method RKEY
+                                | PUBLIC CLASS VARIABLE LKEY all_method_definitions RKEY
     '''
 
 def p_block_main_method(p):
@@ -483,6 +484,7 @@ def p_stack_isEmpty(p):
 
 def p_queue_struct(p):
     '''queue_struct             : QUEUE SMALLER_THAN data_type GREATER_THAN VARIABLE ASSIGNATION NEW QUEUE SMALLER_THAN data_type GREATER_THAN LPARENT RPARENT DOTANDCOMMA
+                                | QUEUE SMALLER_THAN data_type GREATER_THAN VARIABLE ASSIGNATION NEW QUEUE SMALLER_THAN GREATER_THAN LPARENT RPARENT DOTANDCOMMA
     '''
 
 def p_functions_queue(p):
@@ -490,6 +492,7 @@ def p_functions_queue(p):
                                 | queue_dequeue
                                 | queue_clear
                                 | queue_isEmpty
+                                | queue_peek
     '''
 
 def p_queue_enqueue(p):
@@ -518,8 +521,9 @@ def p_queue_isEmpty(p):
 def p_simple_method(p):
     '''simple_method            : STATIC data_type METHOD LPARENT function_arguments RPARENT LKEY all_block_code function_return RKEY
                                 | STATIC VOID METHOD LPARENT function_arguments RPARENT LKEY all_block_code RKEY
+                                | STATIC VOID MAIN LPARENT function_arguments RPARENT LKEY all_block_code function_return RKEY
                                 | access_modifiers STATIC data_type METHOD LPARENT function_arguments RPARENT LKEY all_block_code function_return RKEY
-                                | access_modifiers STATIC VOID METHOD LPARENT function_arguments RPARENT LKEY all_block_code RKEY
+                                | PUBLIC STATIC VOID METHOD LPARENT function_arguments RPARENT LKEY all_block_code RKEY
     '''
 
 def p_function_return(p):
@@ -528,7 +532,9 @@ def p_function_return(p):
 
 def p_function_argument(p):
     '''function_argument        : data_type VARIABLE
+                                | data_type CHAR    
                                 | METHOD VARIABLE
+                                | data_type LBRACKET RBRACKET VARIABLE
     '''
 
 def p_function_arguments(p):
@@ -623,15 +629,13 @@ def analizar_sintactico(file_path):
             print(result)  # Imprimir el resultado del análisis sintáctico
 '''
 
-datos = '''using System; 
+datos = '''
+using System; 
 public class clase1 {
-    public static void Bfs(Graph graph, int v, boolean[] discovered){
+    public static void Bfs(Graph graph, int v, bool[] discovered){
         // crea una queue para hacer BFS
-        Queue<Integer> q = new Queue<>();
-        // marca el vértice de origen como descubierto
-        discovered[v] = true;
-        // poner en queue el vértice fuente
-        q.enqueue(v);
+        Queue<int> q = new Queue<>();
+        q.EnQueue(v);
     }
     static void Main(string[] args){
         const int var2 = 14 , var3 = 15 ;
@@ -650,9 +654,11 @@ public class clase1 {
         cola1.DeQueue();
         cola1.Peek();
         cola1.Clear();
-        cola1.IsEmpty();        
+        cola1.IsEmpty();
+        return 0;        
     }
-}'''
+}
+'''
 
 print(datos)
 
