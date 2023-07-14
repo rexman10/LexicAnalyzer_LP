@@ -1,8 +1,0 @@
-using System;
-public class clase {
-    int num = 10;
-    string texto = "Hola";
-    Console.WriteLine("Ingrese un numero: ");
-    string input = Console.ReadLine();
-    int i = 10, j = 20, k = 30;
-}

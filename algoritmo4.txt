@@ -1,6 +1,15 @@
-public static long Factorial(int n) 
-  {
-      if (n==1)               // Aseguramos que termine (caso base)
-          return 1;
-      return n * Factorial(n-1);  // Si no es 1, sigue la recursión
-  }
+using System; 
+public class clase1 { 
+    const int var2 = 14 ; 
+    var3 = var2 ; 
+    const int var5 = 4 ;
+    int var2 = 14 ; var3 = var2 ; 
+    List<string> nombres = new List<string>(){"Adair"};
+    nombres.Add("Eduardo"); 
+    nombres.RemoveAt(0);
+    try{  const int var5 = 4 ; } 
+    catch (exception e){ dsadas } 
+    finally { final }
+    nombres.Clear(); 
+    nombres.Count();
+}

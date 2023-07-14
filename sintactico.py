@@ -623,32 +623,19 @@ sintactico = yacc.yacc()
 
 datos = '''
 using System; 
-public class clase1 {
-    public static void Bfs(Graph graph, int v, bool[] discovered){
-        // crea una queue para hacer BFS
-        Queue<int> q = new Queue<>();
-        q.EnQueue(v);
-    }
-    static void Main(string[] args){
-        const int var2 = 14 , var3 = 15 ;
-        List<int> nombres = new List<int>(){4 , 5, 5, 6}; 
-        nombres.Add("dgf"); 
-        nombres.RemoveAt(0);
-        int var2 = 14; 
-        var3 = var2 ; 
-        var5 = 4 ;
-        Dictionary<> myDict = new Dictionary<>(); myDict.remove(key);
-        Dictionary<> myDict2 = new Dictionary<>() { { key1, 1 }, { key2, 2 } };
-        Console.WriteLine("hasta luego");
-        Console.WriteLine(myDict2);
-        Queue<string> cola1 = new Queue<string>();
-        cola1.EnQueue("soda");
-        cola1.DeQueue();
-        cola1.Peek();
-        cola1.Clear();
-        cola1.IsEmpty();
-        return 0;        
-    }
+public class clase1 { 
+    const int var2 = 14 ; 
+    var3 = var2 ; 
+    const int var5 = 4 ;
+    int var2 = 14 ; var3 = var2 ; 
+    List<string> nombres = new List<string>(){"Adair"};
+    nombres.Add("Eduardo"); 
+    nombres.RemoveAt(0);
+    try{  const int var5 = 4 ; } 
+    catch (exception e){ dsadas } 
+    finally { final }
+    nombres.Clear(); 
+    nombres.Count();
 }
 '''
 
