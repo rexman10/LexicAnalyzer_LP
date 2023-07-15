@@ -92,7 +92,6 @@ tokens = (
     'FLOAT_NUMBER',
     'DECIMAL_NUMBER',
     'INTEGER',
-    'BOOL',
     'STRING',
     'CHAR',
     'PLUS',
