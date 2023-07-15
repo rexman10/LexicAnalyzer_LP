@@ -18,8 +18,6 @@ def p_block_main_method(p):
 def p_block_code(p):
     '''block_code               : def_const_or_var
                                 | print_data
-                                | boolean_operation
-                                | arithmetic_operation
     '''
 
 def p_all_block_code(p):
@@ -153,19 +151,33 @@ def p_assignation_type_value(p):
     '''
 
 def p_assignation_int(p):
-    '''assignation_int          : VARIABLE ASSIGNATION INTEGER      '''
+    '''assignation_int          : VARIABLE ASSIGNATION INTEGER
+                                | VARIABLE ASSIGNATION VARIABLE
+                                | VARIABLE ASSIGNATION arithmetic_operation
+    '''
 
 def p_assignation_string(p):
-    '''assignation_string       : VARIABLE ASSIGNATION STRING       '''
+    '''assignation_string       : VARIABLE ASSIGNATION STRING
+                                | VARIABLE ASSIGNATION VARIABLE
+    '''
 
 def p_assignation_float(p):
-    '''assignation_float        : VARIABLE ASSIGNATION FLOAT_NUMBER '''
+    '''assignation_float        : VARIABLE ASSIGNATION FLOAT_NUMBER
+                                | VARIABLE ASSIGNATION VARIABLE
+                                | VARIABLE ASSIGNATION arithmetic_operation
+    '''
 
 def p_assignation_true(p):
-    '''assignation_true         : VARIABLE ASSIGNATION BOOLTRUE     '''
+    '''assignation_true         : VARIABLE ASSIGNATION BOOLTRUE
+                                | VARIABLE ASSIGNATION VARIABLE
+                                | VARIABLE ASSIGNATION boolean_operation
+    '''
 
 def p_assignation_false(p):
-    '''assignation_false        : VARIABLE ASSIGNATION BOOLFALSE     '''
+    '''assignation_false        : VARIABLE ASSIGNATION BOOLFALSE
+                                | VARIABLE ASSIGNATION VARIABLE
+                                | VARIABLE ASSIGNATION boolean_operation
+    '''
 
 
 def p_assignation_type_value_multiple(p):
@@ -216,15 +228,15 @@ datos = '''
 using System;
 public class clase1 {
     static void Main (string[] args) {
-        x >= 34 && x == 34
-        x <= 34 || x == 34
-        x > 34
-        x < 34
-        x != 34
-        x == 34
-        123 / 123123 + 5345 * 123124 - 4365
+        bool var1 = x >= 34 && x == 34;
+        bool var2 = x <= 34 || x == 34;
+        bool var3 = x > 34;
+        bool var4 = x < 34 && x == 34 && x != 34;
+        bool var5 = true;
+        bool var6 = false;
+        int operacion1 = 123 / 123123 + 5345 * 123124 - 4365;
         int var = 4;
-        int var2 = 5 , var3 = 6;
+        string var2 = "5" , var3 = "6";
     }
 }
 '''

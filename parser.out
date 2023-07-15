@@ -70,90 +70,97 @@ Rule 2     block_publicClass -> PUBLIC CLASS VARIABLE LKEY block_main_method RKE
 Rule 3     block_main_method -> STATIC VOID MAIN LPARENT STRINGTYPE LBRACKET RBRACKET VARIABLE RPARENT LKEY all_block_code RKEY
 Rule 4     block_code -> def_const_or_var
 Rule 5     block_code -> print_data
-Rule 6     block_code -> boolean_operation
-Rule 7     block_code -> arithmetic_operation
-Rule 8     all_block_code -> block_code
-Rule 9     all_block_code -> block_code all_block_code
-Rule 10    data_type -> CHARTYPE
-Rule 11    data_type -> STRINGTYPE
-Rule 12    data_type -> FLOATTYPE
-Rule 13    data_type -> DECIMALTYPE
-Rule 14    data_type -> INTTYPE
-Rule 15    data_type -> BOOLTYPE
-Rule 16    value_string -> STRING
-Rule 17    value_string -> CHAR
-Rule 18    value_string -> concatenation
-Rule 19    value_boolean -> BOOLTRUE
-Rule 20    value_boolean -> BOOLFALSE
-Rule 21    value_boolean -> VARIABLE
-Rule 22    value_boolean -> comparison_operation
-Rule 23    value_numeric -> INTEGER
-Rule 24    value_numeric -> FLOAT_NUMBER
-Rule 25    value_numeric -> DECIMAL_NUMBER
-Rule 26    value_numeric -> VARIABLE
-Rule 27    print_data -> PRINT LPARENT STRING RPARENT DOTANDCOMMA
-Rule 28    print_data -> PRINT LPARENT VARIABLE RPARENT DOTANDCOMMA
-Rule 29    read_data -> READ LPARENT RPARENT DOTANDCOMMA
-Rule 30    concatenation -> STRING
-Rule 31    concatenation -> STRING PLUS concatenation
-Rule 32    value -> value_numeric
-Rule 33    value -> value_boolean
-Rule 34    value -> value_string
-Rule 35    value -> VARIABLE
-Rule 36    value -> read_data
-Rule 37    arithmetic_operation -> value_numeric
-Rule 38    arithmetic_operation -> value_numeric arithmetic_operator arithmetic_operation
-Rule 39    arithmetic_operator -> PLUS
-Rule 40    arithmetic_operator -> MINUS
-Rule 41    arithmetic_operator -> TIMES
-Rule 42    arithmetic_operator -> DIVIDE
-Rule 43    arithmetic_operator -> PERCENT
-Rule 44    comparison_operation -> value_numeric
-Rule 45    comparison_operation -> value_numeric comparison_operator comparison_operation
-Rule 46    comparison_operator -> GREATER_THAN
-Rule 47    comparison_operator -> SMALLER_THAN
-Rule 48    comparison_operator -> EQUAL_COMPARATION
-Rule 49    comparison_operator -> INEQUALITY
-Rule 50    comparison_operator -> GREATER_THAN_OR_EQUAL
-Rule 51    comparison_operator -> SMALLER_THAN_OR_EQUAL
-Rule 52    boolean_operation -> value_boolean
-Rule 53    boolean_operation -> LOGICNOT value_boolean
-Rule 54    boolean_operation -> value_boolean boolean_operator boolean_operation
-Rule 55    boolean_operator -> LOGICAND
-Rule 56    boolean_operator -> LOGICOR
-Rule 57    def_const_or_var -> constant_assignation
-Rule 58    def_const_or_var -> variable_assignation
-Rule 59    constant_assignation -> access_modifiers CONST assignation_type_value_multiple DOTANDCOMMA
-Rule 60    constant_assignation -> CONST assignation_type_value_multiple DOTANDCOMMA
-Rule 61    variable_assignation -> access_modifiers assignation_type_value_multiple DOTANDCOMMA
-Rule 62    variable_assignation -> assignation_type_value_multiple DOTANDCOMMA
-Rule 63    access_modifiers -> PUBLIC
-Rule 64    access_modifiers -> PRIVATE
-Rule 65    assignation_type_value -> INTTYPE assignation_int
-Rule 66    assignation_type_value -> STRINGTYPE assignation_string
-Rule 67    assignation_type_value -> FLOATTYPE assignation_float
-Rule 68    assignation_type_value -> BOOLTYPE assignation_true
-Rule 69    assignation_type_value -> BOOLTYPE assignation_false
-Rule 70    assignation_int -> VARIABLE ASSIGNATION INTEGER
+Rule 6     all_block_code -> block_code
+Rule 7     all_block_code -> block_code all_block_code
+Rule 8     data_type -> CHARTYPE
+Rule 9     data_type -> STRINGTYPE
+Rule 10    data_type -> FLOATTYPE
+Rule 11    data_type -> DECIMALTYPE
+Rule 12    data_type -> INTTYPE
+Rule 13    data_type -> BOOLTYPE
+Rule 14    value_string -> STRING
+Rule 15    value_string -> CHAR
+Rule 16    value_string -> concatenation
+Rule 17    value_boolean -> BOOLTRUE
+Rule 18    value_boolean -> BOOLFALSE
+Rule 19    value_boolean -> VARIABLE
+Rule 20    value_boolean -> comparison_operation
+Rule 21    value_numeric -> INTEGER
+Rule 22    value_numeric -> FLOAT_NUMBER
+Rule 23    value_numeric -> DECIMAL_NUMBER
+Rule 24    value_numeric -> VARIABLE
+Rule 25    print_data -> PRINT LPARENT STRING RPARENT DOTANDCOMMA
+Rule 26    print_data -> PRINT LPARENT VARIABLE RPARENT DOTANDCOMMA
+Rule 27    read_data -> READ LPARENT RPARENT DOTANDCOMMA
+Rule 28    concatenation -> STRING
+Rule 29    concatenation -> STRING PLUS concatenation
+Rule 30    value -> value_numeric
+Rule 31    value -> value_boolean
+Rule 32    value -> value_string
+Rule 33    value -> VARIABLE
+Rule 34    value -> read_data
+Rule 35    arithmetic_operation -> value_numeric
+Rule 36    arithmetic_operation -> value_numeric arithmetic_operator arithmetic_operation
+Rule 37    arithmetic_operator -> PLUS
+Rule 38    arithmetic_operator -> MINUS
+Rule 39    arithmetic_operator -> TIMES
+Rule 40    arithmetic_operator -> DIVIDE
+Rule 41    arithmetic_operator -> PERCENT
+Rule 42    comparison_operation -> value_numeric
+Rule 43    comparison_operation -> value_numeric comparison_operator comparison_operation
+Rule 44    comparison_operator -> GREATER_THAN
+Rule 45    comparison_operator -> SMALLER_THAN
+Rule 46    comparison_operator -> EQUAL_COMPARATION
+Rule 47    comparison_operator -> INEQUALITY
+Rule 48    comparison_operator -> GREATER_THAN_OR_EQUAL
+Rule 49    comparison_operator -> SMALLER_THAN_OR_EQUAL
+Rule 50    boolean_operation -> value_boolean
+Rule 51    boolean_operation -> LOGICNOT value_boolean
+Rule 52    boolean_operation -> value_boolean boolean_operator boolean_operation
+Rule 53    boolean_operator -> LOGICAND
+Rule 54    boolean_operator -> LOGICOR
+Rule 55    def_const_or_var -> constant_assignation
+Rule 56    def_const_or_var -> variable_assignation
+Rule 57    constant_assignation -> access_modifiers CONST assignation_type_value_multiple DOTANDCOMMA
+Rule 58    constant_assignation -> CONST assignation_type_value_multiple DOTANDCOMMA
+Rule 59    variable_assignation -> access_modifiers assignation_type_value_multiple DOTANDCOMMA
+Rule 60    variable_assignation -> assignation_type_value_multiple DOTANDCOMMA
+Rule 61    access_modifiers -> PUBLIC
+Rule 62    access_modifiers -> PRIVATE
+Rule 63    assignation_type_value -> INTTYPE assignation_int
+Rule 64    assignation_type_value -> STRINGTYPE assignation_string
+Rule 65    assignation_type_value -> FLOATTYPE assignation_float
+Rule 66    assignation_type_value -> BOOLTYPE assignation_true
+Rule 67    assignation_type_value -> BOOLTYPE assignation_false
+Rule 68    assignation_int -> VARIABLE ASSIGNATION INTEGER
+Rule 69    assignation_int -> VARIABLE ASSIGNATION VARIABLE
+Rule 70    assignation_int -> VARIABLE ASSIGNATION arithmetic_operation
 Rule 71    assignation_string -> VARIABLE ASSIGNATION STRING
-Rule 72    assignation_float -> VARIABLE ASSIGNATION FLOAT_NUMBER
-Rule 73    assignation_true -> VARIABLE ASSIGNATION BOOLTRUE
-Rule 74    assignation_false -> VARIABLE ASSIGNATION BOOLFALSE
-Rule 75    assignation_type_value_multiple -> INTTYPE assignation_int_multiple
-Rule 76    assignation_type_value_multiple -> STRINGTYPE assignation_string_multiple
-Rule 77    assignation_type_value_multiple -> FLOATTYPE assignation_float_multiple
-Rule 78    assignation_type_value_multiple -> BOOLTYPE assignation_true_multiple
-Rule 79    assignation_type_value_multiple -> BOOLTYPE assignation_false_multiple
-Rule 80    assignation_int_multiple -> assignation_int
-Rule 81    assignation_int_multiple -> assignation_int COMMA assignation_int_multiple
-Rule 82    assignation_string_multiple -> assignation_string
-Rule 83    assignation_string_multiple -> assignation_string COMMA assignation_string_multiple
-Rule 84    assignation_float_multiple -> assignation_float
-Rule 85    assignation_float_multiple -> assignation_float COMMA assignation_float_multiple
-Rule 86    assignation_true_multiple -> assignation_true
-Rule 87    assignation_true_multiple -> assignation_true COMMA assignation_true_multiple
-Rule 88    assignation_false_multiple -> assignation_false
-Rule 89    assignation_false_multiple -> assignation_false COMMA assignation_false_multiple
+Rule 72    assignation_string -> VARIABLE ASSIGNATION VARIABLE
+Rule 73    assignation_float -> VARIABLE ASSIGNATION FLOAT_NUMBER
+Rule 74    assignation_float -> VARIABLE ASSIGNATION VARIABLE
+Rule 75    assignation_float -> VARIABLE ASSIGNATION arithmetic_operation
+Rule 76    assignation_true -> VARIABLE ASSIGNATION BOOLTRUE
+Rule 77    assignation_true -> VARIABLE ASSIGNATION VARIABLE
+Rule 78    assignation_true -> VARIABLE ASSIGNATION boolean_operation
+Rule 79    assignation_false -> VARIABLE ASSIGNATION BOOLFALSE
+Rule 80    assignation_false -> VARIABLE ASSIGNATION VARIABLE
+Rule 81    assignation_false -> VARIABLE ASSIGNATION boolean_operation
+Rule 82    assignation_type_value_multiple -> INTTYPE assignation_int_multiple
+Rule 83    assignation_type_value_multiple -> STRINGTYPE assignation_string_multiple
+Rule 84    assignation_type_value_multiple -> FLOATTYPE assignation_float_multiple
+Rule 85    assignation_type_value_multiple -> BOOLTYPE assignation_true_multiple
+Rule 86    assignation_type_value_multiple -> BOOLTYPE assignation_false_multiple
+Rule 87    assignation_int_multiple -> assignation_int
+Rule 88    assignation_int_multiple -> assignation_int COMMA assignation_int_multiple
+Rule 89    assignation_string_multiple -> assignation_string
+Rule 90    assignation_string_multiple -> assignation_string COMMA assignation_string_multiple
+Rule 91    assignation_float_multiple -> assignation_float
+Rule 92    assignation_float_multiple -> assignation_float COMMA assignation_float_multiple
+Rule 93    assignation_true_multiple -> assignation_true
+Rule 94    assignation_true_multiple -> assignation_true COMMA assignation_true_multiple
+Rule 95    assignation_false_multiple -> assignation_false
+Rule 96    assignation_false_multiple -> assignation_false COMMA assignation_false_multiple
 
 Terminals, with rules where they appear
 
@@ -161,148 +168,148 @@ ACTION               :
 ADD                  : 
 ADDITION_ASSIGNMENT  : 
 ARROW                : 
-ASSIGNATION          : 70 71 72 73 74
+ASSIGNATION          : 68 69 70 71 72 73 74 75 76 77 78 79 80 81
 ASYNC                : 
 AWAIT                : 
 BACK_SLASH           : 
-BOOLFALSE            : 20 74
-BOOLTRUE             : 19 73
-BOOLTYPE             : 15 68 69 78 79
+BOOLFALSE            : 18 79
+BOOLTRUE             : 17 76
+BOOLTYPE             : 13 66 67 85 86
 BREAK                : 
 CATCH                : 
-CHAR                 : 17
-CHARTYPE             : 10
+CHAR                 : 15
+CHARTYPE             : 8
 CLASS                : 2
 CLEAR                : 
-COMMA                : 81 83 85 87 89
+COMMA                : 88 90 92 94 96
 CONCURRENT           : 
-CONST                : 59 60
+CONST                : 57 58
 COUNT                : 
-DECIMALTYPE          : 13
-DECIMAL_NUMBER       : 25
+DECIMALTYPE          : 11
+DECIMAL_NUMBER       : 23
 DECREMENT            : 
 DEQUEUE              : 
 DICTIONARY           : 
-DIVIDE               : 42
+DIVIDE               : 40
 DIVISION_ASSIGNMENT  : 
 DO                   : 
 DOLLARSIGN           : 
 DOT                  : 
-DOTANDCOMMA          : 1 27 28 29 59 60 61 62
+DOTANDCOMMA          : 1 25 26 27 57 58 59 60
 DOUBLEPOINT          : 
 DOUBLE_QUOTATION_MARKS : 
 ELSE                 : 
 ELSE_IF              : 
 ENQUEUE              : 
-EQUAL_COMPARATION    : 48
+EQUAL_COMPARATION    : 46
 EXCEPTION            : 
 FINALLY              : 
-FLOATTYPE            : 12 67 77
-FLOAT_NUMBER         : 24 72
+FLOATTYPE            : 10 65 84
+FLOAT_NUMBER         : 22 73
 FOR                  : 
 FOREACH              : 
-GREATER_THAN         : 46
-GREATER_THAN_OR_EQUAL : 50
+GREATER_THAN         : 44
+GREATER_THAN_OR_EQUAL : 48
 ID                   : 
 IDENTIFIER           : 
 IF                   : 
 IN                   : 
 INCREMENT            : 
-INEQUALITY           : 49
-INTEGER              : 23 70
-INTTYPE              : 14 65 75
+INEQUALITY           : 47
+INTEGER              : 21 68
+INTTYPE              : 12 63 82
 ISEMPTY              : 
 JUMP_LINE            : 
 LBRACKET             : 3
 LIST                 : 
 LKEY                 : 2 3
-LOGICAND             : 55
-LOGICNOT             : 53
-LOGICOR              : 56
+LOGICAND             : 53
+LOGICNOT             : 51
+LOGICOR              : 54
 LONG                 : 
-LPARENT              : 3 27 28 29
+LPARENT              : 3 25 26 27
 MAIN                 : 3
 METHOD               : 
-MINUS                : 40
+MINUS                : 38
 MODULE_ASSIGNMENT    : 
 MULTIPLICATION_ASSIGNMENT : 
 NAMESPACE            : 
 NEW                  : 
 PEEK                 : 
-PERCENT              : 43
+PERCENT              : 41
 PIPE                 : 
-PLUS                 : 31 39
+PLUS                 : 29 37
 POP                  : 
-PRINT                : 27 28
-PRIVATE              : 64
-PUBLIC               : 2 63
+PRINT                : 25 26
+PRIVATE              : 62
+PUBLIC               : 2 61
 PUSH                 : 
 PUT                  : 
 QUEUE                : 
 RBRACKET             : 3
-READ                 : 29
+READ                 : 27
 REMOVE               : 
 REMOVEAT             : 
 RETURN               : 
 RKEY                 : 2 3
-RPARENT              : 3 27 28 29
+RPARENT              : 3 25 26 27
 SIPLE_QUOTATION_MARKS : 
-SMALLER_THAN         : 47
-SMALLER_THAN_OR_EQUAL : 51
+SMALLER_THAN         : 45
+SMALLER_THAN_OR_EQUAL : 49
 STACK                : 
 STATIC               : 3
-STRING               : 16 27 30 31 71
-STRINGTYPE           : 3 11 66 76
+STRING               : 14 25 28 29 71
+STRINGTYPE           : 3 9 64 83
 SUBTRACTION_ASSIGNMENT : 
 SWITCH               : 
 SYSTEM               : 1
 TABULATION           : 
 TASK                 : 
-TIMES                : 41
+TIMES                : 39
 TRY                  : 
 USING                : 1
-VARIABLE             : 2 3 21 26 28 35 70 71 72 73 74
+VARIABLE             : 2 3 19 24 26 33 68 69 69 70 71 72 72 73 74 74 75 76 77 77 78 79 80 80 81
 VOID                 : 3
 WHILE                : 
 error                : 
 
 Nonterminals, with rules where they appear
 
-access_modifiers     : 59 61
-all_block_code       : 3 9
-arithmetic_operation : 7 38
-arithmetic_operator  : 38
-assignation_false    : 69 88 89
-assignation_false_multiple : 79 89
-assignation_float    : 67 84 85
-assignation_float_multiple : 77 85
-assignation_int      : 65 80 81
-assignation_int_multiple : 75 81
-assignation_string   : 66 82 83
-assignation_string_multiple : 76 83
-assignation_true     : 68 86 87
-assignation_true_multiple : 78 87
+access_modifiers     : 57 59
+all_block_code       : 3 7
+arithmetic_operation : 36 70 75
+arithmetic_operator  : 36
+assignation_false    : 67 95 96
+assignation_false_multiple : 86 96
+assignation_float    : 65 91 92
+assignation_float_multiple : 84 92
+assignation_int      : 63 87 88
+assignation_int_multiple : 82 88
+assignation_string   : 64 89 90
+assignation_string_multiple : 83 90
+assignation_true     : 66 93 94
+assignation_true_multiple : 85 94
 assignation_type_value : 
-assignation_type_value_multiple : 59 60 61 62
-block_code           : 8 9
+assignation_type_value_multiple : 57 58 59 60
+block_code           : 6 7
 block_main_method    : 2
 block_publicClass    : 1
-boolean_operation    : 6 54
-boolean_operator     : 54
-comparison_operation : 22 45
-comparison_operator  : 45
-concatenation        : 18 31
-constant_assignation : 57
+boolean_operation    : 52 78 81
+boolean_operator     : 52
+comparison_operation : 20 43
+comparison_operator  : 43
+concatenation        : 16 29
+constant_assignation : 55
 data_type            : 
 def_const_or_var     : 4
 print_data           : 5
 program              : 0
-read_data            : 36
+read_data            : 34
 value                : 
-value_boolean        : 33 52 53 54
-value_numeric        : 32 37 38 44 45
-value_string         : 34
-variable_assignation : 58
+value_boolean        : 31 50 51 52
+value_numeric        : 30 35 36 42 43
+value_string         : 32
+variable_assignation : 56
 
 Parsing method: LALR
 
@@ -461,250 +468,113 @@ state 20
 state 21
 
     (3) block_main_method -> STATIC VOID MAIN LPARENT STRINGTYPE LBRACKET RBRACKET VARIABLE RPARENT LKEY . all_block_code RKEY
-    (8) all_block_code -> . block_code
-    (9) all_block_code -> . block_code all_block_code
+    (6) all_block_code -> . block_code
+    (7) all_block_code -> . block_code all_block_code
     (4) block_code -> . def_const_or_var
     (5) block_code -> . print_data
-    (6) block_code -> . boolean_operation
-    (7) block_code -> . arithmetic_operation
-    (57) def_const_or_var -> . constant_assignation
-    (58) def_const_or_var -> . variable_assignation
-    (27) print_data -> . PRINT LPARENT STRING RPARENT DOTANDCOMMA
-    (28) print_data -> . PRINT LPARENT VARIABLE RPARENT DOTANDCOMMA
-    (52) boolean_operation -> . value_boolean
-    (53) boolean_operation -> . LOGICNOT value_boolean
-    (54) boolean_operation -> . value_boolean boolean_operator boolean_operation
-    (37) arithmetic_operation -> . value_numeric
-    (38) arithmetic_operation -> . value_numeric arithmetic_operator arithmetic_operation
-    (59) constant_assignation -> . access_modifiers CONST assignation_type_value_multiple DOTANDCOMMA
-    (60) constant_assignation -> . CONST assignation_type_value_multiple DOTANDCOMMA
-    (61) variable_assignation -> . access_modifiers assignation_type_value_multiple DOTANDCOMMA
-    (62) variable_assignation -> . assignation_type_value_multiple DOTANDCOMMA
-    (19) value_boolean -> . BOOLTRUE
-    (20) value_boolean -> . BOOLFALSE
-    (21) value_boolean -> . VARIABLE
-    (22) value_boolean -> . comparison_operation
-    (23) value_numeric -> . INTEGER
-    (24) value_numeric -> . FLOAT_NUMBER
-    (25) value_numeric -> . DECIMAL_NUMBER
-    (26) value_numeric -> . VARIABLE
-    (63) access_modifiers -> . PUBLIC
-    (64) access_modifiers -> . PRIVATE
-    (75) assignation_type_value_multiple -> . INTTYPE assignation_int_multiple
-    (76) assignation_type_value_multiple -> . STRINGTYPE assignation_string_multiple
-    (77) assignation_type_value_multiple -> . FLOATTYPE assignation_float_multiple
-    (78) assignation_type_value_multiple -> . BOOLTYPE assignation_true_multiple
-    (79) assignation_type_value_multiple -> . BOOLTYPE assignation_false_multiple
-    (44) comparison_operation -> . value_numeric
-    (45) comparison_operation -> . value_numeric comparison_operator comparison_operation
+    (55) def_const_or_var -> . constant_assignation
+    (56) def_const_or_var -> . variable_assignation
+    (25) print_data -> . PRINT LPARENT STRING RPARENT DOTANDCOMMA
+    (26) print_data -> . PRINT LPARENT VARIABLE RPARENT DOTANDCOMMA
+    (57) constant_assignation -> . access_modifiers CONST assignation_type_value_multiple DOTANDCOMMA
+    (58) constant_assignation -> . CONST assignation_type_value_multiple DOTANDCOMMA
+    (59) variable_assignation -> . access_modifiers assignation_type_value_multiple DOTANDCOMMA
+    (60) variable_assignation -> . assignation_type_value_multiple DOTANDCOMMA
+    (61) access_modifiers -> . PUBLIC
+    (62) access_modifiers -> . PRIVATE
+    (82) assignation_type_value_multiple -> . INTTYPE assignation_int_multiple
+    (83) assignation_type_value_multiple -> . STRINGTYPE assignation_string_multiple
+    (84) assignation_type_value_multiple -> . FLOATTYPE assignation_float_multiple
+    (85) assignation_type_value_multiple -> . BOOLTYPE assignation_true_multiple
+    (86) assignation_type_value_multiple -> . BOOLTYPE assignation_false_multiple
 
-    PRINT           shift and go to state 32
-    LOGICNOT        shift and go to state 34
-    CONST           shift and go to state 37
-    BOOLTRUE        shift and go to state 39
-    BOOLFALSE       shift and go to state 40
-    VARIABLE        shift and go to state 23
-    INTEGER         shift and go to state 42
-    FLOAT_NUMBER    shift and go to state 43
-    DECIMAL_NUMBER  shift and go to state 44
-    PUBLIC          shift and go to state 45
-    PRIVATE         shift and go to state 46
-    INTTYPE         shift and go to state 47
+    PRINT           shift and go to state 29
+    CONST           shift and go to state 31
+    PUBLIC          shift and go to state 33
+    PRIVATE         shift and go to state 34
+    INTTYPE         shift and go to state 35
     STRINGTYPE      shift and go to state 22
-    FLOATTYPE       shift and go to state 48
-    BOOLTYPE        shift and go to state 49
+    FLOATTYPE       shift and go to state 36
+    BOOLTYPE        shift and go to state 37
 
-    all_block_code                 shift and go to state 24
-    block_code                     shift and go to state 25
-    def_const_or_var               shift and go to state 26
-    print_data                     shift and go to state 27
-    boolean_operation              shift and go to state 28
-    arithmetic_operation           shift and go to state 29
-    constant_assignation           shift and go to state 30
-    variable_assignation           shift and go to state 31
-    value_boolean                  shift and go to state 33
-    value_numeric                  shift and go to state 35
-    access_modifiers               shift and go to state 36
-    assignation_type_value_multiple shift and go to state 38
-    comparison_operation           shift and go to state 41
+    all_block_code                 shift and go to state 23
+    block_code                     shift and go to state 24
+    def_const_or_var               shift and go to state 25
+    print_data                     shift and go to state 26
+    constant_assignation           shift and go to state 27
+    variable_assignation           shift and go to state 28
+    access_modifiers               shift and go to state 30
+    assignation_type_value_multiple shift and go to state 32
 
 state 22
 
-    (76) assignation_type_value_multiple -> STRINGTYPE . assignation_string_multiple
-    (82) assignation_string_multiple -> . assignation_string
-    (83) assignation_string_multiple -> . assignation_string COMMA assignation_string_multiple
+    (83) assignation_type_value_multiple -> STRINGTYPE . assignation_string_multiple
+    (89) assignation_string_multiple -> . assignation_string
+    (90) assignation_string_multiple -> . assignation_string COMMA assignation_string_multiple
     (71) assignation_string -> . VARIABLE ASSIGNATION STRING
+    (72) assignation_string -> . VARIABLE ASSIGNATION VARIABLE
 
-    VARIABLE        shift and go to state 52
+    VARIABLE        shift and go to state 40
 
-    assignation_string_multiple    shift and go to state 50
-    assignation_string             shift and go to state 51
+    assignation_string_multiple    shift and go to state 38
+    assignation_string             shift and go to state 39
 
 state 23
 
-    (21) value_boolean -> VARIABLE .
-    (26) value_numeric -> VARIABLE .
+    (3) block_main_method -> STATIC VOID MAIN LPARENT STRINGTYPE LBRACKET RBRACKET VARIABLE RPARENT LKEY all_block_code . RKEY
 
-  ! reduce/reduce conflict for PRINT resolved using rule 21 (value_boolean -> VARIABLE .)
-  ! reduce/reduce conflict for LOGICNOT resolved using rule 21 (value_boolean -> VARIABLE .)
-  ! reduce/reduce conflict for CONST resolved using rule 21 (value_boolean -> VARIABLE .)
-  ! reduce/reduce conflict for BOOLTRUE resolved using rule 21 (value_boolean -> VARIABLE .)
-  ! reduce/reduce conflict for BOOLFALSE resolved using rule 21 (value_boolean -> VARIABLE .)
-  ! reduce/reduce conflict for VARIABLE resolved using rule 21 (value_boolean -> VARIABLE .)
-  ! reduce/reduce conflict for INTEGER resolved using rule 21 (value_boolean -> VARIABLE .)
-  ! reduce/reduce conflict for FLOAT_NUMBER resolved using rule 21 (value_boolean -> VARIABLE .)
-  ! reduce/reduce conflict for DECIMAL_NUMBER resolved using rule 21 (value_boolean -> VARIABLE .)
-  ! reduce/reduce conflict for PUBLIC resolved using rule 21 (value_boolean -> VARIABLE .)
-  ! reduce/reduce conflict for PRIVATE resolved using rule 21 (value_boolean -> VARIABLE .)
-  ! reduce/reduce conflict for INTTYPE resolved using rule 21 (value_boolean -> VARIABLE .)
-  ! reduce/reduce conflict for STRINGTYPE resolved using rule 21 (value_boolean -> VARIABLE .)
-  ! reduce/reduce conflict for FLOATTYPE resolved using rule 21 (value_boolean -> VARIABLE .)
-  ! reduce/reduce conflict for BOOLTYPE resolved using rule 21 (value_boolean -> VARIABLE .)
-  ! reduce/reduce conflict for RKEY resolved using rule 21 (value_boolean -> VARIABLE .)
-  ! reduce/reduce conflict for LOGICAND resolved using rule 21 (value_boolean -> VARIABLE .)
-  ! reduce/reduce conflict for LOGICOR resolved using rule 21 (value_boolean -> VARIABLE .)
-    LOGICAND        reduce using rule 21 (value_boolean -> VARIABLE .)
-    LOGICOR         reduce using rule 21 (value_boolean -> VARIABLE .)
-    PRINT           reduce using rule 21 (value_boolean -> VARIABLE .)
-    LOGICNOT        reduce using rule 21 (value_boolean -> VARIABLE .)
-    CONST           reduce using rule 21 (value_boolean -> VARIABLE .)
-    BOOLTRUE        reduce using rule 21 (value_boolean -> VARIABLE .)
-    BOOLFALSE       reduce using rule 21 (value_boolean -> VARIABLE .)
-    VARIABLE        reduce using rule 21 (value_boolean -> VARIABLE .)
-    INTEGER         reduce using rule 21 (value_boolean -> VARIABLE .)
-    FLOAT_NUMBER    reduce using rule 21 (value_boolean -> VARIABLE .)
-    DECIMAL_NUMBER  reduce using rule 21 (value_boolean -> VARIABLE .)
-    PUBLIC          reduce using rule 21 (value_boolean -> VARIABLE .)
-    PRIVATE         reduce using rule 21 (value_boolean -> VARIABLE .)
-    INTTYPE         reduce using rule 21 (value_boolean -> VARIABLE .)
-    STRINGTYPE      reduce using rule 21 (value_boolean -> VARIABLE .)
-    FLOATTYPE       reduce using rule 21 (value_boolean -> VARIABLE .)
-    BOOLTYPE        reduce using rule 21 (value_boolean -> VARIABLE .)
-    RKEY            reduce using rule 21 (value_boolean -> VARIABLE .)
-    PLUS            reduce using rule 26 (value_numeric -> VARIABLE .)
-    MINUS           reduce using rule 26 (value_numeric -> VARIABLE .)
-    TIMES           reduce using rule 26 (value_numeric -> VARIABLE .)
-    DIVIDE          reduce using rule 26 (value_numeric -> VARIABLE .)
-    PERCENT         reduce using rule 26 (value_numeric -> VARIABLE .)
-    GREATER_THAN    reduce using rule 26 (value_numeric -> VARIABLE .)
-    SMALLER_THAN    reduce using rule 26 (value_numeric -> VARIABLE .)
-    EQUAL_COMPARATION reduce using rule 26 (value_numeric -> VARIABLE .)
-    INEQUALITY      reduce using rule 26 (value_numeric -> VARIABLE .)
-    GREATER_THAN_OR_EQUAL reduce using rule 26 (value_numeric -> VARIABLE .)
-    SMALLER_THAN_OR_EQUAL reduce using rule 26 (value_numeric -> VARIABLE .)
-
-  ! PRINT           [ reduce using rule 26 (value_numeric -> VARIABLE .) ]
-  ! LOGICNOT        [ reduce using rule 26 (value_numeric -> VARIABLE .) ]
-  ! CONST           [ reduce using rule 26 (value_numeric -> VARIABLE .) ]
-  ! BOOLTRUE        [ reduce using rule 26 (value_numeric -> VARIABLE .) ]
-  ! BOOLFALSE       [ reduce using rule 26 (value_numeric -> VARIABLE .) ]
-  ! VARIABLE        [ reduce using rule 26 (value_numeric -> VARIABLE .) ]
-  ! INTEGER         [ reduce using rule 26 (value_numeric -> VARIABLE .) ]
-  ! FLOAT_NUMBER    [ reduce using rule 26 (value_numeric -> VARIABLE .) ]
-  ! DECIMAL_NUMBER  [ reduce using rule 26 (value_numeric -> VARIABLE .) ]
-  ! PUBLIC          [ reduce using rule 26 (value_numeric -> VARIABLE .) ]
-  ! PRIVATE         [ reduce using rule 26 (value_numeric -> VARIABLE .) ]
-  ! INTTYPE         [ reduce using rule 26 (value_numeric -> VARIABLE .) ]
-  ! STRINGTYPE      [ reduce using rule 26 (value_numeric -> VARIABLE .) ]
-  ! FLOATTYPE       [ reduce using rule 26 (value_numeric -> VARIABLE .) ]
-  ! BOOLTYPE        [ reduce using rule 26 (value_numeric -> VARIABLE .) ]
-  ! RKEY            [ reduce using rule 26 (value_numeric -> VARIABLE .) ]
-  ! LOGICAND        [ reduce using rule 26 (value_numeric -> VARIABLE .) ]
-  ! LOGICOR         [ reduce using rule 26 (value_numeric -> VARIABLE .) ]
+    RKEY            shift and go to state 41
 
 
 state 24
 
-    (3) block_main_method -> STATIC VOID MAIN LPARENT STRINGTYPE LBRACKET RBRACKET VARIABLE RPARENT LKEY all_block_code . RKEY
-
-    RKEY            shift and go to state 53
-
-
-state 25
-
-    (8) all_block_code -> block_code .
-    (9) all_block_code -> block_code . all_block_code
-    (8) all_block_code -> . block_code
-    (9) all_block_code -> . block_code all_block_code
+    (6) all_block_code -> block_code .
+    (7) all_block_code -> block_code . all_block_code
+    (6) all_block_code -> . block_code
+    (7) all_block_code -> . block_code all_block_code
     (4) block_code -> . def_const_or_var
     (5) block_code -> . print_data
-    (6) block_code -> . boolean_operation
-    (7) block_code -> . arithmetic_operation
-    (57) def_const_or_var -> . constant_assignation
-    (58) def_const_or_var -> . variable_assignation
-    (27) print_data -> . PRINT LPARENT STRING RPARENT DOTANDCOMMA
-    (28) print_data -> . PRINT LPARENT VARIABLE RPARENT DOTANDCOMMA
-    (52) boolean_operation -> . value_boolean
-    (53) boolean_operation -> . LOGICNOT value_boolean
-    (54) boolean_operation -> . value_boolean boolean_operator boolean_operation
-    (37) arithmetic_operation -> . value_numeric
-    (38) arithmetic_operation -> . value_numeric arithmetic_operator arithmetic_operation
-    (59) constant_assignation -> . access_modifiers CONST assignation_type_value_multiple DOTANDCOMMA
-    (60) constant_assignation -> . CONST assignation_type_value_multiple DOTANDCOMMA
-    (61) variable_assignation -> . access_modifiers assignation_type_value_multiple DOTANDCOMMA
-    (62) variable_assignation -> . assignation_type_value_multiple DOTANDCOMMA
-    (19) value_boolean -> . BOOLTRUE
-    (20) value_boolean -> . BOOLFALSE
-    (21) value_boolean -> . VARIABLE
-    (22) value_boolean -> . comparison_operation
-    (23) value_numeric -> . INTEGER
-    (24) value_numeric -> . FLOAT_NUMBER
-    (25) value_numeric -> . DECIMAL_NUMBER
-    (26) value_numeric -> . VARIABLE
-    (63) access_modifiers -> . PUBLIC
-    (64) access_modifiers -> . PRIVATE
-    (75) assignation_type_value_multiple -> . INTTYPE assignation_int_multiple
-    (76) assignation_type_value_multiple -> . STRINGTYPE assignation_string_multiple
-    (77) assignation_type_value_multiple -> . FLOATTYPE assignation_float_multiple
-    (78) assignation_type_value_multiple -> . BOOLTYPE assignation_true_multiple
-    (79) assignation_type_value_multiple -> . BOOLTYPE assignation_false_multiple
-    (44) comparison_operation -> . value_numeric
-    (45) comparison_operation -> . value_numeric comparison_operator comparison_operation
+    (55) def_const_or_var -> . constant_assignation
+    (56) def_const_or_var -> . variable_assignation
+    (25) print_data -> . PRINT LPARENT STRING RPARENT DOTANDCOMMA
+    (26) print_data -> . PRINT LPARENT VARIABLE RPARENT DOTANDCOMMA
+    (57) constant_assignation -> . access_modifiers CONST assignation_type_value_multiple DOTANDCOMMA
+    (58) constant_assignation -> . CONST assignation_type_value_multiple DOTANDCOMMA
+    (59) variable_assignation -> . access_modifiers assignation_type_value_multiple DOTANDCOMMA
+    (60) variable_assignation -> . assignation_type_value_multiple DOTANDCOMMA
+    (61) access_modifiers -> . PUBLIC
+    (62) access_modifiers -> . PRIVATE
+    (82) assignation_type_value_multiple -> . INTTYPE assignation_int_multiple
+    (83) assignation_type_value_multiple -> . STRINGTYPE assignation_string_multiple
+    (84) assignation_type_value_multiple -> . FLOATTYPE assignation_float_multiple
+    (85) assignation_type_value_multiple -> . BOOLTYPE assignation_true_multiple
+    (86) assignation_type_value_multiple -> . BOOLTYPE assignation_false_multiple
 
-    RKEY            reduce using rule 8 (all_block_code -> block_code .)
-    PRINT           shift and go to state 32
-    LOGICNOT        shift and go to state 34
-    CONST           shift and go to state 37
-    BOOLTRUE        shift and go to state 39
-    BOOLFALSE       shift and go to state 40
-    VARIABLE        shift and go to state 23
-    INTEGER         shift and go to state 42
-    FLOAT_NUMBER    shift and go to state 43
-    DECIMAL_NUMBER  shift and go to state 44
-    PUBLIC          shift and go to state 45
-    PRIVATE         shift and go to state 46
-    INTTYPE         shift and go to state 47
+    RKEY            reduce using rule 6 (all_block_code -> block_code .)
+    PRINT           shift and go to state 29
+    CONST           shift and go to state 31
+    PUBLIC          shift and go to state 33
+    PRIVATE         shift and go to state 34
+    INTTYPE         shift and go to state 35
     STRINGTYPE      shift and go to state 22
-    FLOATTYPE       shift and go to state 48
-    BOOLTYPE        shift and go to state 49
+    FLOATTYPE       shift and go to state 36
+    BOOLTYPE        shift and go to state 37
 
-    block_code                     shift and go to state 25
-    all_block_code                 shift and go to state 54
-    def_const_or_var               shift and go to state 26
-    print_data                     shift and go to state 27
-    boolean_operation              shift and go to state 28
-    arithmetic_operation           shift and go to state 29
-    constant_assignation           shift and go to state 30
-    variable_assignation           shift and go to state 31
-    value_boolean                  shift and go to state 33
-    value_numeric                  shift and go to state 35
-    access_modifiers               shift and go to state 36
-    assignation_type_value_multiple shift and go to state 38
-    comparison_operation           shift and go to state 41
+    block_code                     shift and go to state 24
+    all_block_code                 shift and go to state 42
+    def_const_or_var               shift and go to state 25
+    print_data                     shift and go to state 26
+    constant_assignation           shift and go to state 27
+    variable_assignation           shift and go to state 28
+    access_modifiers               shift and go to state 30
+    assignation_type_value_multiple shift and go to state 32
 
-state 26
+state 25
 
     (4) block_code -> def_const_or_var .
 
     PRINT           reduce using rule 4 (block_code -> def_const_or_var .)
-    LOGICNOT        reduce using rule 4 (block_code -> def_const_or_var .)
     CONST           reduce using rule 4 (block_code -> def_const_or_var .)
-    BOOLTRUE        reduce using rule 4 (block_code -> def_const_or_var .)
-    BOOLFALSE       reduce using rule 4 (block_code -> def_const_or_var .)
-    VARIABLE        reduce using rule 4 (block_code -> def_const_or_var .)
-    INTEGER         reduce using rule 4 (block_code -> def_const_or_var .)
-    FLOAT_NUMBER    reduce using rule 4 (block_code -> def_const_or_var .)
-    DECIMAL_NUMBER  reduce using rule 4 (block_code -> def_const_or_var .)
     PUBLIC          reduce using rule 4 (block_code -> def_const_or_var .)
     PRIVATE         reduce using rule 4 (block_code -> def_const_or_var .)
     INTTYPE         reduce using rule 4 (block_code -> def_const_or_var .)
@@ -714,19 +584,12 @@ state 26
     RKEY            reduce using rule 4 (block_code -> def_const_or_var .)
 
 
-state 27
+state 26
 
     (5) block_code -> print_data .
 
     PRINT           reduce using rule 5 (block_code -> print_data .)
-    LOGICNOT        reduce using rule 5 (block_code -> print_data .)
     CONST           reduce using rule 5 (block_code -> print_data .)
-    BOOLTRUE        reduce using rule 5 (block_code -> print_data .)
-    BOOLFALSE       reduce using rule 5 (block_code -> print_data .)
-    VARIABLE        reduce using rule 5 (block_code -> print_data .)
-    INTEGER         reduce using rule 5 (block_code -> print_data .)
-    FLOAT_NUMBER    reduce using rule 5 (block_code -> print_data .)
-    DECIMAL_NUMBER  reduce using rule 5 (block_code -> print_data .)
     PUBLIC          reduce using rule 5 (block_code -> print_data .)
     PRIVATE         reduce using rule 5 (block_code -> print_data .)
     INTTYPE         reduce using rule 5 (block_code -> print_data .)
@@ -736,1267 +599,563 @@ state 27
     RKEY            reduce using rule 5 (block_code -> print_data .)
 
 
+state 27
+
+    (55) def_const_or_var -> constant_assignation .
+
+    PRINT           reduce using rule 55 (def_const_or_var -> constant_assignation .)
+    CONST           reduce using rule 55 (def_const_or_var -> constant_assignation .)
+    PUBLIC          reduce using rule 55 (def_const_or_var -> constant_assignation .)
+    PRIVATE         reduce using rule 55 (def_const_or_var -> constant_assignation .)
+    INTTYPE         reduce using rule 55 (def_const_or_var -> constant_assignation .)
+    STRINGTYPE      reduce using rule 55 (def_const_or_var -> constant_assignation .)
+    FLOATTYPE       reduce using rule 55 (def_const_or_var -> constant_assignation .)
+    BOOLTYPE        reduce using rule 55 (def_const_or_var -> constant_assignation .)
+    RKEY            reduce using rule 55 (def_const_or_var -> constant_assignation .)
+
+
 state 28
 
-    (6) block_code -> boolean_operation .
+    (56) def_const_or_var -> variable_assignation .
 
-    PRINT           reduce using rule 6 (block_code -> boolean_operation .)
-    LOGICNOT        reduce using rule 6 (block_code -> boolean_operation .)
-    CONST           reduce using rule 6 (block_code -> boolean_operation .)
-    BOOLTRUE        reduce using rule 6 (block_code -> boolean_operation .)
-    BOOLFALSE       reduce using rule 6 (block_code -> boolean_operation .)
-    VARIABLE        reduce using rule 6 (block_code -> boolean_operation .)
-    INTEGER         reduce using rule 6 (block_code -> boolean_operation .)
-    FLOAT_NUMBER    reduce using rule 6 (block_code -> boolean_operation .)
-    DECIMAL_NUMBER  reduce using rule 6 (block_code -> boolean_operation .)
-    PUBLIC          reduce using rule 6 (block_code -> boolean_operation .)
-    PRIVATE         reduce using rule 6 (block_code -> boolean_operation .)
-    INTTYPE         reduce using rule 6 (block_code -> boolean_operation .)
-    STRINGTYPE      reduce using rule 6 (block_code -> boolean_operation .)
-    FLOATTYPE       reduce using rule 6 (block_code -> boolean_operation .)
-    BOOLTYPE        reduce using rule 6 (block_code -> boolean_operation .)
-    RKEY            reduce using rule 6 (block_code -> boolean_operation .)
+    PRINT           reduce using rule 56 (def_const_or_var -> variable_assignation .)
+    CONST           reduce using rule 56 (def_const_or_var -> variable_assignation .)
+    PUBLIC          reduce using rule 56 (def_const_or_var -> variable_assignation .)
+    PRIVATE         reduce using rule 56 (def_const_or_var -> variable_assignation .)
+    INTTYPE         reduce using rule 56 (def_const_or_var -> variable_assignation .)
+    STRINGTYPE      reduce using rule 56 (def_const_or_var -> variable_assignation .)
+    FLOATTYPE       reduce using rule 56 (def_const_or_var -> variable_assignation .)
+    BOOLTYPE        reduce using rule 56 (def_const_or_var -> variable_assignation .)
+    RKEY            reduce using rule 56 (def_const_or_var -> variable_assignation .)
 
 
 state 29
 
-    (7) block_code -> arithmetic_operation .
+    (25) print_data -> PRINT . LPARENT STRING RPARENT DOTANDCOMMA
+    (26) print_data -> PRINT . LPARENT VARIABLE RPARENT DOTANDCOMMA
 
-    PRINT           reduce using rule 7 (block_code -> arithmetic_operation .)
-    LOGICNOT        reduce using rule 7 (block_code -> arithmetic_operation .)
-    CONST           reduce using rule 7 (block_code -> arithmetic_operation .)
-    BOOLTRUE        reduce using rule 7 (block_code -> arithmetic_operation .)
-    BOOLFALSE       reduce using rule 7 (block_code -> arithmetic_operation .)
-    VARIABLE        reduce using rule 7 (block_code -> arithmetic_operation .)
-    INTEGER         reduce using rule 7 (block_code -> arithmetic_operation .)
-    FLOAT_NUMBER    reduce using rule 7 (block_code -> arithmetic_operation .)
-    DECIMAL_NUMBER  reduce using rule 7 (block_code -> arithmetic_operation .)
-    PUBLIC          reduce using rule 7 (block_code -> arithmetic_operation .)
-    PRIVATE         reduce using rule 7 (block_code -> arithmetic_operation .)
-    INTTYPE         reduce using rule 7 (block_code -> arithmetic_operation .)
-    STRINGTYPE      reduce using rule 7 (block_code -> arithmetic_operation .)
-    FLOATTYPE       reduce using rule 7 (block_code -> arithmetic_operation .)
-    BOOLTYPE        reduce using rule 7 (block_code -> arithmetic_operation .)
-    RKEY            reduce using rule 7 (block_code -> arithmetic_operation .)
+    LPARENT         shift and go to state 43
 
 
 state 30
 
-    (57) def_const_or_var -> constant_assignation .
+    (57) constant_assignation -> access_modifiers . CONST assignation_type_value_multiple DOTANDCOMMA
+    (59) variable_assignation -> access_modifiers . assignation_type_value_multiple DOTANDCOMMA
+    (82) assignation_type_value_multiple -> . INTTYPE assignation_int_multiple
+    (83) assignation_type_value_multiple -> . STRINGTYPE assignation_string_multiple
+    (84) assignation_type_value_multiple -> . FLOATTYPE assignation_float_multiple
+    (85) assignation_type_value_multiple -> . BOOLTYPE assignation_true_multiple
+    (86) assignation_type_value_multiple -> . BOOLTYPE assignation_false_multiple
 
-    PRINT           reduce using rule 57 (def_const_or_var -> constant_assignation .)
-    LOGICNOT        reduce using rule 57 (def_const_or_var -> constant_assignation .)
-    CONST           reduce using rule 57 (def_const_or_var -> constant_assignation .)
-    BOOLTRUE        reduce using rule 57 (def_const_or_var -> constant_assignation .)
-    BOOLFALSE       reduce using rule 57 (def_const_or_var -> constant_assignation .)
-    VARIABLE        reduce using rule 57 (def_const_or_var -> constant_assignation .)
-    INTEGER         reduce using rule 57 (def_const_or_var -> constant_assignation .)
-    FLOAT_NUMBER    reduce using rule 57 (def_const_or_var -> constant_assignation .)
-    DECIMAL_NUMBER  reduce using rule 57 (def_const_or_var -> constant_assignation .)
-    PUBLIC          reduce using rule 57 (def_const_or_var -> constant_assignation .)
-    PRIVATE         reduce using rule 57 (def_const_or_var -> constant_assignation .)
-    INTTYPE         reduce using rule 57 (def_const_or_var -> constant_assignation .)
-    STRINGTYPE      reduce using rule 57 (def_const_or_var -> constant_assignation .)
-    FLOATTYPE       reduce using rule 57 (def_const_or_var -> constant_assignation .)
-    BOOLTYPE        reduce using rule 57 (def_const_or_var -> constant_assignation .)
-    RKEY            reduce using rule 57 (def_const_or_var -> constant_assignation .)
+    CONST           shift and go to state 44
+    INTTYPE         shift and go to state 35
+    STRINGTYPE      shift and go to state 22
+    FLOATTYPE       shift and go to state 36
+    BOOLTYPE        shift and go to state 37
 
+    assignation_type_value_multiple shift and go to state 45
 
 state 31
 
-    (58) def_const_or_var -> variable_assignation .
+    (58) constant_assignation -> CONST . assignation_type_value_multiple DOTANDCOMMA
+    (82) assignation_type_value_multiple -> . INTTYPE assignation_int_multiple
+    (83) assignation_type_value_multiple -> . STRINGTYPE assignation_string_multiple
+    (84) assignation_type_value_multiple -> . FLOATTYPE assignation_float_multiple
+    (85) assignation_type_value_multiple -> . BOOLTYPE assignation_true_multiple
+    (86) assignation_type_value_multiple -> . BOOLTYPE assignation_false_multiple
 
-    PRINT           reduce using rule 58 (def_const_or_var -> variable_assignation .)
-    LOGICNOT        reduce using rule 58 (def_const_or_var -> variable_assignation .)
-    CONST           reduce using rule 58 (def_const_or_var -> variable_assignation .)
-    BOOLTRUE        reduce using rule 58 (def_const_or_var -> variable_assignation .)
-    BOOLFALSE       reduce using rule 58 (def_const_or_var -> variable_assignation .)
-    VARIABLE        reduce using rule 58 (def_const_or_var -> variable_assignation .)
-    INTEGER         reduce using rule 58 (def_const_or_var -> variable_assignation .)
-    FLOAT_NUMBER    reduce using rule 58 (def_const_or_var -> variable_assignation .)
-    DECIMAL_NUMBER  reduce using rule 58 (def_const_or_var -> variable_assignation .)
-    PUBLIC          reduce using rule 58 (def_const_or_var -> variable_assignation .)
-    PRIVATE         reduce using rule 58 (def_const_or_var -> variable_assignation .)
-    INTTYPE         reduce using rule 58 (def_const_or_var -> variable_assignation .)
-    STRINGTYPE      reduce using rule 58 (def_const_or_var -> variable_assignation .)
-    FLOATTYPE       reduce using rule 58 (def_const_or_var -> variable_assignation .)
-    BOOLTYPE        reduce using rule 58 (def_const_or_var -> variable_assignation .)
-    RKEY            reduce using rule 58 (def_const_or_var -> variable_assignation .)
+    INTTYPE         shift and go to state 35
+    STRINGTYPE      shift and go to state 22
+    FLOATTYPE       shift and go to state 36
+    BOOLTYPE        shift and go to state 37
 
+    assignation_type_value_multiple shift and go to state 46
 
 state 32
 
-    (27) print_data -> PRINT . LPARENT STRING RPARENT DOTANDCOMMA
-    (28) print_data -> PRINT . LPARENT VARIABLE RPARENT DOTANDCOMMA
+    (60) variable_assignation -> assignation_type_value_multiple . DOTANDCOMMA
 
-    LPARENT         shift and go to state 55
+    DOTANDCOMMA     shift and go to state 47
 
 
 state 33
 
-    (52) boolean_operation -> value_boolean .
-    (54) boolean_operation -> value_boolean . boolean_operator boolean_operation
-    (55) boolean_operator -> . LOGICAND
-    (56) boolean_operator -> . LOGICOR
+    (61) access_modifiers -> PUBLIC .
 
-    PRINT           reduce using rule 52 (boolean_operation -> value_boolean .)
-    LOGICNOT        reduce using rule 52 (boolean_operation -> value_boolean .)
-    CONST           reduce using rule 52 (boolean_operation -> value_boolean .)
-    BOOLTRUE        reduce using rule 52 (boolean_operation -> value_boolean .)
-    BOOLFALSE       reduce using rule 52 (boolean_operation -> value_boolean .)
-    VARIABLE        reduce using rule 52 (boolean_operation -> value_boolean .)
-    INTEGER         reduce using rule 52 (boolean_operation -> value_boolean .)
-    FLOAT_NUMBER    reduce using rule 52 (boolean_operation -> value_boolean .)
-    DECIMAL_NUMBER  reduce using rule 52 (boolean_operation -> value_boolean .)
-    PUBLIC          reduce using rule 52 (boolean_operation -> value_boolean .)
-    PRIVATE         reduce using rule 52 (boolean_operation -> value_boolean .)
-    INTTYPE         reduce using rule 52 (boolean_operation -> value_boolean .)
-    STRINGTYPE      reduce using rule 52 (boolean_operation -> value_boolean .)
-    FLOATTYPE       reduce using rule 52 (boolean_operation -> value_boolean .)
-    BOOLTYPE        reduce using rule 52 (boolean_operation -> value_boolean .)
-    RKEY            reduce using rule 52 (boolean_operation -> value_boolean .)
-    LOGICAND        shift and go to state 57
-    LOGICOR         shift and go to state 58
+    CONST           reduce using rule 61 (access_modifiers -> PUBLIC .)
+    INTTYPE         reduce using rule 61 (access_modifiers -> PUBLIC .)
+    STRINGTYPE      reduce using rule 61 (access_modifiers -> PUBLIC .)
+    FLOATTYPE       reduce using rule 61 (access_modifiers -> PUBLIC .)
+    BOOLTYPE        reduce using rule 61 (access_modifiers -> PUBLIC .)
 
-    boolean_operator               shift and go to state 56
 
 state 34
 
-    (53) boolean_operation -> LOGICNOT . value_boolean
-    (19) value_boolean -> . BOOLTRUE
-    (20) value_boolean -> . BOOLFALSE
-    (21) value_boolean -> . VARIABLE
-    (22) value_boolean -> . comparison_operation
-    (44) comparison_operation -> . value_numeric
-    (45) comparison_operation -> . value_numeric comparison_operator comparison_operation
-    (23) value_numeric -> . INTEGER
-    (24) value_numeric -> . FLOAT_NUMBER
-    (25) value_numeric -> . DECIMAL_NUMBER
-    (26) value_numeric -> . VARIABLE
+    (62) access_modifiers -> PRIVATE .
 
-    BOOLTRUE        shift and go to state 39
-    BOOLFALSE       shift and go to state 40
-    VARIABLE        shift and go to state 23
-    INTEGER         shift and go to state 42
-    FLOAT_NUMBER    shift and go to state 43
-    DECIMAL_NUMBER  shift and go to state 44
+    CONST           reduce using rule 62 (access_modifiers -> PRIVATE .)
+    INTTYPE         reduce using rule 62 (access_modifiers -> PRIVATE .)
+    STRINGTYPE      reduce using rule 62 (access_modifiers -> PRIVATE .)
+    FLOATTYPE       reduce using rule 62 (access_modifiers -> PRIVATE .)
+    BOOLTYPE        reduce using rule 62 (access_modifiers -> PRIVATE .)
 
-    value_boolean                  shift and go to state 59
-    comparison_operation           shift and go to state 41
-    value_numeric                  shift and go to state 60
 
 state 35
 
-    (37) arithmetic_operation -> value_numeric .
-    (38) arithmetic_operation -> value_numeric . arithmetic_operator arithmetic_operation
-    (44) comparison_operation -> value_numeric .
-    (45) comparison_operation -> value_numeric . comparison_operator comparison_operation
-    (39) arithmetic_operator -> . PLUS
-    (40) arithmetic_operator -> . MINUS
-    (41) arithmetic_operator -> . TIMES
-    (42) arithmetic_operator -> . DIVIDE
-    (43) arithmetic_operator -> . PERCENT
-    (46) comparison_operator -> . GREATER_THAN
-    (47) comparison_operator -> . SMALLER_THAN
-    (48) comparison_operator -> . EQUAL_COMPARATION
-    (49) comparison_operator -> . INEQUALITY
-    (50) comparison_operator -> . GREATER_THAN_OR_EQUAL
-    (51) comparison_operator -> . SMALLER_THAN_OR_EQUAL
+    (82) assignation_type_value_multiple -> INTTYPE . assignation_int_multiple
+    (87) assignation_int_multiple -> . assignation_int
+    (88) assignation_int_multiple -> . assignation_int COMMA assignation_int_multiple
+    (68) assignation_int -> . VARIABLE ASSIGNATION INTEGER
+    (69) assignation_int -> . VARIABLE ASSIGNATION VARIABLE
+    (70) assignation_int -> . VARIABLE ASSIGNATION arithmetic_operation
 
-  ! reduce/reduce conflict for PRINT resolved using rule 37 (arithmetic_operation -> value_numeric .)
-  ! reduce/reduce conflict for LOGICNOT resolved using rule 37 (arithmetic_operation -> value_numeric .)
-  ! reduce/reduce conflict for CONST resolved using rule 37 (arithmetic_operation -> value_numeric .)
-  ! reduce/reduce conflict for BOOLTRUE resolved using rule 37 (arithmetic_operation -> value_numeric .)
-  ! reduce/reduce conflict for BOOLFALSE resolved using rule 37 (arithmetic_operation -> value_numeric .)
-  ! reduce/reduce conflict for VARIABLE resolved using rule 37 (arithmetic_operation -> value_numeric .)
-  ! reduce/reduce conflict for INTEGER resolved using rule 37 (arithmetic_operation -> value_numeric .)
-  ! reduce/reduce conflict for FLOAT_NUMBER resolved using rule 37 (arithmetic_operation -> value_numeric .)
-  ! reduce/reduce conflict for DECIMAL_NUMBER resolved using rule 37 (arithmetic_operation -> value_numeric .)
-  ! reduce/reduce conflict for PUBLIC resolved using rule 37 (arithmetic_operation -> value_numeric .)
-  ! reduce/reduce conflict for PRIVATE resolved using rule 37 (arithmetic_operation -> value_numeric .)
-  ! reduce/reduce conflict for INTTYPE resolved using rule 37 (arithmetic_operation -> value_numeric .)
-  ! reduce/reduce conflict for STRINGTYPE resolved using rule 37 (arithmetic_operation -> value_numeric .)
-  ! reduce/reduce conflict for FLOATTYPE resolved using rule 37 (arithmetic_operation -> value_numeric .)
-  ! reduce/reduce conflict for BOOLTYPE resolved using rule 37 (arithmetic_operation -> value_numeric .)
-  ! reduce/reduce conflict for RKEY resolved using rule 37 (arithmetic_operation -> value_numeric .)
-    PRINT           reduce using rule 37 (arithmetic_operation -> value_numeric .)
-    LOGICNOT        reduce using rule 37 (arithmetic_operation -> value_numeric .)
-    CONST           reduce using rule 37 (arithmetic_operation -> value_numeric .)
-    BOOLTRUE        reduce using rule 37 (arithmetic_operation -> value_numeric .)
-    BOOLFALSE       reduce using rule 37 (arithmetic_operation -> value_numeric .)
-    VARIABLE        reduce using rule 37 (arithmetic_operation -> value_numeric .)
-    INTEGER         reduce using rule 37 (arithmetic_operation -> value_numeric .)
-    FLOAT_NUMBER    reduce using rule 37 (arithmetic_operation -> value_numeric .)
-    DECIMAL_NUMBER  reduce using rule 37 (arithmetic_operation -> value_numeric .)
-    PUBLIC          reduce using rule 37 (arithmetic_operation -> value_numeric .)
-    PRIVATE         reduce using rule 37 (arithmetic_operation -> value_numeric .)
-    INTTYPE         reduce using rule 37 (arithmetic_operation -> value_numeric .)
-    STRINGTYPE      reduce using rule 37 (arithmetic_operation -> value_numeric .)
-    FLOATTYPE       reduce using rule 37 (arithmetic_operation -> value_numeric .)
-    BOOLTYPE        reduce using rule 37 (arithmetic_operation -> value_numeric .)
-    RKEY            reduce using rule 37 (arithmetic_operation -> value_numeric .)
-    LOGICAND        reduce using rule 44 (comparison_operation -> value_numeric .)
-    LOGICOR         reduce using rule 44 (comparison_operation -> value_numeric .)
-    PLUS            shift and go to state 63
-    MINUS           shift and go to state 64
-    TIMES           shift and go to state 65
-    DIVIDE          shift and go to state 66
-    PERCENT         shift and go to state 67
-    GREATER_THAN    shift and go to state 68
-    SMALLER_THAN    shift and go to state 69
-    EQUAL_COMPARATION shift and go to state 70
-    INEQUALITY      shift and go to state 71
-    GREATER_THAN_OR_EQUAL shift and go to state 72
-    SMALLER_THAN_OR_EQUAL shift and go to state 73
+    VARIABLE        shift and go to state 50
 
-  ! PRINT           [ reduce using rule 44 (comparison_operation -> value_numeric .) ]
-  ! LOGICNOT        [ reduce using rule 44 (comparison_operation -> value_numeric .) ]
-  ! CONST           [ reduce using rule 44 (comparison_operation -> value_numeric .) ]
-  ! BOOLTRUE        [ reduce using rule 44 (comparison_operation -> value_numeric .) ]
-  ! BOOLFALSE       [ reduce using rule 44 (comparison_operation -> value_numeric .) ]
-  ! VARIABLE        [ reduce using rule 44 (comparison_operation -> value_numeric .) ]
-  ! INTEGER         [ reduce using rule 44 (comparison_operation -> value_numeric .) ]
-  ! FLOAT_NUMBER    [ reduce using rule 44 (comparison_operation -> value_numeric .) ]
-  ! DECIMAL_NUMBER  [ reduce using rule 44 (comparison_operation -> value_numeric .) ]
-  ! PUBLIC          [ reduce using rule 44 (comparison_operation -> value_numeric .) ]
-  ! PRIVATE         [ reduce using rule 44 (comparison_operation -> value_numeric .) ]
-  ! INTTYPE         [ reduce using rule 44 (comparison_operation -> value_numeric .) ]
-  ! STRINGTYPE      [ reduce using rule 44 (comparison_operation -> value_numeric .) ]
-  ! FLOATTYPE       [ reduce using rule 44 (comparison_operation -> value_numeric .) ]
-  ! BOOLTYPE        [ reduce using rule 44 (comparison_operation -> value_numeric .) ]
-  ! RKEY            [ reduce using rule 44 (comparison_operation -> value_numeric .) ]
-
-    arithmetic_operator            shift and go to state 61
-    comparison_operator            shift and go to state 62
+    assignation_int_multiple       shift and go to state 48
+    assignation_int                shift and go to state 49
 
 state 36
 
-    (59) constant_assignation -> access_modifiers . CONST assignation_type_value_multiple DOTANDCOMMA
-    (61) variable_assignation -> access_modifiers . assignation_type_value_multiple DOTANDCOMMA
-    (75) assignation_type_value_multiple -> . INTTYPE assignation_int_multiple
-    (76) assignation_type_value_multiple -> . STRINGTYPE assignation_string_multiple
-    (77) assignation_type_value_multiple -> . FLOATTYPE assignation_float_multiple
-    (78) assignation_type_value_multiple -> . BOOLTYPE assignation_true_multiple
-    (79) assignation_type_value_multiple -> . BOOLTYPE assignation_false_multiple
+    (84) assignation_type_value_multiple -> FLOATTYPE . assignation_float_multiple
+    (91) assignation_float_multiple -> . assignation_float
+    (92) assignation_float_multiple -> . assignation_float COMMA assignation_float_multiple
+    (73) assignation_float -> . VARIABLE ASSIGNATION FLOAT_NUMBER
+    (74) assignation_float -> . VARIABLE ASSIGNATION VARIABLE
+    (75) assignation_float -> . VARIABLE ASSIGNATION arithmetic_operation
 
-    CONST           shift and go to state 74
-    INTTYPE         shift and go to state 47
-    STRINGTYPE      shift and go to state 22
-    FLOATTYPE       shift and go to state 48
-    BOOLTYPE        shift and go to state 49
+    VARIABLE        shift and go to state 53
 
-    assignation_type_value_multiple shift and go to state 75
+    assignation_float_multiple     shift and go to state 51
+    assignation_float              shift and go to state 52
 
 state 37
 
-    (60) constant_assignation -> CONST . assignation_type_value_multiple DOTANDCOMMA
-    (75) assignation_type_value_multiple -> . INTTYPE assignation_int_multiple
-    (76) assignation_type_value_multiple -> . STRINGTYPE assignation_string_multiple
-    (77) assignation_type_value_multiple -> . FLOATTYPE assignation_float_multiple
-    (78) assignation_type_value_multiple -> . BOOLTYPE assignation_true_multiple
-    (79) assignation_type_value_multiple -> . BOOLTYPE assignation_false_multiple
+    (85) assignation_type_value_multiple -> BOOLTYPE . assignation_true_multiple
+    (86) assignation_type_value_multiple -> BOOLTYPE . assignation_false_multiple
+    (93) assignation_true_multiple -> . assignation_true
+    (94) assignation_true_multiple -> . assignation_true COMMA assignation_true_multiple
+    (95) assignation_false_multiple -> . assignation_false
+    (96) assignation_false_multiple -> . assignation_false COMMA assignation_false_multiple
+    (76) assignation_true -> . VARIABLE ASSIGNATION BOOLTRUE
+    (77) assignation_true -> . VARIABLE ASSIGNATION VARIABLE
+    (78) assignation_true -> . VARIABLE ASSIGNATION boolean_operation
+    (79) assignation_false -> . VARIABLE ASSIGNATION BOOLFALSE
+    (80) assignation_false -> . VARIABLE ASSIGNATION VARIABLE
+    (81) assignation_false -> . VARIABLE ASSIGNATION boolean_operation
 
-    INTTYPE         shift and go to state 47
-    STRINGTYPE      shift and go to state 22
-    FLOATTYPE       shift and go to state 48
-    BOOLTYPE        shift and go to state 49
+    VARIABLE        shift and go to state 58
 
-    assignation_type_value_multiple shift and go to state 76
+    assignation_true_multiple      shift and go to state 54
+    assignation_false_multiple     shift and go to state 55
+    assignation_true               shift and go to state 56
+    assignation_false              shift and go to state 57
 
 state 38
 
-    (62) variable_assignation -> assignation_type_value_multiple . DOTANDCOMMA
+    (83) assignation_type_value_multiple -> STRINGTYPE assignation_string_multiple .
 
-    DOTANDCOMMA     shift and go to state 77
+    DOTANDCOMMA     reduce using rule 83 (assignation_type_value_multiple -> STRINGTYPE assignation_string_multiple .)
 
 
 state 39
 
-    (19) value_boolean -> BOOLTRUE .
+    (89) assignation_string_multiple -> assignation_string .
+    (90) assignation_string_multiple -> assignation_string . COMMA assignation_string_multiple
 
-    LOGICAND        reduce using rule 19 (value_boolean -> BOOLTRUE .)
-    LOGICOR         reduce using rule 19 (value_boolean -> BOOLTRUE .)
-    PRINT           reduce using rule 19 (value_boolean -> BOOLTRUE .)
-    LOGICNOT        reduce using rule 19 (value_boolean -> BOOLTRUE .)
-    CONST           reduce using rule 19 (value_boolean -> BOOLTRUE .)
-    BOOLTRUE        reduce using rule 19 (value_boolean -> BOOLTRUE .)
-    BOOLFALSE       reduce using rule 19 (value_boolean -> BOOLTRUE .)
-    VARIABLE        reduce using rule 19 (value_boolean -> BOOLTRUE .)
-    INTEGER         reduce using rule 19 (value_boolean -> BOOLTRUE .)
-    FLOAT_NUMBER    reduce using rule 19 (value_boolean -> BOOLTRUE .)
-    DECIMAL_NUMBER  reduce using rule 19 (value_boolean -> BOOLTRUE .)
-    PUBLIC          reduce using rule 19 (value_boolean -> BOOLTRUE .)
-    PRIVATE         reduce using rule 19 (value_boolean -> BOOLTRUE .)
-    INTTYPE         reduce using rule 19 (value_boolean -> BOOLTRUE .)
-    STRINGTYPE      reduce using rule 19 (value_boolean -> BOOLTRUE .)
-    FLOATTYPE       reduce using rule 19 (value_boolean -> BOOLTRUE .)
-    BOOLTYPE        reduce using rule 19 (value_boolean -> BOOLTRUE .)
-    RKEY            reduce using rule 19 (value_boolean -> BOOLTRUE .)
+    DOTANDCOMMA     reduce using rule 89 (assignation_string_multiple -> assignation_string .)
+    COMMA           shift and go to state 59
 
 
 state 40
 
-    (20) value_boolean -> BOOLFALSE .
+    (71) assignation_string -> VARIABLE . ASSIGNATION STRING
+    (72) assignation_string -> VARIABLE . ASSIGNATION VARIABLE
 
-    LOGICAND        reduce using rule 20 (value_boolean -> BOOLFALSE .)
-    LOGICOR         reduce using rule 20 (value_boolean -> BOOLFALSE .)
-    PRINT           reduce using rule 20 (value_boolean -> BOOLFALSE .)
-    LOGICNOT        reduce using rule 20 (value_boolean -> BOOLFALSE .)
-    CONST           reduce using rule 20 (value_boolean -> BOOLFALSE .)
-    BOOLTRUE        reduce using rule 20 (value_boolean -> BOOLFALSE .)
-    BOOLFALSE       reduce using rule 20 (value_boolean -> BOOLFALSE .)
-    VARIABLE        reduce using rule 20 (value_boolean -> BOOLFALSE .)
-    INTEGER         reduce using rule 20 (value_boolean -> BOOLFALSE .)
-    FLOAT_NUMBER    reduce using rule 20 (value_boolean -> BOOLFALSE .)
-    DECIMAL_NUMBER  reduce using rule 20 (value_boolean -> BOOLFALSE .)
-    PUBLIC          reduce using rule 20 (value_boolean -> BOOLFALSE .)
-    PRIVATE         reduce using rule 20 (value_boolean -> BOOLFALSE .)
-    INTTYPE         reduce using rule 20 (value_boolean -> BOOLFALSE .)
-    STRINGTYPE      reduce using rule 20 (value_boolean -> BOOLFALSE .)
-    FLOATTYPE       reduce using rule 20 (value_boolean -> BOOLFALSE .)
-    BOOLTYPE        reduce using rule 20 (value_boolean -> BOOLFALSE .)
-    RKEY            reduce using rule 20 (value_boolean -> BOOLFALSE .)
+    ASSIGNATION     shift and go to state 60
 
 
 state 41
-
-    (22) value_boolean -> comparison_operation .
-
-    LOGICAND        reduce using rule 22 (value_boolean -> comparison_operation .)
-    LOGICOR         reduce using rule 22 (value_boolean -> comparison_operation .)
-    PRINT           reduce using rule 22 (value_boolean -> comparison_operation .)
-    LOGICNOT        reduce using rule 22 (value_boolean -> comparison_operation .)
-    CONST           reduce using rule 22 (value_boolean -> comparison_operation .)
-    BOOLTRUE        reduce using rule 22 (value_boolean -> comparison_operation .)
-    BOOLFALSE       reduce using rule 22 (value_boolean -> comparison_operation .)
-    VARIABLE        reduce using rule 22 (value_boolean -> comparison_operation .)
-    INTEGER         reduce using rule 22 (value_boolean -> comparison_operation .)
-    FLOAT_NUMBER    reduce using rule 22 (value_boolean -> comparison_operation .)
-    DECIMAL_NUMBER  reduce using rule 22 (value_boolean -> comparison_operation .)
-    PUBLIC          reduce using rule 22 (value_boolean -> comparison_operation .)
-    PRIVATE         reduce using rule 22 (value_boolean -> comparison_operation .)
-    INTTYPE         reduce using rule 22 (value_boolean -> comparison_operation .)
-    STRINGTYPE      reduce using rule 22 (value_boolean -> comparison_operation .)
-    FLOATTYPE       reduce using rule 22 (value_boolean -> comparison_operation .)
-    BOOLTYPE        reduce using rule 22 (value_boolean -> comparison_operation .)
-    RKEY            reduce using rule 22 (value_boolean -> comparison_operation .)
-
-
-state 42
-
-    (23) value_numeric -> INTEGER .
-
-    PLUS            reduce using rule 23 (value_numeric -> INTEGER .)
-    MINUS           reduce using rule 23 (value_numeric -> INTEGER .)
-    TIMES           reduce using rule 23 (value_numeric -> INTEGER .)
-    DIVIDE          reduce using rule 23 (value_numeric -> INTEGER .)
-    PERCENT         reduce using rule 23 (value_numeric -> INTEGER .)
-    GREATER_THAN    reduce using rule 23 (value_numeric -> INTEGER .)
-    SMALLER_THAN    reduce using rule 23 (value_numeric -> INTEGER .)
-    EQUAL_COMPARATION reduce using rule 23 (value_numeric -> INTEGER .)
-    INEQUALITY      reduce using rule 23 (value_numeric -> INTEGER .)
-    GREATER_THAN_OR_EQUAL reduce using rule 23 (value_numeric -> INTEGER .)
-    SMALLER_THAN_OR_EQUAL reduce using rule 23 (value_numeric -> INTEGER .)
-    PRINT           reduce using rule 23 (value_numeric -> INTEGER .)
-    LOGICNOT        reduce using rule 23 (value_numeric -> INTEGER .)
-    CONST           reduce using rule 23 (value_numeric -> INTEGER .)
-    BOOLTRUE        reduce using rule 23 (value_numeric -> INTEGER .)
-    BOOLFALSE       reduce using rule 23 (value_numeric -> INTEGER .)
-    VARIABLE        reduce using rule 23 (value_numeric -> INTEGER .)
-    INTEGER         reduce using rule 23 (value_numeric -> INTEGER .)
-    FLOAT_NUMBER    reduce using rule 23 (value_numeric -> INTEGER .)
-    DECIMAL_NUMBER  reduce using rule 23 (value_numeric -> INTEGER .)
-    PUBLIC          reduce using rule 23 (value_numeric -> INTEGER .)
-    PRIVATE         reduce using rule 23 (value_numeric -> INTEGER .)
-    INTTYPE         reduce using rule 23 (value_numeric -> INTEGER .)
-    STRINGTYPE      reduce using rule 23 (value_numeric -> INTEGER .)
-    FLOATTYPE       reduce using rule 23 (value_numeric -> INTEGER .)
-    BOOLTYPE        reduce using rule 23 (value_numeric -> INTEGER .)
-    RKEY            reduce using rule 23 (value_numeric -> INTEGER .)
-    LOGICAND        reduce using rule 23 (value_numeric -> INTEGER .)
-    LOGICOR         reduce using rule 23 (value_numeric -> INTEGER .)
-
-
-state 43
-
-    (24) value_numeric -> FLOAT_NUMBER .
-
-    PLUS            reduce using rule 24 (value_numeric -> FLOAT_NUMBER .)
-    MINUS           reduce using rule 24 (value_numeric -> FLOAT_NUMBER .)
-    TIMES           reduce using rule 24 (value_numeric -> FLOAT_NUMBER .)
-    DIVIDE          reduce using rule 24 (value_numeric -> FLOAT_NUMBER .)
-    PERCENT         reduce using rule 24 (value_numeric -> FLOAT_NUMBER .)
-    GREATER_THAN    reduce using rule 24 (value_numeric -> FLOAT_NUMBER .)
-    SMALLER_THAN    reduce using rule 24 (value_numeric -> FLOAT_NUMBER .)
-    EQUAL_COMPARATION reduce using rule 24 (value_numeric -> FLOAT_NUMBER .)
-    INEQUALITY      reduce using rule 24 (value_numeric -> FLOAT_NUMBER .)
-    GREATER_THAN_OR_EQUAL reduce using rule 24 (value_numeric -> FLOAT_NUMBER .)
-    SMALLER_THAN_OR_EQUAL reduce using rule 24 (value_numeric -> FLOAT_NUMBER .)
-    PRINT           reduce using rule 24 (value_numeric -> FLOAT_NUMBER .)
-    LOGICNOT        reduce using rule 24 (value_numeric -> FLOAT_NUMBER .)
-    CONST           reduce using rule 24 (value_numeric -> FLOAT_NUMBER .)
-    BOOLTRUE        reduce using rule 24 (value_numeric -> FLOAT_NUMBER .)
-    BOOLFALSE       reduce using rule 24 (value_numeric -> FLOAT_NUMBER .)
-    VARIABLE        reduce using rule 24 (value_numeric -> FLOAT_NUMBER .)
-    INTEGER         reduce using rule 24 (value_numeric -> FLOAT_NUMBER .)
-    FLOAT_NUMBER    reduce using rule 24 (value_numeric -> FLOAT_NUMBER .)
-    DECIMAL_NUMBER  reduce using rule 24 (value_numeric -> FLOAT_NUMBER .)
-    PUBLIC          reduce using rule 24 (value_numeric -> FLOAT_NUMBER .)
-    PRIVATE         reduce using rule 24 (value_numeric -> FLOAT_NUMBER .)
-    INTTYPE         reduce using rule 24 (value_numeric -> FLOAT_NUMBER .)
-    STRINGTYPE      reduce using rule 24 (value_numeric -> FLOAT_NUMBER .)
-    FLOATTYPE       reduce using rule 24 (value_numeric -> FLOAT_NUMBER .)
-    BOOLTYPE        reduce using rule 24 (value_numeric -> FLOAT_NUMBER .)
-    RKEY            reduce using rule 24 (value_numeric -> FLOAT_NUMBER .)
-    LOGICAND        reduce using rule 24 (value_numeric -> FLOAT_NUMBER .)
-    LOGICOR         reduce using rule 24 (value_numeric -> FLOAT_NUMBER .)
-
-
-state 44
-
-    (25) value_numeric -> DECIMAL_NUMBER .
-
-    PLUS            reduce using rule 25 (value_numeric -> DECIMAL_NUMBER .)
-    MINUS           reduce using rule 25 (value_numeric -> DECIMAL_NUMBER .)
-    TIMES           reduce using rule 25 (value_numeric -> DECIMAL_NUMBER .)
-    DIVIDE          reduce using rule 25 (value_numeric -> DECIMAL_NUMBER .)
-    PERCENT         reduce using rule 25 (value_numeric -> DECIMAL_NUMBER .)
-    GREATER_THAN    reduce using rule 25 (value_numeric -> DECIMAL_NUMBER .)
-    SMALLER_THAN    reduce using rule 25 (value_numeric -> DECIMAL_NUMBER .)
-    EQUAL_COMPARATION reduce using rule 25 (value_numeric -> DECIMAL_NUMBER .)
-    INEQUALITY      reduce using rule 25 (value_numeric -> DECIMAL_NUMBER .)
-    GREATER_THAN_OR_EQUAL reduce using rule 25 (value_numeric -> DECIMAL_NUMBER .)
-    SMALLER_THAN_OR_EQUAL reduce using rule 25 (value_numeric -> DECIMAL_NUMBER .)
-    PRINT           reduce using rule 25 (value_numeric -> DECIMAL_NUMBER .)
-    LOGICNOT        reduce using rule 25 (value_numeric -> DECIMAL_NUMBER .)
-    CONST           reduce using rule 25 (value_numeric -> DECIMAL_NUMBER .)
-    BOOLTRUE        reduce using rule 25 (value_numeric -> DECIMAL_NUMBER .)
-    BOOLFALSE       reduce using rule 25 (value_numeric -> DECIMAL_NUMBER .)
-    VARIABLE        reduce using rule 25 (value_numeric -> DECIMAL_NUMBER .)
-    INTEGER         reduce using rule 25 (value_numeric -> DECIMAL_NUMBER .)
-    FLOAT_NUMBER    reduce using rule 25 (value_numeric -> DECIMAL_NUMBER .)
-    DECIMAL_NUMBER  reduce using rule 25 (value_numeric -> DECIMAL_NUMBER .)
-    PUBLIC          reduce using rule 25 (value_numeric -> DECIMAL_NUMBER .)
-    PRIVATE         reduce using rule 25 (value_numeric -> DECIMAL_NUMBER .)
-    INTTYPE         reduce using rule 25 (value_numeric -> DECIMAL_NUMBER .)
-    STRINGTYPE      reduce using rule 25 (value_numeric -> DECIMAL_NUMBER .)
-    FLOATTYPE       reduce using rule 25 (value_numeric -> DECIMAL_NUMBER .)
-    BOOLTYPE        reduce using rule 25 (value_numeric -> DECIMAL_NUMBER .)
-    RKEY            reduce using rule 25 (value_numeric -> DECIMAL_NUMBER .)
-    LOGICAND        reduce using rule 25 (value_numeric -> DECIMAL_NUMBER .)
-    LOGICOR         reduce using rule 25 (value_numeric -> DECIMAL_NUMBER .)
-
-
-state 45
-
-    (63) access_modifiers -> PUBLIC .
-
-    CONST           reduce using rule 63 (access_modifiers -> PUBLIC .)
-    INTTYPE         reduce using rule 63 (access_modifiers -> PUBLIC .)
-    STRINGTYPE      reduce using rule 63 (access_modifiers -> PUBLIC .)
-    FLOATTYPE       reduce using rule 63 (access_modifiers -> PUBLIC .)
-    BOOLTYPE        reduce using rule 63 (access_modifiers -> PUBLIC .)
-
-
-state 46
-
-    (64) access_modifiers -> PRIVATE .
-
-    CONST           reduce using rule 64 (access_modifiers -> PRIVATE .)
-    INTTYPE         reduce using rule 64 (access_modifiers -> PRIVATE .)
-    STRINGTYPE      reduce using rule 64 (access_modifiers -> PRIVATE .)
-    FLOATTYPE       reduce using rule 64 (access_modifiers -> PRIVATE .)
-    BOOLTYPE        reduce using rule 64 (access_modifiers -> PRIVATE .)
-
-
-state 47
-
-    (75) assignation_type_value_multiple -> INTTYPE . assignation_int_multiple
-    (80) assignation_int_multiple -> . assignation_int
-    (81) assignation_int_multiple -> . assignation_int COMMA assignation_int_multiple
-    (70) assignation_int -> . VARIABLE ASSIGNATION INTEGER
-
-    VARIABLE        shift and go to state 80
-
-    assignation_int_multiple       shift and go to state 78
-    assignation_int                shift and go to state 79
-
-state 48
-
-    (77) assignation_type_value_multiple -> FLOATTYPE . assignation_float_multiple
-    (84) assignation_float_multiple -> . assignation_float
-    (85) assignation_float_multiple -> . assignation_float COMMA assignation_float_multiple
-    (72) assignation_float -> . VARIABLE ASSIGNATION FLOAT_NUMBER
-
-    VARIABLE        shift and go to state 83
-
-    assignation_float_multiple     shift and go to state 81
-    assignation_float              shift and go to state 82
-
-state 49
-
-    (78) assignation_type_value_multiple -> BOOLTYPE . assignation_true_multiple
-    (79) assignation_type_value_multiple -> BOOLTYPE . assignation_false_multiple
-    (86) assignation_true_multiple -> . assignation_true
-    (87) assignation_true_multiple -> . assignation_true COMMA assignation_true_multiple
-    (88) assignation_false_multiple -> . assignation_false
-    (89) assignation_false_multiple -> . assignation_false COMMA assignation_false_multiple
-    (73) assignation_true -> . VARIABLE ASSIGNATION BOOLTRUE
-    (74) assignation_false -> . VARIABLE ASSIGNATION BOOLFALSE
-
-    VARIABLE        shift and go to state 88
-
-    assignation_true_multiple      shift and go to state 84
-    assignation_false_multiple     shift and go to state 85
-    assignation_true               shift and go to state 86
-    assignation_false              shift and go to state 87
-
-state 50
-
-    (76) assignation_type_value_multiple -> STRINGTYPE assignation_string_multiple .
-
-    DOTANDCOMMA     reduce using rule 76 (assignation_type_value_multiple -> STRINGTYPE assignation_string_multiple .)
-
-
-state 51
-
-    (82) assignation_string_multiple -> assignation_string .
-    (83) assignation_string_multiple -> assignation_string . COMMA assignation_string_multiple
-
-    DOTANDCOMMA     reduce using rule 82 (assignation_string_multiple -> assignation_string .)
-    COMMA           shift and go to state 89
-
-
-state 52
-
-    (71) assignation_string -> VARIABLE . ASSIGNATION STRING
-
-    ASSIGNATION     shift and go to state 90
-
-
-state 53
 
     (3) block_main_method -> STATIC VOID MAIN LPARENT STRINGTYPE LBRACKET RBRACKET VARIABLE RPARENT LKEY all_block_code RKEY .
 
     RKEY            reduce using rule 3 (block_main_method -> STATIC VOID MAIN LPARENT STRINGTYPE LBRACKET RBRACKET VARIABLE RPARENT LKEY all_block_code RKEY .)
 
 
+state 42
+
+    (7) all_block_code -> block_code all_block_code .
+
+    RKEY            reduce using rule 7 (all_block_code -> block_code all_block_code .)
+
+
+state 43
+
+    (25) print_data -> PRINT LPARENT . STRING RPARENT DOTANDCOMMA
+    (26) print_data -> PRINT LPARENT . VARIABLE RPARENT DOTANDCOMMA
+
+    STRING          shift and go to state 61
+    VARIABLE        shift and go to state 62
+
+
+state 44
+
+    (57) constant_assignation -> access_modifiers CONST . assignation_type_value_multiple DOTANDCOMMA
+    (82) assignation_type_value_multiple -> . INTTYPE assignation_int_multiple
+    (83) assignation_type_value_multiple -> . STRINGTYPE assignation_string_multiple
+    (84) assignation_type_value_multiple -> . FLOATTYPE assignation_float_multiple
+    (85) assignation_type_value_multiple -> . BOOLTYPE assignation_true_multiple
+    (86) assignation_type_value_multiple -> . BOOLTYPE assignation_false_multiple
+
+    INTTYPE         shift and go to state 35
+    STRINGTYPE      shift and go to state 22
+    FLOATTYPE       shift and go to state 36
+    BOOLTYPE        shift and go to state 37
+
+    assignation_type_value_multiple shift and go to state 63
+
+state 45
+
+    (59) variable_assignation -> access_modifiers assignation_type_value_multiple . DOTANDCOMMA
+
+    DOTANDCOMMA     shift and go to state 64
+
+
+state 46
+
+    (58) constant_assignation -> CONST assignation_type_value_multiple . DOTANDCOMMA
+
+    DOTANDCOMMA     shift and go to state 65
+
+
+state 47
+
+    (60) variable_assignation -> assignation_type_value_multiple DOTANDCOMMA .
+
+    PRINT           reduce using rule 60 (variable_assignation -> assignation_type_value_multiple DOTANDCOMMA .)
+    CONST           reduce using rule 60 (variable_assignation -> assignation_type_value_multiple DOTANDCOMMA .)
+    PUBLIC          reduce using rule 60 (variable_assignation -> assignation_type_value_multiple DOTANDCOMMA .)
+    PRIVATE         reduce using rule 60 (variable_assignation -> assignation_type_value_multiple DOTANDCOMMA .)
+    INTTYPE         reduce using rule 60 (variable_assignation -> assignation_type_value_multiple DOTANDCOMMA .)
+    STRINGTYPE      reduce using rule 60 (variable_assignation -> assignation_type_value_multiple DOTANDCOMMA .)
+    FLOATTYPE       reduce using rule 60 (variable_assignation -> assignation_type_value_multiple DOTANDCOMMA .)
+    BOOLTYPE        reduce using rule 60 (variable_assignation -> assignation_type_value_multiple DOTANDCOMMA .)
+    RKEY            reduce using rule 60 (variable_assignation -> assignation_type_value_multiple DOTANDCOMMA .)
+
+
+state 48
+
+    (82) assignation_type_value_multiple -> INTTYPE assignation_int_multiple .
+
+    DOTANDCOMMA     reduce using rule 82 (assignation_type_value_multiple -> INTTYPE assignation_int_multiple .)
+
+
+state 49
+
+    (87) assignation_int_multiple -> assignation_int .
+    (88) assignation_int_multiple -> assignation_int . COMMA assignation_int_multiple
+
+    DOTANDCOMMA     reduce using rule 87 (assignation_int_multiple -> assignation_int .)
+    COMMA           shift and go to state 66
+
+
+state 50
+
+    (68) assignation_int -> VARIABLE . ASSIGNATION INTEGER
+    (69) assignation_int -> VARIABLE . ASSIGNATION VARIABLE
+    (70) assignation_int -> VARIABLE . ASSIGNATION arithmetic_operation
+
+    ASSIGNATION     shift and go to state 67
+
+
+state 51
+
+    (84) assignation_type_value_multiple -> FLOATTYPE assignation_float_multiple .
+
+    DOTANDCOMMA     reduce using rule 84 (assignation_type_value_multiple -> FLOATTYPE assignation_float_multiple .)
+
+
+state 52
+
+    (91) assignation_float_multiple -> assignation_float .
+    (92) assignation_float_multiple -> assignation_float . COMMA assignation_float_multiple
+
+    DOTANDCOMMA     reduce using rule 91 (assignation_float_multiple -> assignation_float .)
+    COMMA           shift and go to state 68
+
+
+state 53
+
+    (73) assignation_float -> VARIABLE . ASSIGNATION FLOAT_NUMBER
+    (74) assignation_float -> VARIABLE . ASSIGNATION VARIABLE
+    (75) assignation_float -> VARIABLE . ASSIGNATION arithmetic_operation
+
+    ASSIGNATION     shift and go to state 69
+
+
 state 54
 
-    (9) all_block_code -> block_code all_block_code .
+    (85) assignation_type_value_multiple -> BOOLTYPE assignation_true_multiple .
 
-    RKEY            reduce using rule 9 (all_block_code -> block_code all_block_code .)
+    DOTANDCOMMA     reduce using rule 85 (assignation_type_value_multiple -> BOOLTYPE assignation_true_multiple .)
 
 
 state 55
 
-    (27) print_data -> PRINT LPARENT . STRING RPARENT DOTANDCOMMA
-    (28) print_data -> PRINT LPARENT . VARIABLE RPARENT DOTANDCOMMA
+    (86) assignation_type_value_multiple -> BOOLTYPE assignation_false_multiple .
 
-    STRING          shift and go to state 91
-    VARIABLE        shift and go to state 92
+    DOTANDCOMMA     reduce using rule 86 (assignation_type_value_multiple -> BOOLTYPE assignation_false_multiple .)
 
 
 state 56
 
-    (54) boolean_operation -> value_boolean boolean_operator . boolean_operation
-    (52) boolean_operation -> . value_boolean
-    (53) boolean_operation -> . LOGICNOT value_boolean
-    (54) boolean_operation -> . value_boolean boolean_operator boolean_operation
-    (19) value_boolean -> . BOOLTRUE
-    (20) value_boolean -> . BOOLFALSE
-    (21) value_boolean -> . VARIABLE
-    (22) value_boolean -> . comparison_operation
-    (44) comparison_operation -> . value_numeric
-    (45) comparison_operation -> . value_numeric comparison_operator comparison_operation
-    (23) value_numeric -> . INTEGER
-    (24) value_numeric -> . FLOAT_NUMBER
-    (25) value_numeric -> . DECIMAL_NUMBER
-    (26) value_numeric -> . VARIABLE
+    (93) assignation_true_multiple -> assignation_true .
+    (94) assignation_true_multiple -> assignation_true . COMMA assignation_true_multiple
 
-    LOGICNOT        shift and go to state 34
-    BOOLTRUE        shift and go to state 39
-    BOOLFALSE       shift and go to state 40
-    VARIABLE        shift and go to state 23
-    INTEGER         shift and go to state 42
-    FLOAT_NUMBER    shift and go to state 43
-    DECIMAL_NUMBER  shift and go to state 44
+    DOTANDCOMMA     reduce using rule 93 (assignation_true_multiple -> assignation_true .)
+    COMMA           shift and go to state 70
 
-    value_boolean                  shift and go to state 33
-    boolean_operation              shift and go to state 93
-    comparison_operation           shift and go to state 41
-    value_numeric                  shift and go to state 60
 
 state 57
 
-    (55) boolean_operator -> LOGICAND .
+    (95) assignation_false_multiple -> assignation_false .
+    (96) assignation_false_multiple -> assignation_false . COMMA assignation_false_multiple
 
-    LOGICNOT        reduce using rule 55 (boolean_operator -> LOGICAND .)
-    BOOLTRUE        reduce using rule 55 (boolean_operator -> LOGICAND .)
-    BOOLFALSE       reduce using rule 55 (boolean_operator -> LOGICAND .)
-    VARIABLE        reduce using rule 55 (boolean_operator -> LOGICAND .)
-    INTEGER         reduce using rule 55 (boolean_operator -> LOGICAND .)
-    FLOAT_NUMBER    reduce using rule 55 (boolean_operator -> LOGICAND .)
-    DECIMAL_NUMBER  reduce using rule 55 (boolean_operator -> LOGICAND .)
+    DOTANDCOMMA     reduce using rule 95 (assignation_false_multiple -> assignation_false .)
+    COMMA           shift and go to state 71
 
 
 state 58
 
-    (56) boolean_operator -> LOGICOR .
+    (76) assignation_true -> VARIABLE . ASSIGNATION BOOLTRUE
+    (77) assignation_true -> VARIABLE . ASSIGNATION VARIABLE
+    (78) assignation_true -> VARIABLE . ASSIGNATION boolean_operation
+    (79) assignation_false -> VARIABLE . ASSIGNATION BOOLFALSE
+    (80) assignation_false -> VARIABLE . ASSIGNATION VARIABLE
+    (81) assignation_false -> VARIABLE . ASSIGNATION boolean_operation
 
-    LOGICNOT        reduce using rule 56 (boolean_operator -> LOGICOR .)
-    BOOLTRUE        reduce using rule 56 (boolean_operator -> LOGICOR .)
-    BOOLFALSE       reduce using rule 56 (boolean_operator -> LOGICOR .)
-    VARIABLE        reduce using rule 56 (boolean_operator -> LOGICOR .)
-    INTEGER         reduce using rule 56 (boolean_operator -> LOGICOR .)
-    FLOAT_NUMBER    reduce using rule 56 (boolean_operator -> LOGICOR .)
-    DECIMAL_NUMBER  reduce using rule 56 (boolean_operator -> LOGICOR .)
+    ASSIGNATION     shift and go to state 72
 
 
 state 59
 
-    (53) boolean_operation -> LOGICNOT value_boolean .
+    (90) assignation_string_multiple -> assignation_string COMMA . assignation_string_multiple
+    (89) assignation_string_multiple -> . assignation_string
+    (90) assignation_string_multiple -> . assignation_string COMMA assignation_string_multiple
+    (71) assignation_string -> . VARIABLE ASSIGNATION STRING
+    (72) assignation_string -> . VARIABLE ASSIGNATION VARIABLE
 
-    PRINT           reduce using rule 53 (boolean_operation -> LOGICNOT value_boolean .)
-    LOGICNOT        reduce using rule 53 (boolean_operation -> LOGICNOT value_boolean .)
-    CONST           reduce using rule 53 (boolean_operation -> LOGICNOT value_boolean .)
-    BOOLTRUE        reduce using rule 53 (boolean_operation -> LOGICNOT value_boolean .)
-    BOOLFALSE       reduce using rule 53 (boolean_operation -> LOGICNOT value_boolean .)
-    VARIABLE        reduce using rule 53 (boolean_operation -> LOGICNOT value_boolean .)
-    INTEGER         reduce using rule 53 (boolean_operation -> LOGICNOT value_boolean .)
-    FLOAT_NUMBER    reduce using rule 53 (boolean_operation -> LOGICNOT value_boolean .)
-    DECIMAL_NUMBER  reduce using rule 53 (boolean_operation -> LOGICNOT value_boolean .)
-    PUBLIC          reduce using rule 53 (boolean_operation -> LOGICNOT value_boolean .)
-    PRIVATE         reduce using rule 53 (boolean_operation -> LOGICNOT value_boolean .)
-    INTTYPE         reduce using rule 53 (boolean_operation -> LOGICNOT value_boolean .)
-    STRINGTYPE      reduce using rule 53 (boolean_operation -> LOGICNOT value_boolean .)
-    FLOATTYPE       reduce using rule 53 (boolean_operation -> LOGICNOT value_boolean .)
-    BOOLTYPE        reduce using rule 53 (boolean_operation -> LOGICNOT value_boolean .)
-    RKEY            reduce using rule 53 (boolean_operation -> LOGICNOT value_boolean .)
+    VARIABLE        shift and go to state 40
 
+    assignation_string             shift and go to state 39
+    assignation_string_multiple    shift and go to state 73
 
 state 60
 
-    (44) comparison_operation -> value_numeric .
-    (45) comparison_operation -> value_numeric . comparison_operator comparison_operation
-    (46) comparison_operator -> . GREATER_THAN
-    (47) comparison_operator -> . SMALLER_THAN
-    (48) comparison_operator -> . EQUAL_COMPARATION
-    (49) comparison_operator -> . INEQUALITY
-    (50) comparison_operator -> . GREATER_THAN_OR_EQUAL
-    (51) comparison_operator -> . SMALLER_THAN_OR_EQUAL
+    (71) assignation_string -> VARIABLE ASSIGNATION . STRING
+    (72) assignation_string -> VARIABLE ASSIGNATION . VARIABLE
 
-    PRINT           reduce using rule 44 (comparison_operation -> value_numeric .)
-    LOGICNOT        reduce using rule 44 (comparison_operation -> value_numeric .)
-    CONST           reduce using rule 44 (comparison_operation -> value_numeric .)
-    BOOLTRUE        reduce using rule 44 (comparison_operation -> value_numeric .)
-    BOOLFALSE       reduce using rule 44 (comparison_operation -> value_numeric .)
-    VARIABLE        reduce using rule 44 (comparison_operation -> value_numeric .)
-    INTEGER         reduce using rule 44 (comparison_operation -> value_numeric .)
-    FLOAT_NUMBER    reduce using rule 44 (comparison_operation -> value_numeric .)
-    DECIMAL_NUMBER  reduce using rule 44 (comparison_operation -> value_numeric .)
-    PUBLIC          reduce using rule 44 (comparison_operation -> value_numeric .)
-    PRIVATE         reduce using rule 44 (comparison_operation -> value_numeric .)
-    INTTYPE         reduce using rule 44 (comparison_operation -> value_numeric .)
-    STRINGTYPE      reduce using rule 44 (comparison_operation -> value_numeric .)
-    FLOATTYPE       reduce using rule 44 (comparison_operation -> value_numeric .)
-    BOOLTYPE        reduce using rule 44 (comparison_operation -> value_numeric .)
-    RKEY            reduce using rule 44 (comparison_operation -> value_numeric .)
-    LOGICAND        reduce using rule 44 (comparison_operation -> value_numeric .)
-    LOGICOR         reduce using rule 44 (comparison_operation -> value_numeric .)
-    GREATER_THAN    shift and go to state 68
-    SMALLER_THAN    shift and go to state 69
-    EQUAL_COMPARATION shift and go to state 70
-    INEQUALITY      shift and go to state 71
-    GREATER_THAN_OR_EQUAL shift and go to state 72
-    SMALLER_THAN_OR_EQUAL shift and go to state 73
+    STRING          shift and go to state 75
+    VARIABLE        shift and go to state 74
 
-    comparison_operator            shift and go to state 62
 
 state 61
 
-    (38) arithmetic_operation -> value_numeric arithmetic_operator . arithmetic_operation
-    (37) arithmetic_operation -> . value_numeric
-    (38) arithmetic_operation -> . value_numeric arithmetic_operator arithmetic_operation
-    (23) value_numeric -> . INTEGER
-    (24) value_numeric -> . FLOAT_NUMBER
-    (25) value_numeric -> . DECIMAL_NUMBER
-    (26) value_numeric -> . VARIABLE
+    (25) print_data -> PRINT LPARENT STRING . RPARENT DOTANDCOMMA
 
-    INTEGER         shift and go to state 42
-    FLOAT_NUMBER    shift and go to state 43
-    DECIMAL_NUMBER  shift and go to state 44
-    VARIABLE        shift and go to state 96
+    RPARENT         shift and go to state 76
 
-    value_numeric                  shift and go to state 94
-    arithmetic_operation           shift and go to state 95
 
 state 62
 
-    (45) comparison_operation -> value_numeric comparison_operator . comparison_operation
-    (44) comparison_operation -> . value_numeric
-    (45) comparison_operation -> . value_numeric comparison_operator comparison_operation
-    (23) value_numeric -> . INTEGER
-    (24) value_numeric -> . FLOAT_NUMBER
-    (25) value_numeric -> . DECIMAL_NUMBER
-    (26) value_numeric -> . VARIABLE
+    (26) print_data -> PRINT LPARENT VARIABLE . RPARENT DOTANDCOMMA
 
-    INTEGER         shift and go to state 42
-    FLOAT_NUMBER    shift and go to state 43
-    DECIMAL_NUMBER  shift and go to state 44
-    VARIABLE        shift and go to state 96
+    RPARENT         shift and go to state 77
 
-    value_numeric                  shift and go to state 60
-    comparison_operation           shift and go to state 97
 
 state 63
 
-    (39) arithmetic_operator -> PLUS .
+    (57) constant_assignation -> access_modifiers CONST assignation_type_value_multiple . DOTANDCOMMA
 
-    INTEGER         reduce using rule 39 (arithmetic_operator -> PLUS .)
-    FLOAT_NUMBER    reduce using rule 39 (arithmetic_operator -> PLUS .)
-    DECIMAL_NUMBER  reduce using rule 39 (arithmetic_operator -> PLUS .)
-    VARIABLE        reduce using rule 39 (arithmetic_operator -> PLUS .)
+    DOTANDCOMMA     shift and go to state 78
 
 
 state 64
 
-    (40) arithmetic_operator -> MINUS .
+    (59) variable_assignation -> access_modifiers assignation_type_value_multiple DOTANDCOMMA .
 
-    INTEGER         reduce using rule 40 (arithmetic_operator -> MINUS .)
-    FLOAT_NUMBER    reduce using rule 40 (arithmetic_operator -> MINUS .)
-    DECIMAL_NUMBER  reduce using rule 40 (arithmetic_operator -> MINUS .)
-    VARIABLE        reduce using rule 40 (arithmetic_operator -> MINUS .)
+    PRINT           reduce using rule 59 (variable_assignation -> access_modifiers assignation_type_value_multiple DOTANDCOMMA .)
+    CONST           reduce using rule 59 (variable_assignation -> access_modifiers assignation_type_value_multiple DOTANDCOMMA .)
+    PUBLIC          reduce using rule 59 (variable_assignation -> access_modifiers assignation_type_value_multiple DOTANDCOMMA .)
+    PRIVATE         reduce using rule 59 (variable_assignation -> access_modifiers assignation_type_value_multiple DOTANDCOMMA .)
+    INTTYPE         reduce using rule 59 (variable_assignation -> access_modifiers assignation_type_value_multiple DOTANDCOMMA .)
+    STRINGTYPE      reduce using rule 59 (variable_assignation -> access_modifiers assignation_type_value_multiple DOTANDCOMMA .)
+    FLOATTYPE       reduce using rule 59 (variable_assignation -> access_modifiers assignation_type_value_multiple DOTANDCOMMA .)
+    BOOLTYPE        reduce using rule 59 (variable_assignation -> access_modifiers assignation_type_value_multiple DOTANDCOMMA .)
+    RKEY            reduce using rule 59 (variable_assignation -> access_modifiers assignation_type_value_multiple DOTANDCOMMA .)
 
 
 state 65
 
-    (41) arithmetic_operator -> TIMES .
+    (58) constant_assignation -> CONST assignation_type_value_multiple DOTANDCOMMA .
 
-    INTEGER         reduce using rule 41 (arithmetic_operator -> TIMES .)
-    FLOAT_NUMBER    reduce using rule 41 (arithmetic_operator -> TIMES .)
-    DECIMAL_NUMBER  reduce using rule 41 (arithmetic_operator -> TIMES .)
-    VARIABLE        reduce using rule 41 (arithmetic_operator -> TIMES .)
+    PRINT           reduce using rule 58 (constant_assignation -> CONST assignation_type_value_multiple DOTANDCOMMA .)
+    CONST           reduce using rule 58 (constant_assignation -> CONST assignation_type_value_multiple DOTANDCOMMA .)
+    PUBLIC          reduce using rule 58 (constant_assignation -> CONST assignation_type_value_multiple DOTANDCOMMA .)
+    PRIVATE         reduce using rule 58 (constant_assignation -> CONST assignation_type_value_multiple DOTANDCOMMA .)
+    INTTYPE         reduce using rule 58 (constant_assignation -> CONST assignation_type_value_multiple DOTANDCOMMA .)
+    STRINGTYPE      reduce using rule 58 (constant_assignation -> CONST assignation_type_value_multiple DOTANDCOMMA .)
+    FLOATTYPE       reduce using rule 58 (constant_assignation -> CONST assignation_type_value_multiple DOTANDCOMMA .)
+    BOOLTYPE        reduce using rule 58 (constant_assignation -> CONST assignation_type_value_multiple DOTANDCOMMA .)
+    RKEY            reduce using rule 58 (constant_assignation -> CONST assignation_type_value_multiple DOTANDCOMMA .)
 
 
 state 66
 
-    (42) arithmetic_operator -> DIVIDE .
+    (88) assignation_int_multiple -> assignation_int COMMA . assignation_int_multiple
+    (87) assignation_int_multiple -> . assignation_int
+    (88) assignation_int_multiple -> . assignation_int COMMA assignation_int_multiple
+    (68) assignation_int -> . VARIABLE ASSIGNATION INTEGER
+    (69) assignation_int -> . VARIABLE ASSIGNATION VARIABLE
+    (70) assignation_int -> . VARIABLE ASSIGNATION arithmetic_operation
 
-    INTEGER         reduce using rule 42 (arithmetic_operator -> DIVIDE .)
-    FLOAT_NUMBER    reduce using rule 42 (arithmetic_operator -> DIVIDE .)
-    DECIMAL_NUMBER  reduce using rule 42 (arithmetic_operator -> DIVIDE .)
-    VARIABLE        reduce using rule 42 (arithmetic_operator -> DIVIDE .)
+    VARIABLE        shift and go to state 50
 
+    assignation_int                shift and go to state 49
+    assignation_int_multiple       shift and go to state 79
 
 state 67
 
-    (43) arithmetic_operator -> PERCENT .
+    (68) assignation_int -> VARIABLE ASSIGNATION . INTEGER
+    (69) assignation_int -> VARIABLE ASSIGNATION . VARIABLE
+    (70) assignation_int -> VARIABLE ASSIGNATION . arithmetic_operation
+    (35) arithmetic_operation -> . value_numeric
+    (36) arithmetic_operation -> . value_numeric arithmetic_operator arithmetic_operation
+    (21) value_numeric -> . INTEGER
+    (22) value_numeric -> . FLOAT_NUMBER
+    (23) value_numeric -> . DECIMAL_NUMBER
+    (24) value_numeric -> . VARIABLE
 
-    INTEGER         reduce using rule 43 (arithmetic_operator -> PERCENT .)
-    FLOAT_NUMBER    reduce using rule 43 (arithmetic_operator -> PERCENT .)
-    DECIMAL_NUMBER  reduce using rule 43 (arithmetic_operator -> PERCENT .)
-    VARIABLE        reduce using rule 43 (arithmetic_operator -> PERCENT .)
+    INTEGER         shift and go to state 81
+    VARIABLE        shift and go to state 80
+    FLOAT_NUMBER    shift and go to state 84
+    DECIMAL_NUMBER  shift and go to state 85
 
+    arithmetic_operation           shift and go to state 82
+    value_numeric                  shift and go to state 83
 
 state 68
 
-    (46) comparison_operator -> GREATER_THAN .
+    (92) assignation_float_multiple -> assignation_float COMMA . assignation_float_multiple
+    (91) assignation_float_multiple -> . assignation_float
+    (92) assignation_float_multiple -> . assignation_float COMMA assignation_float_multiple
+    (73) assignation_float -> . VARIABLE ASSIGNATION FLOAT_NUMBER
+    (74) assignation_float -> . VARIABLE ASSIGNATION VARIABLE
+    (75) assignation_float -> . VARIABLE ASSIGNATION arithmetic_operation
 
-    INTEGER         reduce using rule 46 (comparison_operator -> GREATER_THAN .)
-    FLOAT_NUMBER    reduce using rule 46 (comparison_operator -> GREATER_THAN .)
-    DECIMAL_NUMBER  reduce using rule 46 (comparison_operator -> GREATER_THAN .)
-    VARIABLE        reduce using rule 46 (comparison_operator -> GREATER_THAN .)
+    VARIABLE        shift and go to state 53
 
+    assignation_float              shift and go to state 52
+    assignation_float_multiple     shift and go to state 86
 
 state 69
 
-    (47) comparison_operator -> SMALLER_THAN .
+    (73) assignation_float -> VARIABLE ASSIGNATION . FLOAT_NUMBER
+    (74) assignation_float -> VARIABLE ASSIGNATION . VARIABLE
+    (75) assignation_float -> VARIABLE ASSIGNATION . arithmetic_operation
+    (35) arithmetic_operation -> . value_numeric
+    (36) arithmetic_operation -> . value_numeric arithmetic_operator arithmetic_operation
+    (21) value_numeric -> . INTEGER
+    (22) value_numeric -> . FLOAT_NUMBER
+    (23) value_numeric -> . DECIMAL_NUMBER
+    (24) value_numeric -> . VARIABLE
 
-    INTEGER         reduce using rule 47 (comparison_operator -> SMALLER_THAN .)
-    FLOAT_NUMBER    reduce using rule 47 (comparison_operator -> SMALLER_THAN .)
-    DECIMAL_NUMBER  reduce using rule 47 (comparison_operator -> SMALLER_THAN .)
-    VARIABLE        reduce using rule 47 (comparison_operator -> SMALLER_THAN .)
+    FLOAT_NUMBER    shift and go to state 88
+    VARIABLE        shift and go to state 87
+    INTEGER         shift and go to state 90
+    DECIMAL_NUMBER  shift and go to state 85
 
+    arithmetic_operation           shift and go to state 89
+    value_numeric                  shift and go to state 83
 
 state 70
 
-    (48) comparison_operator -> EQUAL_COMPARATION .
+    (94) assignation_true_multiple -> assignation_true COMMA . assignation_true_multiple
+    (93) assignation_true_multiple -> . assignation_true
+    (94) assignation_true_multiple -> . assignation_true COMMA assignation_true_multiple
+    (76) assignation_true -> . VARIABLE ASSIGNATION BOOLTRUE
+    (77) assignation_true -> . VARIABLE ASSIGNATION VARIABLE
+    (78) assignation_true -> . VARIABLE ASSIGNATION boolean_operation
 
-    INTEGER         reduce using rule 48 (comparison_operator -> EQUAL_COMPARATION .)
-    FLOAT_NUMBER    reduce using rule 48 (comparison_operator -> EQUAL_COMPARATION .)
-    DECIMAL_NUMBER  reduce using rule 48 (comparison_operator -> EQUAL_COMPARATION .)
-    VARIABLE        reduce using rule 48 (comparison_operator -> EQUAL_COMPARATION .)
+    VARIABLE        shift and go to state 92
 
+    assignation_true               shift and go to state 56
+    assignation_true_multiple      shift and go to state 91
 
 state 71
 
-    (49) comparison_operator -> INEQUALITY .
+    (96) assignation_false_multiple -> assignation_false COMMA . assignation_false_multiple
+    (95) assignation_false_multiple -> . assignation_false
+    (96) assignation_false_multiple -> . assignation_false COMMA assignation_false_multiple
+    (79) assignation_false -> . VARIABLE ASSIGNATION BOOLFALSE
+    (80) assignation_false -> . VARIABLE ASSIGNATION VARIABLE
+    (81) assignation_false -> . VARIABLE ASSIGNATION boolean_operation
 
-    INTEGER         reduce using rule 49 (comparison_operator -> INEQUALITY .)
-    FLOAT_NUMBER    reduce using rule 49 (comparison_operator -> INEQUALITY .)
-    DECIMAL_NUMBER  reduce using rule 49 (comparison_operator -> INEQUALITY .)
-    VARIABLE        reduce using rule 49 (comparison_operator -> INEQUALITY .)
+    VARIABLE        shift and go to state 94
 
+    assignation_false              shift and go to state 57
+    assignation_false_multiple     shift and go to state 93
 
 state 72
 
-    (50) comparison_operator -> GREATER_THAN_OR_EQUAL .
+    (76) assignation_true -> VARIABLE ASSIGNATION . BOOLTRUE
+    (77) assignation_true -> VARIABLE ASSIGNATION . VARIABLE
+    (78) assignation_true -> VARIABLE ASSIGNATION . boolean_operation
+    (79) assignation_false -> VARIABLE ASSIGNATION . BOOLFALSE
+    (80) assignation_false -> VARIABLE ASSIGNATION . VARIABLE
+    (81) assignation_false -> VARIABLE ASSIGNATION . boolean_operation
+    (50) boolean_operation -> . value_boolean
+    (51) boolean_operation -> . LOGICNOT value_boolean
+    (52) boolean_operation -> . value_boolean boolean_operator boolean_operation
+    (17) value_boolean -> . BOOLTRUE
+    (18) value_boolean -> . BOOLFALSE
+    (19) value_boolean -> . VARIABLE
+    (20) value_boolean -> . comparison_operation
+    (42) comparison_operation -> . value_numeric
+    (43) comparison_operation -> . value_numeric comparison_operator comparison_operation
+    (21) value_numeric -> . INTEGER
+    (22) value_numeric -> . FLOAT_NUMBER
+    (23) value_numeric -> . DECIMAL_NUMBER
+    (24) value_numeric -> . VARIABLE
 
-    INTEGER         reduce using rule 50 (comparison_operator -> GREATER_THAN_OR_EQUAL .)
-    FLOAT_NUMBER    reduce using rule 50 (comparison_operator -> GREATER_THAN_OR_EQUAL .)
-    DECIMAL_NUMBER  reduce using rule 50 (comparison_operator -> GREATER_THAN_OR_EQUAL .)
-    VARIABLE        reduce using rule 50 (comparison_operator -> GREATER_THAN_OR_EQUAL .)
+    BOOLTRUE        shift and go to state 96
+    VARIABLE        shift and go to state 95
+    BOOLFALSE       shift and go to state 98
+    LOGICNOT        shift and go to state 100
+    INTEGER         shift and go to state 90
+    FLOAT_NUMBER    shift and go to state 84
+    DECIMAL_NUMBER  shift and go to state 85
 
+    boolean_operation              shift and go to state 97
+    value_boolean                  shift and go to state 99
+    comparison_operation           shift and go to state 101
+    value_numeric                  shift and go to state 102
 
 state 73
 
-    (51) comparison_operator -> SMALLER_THAN_OR_EQUAL .
+    (90) assignation_string_multiple -> assignation_string COMMA assignation_string_multiple .
 
-    INTEGER         reduce using rule 51 (comparison_operator -> SMALLER_THAN_OR_EQUAL .)
-    FLOAT_NUMBER    reduce using rule 51 (comparison_operator -> SMALLER_THAN_OR_EQUAL .)
-    DECIMAL_NUMBER  reduce using rule 51 (comparison_operator -> SMALLER_THAN_OR_EQUAL .)
-    VARIABLE        reduce using rule 51 (comparison_operator -> SMALLER_THAN_OR_EQUAL .)
+    DOTANDCOMMA     reduce using rule 90 (assignation_string_multiple -> assignation_string COMMA assignation_string_multiple .)
 
 
 state 74
 
-    (59) constant_assignation -> access_modifiers CONST . assignation_type_value_multiple DOTANDCOMMA
-    (75) assignation_type_value_multiple -> . INTTYPE assignation_int_multiple
-    (76) assignation_type_value_multiple -> . STRINGTYPE assignation_string_multiple
-    (77) assignation_type_value_multiple -> . FLOATTYPE assignation_float_multiple
-    (78) assignation_type_value_multiple -> . BOOLTYPE assignation_true_multiple
-    (79) assignation_type_value_multiple -> . BOOLTYPE assignation_false_multiple
+    (72) assignation_string -> VARIABLE ASSIGNATION VARIABLE .
 
-    INTTYPE         shift and go to state 47
-    STRINGTYPE      shift and go to state 22
-    FLOATTYPE       shift and go to state 48
-    BOOLTYPE        shift and go to state 49
+    COMMA           reduce using rule 72 (assignation_string -> VARIABLE ASSIGNATION VARIABLE .)
+    DOTANDCOMMA     reduce using rule 72 (assignation_string -> VARIABLE ASSIGNATION VARIABLE .)
 
-    assignation_type_value_multiple shift and go to state 98
 
 state 75
-
-    (61) variable_assignation -> access_modifiers assignation_type_value_multiple . DOTANDCOMMA
-
-    DOTANDCOMMA     shift and go to state 99
-
-
-state 76
-
-    (60) constant_assignation -> CONST assignation_type_value_multiple . DOTANDCOMMA
-
-    DOTANDCOMMA     shift and go to state 100
-
-
-state 77
-
-    (62) variable_assignation -> assignation_type_value_multiple DOTANDCOMMA .
-
-    PRINT           reduce using rule 62 (variable_assignation -> assignation_type_value_multiple DOTANDCOMMA .)
-    LOGICNOT        reduce using rule 62 (variable_assignation -> assignation_type_value_multiple DOTANDCOMMA .)
-    CONST           reduce using rule 62 (variable_assignation -> assignation_type_value_multiple DOTANDCOMMA .)
-    BOOLTRUE        reduce using rule 62 (variable_assignation -> assignation_type_value_multiple DOTANDCOMMA .)
-    BOOLFALSE       reduce using rule 62 (variable_assignation -> assignation_type_value_multiple DOTANDCOMMA .)
-    VARIABLE        reduce using rule 62 (variable_assignation -> assignation_type_value_multiple DOTANDCOMMA .)
-    INTEGER         reduce using rule 62 (variable_assignation -> assignation_type_value_multiple DOTANDCOMMA .)
-    FLOAT_NUMBER    reduce using rule 62 (variable_assignation -> assignation_type_value_multiple DOTANDCOMMA .)
-    DECIMAL_NUMBER  reduce using rule 62 (variable_assignation -> assignation_type_value_multiple DOTANDCOMMA .)
-    PUBLIC          reduce using rule 62 (variable_assignation -> assignation_type_value_multiple DOTANDCOMMA .)
-    PRIVATE         reduce using rule 62 (variable_assignation -> assignation_type_value_multiple DOTANDCOMMA .)
-    INTTYPE         reduce using rule 62 (variable_assignation -> assignation_type_value_multiple DOTANDCOMMA .)
-    STRINGTYPE      reduce using rule 62 (variable_assignation -> assignation_type_value_multiple DOTANDCOMMA .)
-    FLOATTYPE       reduce using rule 62 (variable_assignation -> assignation_type_value_multiple DOTANDCOMMA .)
-    BOOLTYPE        reduce using rule 62 (variable_assignation -> assignation_type_value_multiple DOTANDCOMMA .)
-    RKEY            reduce using rule 62 (variable_assignation -> assignation_type_value_multiple DOTANDCOMMA .)
-
-
-state 78
-
-    (75) assignation_type_value_multiple -> INTTYPE assignation_int_multiple .
-
-    DOTANDCOMMA     reduce using rule 75 (assignation_type_value_multiple -> INTTYPE assignation_int_multiple .)
-
-
-state 79
-
-    (80) assignation_int_multiple -> assignation_int .
-    (81) assignation_int_multiple -> assignation_int . COMMA assignation_int_multiple
-
-    DOTANDCOMMA     reduce using rule 80 (assignation_int_multiple -> assignation_int .)
-    COMMA           shift and go to state 101
-
-
-state 80
-
-    (70) assignation_int -> VARIABLE . ASSIGNATION INTEGER
-
-    ASSIGNATION     shift and go to state 102
-
-
-state 81
-
-    (77) assignation_type_value_multiple -> FLOATTYPE assignation_float_multiple .
-
-    DOTANDCOMMA     reduce using rule 77 (assignation_type_value_multiple -> FLOATTYPE assignation_float_multiple .)
-
-
-state 82
-
-    (84) assignation_float_multiple -> assignation_float .
-    (85) assignation_float_multiple -> assignation_float . COMMA assignation_float_multiple
-
-    DOTANDCOMMA     reduce using rule 84 (assignation_float_multiple -> assignation_float .)
-    COMMA           shift and go to state 103
-
-
-state 83
-
-    (72) assignation_float -> VARIABLE . ASSIGNATION FLOAT_NUMBER
-
-    ASSIGNATION     shift and go to state 104
-
-
-state 84
-
-    (78) assignation_type_value_multiple -> BOOLTYPE assignation_true_multiple .
-
-    DOTANDCOMMA     reduce using rule 78 (assignation_type_value_multiple -> BOOLTYPE assignation_true_multiple .)
-
-
-state 85
-
-    (79) assignation_type_value_multiple -> BOOLTYPE assignation_false_multiple .
-
-    DOTANDCOMMA     reduce using rule 79 (assignation_type_value_multiple -> BOOLTYPE assignation_false_multiple .)
-
-
-state 86
-
-    (86) assignation_true_multiple -> assignation_true .
-    (87) assignation_true_multiple -> assignation_true . COMMA assignation_true_multiple
-
-    DOTANDCOMMA     reduce using rule 86 (assignation_true_multiple -> assignation_true .)
-    COMMA           shift and go to state 105
-
-
-state 87
-
-    (88) assignation_false_multiple -> assignation_false .
-    (89) assignation_false_multiple -> assignation_false . COMMA assignation_false_multiple
-
-    DOTANDCOMMA     reduce using rule 88 (assignation_false_multiple -> assignation_false .)
-    COMMA           shift and go to state 106
-
-
-state 88
-
-    (73) assignation_true -> VARIABLE . ASSIGNATION BOOLTRUE
-    (74) assignation_false -> VARIABLE . ASSIGNATION BOOLFALSE
-
-    ASSIGNATION     shift and go to state 107
-
-
-state 89
-
-    (83) assignation_string_multiple -> assignation_string COMMA . assignation_string_multiple
-    (82) assignation_string_multiple -> . assignation_string
-    (83) assignation_string_multiple -> . assignation_string COMMA assignation_string_multiple
-    (71) assignation_string -> . VARIABLE ASSIGNATION STRING
-
-    VARIABLE        shift and go to state 52
-
-    assignation_string             shift and go to state 51
-    assignation_string_multiple    shift and go to state 108
-
-state 90
-
-    (71) assignation_string -> VARIABLE ASSIGNATION . STRING
-
-    STRING          shift and go to state 109
-
-
-state 91
-
-    (27) print_data -> PRINT LPARENT STRING . RPARENT DOTANDCOMMA
-
-    RPARENT         shift and go to state 110
-
-
-state 92
-
-    (28) print_data -> PRINT LPARENT VARIABLE . RPARENT DOTANDCOMMA
-
-    RPARENT         shift and go to state 111
-
-
-state 93
-
-    (54) boolean_operation -> value_boolean boolean_operator boolean_operation .
-
-    PRINT           reduce using rule 54 (boolean_operation -> value_boolean boolean_operator boolean_operation .)
-    LOGICNOT        reduce using rule 54 (boolean_operation -> value_boolean boolean_operator boolean_operation .)
-    CONST           reduce using rule 54 (boolean_operation -> value_boolean boolean_operator boolean_operation .)
-    BOOLTRUE        reduce using rule 54 (boolean_operation -> value_boolean boolean_operator boolean_operation .)
-    BOOLFALSE       reduce using rule 54 (boolean_operation -> value_boolean boolean_operator boolean_operation .)
-    VARIABLE        reduce using rule 54 (boolean_operation -> value_boolean boolean_operator boolean_operation .)
-    INTEGER         reduce using rule 54 (boolean_operation -> value_boolean boolean_operator boolean_operation .)
-    FLOAT_NUMBER    reduce using rule 54 (boolean_operation -> value_boolean boolean_operator boolean_operation .)
-    DECIMAL_NUMBER  reduce using rule 54 (boolean_operation -> value_boolean boolean_operator boolean_operation .)
-    PUBLIC          reduce using rule 54 (boolean_operation -> value_boolean boolean_operator boolean_operation .)
-    PRIVATE         reduce using rule 54 (boolean_operation -> value_boolean boolean_operator boolean_operation .)
-    INTTYPE         reduce using rule 54 (boolean_operation -> value_boolean boolean_operator boolean_operation .)
-    STRINGTYPE      reduce using rule 54 (boolean_operation -> value_boolean boolean_operator boolean_operation .)
-    FLOATTYPE       reduce using rule 54 (boolean_operation -> value_boolean boolean_operator boolean_operation .)
-    BOOLTYPE        reduce using rule 54 (boolean_operation -> value_boolean boolean_operator boolean_operation .)
-    RKEY            reduce using rule 54 (boolean_operation -> value_boolean boolean_operator boolean_operation .)
-
-
-state 94
-
-    (37) arithmetic_operation -> value_numeric .
-    (38) arithmetic_operation -> value_numeric . arithmetic_operator arithmetic_operation
-    (39) arithmetic_operator -> . PLUS
-    (40) arithmetic_operator -> . MINUS
-    (41) arithmetic_operator -> . TIMES
-    (42) arithmetic_operator -> . DIVIDE
-    (43) arithmetic_operator -> . PERCENT
-
-    PRINT           reduce using rule 37 (arithmetic_operation -> value_numeric .)
-    LOGICNOT        reduce using rule 37 (arithmetic_operation -> value_numeric .)
-    CONST           reduce using rule 37 (arithmetic_operation -> value_numeric .)
-    BOOLTRUE        reduce using rule 37 (arithmetic_operation -> value_numeric .)
-    BOOLFALSE       reduce using rule 37 (arithmetic_operation -> value_numeric .)
-    VARIABLE        reduce using rule 37 (arithmetic_operation -> value_numeric .)
-    INTEGER         reduce using rule 37 (arithmetic_operation -> value_numeric .)
-    FLOAT_NUMBER    reduce using rule 37 (arithmetic_operation -> value_numeric .)
-    DECIMAL_NUMBER  reduce using rule 37 (arithmetic_operation -> value_numeric .)
-    PUBLIC          reduce using rule 37 (arithmetic_operation -> value_numeric .)
-    PRIVATE         reduce using rule 37 (arithmetic_operation -> value_numeric .)
-    INTTYPE         reduce using rule 37 (arithmetic_operation -> value_numeric .)
-    STRINGTYPE      reduce using rule 37 (arithmetic_operation -> value_numeric .)
-    FLOATTYPE       reduce using rule 37 (arithmetic_operation -> value_numeric .)
-    BOOLTYPE        reduce using rule 37 (arithmetic_operation -> value_numeric .)
-    RKEY            reduce using rule 37 (arithmetic_operation -> value_numeric .)
-    PLUS            shift and go to state 63
-    MINUS           shift and go to state 64
-    TIMES           shift and go to state 65
-    DIVIDE          shift and go to state 66
-    PERCENT         shift and go to state 67
-
-    arithmetic_operator            shift and go to state 61
-
-state 95
-
-    (38) arithmetic_operation -> value_numeric arithmetic_operator arithmetic_operation .
-
-    PRINT           reduce using rule 38 (arithmetic_operation -> value_numeric arithmetic_operator arithmetic_operation .)
-    LOGICNOT        reduce using rule 38 (arithmetic_operation -> value_numeric arithmetic_operator arithmetic_operation .)
-    CONST           reduce using rule 38 (arithmetic_operation -> value_numeric arithmetic_operator arithmetic_operation .)
-    BOOLTRUE        reduce using rule 38 (arithmetic_operation -> value_numeric arithmetic_operator arithmetic_operation .)
-    BOOLFALSE       reduce using rule 38 (arithmetic_operation -> value_numeric arithmetic_operator arithmetic_operation .)
-    VARIABLE        reduce using rule 38 (arithmetic_operation -> value_numeric arithmetic_operator arithmetic_operation .)
-    INTEGER         reduce using rule 38 (arithmetic_operation -> value_numeric arithmetic_operator arithmetic_operation .)
-    FLOAT_NUMBER    reduce using rule 38 (arithmetic_operation -> value_numeric arithmetic_operator arithmetic_operation .)
-    DECIMAL_NUMBER  reduce using rule 38 (arithmetic_operation -> value_numeric arithmetic_operator arithmetic_operation .)
-    PUBLIC          reduce using rule 38 (arithmetic_operation -> value_numeric arithmetic_operator arithmetic_operation .)
-    PRIVATE         reduce using rule 38 (arithmetic_operation -> value_numeric arithmetic_operator arithmetic_operation .)
-    INTTYPE         reduce using rule 38 (arithmetic_operation -> value_numeric arithmetic_operator arithmetic_operation .)
-    STRINGTYPE      reduce using rule 38 (arithmetic_operation -> value_numeric arithmetic_operator arithmetic_operation .)
-    FLOATTYPE       reduce using rule 38 (arithmetic_operation -> value_numeric arithmetic_operator arithmetic_operation .)
-    BOOLTYPE        reduce using rule 38 (arithmetic_operation -> value_numeric arithmetic_operator arithmetic_operation .)
-    RKEY            reduce using rule 38 (arithmetic_operation -> value_numeric arithmetic_operator arithmetic_operation .)
-
-
-state 96
-
-    (26) value_numeric -> VARIABLE .
-
-    PLUS            reduce using rule 26 (value_numeric -> VARIABLE .)
-    MINUS           reduce using rule 26 (value_numeric -> VARIABLE .)
-    TIMES           reduce using rule 26 (value_numeric -> VARIABLE .)
-    DIVIDE          reduce using rule 26 (value_numeric -> VARIABLE .)
-    PERCENT         reduce using rule 26 (value_numeric -> VARIABLE .)
-    PRINT           reduce using rule 26 (value_numeric -> VARIABLE .)
-    LOGICNOT        reduce using rule 26 (value_numeric -> VARIABLE .)
-    CONST           reduce using rule 26 (value_numeric -> VARIABLE .)
-    BOOLTRUE        reduce using rule 26 (value_numeric -> VARIABLE .)
-    BOOLFALSE       reduce using rule 26 (value_numeric -> VARIABLE .)
-    VARIABLE        reduce using rule 26 (value_numeric -> VARIABLE .)
-    INTEGER         reduce using rule 26 (value_numeric -> VARIABLE .)
-    FLOAT_NUMBER    reduce using rule 26 (value_numeric -> VARIABLE .)
-    DECIMAL_NUMBER  reduce using rule 26 (value_numeric -> VARIABLE .)
-    PUBLIC          reduce using rule 26 (value_numeric -> VARIABLE .)
-    PRIVATE         reduce using rule 26 (value_numeric -> VARIABLE .)
-    INTTYPE         reduce using rule 26 (value_numeric -> VARIABLE .)
-    STRINGTYPE      reduce using rule 26 (value_numeric -> VARIABLE .)
-    FLOATTYPE       reduce using rule 26 (value_numeric -> VARIABLE .)
-    BOOLTYPE        reduce using rule 26 (value_numeric -> VARIABLE .)
-    RKEY            reduce using rule 26 (value_numeric -> VARIABLE .)
-    GREATER_THAN    reduce using rule 26 (value_numeric -> VARIABLE .)
-    SMALLER_THAN    reduce using rule 26 (value_numeric -> VARIABLE .)
-    EQUAL_COMPARATION reduce using rule 26 (value_numeric -> VARIABLE .)
-    INEQUALITY      reduce using rule 26 (value_numeric -> VARIABLE .)
-    GREATER_THAN_OR_EQUAL reduce using rule 26 (value_numeric -> VARIABLE .)
-    SMALLER_THAN_OR_EQUAL reduce using rule 26 (value_numeric -> VARIABLE .)
-    LOGICAND        reduce using rule 26 (value_numeric -> VARIABLE .)
-    LOGICOR         reduce using rule 26 (value_numeric -> VARIABLE .)
-
-
-state 97
-
-    (45) comparison_operation -> value_numeric comparison_operator comparison_operation .
-
-    LOGICAND        reduce using rule 45 (comparison_operation -> value_numeric comparison_operator comparison_operation .)
-    LOGICOR         reduce using rule 45 (comparison_operation -> value_numeric comparison_operator comparison_operation .)
-    PRINT           reduce using rule 45 (comparison_operation -> value_numeric comparison_operator comparison_operation .)
-    LOGICNOT        reduce using rule 45 (comparison_operation -> value_numeric comparison_operator comparison_operation .)
-    CONST           reduce using rule 45 (comparison_operation -> value_numeric comparison_operator comparison_operation .)
-    BOOLTRUE        reduce using rule 45 (comparison_operation -> value_numeric comparison_operator comparison_operation .)
-    BOOLFALSE       reduce using rule 45 (comparison_operation -> value_numeric comparison_operator comparison_operation .)
-    VARIABLE        reduce using rule 45 (comparison_operation -> value_numeric comparison_operator comparison_operation .)
-    INTEGER         reduce using rule 45 (comparison_operation -> value_numeric comparison_operator comparison_operation .)
-    FLOAT_NUMBER    reduce using rule 45 (comparison_operation -> value_numeric comparison_operator comparison_operation .)
-    DECIMAL_NUMBER  reduce using rule 45 (comparison_operation -> value_numeric comparison_operator comparison_operation .)
-    PUBLIC          reduce using rule 45 (comparison_operation -> value_numeric comparison_operator comparison_operation .)
-    PRIVATE         reduce using rule 45 (comparison_operation -> value_numeric comparison_operator comparison_operation .)
-    INTTYPE         reduce using rule 45 (comparison_operation -> value_numeric comparison_operator comparison_operation .)
-    STRINGTYPE      reduce using rule 45 (comparison_operation -> value_numeric comparison_operator comparison_operation .)
-    FLOATTYPE       reduce using rule 45 (comparison_operation -> value_numeric comparison_operator comparison_operation .)
-    BOOLTYPE        reduce using rule 45 (comparison_operation -> value_numeric comparison_operator comparison_operation .)
-    RKEY            reduce using rule 45 (comparison_operation -> value_numeric comparison_operator comparison_operation .)
-
-
-state 98
-
-    (59) constant_assignation -> access_modifiers CONST assignation_type_value_multiple . DOTANDCOMMA
-
-    DOTANDCOMMA     shift and go to state 112
-
-
-state 99
-
-    (61) variable_assignation -> access_modifiers assignation_type_value_multiple DOTANDCOMMA .
-
-    PRINT           reduce using rule 61 (variable_assignation -> access_modifiers assignation_type_value_multiple DOTANDCOMMA .)
-    LOGICNOT        reduce using rule 61 (variable_assignation -> access_modifiers assignation_type_value_multiple DOTANDCOMMA .)
-    CONST           reduce using rule 61 (variable_assignation -> access_modifiers assignation_type_value_multiple DOTANDCOMMA .)
-    BOOLTRUE        reduce using rule 61 (variable_assignation -> access_modifiers assignation_type_value_multiple DOTANDCOMMA .)
-    BOOLFALSE       reduce using rule 61 (variable_assignation -> access_modifiers assignation_type_value_multiple DOTANDCOMMA .)
-    VARIABLE        reduce using rule 61 (variable_assignation -> access_modifiers assignation_type_value_multiple DOTANDCOMMA .)
-    INTEGER         reduce using rule 61 (variable_assignation -> access_modifiers assignation_type_value_multiple DOTANDCOMMA .)
-    FLOAT_NUMBER    reduce using rule 61 (variable_assignation -> access_modifiers assignation_type_value_multiple DOTANDCOMMA .)
-    DECIMAL_NUMBER  reduce using rule 61 (variable_assignation -> access_modifiers assignation_type_value_multiple DOTANDCOMMA .)
-    PUBLIC          reduce using rule 61 (variable_assignation -> access_modifiers assignation_type_value_multiple DOTANDCOMMA .)
-    PRIVATE         reduce using rule 61 (variable_assignation -> access_modifiers assignation_type_value_multiple DOTANDCOMMA .)
-    INTTYPE         reduce using rule 61 (variable_assignation -> access_modifiers assignation_type_value_multiple DOTANDCOMMA .)
-    STRINGTYPE      reduce using rule 61 (variable_assignation -> access_modifiers assignation_type_value_multiple DOTANDCOMMA .)
-    FLOATTYPE       reduce using rule 61 (variable_assignation -> access_modifiers assignation_type_value_multiple DOTANDCOMMA .)
-    BOOLTYPE        reduce using rule 61 (variable_assignation -> access_modifiers assignation_type_value_multiple DOTANDCOMMA .)
-    RKEY            reduce using rule 61 (variable_assignation -> access_modifiers assignation_type_value_multiple DOTANDCOMMA .)
-
-
-state 100
-
-    (60) constant_assignation -> CONST assignation_type_value_multiple DOTANDCOMMA .
-
-    PRINT           reduce using rule 60 (constant_assignation -> CONST assignation_type_value_multiple DOTANDCOMMA .)
-    LOGICNOT        reduce using rule 60 (constant_assignation -> CONST assignation_type_value_multiple DOTANDCOMMA .)
-    CONST           reduce using rule 60 (constant_assignation -> CONST assignation_type_value_multiple DOTANDCOMMA .)
-    BOOLTRUE        reduce using rule 60 (constant_assignation -> CONST assignation_type_value_multiple DOTANDCOMMA .)
-    BOOLFALSE       reduce using rule 60 (constant_assignation -> CONST assignation_type_value_multiple DOTANDCOMMA .)
-    VARIABLE        reduce using rule 60 (constant_assignation -> CONST assignation_type_value_multiple DOTANDCOMMA .)
-    INTEGER         reduce using rule 60 (constant_assignation -> CONST assignation_type_value_multiple DOTANDCOMMA .)
-    FLOAT_NUMBER    reduce using rule 60 (constant_assignation -> CONST assignation_type_value_multiple DOTANDCOMMA .)
-    DECIMAL_NUMBER  reduce using rule 60 (constant_assignation -> CONST assignation_type_value_multiple DOTANDCOMMA .)
-    PUBLIC          reduce using rule 60 (constant_assignation -> CONST assignation_type_value_multiple DOTANDCOMMA .)
-    PRIVATE         reduce using rule 60 (constant_assignation -> CONST assignation_type_value_multiple DOTANDCOMMA .)
-    INTTYPE         reduce using rule 60 (constant_assignation -> CONST assignation_type_value_multiple DOTANDCOMMA .)
-    STRINGTYPE      reduce using rule 60 (constant_assignation -> CONST assignation_type_value_multiple DOTANDCOMMA .)
-    FLOATTYPE       reduce using rule 60 (constant_assignation -> CONST assignation_type_value_multiple DOTANDCOMMA .)
-    BOOLTYPE        reduce using rule 60 (constant_assignation -> CONST assignation_type_value_multiple DOTANDCOMMA .)
-    RKEY            reduce using rule 60 (constant_assignation -> CONST assignation_type_value_multiple DOTANDCOMMA .)
-
-
-state 101
-
-    (81) assignation_int_multiple -> assignation_int COMMA . assignation_int_multiple
-    (80) assignation_int_multiple -> . assignation_int
-    (81) assignation_int_multiple -> . assignation_int COMMA assignation_int_multiple
-    (70) assignation_int -> . VARIABLE ASSIGNATION INTEGER
-
-    VARIABLE        shift and go to state 80
-
-    assignation_int                shift and go to state 79
-    assignation_int_multiple       shift and go to state 113
-
-state 102
-
-    (70) assignation_int -> VARIABLE ASSIGNATION . INTEGER
-
-    INTEGER         shift and go to state 114
-
-
-state 103
-
-    (85) assignation_float_multiple -> assignation_float COMMA . assignation_float_multiple
-    (84) assignation_float_multiple -> . assignation_float
-    (85) assignation_float_multiple -> . assignation_float COMMA assignation_float_multiple
-    (72) assignation_float -> . VARIABLE ASSIGNATION FLOAT_NUMBER
-
-    VARIABLE        shift and go to state 83
-
-    assignation_float              shift and go to state 82
-    assignation_float_multiple     shift and go to state 115
-
-state 104
-
-    (72) assignation_float -> VARIABLE ASSIGNATION . FLOAT_NUMBER
-
-    FLOAT_NUMBER    shift and go to state 116
-
-
-state 105
-
-    (87) assignation_true_multiple -> assignation_true COMMA . assignation_true_multiple
-    (86) assignation_true_multiple -> . assignation_true
-    (87) assignation_true_multiple -> . assignation_true COMMA assignation_true_multiple
-    (73) assignation_true -> . VARIABLE ASSIGNATION BOOLTRUE
-
-    VARIABLE        shift and go to state 118
-
-    assignation_true               shift and go to state 86
-    assignation_true_multiple      shift and go to state 117
-
-state 106
-
-    (89) assignation_false_multiple -> assignation_false COMMA . assignation_false_multiple
-    (88) assignation_false_multiple -> . assignation_false
-    (89) assignation_false_multiple -> . assignation_false COMMA assignation_false_multiple
-    (74) assignation_false -> . VARIABLE ASSIGNATION BOOLFALSE
-
-    VARIABLE        shift and go to state 120
-
-    assignation_false              shift and go to state 87
-    assignation_false_multiple     shift and go to state 119
-
-state 107
-
-    (73) assignation_true -> VARIABLE ASSIGNATION . BOOLTRUE
-    (74) assignation_false -> VARIABLE ASSIGNATION . BOOLFALSE
-
-    BOOLTRUE        shift and go to state 121
-    BOOLFALSE       shift and go to state 122
-
-
-state 108
-
-    (83) assignation_string_multiple -> assignation_string COMMA assignation_string_multiple .
-
-    DOTANDCOMMA     reduce using rule 83 (assignation_string_multiple -> assignation_string COMMA assignation_string_multiple .)
-
-
-state 109
 
     (71) assignation_string -> VARIABLE ASSIGNATION STRING .
 
@@ -2004,177 +1163,923 @@ state 109
     DOTANDCOMMA     reduce using rule 71 (assignation_string -> VARIABLE ASSIGNATION STRING .)
 
 
+state 76
+
+    (25) print_data -> PRINT LPARENT STRING RPARENT . DOTANDCOMMA
+
+    DOTANDCOMMA     shift and go to state 103
+
+
+state 77
+
+    (26) print_data -> PRINT LPARENT VARIABLE RPARENT . DOTANDCOMMA
+
+    DOTANDCOMMA     shift and go to state 104
+
+
+state 78
+
+    (57) constant_assignation -> access_modifiers CONST assignation_type_value_multiple DOTANDCOMMA .
+
+    PRINT           reduce using rule 57 (constant_assignation -> access_modifiers CONST assignation_type_value_multiple DOTANDCOMMA .)
+    CONST           reduce using rule 57 (constant_assignation -> access_modifiers CONST assignation_type_value_multiple DOTANDCOMMA .)
+    PUBLIC          reduce using rule 57 (constant_assignation -> access_modifiers CONST assignation_type_value_multiple DOTANDCOMMA .)
+    PRIVATE         reduce using rule 57 (constant_assignation -> access_modifiers CONST assignation_type_value_multiple DOTANDCOMMA .)
+    INTTYPE         reduce using rule 57 (constant_assignation -> access_modifiers CONST assignation_type_value_multiple DOTANDCOMMA .)
+    STRINGTYPE      reduce using rule 57 (constant_assignation -> access_modifiers CONST assignation_type_value_multiple DOTANDCOMMA .)
+    FLOATTYPE       reduce using rule 57 (constant_assignation -> access_modifiers CONST assignation_type_value_multiple DOTANDCOMMA .)
+    BOOLTYPE        reduce using rule 57 (constant_assignation -> access_modifiers CONST assignation_type_value_multiple DOTANDCOMMA .)
+    RKEY            reduce using rule 57 (constant_assignation -> access_modifiers CONST assignation_type_value_multiple DOTANDCOMMA .)
+
+
+state 79
+
+    (88) assignation_int_multiple -> assignation_int COMMA assignation_int_multiple .
+
+    DOTANDCOMMA     reduce using rule 88 (assignation_int_multiple -> assignation_int COMMA assignation_int_multiple .)
+
+
+state 80
+
+    (69) assignation_int -> VARIABLE ASSIGNATION VARIABLE .
+    (24) value_numeric -> VARIABLE .
+
+  ! reduce/reduce conflict for COMMA resolved using rule 24 (value_numeric -> VARIABLE .)
+  ! reduce/reduce conflict for DOTANDCOMMA resolved using rule 24 (value_numeric -> VARIABLE .)
+    PLUS            reduce using rule 24 (value_numeric -> VARIABLE .)
+    MINUS           reduce using rule 24 (value_numeric -> VARIABLE .)
+    TIMES           reduce using rule 24 (value_numeric -> VARIABLE .)
+    DIVIDE          reduce using rule 24 (value_numeric -> VARIABLE .)
+    PERCENT         reduce using rule 24 (value_numeric -> VARIABLE .)
+    COMMA           reduce using rule 24 (value_numeric -> VARIABLE .)
+    DOTANDCOMMA     reduce using rule 24 (value_numeric -> VARIABLE .)
+
+  ! COMMA           [ reduce using rule 69 (assignation_int -> VARIABLE ASSIGNATION VARIABLE .) ]
+  ! DOTANDCOMMA     [ reduce using rule 69 (assignation_int -> VARIABLE ASSIGNATION VARIABLE .) ]
+
+
+state 81
+
+    (68) assignation_int -> VARIABLE ASSIGNATION INTEGER .
+    (21) value_numeric -> INTEGER .
+
+  ! reduce/reduce conflict for COMMA resolved using rule 21 (value_numeric -> INTEGER .)
+  ! reduce/reduce conflict for DOTANDCOMMA resolved using rule 21 (value_numeric -> INTEGER .)
+    PLUS            reduce using rule 21 (value_numeric -> INTEGER .)
+    MINUS           reduce using rule 21 (value_numeric -> INTEGER .)
+    TIMES           reduce using rule 21 (value_numeric -> INTEGER .)
+    DIVIDE          reduce using rule 21 (value_numeric -> INTEGER .)
+    PERCENT         reduce using rule 21 (value_numeric -> INTEGER .)
+    COMMA           reduce using rule 21 (value_numeric -> INTEGER .)
+    DOTANDCOMMA     reduce using rule 21 (value_numeric -> INTEGER .)
+
+  ! COMMA           [ reduce using rule 68 (assignation_int -> VARIABLE ASSIGNATION INTEGER .) ]
+  ! DOTANDCOMMA     [ reduce using rule 68 (assignation_int -> VARIABLE ASSIGNATION INTEGER .) ]
+
+
+state 82
+
+    (70) assignation_int -> VARIABLE ASSIGNATION arithmetic_operation .
+
+    COMMA           reduce using rule 70 (assignation_int -> VARIABLE ASSIGNATION arithmetic_operation .)
+    DOTANDCOMMA     reduce using rule 70 (assignation_int -> VARIABLE ASSIGNATION arithmetic_operation .)
+
+
+state 83
+
+    (35) arithmetic_operation -> value_numeric .
+    (36) arithmetic_operation -> value_numeric . arithmetic_operator arithmetic_operation
+    (37) arithmetic_operator -> . PLUS
+    (38) arithmetic_operator -> . MINUS
+    (39) arithmetic_operator -> . TIMES
+    (40) arithmetic_operator -> . DIVIDE
+    (41) arithmetic_operator -> . PERCENT
+
+    COMMA           reduce using rule 35 (arithmetic_operation -> value_numeric .)
+    DOTANDCOMMA     reduce using rule 35 (arithmetic_operation -> value_numeric .)
+    PLUS            shift and go to state 106
+    MINUS           shift and go to state 107
+    TIMES           shift and go to state 108
+    DIVIDE          shift and go to state 109
+    PERCENT         shift and go to state 110
+
+    arithmetic_operator            shift and go to state 105
+
+state 84
+
+    (22) value_numeric -> FLOAT_NUMBER .
+
+    PLUS            reduce using rule 22 (value_numeric -> FLOAT_NUMBER .)
+    MINUS           reduce using rule 22 (value_numeric -> FLOAT_NUMBER .)
+    TIMES           reduce using rule 22 (value_numeric -> FLOAT_NUMBER .)
+    DIVIDE          reduce using rule 22 (value_numeric -> FLOAT_NUMBER .)
+    PERCENT         reduce using rule 22 (value_numeric -> FLOAT_NUMBER .)
+    COMMA           reduce using rule 22 (value_numeric -> FLOAT_NUMBER .)
+    DOTANDCOMMA     reduce using rule 22 (value_numeric -> FLOAT_NUMBER .)
+    GREATER_THAN    reduce using rule 22 (value_numeric -> FLOAT_NUMBER .)
+    SMALLER_THAN    reduce using rule 22 (value_numeric -> FLOAT_NUMBER .)
+    EQUAL_COMPARATION reduce using rule 22 (value_numeric -> FLOAT_NUMBER .)
+    INEQUALITY      reduce using rule 22 (value_numeric -> FLOAT_NUMBER .)
+    GREATER_THAN_OR_EQUAL reduce using rule 22 (value_numeric -> FLOAT_NUMBER .)
+    SMALLER_THAN_OR_EQUAL reduce using rule 22 (value_numeric -> FLOAT_NUMBER .)
+    LOGICAND        reduce using rule 22 (value_numeric -> FLOAT_NUMBER .)
+    LOGICOR         reduce using rule 22 (value_numeric -> FLOAT_NUMBER .)
+
+
+state 85
+
+    (23) value_numeric -> DECIMAL_NUMBER .
+
+    PLUS            reduce using rule 23 (value_numeric -> DECIMAL_NUMBER .)
+    MINUS           reduce using rule 23 (value_numeric -> DECIMAL_NUMBER .)
+    TIMES           reduce using rule 23 (value_numeric -> DECIMAL_NUMBER .)
+    DIVIDE          reduce using rule 23 (value_numeric -> DECIMAL_NUMBER .)
+    PERCENT         reduce using rule 23 (value_numeric -> DECIMAL_NUMBER .)
+    COMMA           reduce using rule 23 (value_numeric -> DECIMAL_NUMBER .)
+    DOTANDCOMMA     reduce using rule 23 (value_numeric -> DECIMAL_NUMBER .)
+    GREATER_THAN    reduce using rule 23 (value_numeric -> DECIMAL_NUMBER .)
+    SMALLER_THAN    reduce using rule 23 (value_numeric -> DECIMAL_NUMBER .)
+    EQUAL_COMPARATION reduce using rule 23 (value_numeric -> DECIMAL_NUMBER .)
+    INEQUALITY      reduce using rule 23 (value_numeric -> DECIMAL_NUMBER .)
+    GREATER_THAN_OR_EQUAL reduce using rule 23 (value_numeric -> DECIMAL_NUMBER .)
+    SMALLER_THAN_OR_EQUAL reduce using rule 23 (value_numeric -> DECIMAL_NUMBER .)
+    LOGICAND        reduce using rule 23 (value_numeric -> DECIMAL_NUMBER .)
+    LOGICOR         reduce using rule 23 (value_numeric -> DECIMAL_NUMBER .)
+
+
+state 86
+
+    (92) assignation_float_multiple -> assignation_float COMMA assignation_float_multiple .
+
+    DOTANDCOMMA     reduce using rule 92 (assignation_float_multiple -> assignation_float COMMA assignation_float_multiple .)
+
+
+state 87
+
+    (74) assignation_float -> VARIABLE ASSIGNATION VARIABLE .
+    (24) value_numeric -> VARIABLE .
+
+  ! reduce/reduce conflict for COMMA resolved using rule 24 (value_numeric -> VARIABLE .)
+  ! reduce/reduce conflict for DOTANDCOMMA resolved using rule 24 (value_numeric -> VARIABLE .)
+    PLUS            reduce using rule 24 (value_numeric -> VARIABLE .)
+    MINUS           reduce using rule 24 (value_numeric -> VARIABLE .)
+    TIMES           reduce using rule 24 (value_numeric -> VARIABLE .)
+    DIVIDE          reduce using rule 24 (value_numeric -> VARIABLE .)
+    PERCENT         reduce using rule 24 (value_numeric -> VARIABLE .)
+    COMMA           reduce using rule 24 (value_numeric -> VARIABLE .)
+    DOTANDCOMMA     reduce using rule 24 (value_numeric -> VARIABLE .)
+
+  ! COMMA           [ reduce using rule 74 (assignation_float -> VARIABLE ASSIGNATION VARIABLE .) ]
+  ! DOTANDCOMMA     [ reduce using rule 74 (assignation_float -> VARIABLE ASSIGNATION VARIABLE .) ]
+
+
+state 88
+
+    (73) assignation_float -> VARIABLE ASSIGNATION FLOAT_NUMBER .
+    (22) value_numeric -> FLOAT_NUMBER .
+
+  ! reduce/reduce conflict for COMMA resolved using rule 22 (value_numeric -> FLOAT_NUMBER .)
+  ! reduce/reduce conflict for DOTANDCOMMA resolved using rule 22 (value_numeric -> FLOAT_NUMBER .)
+    PLUS            reduce using rule 22 (value_numeric -> FLOAT_NUMBER .)
+    MINUS           reduce using rule 22 (value_numeric -> FLOAT_NUMBER .)
+    TIMES           reduce using rule 22 (value_numeric -> FLOAT_NUMBER .)
+    DIVIDE          reduce using rule 22 (value_numeric -> FLOAT_NUMBER .)
+    PERCENT         reduce using rule 22 (value_numeric -> FLOAT_NUMBER .)
+    COMMA           reduce using rule 22 (value_numeric -> FLOAT_NUMBER .)
+    DOTANDCOMMA     reduce using rule 22 (value_numeric -> FLOAT_NUMBER .)
+
+  ! COMMA           [ reduce using rule 73 (assignation_float -> VARIABLE ASSIGNATION FLOAT_NUMBER .) ]
+  ! DOTANDCOMMA     [ reduce using rule 73 (assignation_float -> VARIABLE ASSIGNATION FLOAT_NUMBER .) ]
+
+
+state 89
+
+    (75) assignation_float -> VARIABLE ASSIGNATION arithmetic_operation .
+
+    COMMA           reduce using rule 75 (assignation_float -> VARIABLE ASSIGNATION arithmetic_operation .)
+    DOTANDCOMMA     reduce using rule 75 (assignation_float -> VARIABLE ASSIGNATION arithmetic_operation .)
+
+
+state 90
+
+    (21) value_numeric -> INTEGER .
+
+    PLUS            reduce using rule 21 (value_numeric -> INTEGER .)
+    MINUS           reduce using rule 21 (value_numeric -> INTEGER .)
+    TIMES           reduce using rule 21 (value_numeric -> INTEGER .)
+    DIVIDE          reduce using rule 21 (value_numeric -> INTEGER .)
+    PERCENT         reduce using rule 21 (value_numeric -> INTEGER .)
+    COMMA           reduce using rule 21 (value_numeric -> INTEGER .)
+    DOTANDCOMMA     reduce using rule 21 (value_numeric -> INTEGER .)
+    GREATER_THAN    reduce using rule 21 (value_numeric -> INTEGER .)
+    SMALLER_THAN    reduce using rule 21 (value_numeric -> INTEGER .)
+    EQUAL_COMPARATION reduce using rule 21 (value_numeric -> INTEGER .)
+    INEQUALITY      reduce using rule 21 (value_numeric -> INTEGER .)
+    GREATER_THAN_OR_EQUAL reduce using rule 21 (value_numeric -> INTEGER .)
+    SMALLER_THAN_OR_EQUAL reduce using rule 21 (value_numeric -> INTEGER .)
+    LOGICAND        reduce using rule 21 (value_numeric -> INTEGER .)
+    LOGICOR         reduce using rule 21 (value_numeric -> INTEGER .)
+
+
+state 91
+
+    (94) assignation_true_multiple -> assignation_true COMMA assignation_true_multiple .
+
+    DOTANDCOMMA     reduce using rule 94 (assignation_true_multiple -> assignation_true COMMA assignation_true_multiple .)
+
+
+state 92
+
+    (76) assignation_true -> VARIABLE . ASSIGNATION BOOLTRUE
+    (77) assignation_true -> VARIABLE . ASSIGNATION VARIABLE
+    (78) assignation_true -> VARIABLE . ASSIGNATION boolean_operation
+
+    ASSIGNATION     shift and go to state 111
+
+
+state 93
+
+    (96) assignation_false_multiple -> assignation_false COMMA assignation_false_multiple .
+
+    DOTANDCOMMA     reduce using rule 96 (assignation_false_multiple -> assignation_false COMMA assignation_false_multiple .)
+
+
+state 94
+
+    (79) assignation_false -> VARIABLE . ASSIGNATION BOOLFALSE
+    (80) assignation_false -> VARIABLE . ASSIGNATION VARIABLE
+    (81) assignation_false -> VARIABLE . ASSIGNATION boolean_operation
+
+    ASSIGNATION     shift and go to state 112
+
+
+state 95
+
+    (77) assignation_true -> VARIABLE ASSIGNATION VARIABLE .
+    (80) assignation_false -> VARIABLE ASSIGNATION VARIABLE .
+    (19) value_boolean -> VARIABLE .
+    (24) value_numeric -> VARIABLE .
+
+  ! reduce/reduce conflict for COMMA resolved using rule 77 (assignation_true -> VARIABLE ASSIGNATION VARIABLE .)
+  ! reduce/reduce conflict for DOTANDCOMMA resolved using rule 77 (assignation_true -> VARIABLE ASSIGNATION VARIABLE .)
+  ! reduce/reduce conflict for COMMA resolved using rule 19 (value_boolean -> VARIABLE .)
+  ! reduce/reduce conflict for DOTANDCOMMA resolved using rule 19 (value_boolean -> VARIABLE .)
+  ! reduce/reduce conflict for LOGICAND resolved using rule 19 (value_boolean -> VARIABLE .)
+  ! reduce/reduce conflict for LOGICOR resolved using rule 19 (value_boolean -> VARIABLE .)
+  ! reduce/reduce conflict for COMMA resolved using rule 19 (value_boolean -> VARIABLE .)
+  ! reduce/reduce conflict for DOTANDCOMMA resolved using rule 19 (value_boolean -> VARIABLE .)
+    LOGICAND        reduce using rule 19 (value_boolean -> VARIABLE .)
+    LOGICOR         reduce using rule 19 (value_boolean -> VARIABLE .)
+    COMMA           reduce using rule 19 (value_boolean -> VARIABLE .)
+    DOTANDCOMMA     reduce using rule 19 (value_boolean -> VARIABLE .)
+    GREATER_THAN    reduce using rule 24 (value_numeric -> VARIABLE .)
+    SMALLER_THAN    reduce using rule 24 (value_numeric -> VARIABLE .)
+    EQUAL_COMPARATION reduce using rule 24 (value_numeric -> VARIABLE .)
+    INEQUALITY      reduce using rule 24 (value_numeric -> VARIABLE .)
+    GREATER_THAN_OR_EQUAL reduce using rule 24 (value_numeric -> VARIABLE .)
+    SMALLER_THAN_OR_EQUAL reduce using rule 24 (value_numeric -> VARIABLE .)
+
+  ! COMMA           [ reduce using rule 77 (assignation_true -> VARIABLE ASSIGNATION VARIABLE .) ]
+  ! DOTANDCOMMA     [ reduce using rule 77 (assignation_true -> VARIABLE ASSIGNATION VARIABLE .) ]
+  ! COMMA           [ reduce using rule 80 (assignation_false -> VARIABLE ASSIGNATION VARIABLE .) ]
+  ! DOTANDCOMMA     [ reduce using rule 80 (assignation_false -> VARIABLE ASSIGNATION VARIABLE .) ]
+  ! LOGICAND        [ reduce using rule 24 (value_numeric -> VARIABLE .) ]
+  ! LOGICOR         [ reduce using rule 24 (value_numeric -> VARIABLE .) ]
+  ! COMMA           [ reduce using rule 24 (value_numeric -> VARIABLE .) ]
+  ! DOTANDCOMMA     [ reduce using rule 24 (value_numeric -> VARIABLE .) ]
+
+
+state 96
+
+    (76) assignation_true -> VARIABLE ASSIGNATION BOOLTRUE .
+    (17) value_boolean -> BOOLTRUE .
+
+  ! reduce/reduce conflict for COMMA resolved using rule 17 (value_boolean -> BOOLTRUE .)
+  ! reduce/reduce conflict for DOTANDCOMMA resolved using rule 17 (value_boolean -> BOOLTRUE .)
+    LOGICAND        reduce using rule 17 (value_boolean -> BOOLTRUE .)
+    LOGICOR         reduce using rule 17 (value_boolean -> BOOLTRUE .)
+    COMMA           reduce using rule 17 (value_boolean -> BOOLTRUE .)
+    DOTANDCOMMA     reduce using rule 17 (value_boolean -> BOOLTRUE .)
+
+  ! COMMA           [ reduce using rule 76 (assignation_true -> VARIABLE ASSIGNATION BOOLTRUE .) ]
+  ! DOTANDCOMMA     [ reduce using rule 76 (assignation_true -> VARIABLE ASSIGNATION BOOLTRUE .) ]
+
+
+state 97
+
+    (78) assignation_true -> VARIABLE ASSIGNATION boolean_operation .
+    (81) assignation_false -> VARIABLE ASSIGNATION boolean_operation .
+
+  ! reduce/reduce conflict for COMMA resolved using rule 78 (assignation_true -> VARIABLE ASSIGNATION boolean_operation .)
+  ! reduce/reduce conflict for DOTANDCOMMA resolved using rule 78 (assignation_true -> VARIABLE ASSIGNATION boolean_operation .)
+    COMMA           reduce using rule 78 (assignation_true -> VARIABLE ASSIGNATION boolean_operation .)
+    DOTANDCOMMA     reduce using rule 78 (assignation_true -> VARIABLE ASSIGNATION boolean_operation .)
+
+  ! COMMA           [ reduce using rule 81 (assignation_false -> VARIABLE ASSIGNATION boolean_operation .) ]
+  ! DOTANDCOMMA     [ reduce using rule 81 (assignation_false -> VARIABLE ASSIGNATION boolean_operation .) ]
+
+
+state 98
+
+    (79) assignation_false -> VARIABLE ASSIGNATION BOOLFALSE .
+    (18) value_boolean -> BOOLFALSE .
+
+  ! reduce/reduce conflict for COMMA resolved using rule 18 (value_boolean -> BOOLFALSE .)
+  ! reduce/reduce conflict for DOTANDCOMMA resolved using rule 18 (value_boolean -> BOOLFALSE .)
+    LOGICAND        reduce using rule 18 (value_boolean -> BOOLFALSE .)
+    LOGICOR         reduce using rule 18 (value_boolean -> BOOLFALSE .)
+    COMMA           reduce using rule 18 (value_boolean -> BOOLFALSE .)
+    DOTANDCOMMA     reduce using rule 18 (value_boolean -> BOOLFALSE .)
+
+  ! COMMA           [ reduce using rule 79 (assignation_false -> VARIABLE ASSIGNATION BOOLFALSE .) ]
+  ! DOTANDCOMMA     [ reduce using rule 79 (assignation_false -> VARIABLE ASSIGNATION BOOLFALSE .) ]
+
+
+state 99
+
+    (50) boolean_operation -> value_boolean .
+    (52) boolean_operation -> value_boolean . boolean_operator boolean_operation
+    (53) boolean_operator -> . LOGICAND
+    (54) boolean_operator -> . LOGICOR
+
+    COMMA           reduce using rule 50 (boolean_operation -> value_boolean .)
+    DOTANDCOMMA     reduce using rule 50 (boolean_operation -> value_boolean .)
+    LOGICAND        shift and go to state 114
+    LOGICOR         shift and go to state 115
+
+    boolean_operator               shift and go to state 113
+
+state 100
+
+    (51) boolean_operation -> LOGICNOT . value_boolean
+    (17) value_boolean -> . BOOLTRUE
+    (18) value_boolean -> . BOOLFALSE
+    (19) value_boolean -> . VARIABLE
+    (20) value_boolean -> . comparison_operation
+    (42) comparison_operation -> . value_numeric
+    (43) comparison_operation -> . value_numeric comparison_operator comparison_operation
+    (21) value_numeric -> . INTEGER
+    (22) value_numeric -> . FLOAT_NUMBER
+    (23) value_numeric -> . DECIMAL_NUMBER
+    (24) value_numeric -> . VARIABLE
+
+    BOOLTRUE        shift and go to state 117
+    BOOLFALSE       shift and go to state 118
+    VARIABLE        shift and go to state 119
+    INTEGER         shift and go to state 90
+    FLOAT_NUMBER    shift and go to state 84
+    DECIMAL_NUMBER  shift and go to state 85
+
+    value_boolean                  shift and go to state 116
+    comparison_operation           shift and go to state 101
+    value_numeric                  shift and go to state 102
+
+state 101
+
+    (20) value_boolean -> comparison_operation .
+
+    LOGICAND        reduce using rule 20 (value_boolean -> comparison_operation .)
+    LOGICOR         reduce using rule 20 (value_boolean -> comparison_operation .)
+    COMMA           reduce using rule 20 (value_boolean -> comparison_operation .)
+    DOTANDCOMMA     reduce using rule 20 (value_boolean -> comparison_operation .)
+
+
+state 102
+
+    (42) comparison_operation -> value_numeric .
+    (43) comparison_operation -> value_numeric . comparison_operator comparison_operation
+    (44) comparison_operator -> . GREATER_THAN
+    (45) comparison_operator -> . SMALLER_THAN
+    (46) comparison_operator -> . EQUAL_COMPARATION
+    (47) comparison_operator -> . INEQUALITY
+    (48) comparison_operator -> . GREATER_THAN_OR_EQUAL
+    (49) comparison_operator -> . SMALLER_THAN_OR_EQUAL
+
+    LOGICAND        reduce using rule 42 (comparison_operation -> value_numeric .)
+    LOGICOR         reduce using rule 42 (comparison_operation -> value_numeric .)
+    COMMA           reduce using rule 42 (comparison_operation -> value_numeric .)
+    DOTANDCOMMA     reduce using rule 42 (comparison_operation -> value_numeric .)
+    GREATER_THAN    shift and go to state 121
+    SMALLER_THAN    shift and go to state 122
+    EQUAL_COMPARATION shift and go to state 123
+    INEQUALITY      shift and go to state 124
+    GREATER_THAN_OR_EQUAL shift and go to state 125
+    SMALLER_THAN_OR_EQUAL shift and go to state 126
+
+    comparison_operator            shift and go to state 120
+
+state 103
+
+    (25) print_data -> PRINT LPARENT STRING RPARENT DOTANDCOMMA .
+
+    PRINT           reduce using rule 25 (print_data -> PRINT LPARENT STRING RPARENT DOTANDCOMMA .)
+    CONST           reduce using rule 25 (print_data -> PRINT LPARENT STRING RPARENT DOTANDCOMMA .)
+    PUBLIC          reduce using rule 25 (print_data -> PRINT LPARENT STRING RPARENT DOTANDCOMMA .)
+    PRIVATE         reduce using rule 25 (print_data -> PRINT LPARENT STRING RPARENT DOTANDCOMMA .)
+    INTTYPE         reduce using rule 25 (print_data -> PRINT LPARENT STRING RPARENT DOTANDCOMMA .)
+    STRINGTYPE      reduce using rule 25 (print_data -> PRINT LPARENT STRING RPARENT DOTANDCOMMA .)
+    FLOATTYPE       reduce using rule 25 (print_data -> PRINT LPARENT STRING RPARENT DOTANDCOMMA .)
+    BOOLTYPE        reduce using rule 25 (print_data -> PRINT LPARENT STRING RPARENT DOTANDCOMMA .)
+    RKEY            reduce using rule 25 (print_data -> PRINT LPARENT STRING RPARENT DOTANDCOMMA .)
+
+
+state 104
+
+    (26) print_data -> PRINT LPARENT VARIABLE RPARENT DOTANDCOMMA .
+
+    PRINT           reduce using rule 26 (print_data -> PRINT LPARENT VARIABLE RPARENT DOTANDCOMMA .)
+    CONST           reduce using rule 26 (print_data -> PRINT LPARENT VARIABLE RPARENT DOTANDCOMMA .)
+    PUBLIC          reduce using rule 26 (print_data -> PRINT LPARENT VARIABLE RPARENT DOTANDCOMMA .)
+    PRIVATE         reduce using rule 26 (print_data -> PRINT LPARENT VARIABLE RPARENT DOTANDCOMMA .)
+    INTTYPE         reduce using rule 26 (print_data -> PRINT LPARENT VARIABLE RPARENT DOTANDCOMMA .)
+    STRINGTYPE      reduce using rule 26 (print_data -> PRINT LPARENT VARIABLE RPARENT DOTANDCOMMA .)
+    FLOATTYPE       reduce using rule 26 (print_data -> PRINT LPARENT VARIABLE RPARENT DOTANDCOMMA .)
+    BOOLTYPE        reduce using rule 26 (print_data -> PRINT LPARENT VARIABLE RPARENT DOTANDCOMMA .)
+    RKEY            reduce using rule 26 (print_data -> PRINT LPARENT VARIABLE RPARENT DOTANDCOMMA .)
+
+
+state 105
+
+    (36) arithmetic_operation -> value_numeric arithmetic_operator . arithmetic_operation
+    (35) arithmetic_operation -> . value_numeric
+    (36) arithmetic_operation -> . value_numeric arithmetic_operator arithmetic_operation
+    (21) value_numeric -> . INTEGER
+    (22) value_numeric -> . FLOAT_NUMBER
+    (23) value_numeric -> . DECIMAL_NUMBER
+    (24) value_numeric -> . VARIABLE
+
+    INTEGER         shift and go to state 90
+    FLOAT_NUMBER    shift and go to state 84
+    DECIMAL_NUMBER  shift and go to state 85
+    VARIABLE        shift and go to state 128
+
+    value_numeric                  shift and go to state 83
+    arithmetic_operation           shift and go to state 127
+
+state 106
+
+    (37) arithmetic_operator -> PLUS .
+
+    INTEGER         reduce using rule 37 (arithmetic_operator -> PLUS .)
+    FLOAT_NUMBER    reduce using rule 37 (arithmetic_operator -> PLUS .)
+    DECIMAL_NUMBER  reduce using rule 37 (arithmetic_operator -> PLUS .)
+    VARIABLE        reduce using rule 37 (arithmetic_operator -> PLUS .)
+
+
+state 107
+
+    (38) arithmetic_operator -> MINUS .
+
+    INTEGER         reduce using rule 38 (arithmetic_operator -> MINUS .)
+    FLOAT_NUMBER    reduce using rule 38 (arithmetic_operator -> MINUS .)
+    DECIMAL_NUMBER  reduce using rule 38 (arithmetic_operator -> MINUS .)
+    VARIABLE        reduce using rule 38 (arithmetic_operator -> MINUS .)
+
+
+state 108
+
+    (39) arithmetic_operator -> TIMES .
+
+    INTEGER         reduce using rule 39 (arithmetic_operator -> TIMES .)
+    FLOAT_NUMBER    reduce using rule 39 (arithmetic_operator -> TIMES .)
+    DECIMAL_NUMBER  reduce using rule 39 (arithmetic_operator -> TIMES .)
+    VARIABLE        reduce using rule 39 (arithmetic_operator -> TIMES .)
+
+
+state 109
+
+    (40) arithmetic_operator -> DIVIDE .
+
+    INTEGER         reduce using rule 40 (arithmetic_operator -> DIVIDE .)
+    FLOAT_NUMBER    reduce using rule 40 (arithmetic_operator -> DIVIDE .)
+    DECIMAL_NUMBER  reduce using rule 40 (arithmetic_operator -> DIVIDE .)
+    VARIABLE        reduce using rule 40 (arithmetic_operator -> DIVIDE .)
+
+
 state 110
 
-    (27) print_data -> PRINT LPARENT STRING RPARENT . DOTANDCOMMA
+    (41) arithmetic_operator -> PERCENT .
 
-    DOTANDCOMMA     shift and go to state 123
+    INTEGER         reduce using rule 41 (arithmetic_operator -> PERCENT .)
+    FLOAT_NUMBER    reduce using rule 41 (arithmetic_operator -> PERCENT .)
+    DECIMAL_NUMBER  reduce using rule 41 (arithmetic_operator -> PERCENT .)
+    VARIABLE        reduce using rule 41 (arithmetic_operator -> PERCENT .)
 
 
 state 111
 
-    (28) print_data -> PRINT LPARENT VARIABLE RPARENT . DOTANDCOMMA
+    (76) assignation_true -> VARIABLE ASSIGNATION . BOOLTRUE
+    (77) assignation_true -> VARIABLE ASSIGNATION . VARIABLE
+    (78) assignation_true -> VARIABLE ASSIGNATION . boolean_operation
+    (50) boolean_operation -> . value_boolean
+    (51) boolean_operation -> . LOGICNOT value_boolean
+    (52) boolean_operation -> . value_boolean boolean_operator boolean_operation
+    (17) value_boolean -> . BOOLTRUE
+    (18) value_boolean -> . BOOLFALSE
+    (19) value_boolean -> . VARIABLE
+    (20) value_boolean -> . comparison_operation
+    (42) comparison_operation -> . value_numeric
+    (43) comparison_operation -> . value_numeric comparison_operator comparison_operation
+    (21) value_numeric -> . INTEGER
+    (22) value_numeric -> . FLOAT_NUMBER
+    (23) value_numeric -> . DECIMAL_NUMBER
+    (24) value_numeric -> . VARIABLE
 
-    DOTANDCOMMA     shift and go to state 124
+    BOOLTRUE        shift and go to state 96
+    VARIABLE        shift and go to state 129
+    LOGICNOT        shift and go to state 100
+    BOOLFALSE       shift and go to state 118
+    INTEGER         shift and go to state 90
+    FLOAT_NUMBER    shift and go to state 84
+    DECIMAL_NUMBER  shift and go to state 85
 
+    boolean_operation              shift and go to state 130
+    value_boolean                  shift and go to state 99
+    comparison_operation           shift and go to state 101
+    value_numeric                  shift and go to state 102
 
 state 112
 
-    (59) constant_assignation -> access_modifiers CONST assignation_type_value_multiple DOTANDCOMMA .
+    (79) assignation_false -> VARIABLE ASSIGNATION . BOOLFALSE
+    (80) assignation_false -> VARIABLE ASSIGNATION . VARIABLE
+    (81) assignation_false -> VARIABLE ASSIGNATION . boolean_operation
+    (50) boolean_operation -> . value_boolean
+    (51) boolean_operation -> . LOGICNOT value_boolean
+    (52) boolean_operation -> . value_boolean boolean_operator boolean_operation
+    (17) value_boolean -> . BOOLTRUE
+    (18) value_boolean -> . BOOLFALSE
+    (19) value_boolean -> . VARIABLE
+    (20) value_boolean -> . comparison_operation
+    (42) comparison_operation -> . value_numeric
+    (43) comparison_operation -> . value_numeric comparison_operator comparison_operation
+    (21) value_numeric -> . INTEGER
+    (22) value_numeric -> . FLOAT_NUMBER
+    (23) value_numeric -> . DECIMAL_NUMBER
+    (24) value_numeric -> . VARIABLE
 
-    PRINT           reduce using rule 59 (constant_assignation -> access_modifiers CONST assignation_type_value_multiple DOTANDCOMMA .)
-    LOGICNOT        reduce using rule 59 (constant_assignation -> access_modifiers CONST assignation_type_value_multiple DOTANDCOMMA .)
-    CONST           reduce using rule 59 (constant_assignation -> access_modifiers CONST assignation_type_value_multiple DOTANDCOMMA .)
-    BOOLTRUE        reduce using rule 59 (constant_assignation -> access_modifiers CONST assignation_type_value_multiple DOTANDCOMMA .)
-    BOOLFALSE       reduce using rule 59 (constant_assignation -> access_modifiers CONST assignation_type_value_multiple DOTANDCOMMA .)
-    VARIABLE        reduce using rule 59 (constant_assignation -> access_modifiers CONST assignation_type_value_multiple DOTANDCOMMA .)
-    INTEGER         reduce using rule 59 (constant_assignation -> access_modifiers CONST assignation_type_value_multiple DOTANDCOMMA .)
-    FLOAT_NUMBER    reduce using rule 59 (constant_assignation -> access_modifiers CONST assignation_type_value_multiple DOTANDCOMMA .)
-    DECIMAL_NUMBER  reduce using rule 59 (constant_assignation -> access_modifiers CONST assignation_type_value_multiple DOTANDCOMMA .)
-    PUBLIC          reduce using rule 59 (constant_assignation -> access_modifiers CONST assignation_type_value_multiple DOTANDCOMMA .)
-    PRIVATE         reduce using rule 59 (constant_assignation -> access_modifiers CONST assignation_type_value_multiple DOTANDCOMMA .)
-    INTTYPE         reduce using rule 59 (constant_assignation -> access_modifiers CONST assignation_type_value_multiple DOTANDCOMMA .)
-    STRINGTYPE      reduce using rule 59 (constant_assignation -> access_modifiers CONST assignation_type_value_multiple DOTANDCOMMA .)
-    FLOATTYPE       reduce using rule 59 (constant_assignation -> access_modifiers CONST assignation_type_value_multiple DOTANDCOMMA .)
-    BOOLTYPE        reduce using rule 59 (constant_assignation -> access_modifiers CONST assignation_type_value_multiple DOTANDCOMMA .)
-    RKEY            reduce using rule 59 (constant_assignation -> access_modifiers CONST assignation_type_value_multiple DOTANDCOMMA .)
+    BOOLFALSE       shift and go to state 98
+    VARIABLE        shift and go to state 131
+    LOGICNOT        shift and go to state 100
+    BOOLTRUE        shift and go to state 117
+    INTEGER         shift and go to state 90
+    FLOAT_NUMBER    shift and go to state 84
+    DECIMAL_NUMBER  shift and go to state 85
 
+    boolean_operation              shift and go to state 132
+    value_boolean                  shift and go to state 99
+    comparison_operation           shift and go to state 101
+    value_numeric                  shift and go to state 102
 
 state 113
 
-    (81) assignation_int_multiple -> assignation_int COMMA assignation_int_multiple .
+    (52) boolean_operation -> value_boolean boolean_operator . boolean_operation
+    (50) boolean_operation -> . value_boolean
+    (51) boolean_operation -> . LOGICNOT value_boolean
+    (52) boolean_operation -> . value_boolean boolean_operator boolean_operation
+    (17) value_boolean -> . BOOLTRUE
+    (18) value_boolean -> . BOOLFALSE
+    (19) value_boolean -> . VARIABLE
+    (20) value_boolean -> . comparison_operation
+    (42) comparison_operation -> . value_numeric
+    (43) comparison_operation -> . value_numeric comparison_operator comparison_operation
+    (21) value_numeric -> . INTEGER
+    (22) value_numeric -> . FLOAT_NUMBER
+    (23) value_numeric -> . DECIMAL_NUMBER
+    (24) value_numeric -> . VARIABLE
 
-    DOTANDCOMMA     reduce using rule 81 (assignation_int_multiple -> assignation_int COMMA assignation_int_multiple .)
+    LOGICNOT        shift and go to state 100
+    BOOLTRUE        shift and go to state 117
+    BOOLFALSE       shift and go to state 118
+    VARIABLE        shift and go to state 119
+    INTEGER         shift and go to state 90
+    FLOAT_NUMBER    shift and go to state 84
+    DECIMAL_NUMBER  shift and go to state 85
 
+    value_boolean                  shift and go to state 99
+    boolean_operation              shift and go to state 133
+    comparison_operation           shift and go to state 101
+    value_numeric                  shift and go to state 102
 
 state 114
 
-    (70) assignation_int -> VARIABLE ASSIGNATION INTEGER .
+    (53) boolean_operator -> LOGICAND .
 
-    COMMA           reduce using rule 70 (assignation_int -> VARIABLE ASSIGNATION INTEGER .)
-    DOTANDCOMMA     reduce using rule 70 (assignation_int -> VARIABLE ASSIGNATION INTEGER .)
+    LOGICNOT        reduce using rule 53 (boolean_operator -> LOGICAND .)
+    BOOLTRUE        reduce using rule 53 (boolean_operator -> LOGICAND .)
+    BOOLFALSE       reduce using rule 53 (boolean_operator -> LOGICAND .)
+    VARIABLE        reduce using rule 53 (boolean_operator -> LOGICAND .)
+    INTEGER         reduce using rule 53 (boolean_operator -> LOGICAND .)
+    FLOAT_NUMBER    reduce using rule 53 (boolean_operator -> LOGICAND .)
+    DECIMAL_NUMBER  reduce using rule 53 (boolean_operator -> LOGICAND .)
 
 
 state 115
 
-    (85) assignation_float_multiple -> assignation_float COMMA assignation_float_multiple .
+    (54) boolean_operator -> LOGICOR .
 
-    DOTANDCOMMA     reduce using rule 85 (assignation_float_multiple -> assignation_float COMMA assignation_float_multiple .)
+    LOGICNOT        reduce using rule 54 (boolean_operator -> LOGICOR .)
+    BOOLTRUE        reduce using rule 54 (boolean_operator -> LOGICOR .)
+    BOOLFALSE       reduce using rule 54 (boolean_operator -> LOGICOR .)
+    VARIABLE        reduce using rule 54 (boolean_operator -> LOGICOR .)
+    INTEGER         reduce using rule 54 (boolean_operator -> LOGICOR .)
+    FLOAT_NUMBER    reduce using rule 54 (boolean_operator -> LOGICOR .)
+    DECIMAL_NUMBER  reduce using rule 54 (boolean_operator -> LOGICOR .)
 
 
 state 116
 
-    (72) assignation_float -> VARIABLE ASSIGNATION FLOAT_NUMBER .
+    (51) boolean_operation -> LOGICNOT value_boolean .
 
-    COMMA           reduce using rule 72 (assignation_float -> VARIABLE ASSIGNATION FLOAT_NUMBER .)
-    DOTANDCOMMA     reduce using rule 72 (assignation_float -> VARIABLE ASSIGNATION FLOAT_NUMBER .)
+    COMMA           reduce using rule 51 (boolean_operation -> LOGICNOT value_boolean .)
+    DOTANDCOMMA     reduce using rule 51 (boolean_operation -> LOGICNOT value_boolean .)
 
 
 state 117
 
-    (87) assignation_true_multiple -> assignation_true COMMA assignation_true_multiple .
+    (17) value_boolean -> BOOLTRUE .
 
-    DOTANDCOMMA     reduce using rule 87 (assignation_true_multiple -> assignation_true COMMA assignation_true_multiple .)
+    COMMA           reduce using rule 17 (value_boolean -> BOOLTRUE .)
+    DOTANDCOMMA     reduce using rule 17 (value_boolean -> BOOLTRUE .)
+    LOGICAND        reduce using rule 17 (value_boolean -> BOOLTRUE .)
+    LOGICOR         reduce using rule 17 (value_boolean -> BOOLTRUE .)
 
 
 state 118
 
-    (73) assignation_true -> VARIABLE . ASSIGNATION BOOLTRUE
+    (18) value_boolean -> BOOLFALSE .
 
-    ASSIGNATION     shift and go to state 125
+    COMMA           reduce using rule 18 (value_boolean -> BOOLFALSE .)
+    DOTANDCOMMA     reduce using rule 18 (value_boolean -> BOOLFALSE .)
+    LOGICAND        reduce using rule 18 (value_boolean -> BOOLFALSE .)
+    LOGICOR         reduce using rule 18 (value_boolean -> BOOLFALSE .)
 
 
 state 119
 
-    (89) assignation_false_multiple -> assignation_false COMMA assignation_false_multiple .
+    (19) value_boolean -> VARIABLE .
+    (24) value_numeric -> VARIABLE .
 
-    DOTANDCOMMA     reduce using rule 89 (assignation_false_multiple -> assignation_false COMMA assignation_false_multiple .)
+  ! reduce/reduce conflict for COMMA resolved using rule 19 (value_boolean -> VARIABLE .)
+  ! reduce/reduce conflict for DOTANDCOMMA resolved using rule 19 (value_boolean -> VARIABLE .)
+  ! reduce/reduce conflict for LOGICAND resolved using rule 19 (value_boolean -> VARIABLE .)
+  ! reduce/reduce conflict for LOGICOR resolved using rule 19 (value_boolean -> VARIABLE .)
+    COMMA           reduce using rule 19 (value_boolean -> VARIABLE .)
+    DOTANDCOMMA     reduce using rule 19 (value_boolean -> VARIABLE .)
+    LOGICAND        reduce using rule 19 (value_boolean -> VARIABLE .)
+    LOGICOR         reduce using rule 19 (value_boolean -> VARIABLE .)
+    GREATER_THAN    reduce using rule 24 (value_numeric -> VARIABLE .)
+    SMALLER_THAN    reduce using rule 24 (value_numeric -> VARIABLE .)
+    EQUAL_COMPARATION reduce using rule 24 (value_numeric -> VARIABLE .)
+    INEQUALITY      reduce using rule 24 (value_numeric -> VARIABLE .)
+    GREATER_THAN_OR_EQUAL reduce using rule 24 (value_numeric -> VARIABLE .)
+    SMALLER_THAN_OR_EQUAL reduce using rule 24 (value_numeric -> VARIABLE .)
+
+  ! COMMA           [ reduce using rule 24 (value_numeric -> VARIABLE .) ]
+  ! DOTANDCOMMA     [ reduce using rule 24 (value_numeric -> VARIABLE .) ]
+  ! LOGICAND        [ reduce using rule 24 (value_numeric -> VARIABLE .) ]
+  ! LOGICOR         [ reduce using rule 24 (value_numeric -> VARIABLE .) ]
 
 
 state 120
 
-    (74) assignation_false -> VARIABLE . ASSIGNATION BOOLFALSE
+    (43) comparison_operation -> value_numeric comparison_operator . comparison_operation
+    (42) comparison_operation -> . value_numeric
+    (43) comparison_operation -> . value_numeric comparison_operator comparison_operation
+    (21) value_numeric -> . INTEGER
+    (22) value_numeric -> . FLOAT_NUMBER
+    (23) value_numeric -> . DECIMAL_NUMBER
+    (24) value_numeric -> . VARIABLE
 
-    ASSIGNATION     shift and go to state 126
+    INTEGER         shift and go to state 90
+    FLOAT_NUMBER    shift and go to state 84
+    DECIMAL_NUMBER  shift and go to state 85
+    VARIABLE        shift and go to state 128
 
+    value_numeric                  shift and go to state 102
+    comparison_operation           shift and go to state 134
 
 state 121
 
-    (73) assignation_true -> VARIABLE ASSIGNATION BOOLTRUE .
+    (44) comparison_operator -> GREATER_THAN .
 
-    COMMA           reduce using rule 73 (assignation_true -> VARIABLE ASSIGNATION BOOLTRUE .)
-    DOTANDCOMMA     reduce using rule 73 (assignation_true -> VARIABLE ASSIGNATION BOOLTRUE .)
+    INTEGER         reduce using rule 44 (comparison_operator -> GREATER_THAN .)
+    FLOAT_NUMBER    reduce using rule 44 (comparison_operator -> GREATER_THAN .)
+    DECIMAL_NUMBER  reduce using rule 44 (comparison_operator -> GREATER_THAN .)
+    VARIABLE        reduce using rule 44 (comparison_operator -> GREATER_THAN .)
 
 
 state 122
 
-    (74) assignation_false -> VARIABLE ASSIGNATION BOOLFALSE .
+    (45) comparison_operator -> SMALLER_THAN .
 
-    COMMA           reduce using rule 74 (assignation_false -> VARIABLE ASSIGNATION BOOLFALSE .)
-    DOTANDCOMMA     reduce using rule 74 (assignation_false -> VARIABLE ASSIGNATION BOOLFALSE .)
+    INTEGER         reduce using rule 45 (comparison_operator -> SMALLER_THAN .)
+    FLOAT_NUMBER    reduce using rule 45 (comparison_operator -> SMALLER_THAN .)
+    DECIMAL_NUMBER  reduce using rule 45 (comparison_operator -> SMALLER_THAN .)
+    VARIABLE        reduce using rule 45 (comparison_operator -> SMALLER_THAN .)
 
 
 state 123
 
-    (27) print_data -> PRINT LPARENT STRING RPARENT DOTANDCOMMA .
+    (46) comparison_operator -> EQUAL_COMPARATION .
 
-    PRINT           reduce using rule 27 (print_data -> PRINT LPARENT STRING RPARENT DOTANDCOMMA .)
-    LOGICNOT        reduce using rule 27 (print_data -> PRINT LPARENT STRING RPARENT DOTANDCOMMA .)
-    CONST           reduce using rule 27 (print_data -> PRINT LPARENT STRING RPARENT DOTANDCOMMA .)
-    BOOLTRUE        reduce using rule 27 (print_data -> PRINT LPARENT STRING RPARENT DOTANDCOMMA .)
-    BOOLFALSE       reduce using rule 27 (print_data -> PRINT LPARENT STRING RPARENT DOTANDCOMMA .)
-    VARIABLE        reduce using rule 27 (print_data -> PRINT LPARENT STRING RPARENT DOTANDCOMMA .)
-    INTEGER         reduce using rule 27 (print_data -> PRINT LPARENT STRING RPARENT DOTANDCOMMA .)
-    FLOAT_NUMBER    reduce using rule 27 (print_data -> PRINT LPARENT STRING RPARENT DOTANDCOMMA .)
-    DECIMAL_NUMBER  reduce using rule 27 (print_data -> PRINT LPARENT STRING RPARENT DOTANDCOMMA .)
-    PUBLIC          reduce using rule 27 (print_data -> PRINT LPARENT STRING RPARENT DOTANDCOMMA .)
-    PRIVATE         reduce using rule 27 (print_data -> PRINT LPARENT STRING RPARENT DOTANDCOMMA .)
-    INTTYPE         reduce using rule 27 (print_data -> PRINT LPARENT STRING RPARENT DOTANDCOMMA .)
-    STRINGTYPE      reduce using rule 27 (print_data -> PRINT LPARENT STRING RPARENT DOTANDCOMMA .)
-    FLOATTYPE       reduce using rule 27 (print_data -> PRINT LPARENT STRING RPARENT DOTANDCOMMA .)
-    BOOLTYPE        reduce using rule 27 (print_data -> PRINT LPARENT STRING RPARENT DOTANDCOMMA .)
-    RKEY            reduce using rule 27 (print_data -> PRINT LPARENT STRING RPARENT DOTANDCOMMA .)
+    INTEGER         reduce using rule 46 (comparison_operator -> EQUAL_COMPARATION .)
+    FLOAT_NUMBER    reduce using rule 46 (comparison_operator -> EQUAL_COMPARATION .)
+    DECIMAL_NUMBER  reduce using rule 46 (comparison_operator -> EQUAL_COMPARATION .)
+    VARIABLE        reduce using rule 46 (comparison_operator -> EQUAL_COMPARATION .)
 
 
 state 124
 
-    (28) print_data -> PRINT LPARENT VARIABLE RPARENT DOTANDCOMMA .
+    (47) comparison_operator -> INEQUALITY .
 
-    PRINT           reduce using rule 28 (print_data -> PRINT LPARENT VARIABLE RPARENT DOTANDCOMMA .)
-    LOGICNOT        reduce using rule 28 (print_data -> PRINT LPARENT VARIABLE RPARENT DOTANDCOMMA .)
-    CONST           reduce using rule 28 (print_data -> PRINT LPARENT VARIABLE RPARENT DOTANDCOMMA .)
-    BOOLTRUE        reduce using rule 28 (print_data -> PRINT LPARENT VARIABLE RPARENT DOTANDCOMMA .)
-    BOOLFALSE       reduce using rule 28 (print_data -> PRINT LPARENT VARIABLE RPARENT DOTANDCOMMA .)
-    VARIABLE        reduce using rule 28 (print_data -> PRINT LPARENT VARIABLE RPARENT DOTANDCOMMA .)
-    INTEGER         reduce using rule 28 (print_data -> PRINT LPARENT VARIABLE RPARENT DOTANDCOMMA .)
-    FLOAT_NUMBER    reduce using rule 28 (print_data -> PRINT LPARENT VARIABLE RPARENT DOTANDCOMMA .)
-    DECIMAL_NUMBER  reduce using rule 28 (print_data -> PRINT LPARENT VARIABLE RPARENT DOTANDCOMMA .)
-    PUBLIC          reduce using rule 28 (print_data -> PRINT LPARENT VARIABLE RPARENT DOTANDCOMMA .)
-    PRIVATE         reduce using rule 28 (print_data -> PRINT LPARENT VARIABLE RPARENT DOTANDCOMMA .)
-    INTTYPE         reduce using rule 28 (print_data -> PRINT LPARENT VARIABLE RPARENT DOTANDCOMMA .)
-    STRINGTYPE      reduce using rule 28 (print_data -> PRINT LPARENT VARIABLE RPARENT DOTANDCOMMA .)
-    FLOATTYPE       reduce using rule 28 (print_data -> PRINT LPARENT VARIABLE RPARENT DOTANDCOMMA .)
-    BOOLTYPE        reduce using rule 28 (print_data -> PRINT LPARENT VARIABLE RPARENT DOTANDCOMMA .)
-    RKEY            reduce using rule 28 (print_data -> PRINT LPARENT VARIABLE RPARENT DOTANDCOMMA .)
+    INTEGER         reduce using rule 47 (comparison_operator -> INEQUALITY .)
+    FLOAT_NUMBER    reduce using rule 47 (comparison_operator -> INEQUALITY .)
+    DECIMAL_NUMBER  reduce using rule 47 (comparison_operator -> INEQUALITY .)
+    VARIABLE        reduce using rule 47 (comparison_operator -> INEQUALITY .)
 
 
 state 125
 
-    (73) assignation_true -> VARIABLE ASSIGNATION . BOOLTRUE
+    (48) comparison_operator -> GREATER_THAN_OR_EQUAL .
 
-    BOOLTRUE        shift and go to state 121
+    INTEGER         reduce using rule 48 (comparison_operator -> GREATER_THAN_OR_EQUAL .)
+    FLOAT_NUMBER    reduce using rule 48 (comparison_operator -> GREATER_THAN_OR_EQUAL .)
+    DECIMAL_NUMBER  reduce using rule 48 (comparison_operator -> GREATER_THAN_OR_EQUAL .)
+    VARIABLE        reduce using rule 48 (comparison_operator -> GREATER_THAN_OR_EQUAL .)
 
 
 state 126
 
-    (74) assignation_false -> VARIABLE ASSIGNATION . BOOLFALSE
+    (49) comparison_operator -> SMALLER_THAN_OR_EQUAL .
 
-    BOOLFALSE       shift and go to state 122
+    INTEGER         reduce using rule 49 (comparison_operator -> SMALLER_THAN_OR_EQUAL .)
+    FLOAT_NUMBER    reduce using rule 49 (comparison_operator -> SMALLER_THAN_OR_EQUAL .)
+    DECIMAL_NUMBER  reduce using rule 49 (comparison_operator -> SMALLER_THAN_OR_EQUAL .)
+    VARIABLE        reduce using rule 49 (comparison_operator -> SMALLER_THAN_OR_EQUAL .)
+
+
+state 127
+
+    (36) arithmetic_operation -> value_numeric arithmetic_operator arithmetic_operation .
+
+    COMMA           reduce using rule 36 (arithmetic_operation -> value_numeric arithmetic_operator arithmetic_operation .)
+    DOTANDCOMMA     reduce using rule 36 (arithmetic_operation -> value_numeric arithmetic_operator arithmetic_operation .)
+
+
+state 128
+
+    (24) value_numeric -> VARIABLE .
+
+    PLUS            reduce using rule 24 (value_numeric -> VARIABLE .)
+    MINUS           reduce using rule 24 (value_numeric -> VARIABLE .)
+    TIMES           reduce using rule 24 (value_numeric -> VARIABLE .)
+    DIVIDE          reduce using rule 24 (value_numeric -> VARIABLE .)
+    PERCENT         reduce using rule 24 (value_numeric -> VARIABLE .)
+    COMMA           reduce using rule 24 (value_numeric -> VARIABLE .)
+    DOTANDCOMMA     reduce using rule 24 (value_numeric -> VARIABLE .)
+    GREATER_THAN    reduce using rule 24 (value_numeric -> VARIABLE .)
+    SMALLER_THAN    reduce using rule 24 (value_numeric -> VARIABLE .)
+    EQUAL_COMPARATION reduce using rule 24 (value_numeric -> VARIABLE .)
+    INEQUALITY      reduce using rule 24 (value_numeric -> VARIABLE .)
+    GREATER_THAN_OR_EQUAL reduce using rule 24 (value_numeric -> VARIABLE .)
+    SMALLER_THAN_OR_EQUAL reduce using rule 24 (value_numeric -> VARIABLE .)
+    LOGICAND        reduce using rule 24 (value_numeric -> VARIABLE .)
+    LOGICOR         reduce using rule 24 (value_numeric -> VARIABLE .)
+
+
+state 129
+
+    (77) assignation_true -> VARIABLE ASSIGNATION VARIABLE .
+    (19) value_boolean -> VARIABLE .
+    (24) value_numeric -> VARIABLE .
+
+  ! reduce/reduce conflict for COMMA resolved using rule 19 (value_boolean -> VARIABLE .)
+  ! reduce/reduce conflict for DOTANDCOMMA resolved using rule 19 (value_boolean -> VARIABLE .)
+  ! reduce/reduce conflict for LOGICAND resolved using rule 19 (value_boolean -> VARIABLE .)
+  ! reduce/reduce conflict for LOGICOR resolved using rule 19 (value_boolean -> VARIABLE .)
+  ! reduce/reduce conflict for COMMA resolved using rule 19 (value_boolean -> VARIABLE .)
+  ! reduce/reduce conflict for DOTANDCOMMA resolved using rule 19 (value_boolean -> VARIABLE .)
+    LOGICAND        reduce using rule 19 (value_boolean -> VARIABLE .)
+    LOGICOR         reduce using rule 19 (value_boolean -> VARIABLE .)
+    COMMA           reduce using rule 19 (value_boolean -> VARIABLE .)
+    DOTANDCOMMA     reduce using rule 19 (value_boolean -> VARIABLE .)
+    GREATER_THAN    reduce using rule 24 (value_numeric -> VARIABLE .)
+    SMALLER_THAN    reduce using rule 24 (value_numeric -> VARIABLE .)
+    EQUAL_COMPARATION reduce using rule 24 (value_numeric -> VARIABLE .)
+    INEQUALITY      reduce using rule 24 (value_numeric -> VARIABLE .)
+    GREATER_THAN_OR_EQUAL reduce using rule 24 (value_numeric -> VARIABLE .)
+    SMALLER_THAN_OR_EQUAL reduce using rule 24 (value_numeric -> VARIABLE .)
+
+  ! COMMA           [ reduce using rule 77 (assignation_true -> VARIABLE ASSIGNATION VARIABLE .) ]
+  ! DOTANDCOMMA     [ reduce using rule 77 (assignation_true -> VARIABLE ASSIGNATION VARIABLE .) ]
+  ! LOGICAND        [ reduce using rule 24 (value_numeric -> VARIABLE .) ]
+  ! LOGICOR         [ reduce using rule 24 (value_numeric -> VARIABLE .) ]
+  ! COMMA           [ reduce using rule 24 (value_numeric -> VARIABLE .) ]
+  ! DOTANDCOMMA     [ reduce using rule 24 (value_numeric -> VARIABLE .) ]
+
+
+state 130
+
+    (78) assignation_true -> VARIABLE ASSIGNATION boolean_operation .
+
+    COMMA           reduce using rule 78 (assignation_true -> VARIABLE ASSIGNATION boolean_operation .)
+    DOTANDCOMMA     reduce using rule 78 (assignation_true -> VARIABLE ASSIGNATION boolean_operation .)
+
+
+state 131
+
+    (80) assignation_false -> VARIABLE ASSIGNATION VARIABLE .
+    (19) value_boolean -> VARIABLE .
+    (24) value_numeric -> VARIABLE .
+
+  ! reduce/reduce conflict for COMMA resolved using rule 19 (value_boolean -> VARIABLE .)
+  ! reduce/reduce conflict for DOTANDCOMMA resolved using rule 19 (value_boolean -> VARIABLE .)
+  ! reduce/reduce conflict for LOGICAND resolved using rule 19 (value_boolean -> VARIABLE .)
+  ! reduce/reduce conflict for LOGICOR resolved using rule 19 (value_boolean -> VARIABLE .)
+  ! reduce/reduce conflict for COMMA resolved using rule 19 (value_boolean -> VARIABLE .)
+  ! reduce/reduce conflict for DOTANDCOMMA resolved using rule 19 (value_boolean -> VARIABLE .)
+    LOGICAND        reduce using rule 19 (value_boolean -> VARIABLE .)
+    LOGICOR         reduce using rule 19 (value_boolean -> VARIABLE .)
+    COMMA           reduce using rule 19 (value_boolean -> VARIABLE .)
+    DOTANDCOMMA     reduce using rule 19 (value_boolean -> VARIABLE .)
+    GREATER_THAN    reduce using rule 24 (value_numeric -> VARIABLE .)
+    SMALLER_THAN    reduce using rule 24 (value_numeric -> VARIABLE .)
+    EQUAL_COMPARATION reduce using rule 24 (value_numeric -> VARIABLE .)
+    INEQUALITY      reduce using rule 24 (value_numeric -> VARIABLE .)
+    GREATER_THAN_OR_EQUAL reduce using rule 24 (value_numeric -> VARIABLE .)
+    SMALLER_THAN_OR_EQUAL reduce using rule 24 (value_numeric -> VARIABLE .)
+
+  ! COMMA           [ reduce using rule 80 (assignation_false -> VARIABLE ASSIGNATION VARIABLE .) ]
+  ! DOTANDCOMMA     [ reduce using rule 80 (assignation_false -> VARIABLE ASSIGNATION VARIABLE .) ]
+  ! LOGICAND        [ reduce using rule 24 (value_numeric -> VARIABLE .) ]
+  ! LOGICOR         [ reduce using rule 24 (value_numeric -> VARIABLE .) ]
+  ! COMMA           [ reduce using rule 24 (value_numeric -> VARIABLE .) ]
+  ! DOTANDCOMMA     [ reduce using rule 24 (value_numeric -> VARIABLE .) ]
+
+
+state 132
+
+    (81) assignation_false -> VARIABLE ASSIGNATION boolean_operation .
+
+    COMMA           reduce using rule 81 (assignation_false -> VARIABLE ASSIGNATION boolean_operation .)
+    DOTANDCOMMA     reduce using rule 81 (assignation_false -> VARIABLE ASSIGNATION boolean_operation .)
+
+
+state 133
+
+    (52) boolean_operation -> value_boolean boolean_operator boolean_operation .
+
+    COMMA           reduce using rule 52 (boolean_operation -> value_boolean boolean_operator boolean_operation .)
+    DOTANDCOMMA     reduce using rule 52 (boolean_operation -> value_boolean boolean_operator boolean_operation .)
+
+
+state 134
+
+    (43) comparison_operation -> value_numeric comparison_operator comparison_operation .
+
+    LOGICAND        reduce using rule 43 (comparison_operation -> value_numeric comparison_operator comparison_operation .)
+    LOGICOR         reduce using rule 43 (comparison_operation -> value_numeric comparison_operator comparison_operation .)
+    COMMA           reduce using rule 43 (comparison_operation -> value_numeric comparison_operator comparison_operation .)
+    DOTANDCOMMA     reduce using rule 43 (comparison_operation -> value_numeric comparison_operator comparison_operation .)
 
 WARNING: 
 WARNING: Conflicts:
 WARNING: 
-WARNING: reduce/reduce conflict in state 23 resolved using rule (value_boolean -> VARIABLE)
-WARNING: rejected rule (value_numeric -> VARIABLE) in state 23
-WARNING: reduce/reduce conflict in state 35 resolved using rule (arithmetic_operation -> value_numeric)
-WARNING: rejected rule (comparison_operation -> value_numeric) in state 35
+WARNING: reduce/reduce conflict in state 80 resolved using rule (value_numeric -> VARIABLE)
+WARNING: rejected rule (assignation_int -> VARIABLE ASSIGNATION VARIABLE) in state 80
+WARNING: reduce/reduce conflict in state 81 resolved using rule (value_numeric -> INTEGER)
+WARNING: rejected rule (assignation_int -> VARIABLE ASSIGNATION INTEGER) in state 81
+WARNING: reduce/reduce conflict in state 87 resolved using rule (value_numeric -> VARIABLE)
+WARNING: rejected rule (assignation_float -> VARIABLE ASSIGNATION VARIABLE) in state 87
+WARNING: reduce/reduce conflict in state 88 resolved using rule (value_numeric -> FLOAT_NUMBER)
+WARNING: rejected rule (assignation_float -> VARIABLE ASSIGNATION FLOAT_NUMBER) in state 88
+WARNING: reduce/reduce conflict in state 95 resolved using rule (assignation_true -> VARIABLE ASSIGNATION VARIABLE)
+WARNING: rejected rule (assignation_false -> VARIABLE ASSIGNATION VARIABLE) in state 95
+WARNING: reduce/reduce conflict in state 95 resolved using rule (value_boolean -> VARIABLE)
+WARNING: rejected rule (assignation_true -> VARIABLE ASSIGNATION VARIABLE) in state 95
+WARNING: reduce/reduce conflict in state 95 resolved using rule (value_boolean -> VARIABLE)
+WARNING: rejected rule (value_numeric -> VARIABLE) in state 95
+WARNING: reduce/reduce conflict in state 96 resolved using rule (value_boolean -> BOOLTRUE)
+WARNING: rejected rule (assignation_true -> VARIABLE ASSIGNATION BOOLTRUE) in state 96
+WARNING: reduce/reduce conflict in state 97 resolved using rule (assignation_true -> VARIABLE ASSIGNATION boolean_operation)
+WARNING: rejected rule (assignation_false -> VARIABLE ASSIGNATION boolean_operation) in state 97
+WARNING: reduce/reduce conflict in state 98 resolved using rule (value_boolean -> BOOLFALSE)
+WARNING: rejected rule (assignation_false -> VARIABLE ASSIGNATION BOOLFALSE) in state 98
+WARNING: reduce/reduce conflict in state 119 resolved using rule (value_boolean -> VARIABLE)
+WARNING: rejected rule (value_numeric -> VARIABLE) in state 119
+WARNING: reduce/reduce conflict in state 129 resolved using rule (value_boolean -> VARIABLE)
+WARNING: rejected rule (assignation_true -> VARIABLE ASSIGNATION VARIABLE) in state 129
+WARNING: reduce/reduce conflict in state 129 resolved using rule (value_boolean -> VARIABLE)
+WARNING: rejected rule (value_numeric -> VARIABLE) in state 129
+WARNING: reduce/reduce conflict in state 131 resolved using rule (value_boolean -> VARIABLE)
+WARNING: rejected rule (assignation_false -> VARIABLE ASSIGNATION VARIABLE) in state 131
+WARNING: reduce/reduce conflict in state 131 resolved using rule (value_boolean -> VARIABLE)
+WARNING: rejected rule (value_numeric -> VARIABLE) in state 131
+WARNING: Rule (assignation_int -> VARIABLE ASSIGNATION VARIABLE) is never reduced
+WARNING: Rule (assignation_int -> VARIABLE ASSIGNATION INTEGER) is never reduced
+WARNING: Rule (assignation_float -> VARIABLE ASSIGNATION VARIABLE) is never reduced
+WARNING: Rule (assignation_float -> VARIABLE ASSIGNATION FLOAT_NUMBER) is never reduced
+WARNING: Rule (assignation_false -> VARIABLE ASSIGNATION VARIABLE) is never reduced
+WARNING: Rule (assignation_true -> VARIABLE ASSIGNATION VARIABLE) is never reduced
+WARNING: Rule (assignation_true -> VARIABLE ASSIGNATION BOOLTRUE) is never reduced
+WARNING: Rule (assignation_false -> VARIABLE ASSIGNATION BOOLFALSE) is never reduced
