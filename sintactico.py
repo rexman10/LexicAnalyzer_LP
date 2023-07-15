@@ -598,16 +598,95 @@ def p_condition(p):
                                 | VARIABLE logic_operator VARIABLE
     '''
 
-#El metodo para imprimir en consola al ejecutar solo el archivo sintactico.py
+
+
+
+
+# FUNCION A DE PRUEBA (SALIDA DE UN SOLO ERROR SINTACTICO)
+# descomentar el bloque para su uso
 '''
 def p_error(p):
     if p:
-         print("Error de sintaxis en token:", p.type)
-         #sintactico.errok()
+        print("Error de sintaxis en token:", p.type, str(p.lineno))
+        # sintactico.errok()
     else:
-         print("Syntax error at EOF")
+        print("Syntax error at EOF")
+
+
+sintactico = yacc.yacc()
+
+
+def analizar_sintactico(contenido):
+    result = sintactico.parse(contenido)
+    if result != None:
+        print(result)
+
+
+analizar_sintactico(datos)
 '''
 
+
+# FUNCION B DE PRUEBA (SALIDA DE VARIOS ERRORES SINTACTICO)
+# descomentar el bloque para su uso
+
+mensajes_error = []
+
+def p_error(p):
+    if p:
+        error_message = "Error de sintaxis en el token: " + str(p.type) + ", línea: " + str(p.lineno)
+        error_message += ", columna: " + str(obtener_columna(p.lexpos))
+        mensajes_error.append(error_message)
+        #Por default solo me analiza el primer error que encuentra, pero con
+        #sintactico.errok() se raliza el analisis y devuele mas errores
+        sintactico.errok()
+    else:
+        print("Syntax error at EOF")
+
+def obtener_columna(lexpos):
+    # Calcula el número de columna en base a la posición del token
+    # en el contenido analizado
+    linea_actual = datos.rfind('\n', 0, lexpos) + 1
+    return lexpos - linea_actual + 1
+
+# Build the parser
+sintactico = yacc.yacc()
+
+datos = '''
+using System; 
+public class Myclass{ 
+    const int var2 = 14 ; 
+    var3 = var2 ; 
+    const int var5 = 4 ;
+    int var2 = 14 ; var3 = var2 ; 
+    List<string> nombres = new List<string>(){"Adair"};
+    nombres.Add("Eduardo"); 
+    nombres.RemoveAt(0);
+    try{  const int var5 = 5 ; } 
+    catch (exception e) { dsadas } 
+    finally { final }
+    nombres.Clear();
+    nombres.Count();
+}
+'''
+
+def analizar_sintactico(contenido):
+    result = sintactico.parse(contenido)
+    #return result is not None
+    if result!=None:
+        return result
+
+analizar_sintactico(datos)
+
+if len(mensajes_error) > 0:
+    for error in mensajes_error:
+        print(error)
+    else:
+        print("Análisis sintáctico exitoso")
+
+
+# FUNCION C DE PRUEBA (SALIDA POR INTERFAZ)(POR REVISAR)
+# descomentar el bloque para su uso
+'''
 p_error_message = None
 def p_error(p):
     global p_error_message
@@ -616,9 +695,10 @@ def p_error(p):
     else:
         p_error_message = "Syntax error at EOF"
 
-# Build the parser
+#Build the parser
 sintactico = yacc.yacc()
 
+<<<<<<< HEAD
 
 
 datos = '''
@@ -641,11 +721,20 @@ public class clase1 {
 
 print(datos)
 
+=======
+>>>>>>> ad44b96fd8fb1e45a657062be11a20f4ac7abdeb
 def analizar_sintactico_string(content):
     result = sintactico.parse(content)
+    print(result)
     #return result is not None
     if result!=None:
-        print(result)
+        print("Detro de la funcion analizar_sintactico")
+
         return result
 
+<<<<<<< HEAD
 varresult = analizar_sintactico_string(datos)
+=======
+analizar_sintactico_string(datos)
+'''
+>>>>>>> ad44b96fd8fb1e45a657062be11a20f4ac7abdeb
