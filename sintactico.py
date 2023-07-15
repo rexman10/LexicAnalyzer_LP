@@ -635,7 +635,7 @@ public class clase1 {
     catch (exception e){ dsadas } 
     finally { final }
     nombres.Clear(); 
-    nombres.Count();
+    nombres.Cnt();
 }
 '''
 
@@ -648,4 +648,4 @@ def analizar_sintactico_string(content):
         print(result)
         return result
 
-var = analizar_sintactico_string(datos)
+varresult = analizar_sintactico_string(datos)
