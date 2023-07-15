@@ -634,6 +634,7 @@ mensajes_error = []
 def p_error(p):
     if p:
         error_message = "Error de sintaxis en el token: " + str(p.type) + ", línea: " + str(p.lineno)
+        error_message += ", columna: " + str(obtener_columna(p.lexpos))
         mensajes_error.append(error_message)
         #Por default solo me analiza el primer error que encuentra, pero con
         #sintactico.errok() se raliza el analisis y devuele mas errores
@@ -641,7 +642,11 @@ def p_error(p):
     else:
         print("Syntax error at EOF")
 
-
+def obtener_columna(lexpos):
+    # Calcula el número de columna en base a la posición del token
+    # en el contenido analizado
+    linea_actual = datos.rfind('\n', 0, lexpos) + 1
+    return lexpos - linea_actual + 1
 
 # Build the parser
 sintactico = yacc.yacc()
