@@ -122,7 +122,6 @@ tokens = (
     'LOGICAND',
     'LOGICOR',
     'LOGICNOT',
-    'LOGICXOR', #TRUE SI A O B ES TRUE
     #Fin aporte David Rivera
     #Inicio aporte Kenneth Pacheco
     'ADDITION_ASSIGNMENT',
@@ -166,28 +165,27 @@ t_PERCENT = r'\%'
 t_DOLLARSIGN = r'\$'
 t_GREATER_THAN = r'\>'
 t_SMALLER_THAN = r'\<'
-t_EQUAL_COMPARATION = r'=='
+t_EQUAL_COMPARATION = r'\=\='
 t_ASSIGNATION = r'\='
 t_DOTANDCOMMA = r'\;'
 t_ARROW = r'\=\>'
 #Fin aporte Adair Abrigo
 #Inicio aporte David Rivera
-t_INEQUALITY = r'!='
-t_GREATER_THAN_OR_EQUAL = r'>='
-t_SMALLER_THAN_OR_EQUAL = r'<='
+t_INEQUALITY = r'\!\='
+t_GREATER_THAN_OR_EQUAL = r'\>\='
+t_SMALLER_THAN_OR_EQUAL = r'\<\='
 t_LOGICAND = r'\&\&'
 t_LOGICOR = r'\|\|'
 t_LOGICNOT = r'\!'
-t_LOGICXOR = r'\^'
 t_CONCURRENT = r'CONCURRENT'
 t_IDENTIFIER = r'[a-zA-Z_][a-zA-Z0-9_]*'
 #Fin aporte David Rivera
 #Inicio aporte Kenneth Pacheco
-t_ADDITION_ASSIGNMENT = r'\+='
-t_SUBTRACTION_ASSIGNMENT = r'-='
-t_MULTIPLICATION_ASSIGNMENT = r'\*='
-t_DIVISION_ASSIGNMENT = r'\/='
-t_MODULE_ASSIGNMENT = r'%='
+t_ADDITION_ASSIGNMENT = r'\+\='
+t_SUBTRACTION_ASSIGNMENT = r'\-\='
+t_MULTIPLICATION_ASSIGNMENT = r'\*\='
+t_DIVISION_ASSIGNMENT = r'\/\='
+t_MODULE_ASSIGNMENT = r'\%\='
 t_JUMP_LINE = r'\\n'
 t_TABULATION = r'\\t'
 t_DOUBLE_QUOTATION_MARKS = r'"'

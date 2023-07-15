@@ -694,35 +694,10 @@ def p_error(p):
         p_error_message = "Error de sintaxis en token: " + str(p.type)
     else:
         p_error_message = "Syntax error at EOF"
-
+'''
 #Build the parser
 sintactico = yacc.yacc()
 
-<<<<<<< HEAD
-
-
-datos = '''
-using System; 
-public class clase1 { 
-    const int var2 = 14 ; 
-    var3 = var2 ; 
-    const int var5 = 4 ;
-    int var2 = 14 ; var3 = var2 ; 
-    List<string> nombres = new List<string>(){"Adair"};
-    nombres.Add("Eduardo"); 
-    nombres.RemoveAt(0);
-    try{  const int var5 = 4 ; } 
-    catch (exception e){ dsadas } 
-    finally { final }
-    nombres.Clear(); 
-    nombres.Cnt();
-}
-'''
-
-print(datos)
-
-=======
->>>>>>> ad44b96fd8fb1e45a657062be11a20f4ac7abdeb
 def analizar_sintactico_string(content):
     result = sintactico.parse(content)
     print(result)
@@ -732,9 +707,4 @@ def analizar_sintactico_string(content):
 
         return result
 
-<<<<<<< HEAD
 varresult = analizar_sintactico_string(datos)
-=======
-analizar_sintactico_string(datos)
-'''
->>>>>>> ad44b96fd8fb1e45a657062be11a20f4ac7abdeb
