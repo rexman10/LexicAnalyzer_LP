@@ -22,6 +22,12 @@ def p_block_code(p):
                                 | print_data
                                 | thread_main
                                 | concurrent_method
+                                | normal_if
+                                | block_while
+                                | stack_struct
+                                | functions_stack
+                                | queue_struct
+                                | functions_queue
     '''
 
 def p_all_block_code(p):
@@ -273,8 +279,96 @@ def p_thread_identificator(p):
     thread_identificator        : VARIABLE
     '''
 
-
 #Fin Metodos Concurrentes
+
+#Estructuras de control 
+    #sentencia if 
+
+def p_block_if(p):
+    '''block_if                 : normal_if
+                                | all_block_code
+    '''
+def p_normal_if(p):
+    '''normal_if                : IF LPARENT boolean_operation RPARENT LKEY block_if RKEY other_if
+                                | IF LPARENT boolean_operation RPARENT LKEY block_if RKEY 
+    '''
+
+def p_other_if(p):
+    '''other_if                 : ELSE LKEY block_if RKEY
+                                | ELSE_IF LPARENT boolean_operation RPARENT LKEY block_if RKEY other_if
+    '''
+
+    #fin sentencia if
+    #sentencia while
+def p_block_while(p):
+    '''block_while              : normal_while
+                                | do_while             
+    '''
+
+def p_normal_while(p):
+    'normal_while               : WHILE LPARENT boolean_operation RPARENT LKEY all_block_code RKEY'
+
+def p_do_while(p):
+    'do_while                   : DO LKEY all_block_code RKEY WHILE LPARENT boolean_operation RPARENT'
+    #fin sentencia while
+
+
+#Estructuras de datos
+    #Inicio pilas
+def p_stack_struct(p):
+    'stack_struct               : STACK VARIABLE ASSIGNATION NEW STACK LPARENT RPARENT DOTANDCOMMA'
+
+def p_functions_stack(p):
+    '''functions_stack          : stack_push
+                                | stack_pop
+                                | stack_clear
+                                | stack_peek
+                                | stack_isEmpty
+    '''
+def p_stack_push(p):
+    'stack_push                 : VARIABLE DOT PUSH LPARENT value RPARENT DOTANDCOMMA'
+
+def p_stack_pop(p):
+    'stack_pop                  : VARIABLE DOT POP LPARENT RPARENT DOTANDCOMMA'
+
+def p_stack_clear(p):
+    'stack_clear                : VARIABLE DOT CLEAR LPARENT RPARENT DOTANDCOMMA'
+
+def p_stack_peek(p):
+    'stack_peek                 : VARIABLE DOT PEEK LPARENT RPARENT DOTANDCOMMA'
+
+def p_stack_isEmpty(p):
+    'stack_isEmpty              : VARIABLE DOT ISEMPTY LPARENT RPARENT DOTANDCOMMA'
+
+    #fin pilas
+    #inicio colas
+def p_queue_struct(p):
+    'queue_struct               : QUEUE VARIABLE ASSIGNATION NEW QUEUE LPARENT RPARENT DOTANDCOMMA'
+
+def p_functions_queue(p):
+    '''functions_queue          : queue_enqueue
+                                | queue_dequeue
+                                | queue_clear
+                                | queue_isEmpty
+                                | queue_peek
+    '''
+
+def p_queue_enqueue(p):
+    'queue_enqueue            : VARIABLE DOT ENQUEUE LPARENT value RPARENT DOTANDCOMMA'
+
+def p_queue_dequeue(p):
+    'queue_dequeue            : VARIABLE DOT DEQUEUE LPARENT RPARENT DOTANDCOMMA'
+
+def p_queue_clear(p):
+    'queue_clear              : VARIABLE DOT CLEAR LPARENT RPARENT DOTANDCOMMA'
+
+def p_queue_peek(p):
+    'queue_peek               : VARIABLE DOT PEEK LPARENT RPARENT DOTANDCOMMA'
+
+def p_queue_isEmpty(p):
+    'queue_isEmpty            : VARIABLE DOT ISEMPTY LPARENT RPARENT DOTANDCOMMA'
+
+    #fin colas
 
 def p_error(p):
     if p:
@@ -297,7 +391,37 @@ public class clase1 {
         bool var6 = false;
         int operacion1 = 123 / 123123 + 5345 * 123124 - 4365;
         int var = 4;
-        string var2 = "6", var3 = "8";
+        string var2 = "6", var3 = "8";   
+        do{
+            Queue pila1 = new Queue ();
+            pila1.EnQueue(5);
+            pila1.DeQueue();
+            pila1.Clear();
+            pila1.Peek();
+            pila1.IsEmpty();
+        }while(5>10 && 6==3 || false && holi || !false)    
+
+        if (5>10 && 6==3 || false && holi || !false){
+            bool var4 = x < 34 && x == 34 && x != 34;
+            bool var5 = true;
+            bool var6 = false;
+            if (5>10 && 6==3 || false && holi || !false){
+                bool var4 = x < 34 && x == 34 && x != 34;
+                bool var5 = true; 
+            }
+        }else_if(5>10 && 6==3 || false && holi || !false){
+            bool var4 = x < 34 && x == 34 && x != 34;
+            bool var5 = true; 
+        }else{
+            bool var4 = x < 34 && x == 34 && x != 34;
+            bool var5 = true;
+            bool var6 = false;
+            if (5>10 && 6==3 || false && holi || !false){
+                bool var4 = x < 34 && x == 34 && x != 34;
+                bool var5 = true; 
+            }
+        }
+
     }
 }
 '''
