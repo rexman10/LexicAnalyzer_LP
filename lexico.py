@@ -234,16 +234,16 @@ def t_DECIMAL_NUMBER(t):
     t.value = float(str(t.value)[0:-2])
     return t
 def t_FLOAT_NUMBER(t):
-    r'\-?\d+\.\d+'
-    t.value = float(t.value)
+    r'\-?\d+\.\d+f'
+    t.value = float(str(t.value)[0:-2])
     return t
 def t_INTEGER(t):
     r'\-?\d+'
     t.value = int(t.value)
     return t
 def t_CHAR(t):
-    r'[a-zA-Z]'
-    t.value = int(t.value)
+    r'\'[a-zA-Z]\''
+    t.value = str(t.value)
     return t
 
 #Para reestablecer el numero delineas al analizar nuevo archivo

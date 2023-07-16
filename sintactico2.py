@@ -20,6 +20,9 @@ def p_block_main_method(p):
 def p_block_code(p):
     '''block_code               : def_const_or_var
                                 | print_data
+                                | array_assignation
+                                | array_value_assign
+                                | array_indexing
                                 | thread_main
                                 | concurrent_method
 
@@ -90,12 +93,99 @@ def p_concatenation(p):
                                 | STRING PLUS concatenation
     '''
 
+def p_array_type(p):
+    '''array_type               : CHARTYPE LBRACKET RBRACKET
+                                | STRINGTYPE LBRACKET RBRACKET
+                                | FLOATTYPE LBRACKET RBRACKET
+                                | DECIMALTYPE LBRACKET RBRACKET
+                                | INTTYPE LBRACKET RBRACKET
+                                | BOOLTYPE LBRACKET RBRACKET
+    '''
+
+def p_array_assignation(p):
+    '''array_assignation        : CHARTYPE LBRACKET RBRACKET char_array_assignation DOTANDCOMMA
+                                | STRINGTYPE LBRACKET RBRACKET string_array_assignation DOTANDCOMMA
+                                | FLOATTYPE LBRACKET RBRACKET float_array_assignation DOTANDCOMMA
+                                | DECIMALTYPE LBRACKET RBRACKET decimal_array_assignation DOTANDCOMMA
+                                | INTTYPE LBRACKET RBRACKET int_array_assignation DOTANDCOMMA
+                                | BOOLTYPE LBRACKET RBRACKET bool_array_assignation DOTANDCOMMA
+    '''
+
+def p_char_array_assignation(p):
+    'char_array_assignation     : VARIABLE ASSIGNATION LBRACKET char_content_multiple RBRACKET'
+
+def p_char_content_multiple(p):
+    '''char_content_multiple    : CHAR
+                                | CHAR COMMA char_content_multiple
+    '''
+
+def p_string_array_assignation(p):
+    'string_array_assignation   : VARIABLE ASSIGNATION LBRACKET string_content_multiple RBRACKET'
+
+def p_string_content_multiple(p):
+    '''string_content_multiple  : STRING
+                                | STRING COMMA string_content_multiple
+    '''
+
+def p_float_array_assignation(p):
+    'float_array_assignation    : VARIABLE ASSIGNATION LBRACKET float_content_multiple RBRACKET'
+
+def p_float_content_multiple(p):
+    '''float_content_multiple   : FLOAT_NUMBER
+                                | FLOAT_NUMBER COMMA float_content_multiple
+    '''
+
+def p_int_array_assignation(p):
+    'int_array_assignation      : VARIABLE ASSIGNATION LBRACKET int_content_multiple RBRACKET'
+
+def p_int_content_multiple(p):
+    '''int_content_multiple     : INTEGER
+                                | INTEGER COMMA int_content_multiple
+    '''
+
+def p_decimal_array_assignation(p):
+    'decimal_array_assignation  : VARIABLE ASSIGNATION LBRACKET decimal_content_multiple RBRACKET'
+
+def p_decimal_content_multiple(p):
+    '''decimal_content_multiple : DECIMAL_NUMBER
+                                | DECIMAL_NUMBER COMMA decimal_content_multiple
+    '''
+
+def p_bool_array_assignation(p):
+    'bool_array_assignation     : VARIABLE ASSIGNATION LBRACKET bool_content_multiple RBRACKET'
+
+def p_bool_content_multiple(p):
+    '''bool_content_multiple    : BOOLTRUE
+                                | BOOLFALSE
+                                | BOOLTRUE COMMA bool_content_multiple
+                                | BOOLFALSE COMMA bool_content_multiple
+    '''
+
+def p_array(p):
+    'array                      : LBRACKET array_content RBRACKET'
+
+def p_array_content(p):
+    '''array_content            : value
+                                | value COMMA array_content
+    '''
+
+def p_array_indexing(p):
+    '''array_indexing           : VARIABLE LBRACKET VARIABLE RBRACKET
+                                | VARIABLE LBRACKET INTEGER RBRACKET
+    '''
+
+def p_array_value_assign(p):
+    '''array_value_assign       : VARIABLE LBRACKET VARIABLE RBRACKET ASSIGNATION value DOTANDCOMMA
+                                | VARIABLE LBRACKET INTEGER RBRACKET ASSIGNATION value DOTANDCOMMA
+    '''
+
 def p_value(p):
     '''value                    : value_numeric
                                 | value_boolean
                                 | value_string
                                 | VARIABLE
                                 | read_data
+                                | array
     '''
 
 # Operaciones logicas y aritmeticas
@@ -377,7 +467,7 @@ def p_statement_lambda(p):
 
 #Tipos de datos
 def p_enums(p):
-    'enums                    : ENUM METHOD LKEY list_enums RKEY'
+    'enums                      : ENUM METHOD LKEY list_enums RKEY'
 
 def p_list_enums(p):
     '''list_enums               : METHOD
@@ -459,26 +549,26 @@ def p_functions_queue(p):
     '''
 
 def p_queue_enqueue(p):
-    'queue_enqueue            : VARIABLE DOT ENQUEUE LPARENT value RPARENT DOTANDCOMMA'
+    'queue_enqueue              : VARIABLE DOT ENQUEUE LPARENT value RPARENT DOTANDCOMMA'
 
 def p_queue_dequeue(p):
-    'queue_dequeue            : VARIABLE DOT DEQUEUE LPARENT RPARENT DOTANDCOMMA'
+    'queue_dequeue              : VARIABLE DOT DEQUEUE LPARENT RPARENT DOTANDCOMMA'
 
 def p_queue_clear(p):
-    'queue_clear              : VARIABLE DOT CLEAR LPARENT RPARENT DOTANDCOMMA'
+    'queue_clear                : VARIABLE DOT CLEAR LPARENT RPARENT DOTANDCOMMA'
 
 def p_queue_peek(p):
-    'queue_peek               : VARIABLE DOT PEEK LPARENT RPARENT DOTANDCOMMA'
+    'queue_peek                 : VARIABLE DOT PEEK LPARENT RPARENT DOTANDCOMMA'
 
 def p_queue_isEmpty(p):
-    'queue_isEmpty            : VARIABLE DOT ISEMPTY LPARENT RPARENT DOTANDCOMMA'
+    'queue_isEmpty              : VARIABLE DOT ISEMPTY LPARENT RPARENT DOTANDCOMMA'
 
     #fin colas
 
 def p_error(p):
     if p:
          print("Error de sintaxis en token:", p.type, "in: ", p.lexpos, p.value)
-         #sintactico.errok()
+         sintactico.errok()
     else:
          print("Syntax error at EOF")
 # Build the parser
@@ -544,7 +634,13 @@ public class clase1 {
             bool var6 = false;
             if (5>10 && 6==3 || false && holi || !false){
                 bool var4 = x < 34 && x == 34 && x != 34;
-                bool var5 = true; 
+                bool var5 = true;
+                bool[] arreglo1 = [true, false];
+                int[] arreglo1 = [12, 74];
+                decimal[] arreglo1 = [12.25m, -74.141m];
+                float[] arreglo1 = [12.17f, 74.20f];
+                string[] arreglo1 = ["true", "false"];
+                char[] arreglo1 = ['A', 'z', 'p', 'G'];
             }
         }
 
