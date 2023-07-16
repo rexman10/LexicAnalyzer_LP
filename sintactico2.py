@@ -9,15 +9,19 @@ def p_program(p):
 
 def p_block_publicClass(p):
     '''block_publicClass        : PUBLIC CLASS VARIABLE LKEY block_main_method RKEY
+                                | STATIC VOID MAIN LPARENT STRINGTYPE LBRACKET RBRACKET VARIABLE RPARENT LKEY all_block_code RKEY all_block_code
     '''
 
 def p_block_main_method(p):
     '''block_main_method        : STATIC VOID MAIN LPARENT STRINGTYPE LBRACKET RBRACKET VARIABLE RPARENT LKEY all_block_code RKEY
+                                | STATIC VOID MAIN LPARENT STRINGTYPE LBRACKET RBRACKET VARIABLE RPARENT LKEY all_block_code RKEY all_block_code
     '''
 
 def p_block_code(p):
     '''block_code               : def_const_or_var
                                 | print_data
+                                | thread_main
+                                | concurrent_method
     '''
 
 def p_all_block_code(p):
@@ -213,14 +217,71 @@ def p_assignation_false_multiple(p):
                                                 | assignation_false COMMA assignation_false_multiple
     '''
 
+#Inicio Metodos concurrentes
+def p_thread_main(p):
+    '''
+    thread_main                 : declaration_thread declaration_thread thread_init thread_init thread_wait thread_wait
+    '''
+
+def p_declaration_thread(p):
+    '''
+    declaration_thread          : THREAD thread_identificator ASSIGNATION NEW THREAD LPARENT thread_identificator RPARENT DOTANDCOMMA
+                                | THREAD thread_identificator ASSIGNATION NEW THREAD LPARENT concurrent_method RPARENT DOTANDCOMMA
+    '''
+
+def p_thread_init(p):
+    '''
+    thread_init                 : thread_identificator DOT START LPARENT RPARENT DOTANDCOMMA
+    '''
+
+def p_thread_wait(p):
+    '''
+    thread_wait                 : thread_identificator DOT JOIN LPARENT RPARENT DOTANDCOMMA
+    '''
+
+def p_concurrent_method(p):
+    '''
+    concurrent_method           : STATIC VOID thread_identificator LPARENT RPARENT LKEY thread_logic RKEY
+                                | WRITE
+    '''
+
+def p_thread_logic(p):
+    '''
+    thread_logic                : thread_sentence
+                                | thread_logic thread_sentence
+    '''
+
+def p_thread_sentence(p):
+    '''
+    thread_sentence             : thread_expression DOTANDCOMMA
+    '''
+
+def p_thread_expression(p):
+    '''
+    thread_expression           : thread_identificator DOT concurrent_method LPARENT RPARENT
+                                | PRINT LPARENT STRING RPARENT
+    '''
+
+def p_thread_arguments(p):
+    '''
+    thread_arguments            : thread_expression
+                                | thread_arguments COMMA thread_expression
+    '''
+
+def p_thread_identificator(p):
+    '''
+    thread_identificator        : VARIABLE
+    '''
+
+
+#Fin Metodos Concurrentes
+
 def p_error(p):
     if p:
          print("Error de sintaxis en token:", p.type, "in: ", p.lexpos, p.value)
          #sintactico.errok()
     else:
          print("Syntax error at EOF")
-
-
 # Build the parser
 sintactico = yacc.yacc()
 
@@ -242,12 +303,10 @@ public class clase1 {
 '''
 
 print(datos)
-
 def analizar_sintactico_string(content):
     result = sintactico.parse(content)
     #return result is not None
     if result!=None:
         print(result)
         return result
-
 var = analizar_sintactico_string(datos)

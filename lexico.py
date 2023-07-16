@@ -48,6 +48,10 @@ reserved = {
     #Fin aporte Adair Abrigo
 
     #Inicio aporte David Rivera
+    "Thread": "THREAD",
+    "Start": "START",
+    "Join": "JOIN",
+    "Write": "WRITE",
     "Dictionary": "DICTIONARY",
     "else_if": "ELSE_IF",
     "put": "PUT",
