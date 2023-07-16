@@ -2,2972 +2,480 @@ Created by PLY version 3.11 (http://www.dabeaz.com/ply)
 
 Unused terminals:
 
-    ACTION
-    ADD
     ADDITION_ASSIGNMENT
-    ARROW
-    ASYNC
-    AWAIT
     BACK_SLASH
     BREAK
-    CATCH
-    CLEAR
-    CONCURRENT
-    COUNT
-    DECREMENT
-    DEQUEUE
-    DICTIONARY
     DIVISION_ASSIGNMENT
-    DO
     DOLLARSIGN
     DOUBLEPOINT
     DOUBLE_QUOTATION_MARKS
-    ELSE
-    ELSE_IF
-    ENQUEUE
-    EXCEPTION
-    FINALLY
-    FOR
-    FOREACH
     ID
-    IDENTIFIER
-    IF
-    IN
-    INCREMENT
-    ISEMPTY
+    JOIN
     JUMP_LINE
-    LIST
     LONG
-    METHOD
     MODULE_ASSIGNMENT
     MULTIPLICATION_ASSIGNMENT
     NAMESPACE
-    PEEK
     PIPE
-    POP
-    PUSH
-    PUT
-    QUEUE
-    REMOVE
-    REMOVEAT
-    RETURN
     SIPLE_QUOTATION_MARKS
-    STACK
+    START
     SUBTRACTION_ASSIGNMENT
     SWITCH
     TABULATION
-    TASK
-    TRY
-    WHILE
+    THREAD
+    WRITE
 
 Grammar
 
 Rule 0     S' -> program
 Rule 1     program -> USING SYSTEM DOTANDCOMMA block_publicClass
-Rule 2     block_publicClass -> PUBLIC CLASS VARIABLE LKEY block_main_method RKEY
-Rule 3     block_publicClass -> STATIC VOID MAIN LPARENT STRINGTYPE LBRACKET RBRACKET VARIABLE RPARENT LKEY all_block_code RKEY all_block_code
-Rule 4     block_main_method -> STATIC VOID MAIN LPARENT STRINGTYPE LBRACKET RBRACKET VARIABLE RPARENT LKEY all_block_code RKEY
-Rule 5     block_main_method -> STATIC VOID MAIN LPARENT STRINGTYPE LBRACKET RBRACKET VARIABLE RPARENT LKEY all_block_code RKEY all_block_code
+Rule 2     block_publicClass -> PUBLIC CLASS VARIABLE LKEY all_method_definitions block_main_method RKEY
+Rule 3     block_publicClass -> PUBLIC CLASS VARIABLE LKEY block_main_method RKEY
+Rule 4     block_publicClass -> PUBLIC CLASS VARIABLE LKEY all_method_definitions RKEY
+Rule 5     block_main_method -> STATIC VOID MAIN LPARENT STRINGTYPE LBRACKET RBRACKET VARIABLE RPARENT LKEY all_block_code RKEY
 Rule 6     block_code -> def_const_or_var
 Rule 7     block_code -> print_data
-Rule 8     block_code -> thread_main
-Rule 9     block_code -> concurrent_method
-Rule 10    all_block_code -> block_code
-Rule 11    all_block_code -> block_code all_block_code
-Rule 12    data_type -> CHARTYPE
-Rule 13    data_type -> STRINGTYPE
-Rule 14    data_type -> FLOATTYPE
-Rule 15    data_type -> DECIMALTYPE
-Rule 16    data_type -> INTTYPE
-Rule 17    data_type -> BOOLTYPE
-Rule 18    value_string -> STRING
-Rule 19    value_string -> CHAR
-Rule 20    value_string -> concatenation
-Rule 21    value_boolean -> BOOLTRUE
-Rule 22    value_boolean -> BOOLFALSE
-Rule 23    value_boolean -> VARIABLE
-Rule 24    value_boolean -> comparison_operation
-Rule 25    value_numeric -> INTEGER
-Rule 26    value_numeric -> FLOAT_NUMBER
-Rule 27    value_numeric -> DECIMAL_NUMBER
-Rule 28    value_numeric -> VARIABLE
-Rule 29    print_data -> PRINT LPARENT STRING RPARENT DOTANDCOMMA
-Rule 30    print_data -> PRINT LPARENT VARIABLE RPARENT DOTANDCOMMA
-Rule 31    read_data -> READ LPARENT RPARENT DOTANDCOMMA
-Rule 32    concatenation -> STRING
-Rule 33    concatenation -> STRING PLUS concatenation
-Rule 34    value -> value_numeric
-Rule 35    value -> value_boolean
-Rule 36    value -> value_string
-Rule 37    value -> VARIABLE
-Rule 38    value -> read_data
-Rule 39    arithmetic_operation -> value_numeric
-Rule 40    arithmetic_operation -> value_numeric arithmetic_operator arithmetic_operation
-Rule 41    arithmetic_operator -> PLUS
-Rule 42    arithmetic_operator -> MINUS
-Rule 43    arithmetic_operator -> TIMES
-Rule 44    arithmetic_operator -> DIVIDE
-Rule 45    arithmetic_operator -> PERCENT
-Rule 46    comparison_operation -> value_numeric
-Rule 47    comparison_operation -> value_numeric comparison_operator comparison_operation
-Rule 48    comparison_operator -> GREATER_THAN
-Rule 49    comparison_operator -> SMALLER_THAN
-Rule 50    comparison_operator -> EQUAL_COMPARATION
-Rule 51    comparison_operator -> INEQUALITY
-Rule 52    comparison_operator -> GREATER_THAN_OR_EQUAL
-Rule 53    comparison_operator -> SMALLER_THAN_OR_EQUAL
-Rule 54    boolean_operation -> value_boolean
-Rule 55    boolean_operation -> LOGICNOT value_boolean
-Rule 56    boolean_operation -> value_boolean boolean_operator boolean_operation
-Rule 57    boolean_operator -> LOGICAND
-Rule 58    boolean_operator -> LOGICOR
-Rule 59    def_const_or_var -> constant_assignation
-Rule 60    def_const_or_var -> variable_assignation
-Rule 61    constant_assignation -> access_modifiers CONST assignation_type_value_multiple DOTANDCOMMA
-Rule 62    constant_assignation -> CONST assignation_type_value_multiple DOTANDCOMMA
-Rule 63    variable_assignation -> access_modifiers assignation_type_value_multiple DOTANDCOMMA
-Rule 64    variable_assignation -> assignation_type_value_multiple DOTANDCOMMA
-Rule 65    access_modifiers -> PUBLIC
-Rule 66    access_modifiers -> PRIVATE
-Rule 67    assignation_type_value -> INTTYPE assignation_int
-Rule 68    assignation_type_value -> STRINGTYPE assignation_string
-Rule 69    assignation_type_value -> FLOATTYPE assignation_float
-Rule 70    assignation_type_value -> BOOLTYPE assignation_true
-Rule 71    assignation_type_value -> BOOLTYPE assignation_false
-Rule 72    assignation_int -> VARIABLE ASSIGNATION INTEGER
-Rule 73    assignation_int -> VARIABLE ASSIGNATION VARIABLE
-Rule 74    assignation_int -> VARIABLE ASSIGNATION arithmetic_operation
-Rule 75    assignation_string -> VARIABLE ASSIGNATION STRING
-Rule 76    assignation_string -> VARIABLE ASSIGNATION VARIABLE
-Rule 77    assignation_float -> VARIABLE ASSIGNATION FLOAT_NUMBER
-Rule 78    assignation_float -> VARIABLE ASSIGNATION VARIABLE
-Rule 79    assignation_float -> VARIABLE ASSIGNATION arithmetic_operation
-Rule 80    assignation_true -> VARIABLE ASSIGNATION BOOLTRUE
-Rule 81    assignation_true -> VARIABLE ASSIGNATION VARIABLE
-Rule 82    assignation_true -> VARIABLE ASSIGNATION boolean_operation
-Rule 83    assignation_false -> VARIABLE ASSIGNATION BOOLFALSE
-Rule 84    assignation_false -> VARIABLE ASSIGNATION VARIABLE
-Rule 85    assignation_false -> VARIABLE ASSIGNATION boolean_operation
-Rule 86    assignation_type_value_multiple -> INTTYPE assignation_int_multiple
-Rule 87    assignation_type_value_multiple -> STRINGTYPE assignation_string_multiple
-Rule 88    assignation_type_value_multiple -> FLOATTYPE assignation_float_multiple
-Rule 89    assignation_type_value_multiple -> BOOLTYPE assignation_true_multiple
-Rule 90    assignation_type_value_multiple -> BOOLTYPE assignation_false_multiple
-Rule 91    assignation_int_multiple -> assignation_int
-Rule 92    assignation_int_multiple -> assignation_int COMMA assignation_int_multiple
-Rule 93    assignation_string_multiple -> assignation_string
-Rule 94    assignation_string_multiple -> assignation_string COMMA assignation_string_multiple
-Rule 95    assignation_float_multiple -> assignation_float
-Rule 96    assignation_float_multiple -> assignation_float COMMA assignation_float_multiple
-Rule 97    assignation_true_multiple -> assignation_true
-Rule 98    assignation_true_multiple -> assignation_true COMMA assignation_true_multiple
-Rule 99    assignation_false_multiple -> assignation_false
-Rule 100   assignation_false_multiple -> assignation_false COMMA assignation_false_multiple
-Rule 101   thread_main -> declaration_thread declaration_thread thread_init thread_init thread_wait thread_wait
-Rule 102   declaration_thread -> THREAD thread_identificator ASSIGNATION NEW THREAD LPARENT thread_identificator RPARENT DOTANDCOMMA
-Rule 103   declaration_thread -> THREAD thread_identificator ASSIGNATION NEW THREAD LPARENT concurrent_method RPARENT DOTANDCOMMA
-Rule 104   thread_init -> thread_identificator DOT START LPARENT RPARENT DOTANDCOMMA
-Rule 105   thread_wait -> thread_identificator DOT JOIN LPARENT RPARENT DOTANDCOMMA
-Rule 106   concurrent_method -> STATIC VOID thread_identificator LPARENT RPARENT LKEY thread_logic RKEY
-Rule 107   concurrent_method -> WRITE
-Rule 108   thread_logic -> thread_sentence
-Rule 109   thread_logic -> thread_logic thread_sentence
-Rule 110   thread_sentence -> thread_expression DOTANDCOMMA
-Rule 111   thread_expression -> thread_identificator DOT concurrent_method LPARENT RPARENT
-Rule 112   thread_expression -> PRINT LPARENT STRING RPARENT
-Rule 113   thread_arguments -> thread_expression
-Rule 114   thread_arguments -> thread_arguments COMMA thread_expression
-Rule 115   thread_identificator -> VARIABLE
+Rule 8     block_code -> read_data
+Rule 9     block_code -> arithmetic_operation
+Rule 10    block_code -> logic_operation
+Rule 11    block_code -> array_assignation
+Rule 12    block_code -> array_value_assign
+Rule 13    block_code -> array_indexing
+Rule 14    block_code -> lists
+Rule 15    block_code -> functions_list
+Rule 16    block_code -> dict_estruct
+Rule 17    block_code -> functions_dict
+Rule 18    block_code -> concurrent_method
+Rule 19    block_code -> queue_struct
+Rule 20    block_code -> functions_queue
+Rule 21    block_code -> stack_struct
+Rule 22    block_code -> functions_stack
+Rule 23    block_code -> block_if
+Rule 24    block_code -> block_for
+Rule 25    block_code -> block_try_catch
+Rule 26    block_code -> block_while
+Rule 27    all_block_code -> block_code
+Rule 28    all_block_code -> block_code all_block_code
+Rule 29    method_definition -> simple_method
+Rule 30    method_definition -> declaration_async
+Rule 31    method_definition -> declaration_lambda
+Rule 32    all_method_definitions -> method_definition
+Rule 33    all_method_definitions -> method_definition all_method_definitions
+Rule 34    print_data -> PRINT LPARENT STRING RPARENT DOTANDCOMMA
+Rule 35    print_data -> PRINT LPARENT VARIABLE RPARENT DOTANDCOMMA
+Rule 36    read_data -> READ LPARENT RPARENT DOTANDCOMMA
+Rule 37    concatenation -> STRING
+Rule 38    concatenation -> STRING PLUS concatenation
+Rule 39    value -> value_numeric
+Rule 40    value -> value_logic
+Rule 41    value -> value_string
+Rule 42    value -> read_data
+Rule 43    value -> METHOD
+Rule 44    value -> array
+Rule 45    array_assignation -> array_type VARIABLE ASSIGNATION LBRACKET array_content RBRACKET DOTANDCOMMA
+Rule 46    array -> LBRACKET array_content RBRACKET
+Rule 47    array_content -> value
+Rule 48    array_content -> value COMMA array_content
+Rule 49    array_indexing -> VARIABLE LBRACKET VARIABLE RBRACKET
+Rule 50    array_indexing -> VARIABLE LBRACKET INTEGER RBRACKET
+Rule 51    array_value_assign -> VARIABLE LBRACKET VARIABLE RBRACKET ASSIGNATION value DOTANDCOMMA
+Rule 52    array_value_assign -> VARIABLE LBRACKET INTEGER RBRACKET ASSIGNATION value DOTANDCOMMA
+Rule 53    value_string -> STRING
+Rule 54    value_string -> CHAR
+Rule 55    value_string -> VARIABLE
+Rule 56    value_string -> concatenation
+Rule 57    value_logic -> BOOLTRUE
+Rule 58    value_logic -> BOOLFALSE
+Rule 59    value_logic -> logic_operation
+Rule 60    value_numeric -> INTEGER
+Rule 61    value_numeric -> FLOAT_NUMBER
+Rule 62    value_numeric -> DECIMAL_NUMBER
+Rule 63    value_numeric -> arithmetic_operation
+Rule 64    arithmetic_operation -> value_numeric
+Rule 65    arithmetic_operation -> VARIABLE
+Rule 66    arithmetic_operation -> value_numeric arithmetic_operator arithmetic_operation
+Rule 67    arithmetic_operation -> VARIABLE arithmetic_operator arithmetic_operation
+Rule 68    logic_operation -> value_numeric logic_operator INTEGER
+Rule 69    logic_operation -> VARIABLE logic_operator INTEGER
+Rule 70    logic_operator -> GREATER_THAN
+Rule 71    logic_operator -> SMALLER_THAN
+Rule 72    logic_operator -> EQUAL_COMPARATION
+Rule 73    logic_operator -> INEQUALITY
+Rule 74    logic_operator -> GREATER_THAN_OR_EQUAL
+Rule 75    logic_operator -> SMALLER_THAN_OR_EQUAL
+Rule 76    logic_operator -> LOGICAND
+Rule 77    logic_operator -> LOGICOR
+Rule 78    logic_operator -> LOGICNOT
+Rule 79    logic_operator -> LOGICXOR
+Rule 80    arithmetic_operator -> PLUS
+Rule 81    arithmetic_operator -> MINUS
+Rule 82    arithmetic_operator -> TIMES
+Rule 83    arithmetic_operator -> DIVIDE
+Rule 84    arithmetic_operator -> PERCENT
+Rule 85    access_modifiers -> PUBLIC
+Rule 86    access_modifiers -> PRIVATE
+Rule 87    def_const_or_var -> constant_assignation
+Rule 88    def_const_or_var -> variable_assignation
+Rule 89    def_const_or_var -> late_initialization
+Rule 90    constant_assignation -> access_modifiers CONST data_type assignation_key_value DOTANDCOMMA
+Rule 91    constant_assignation -> CONST data_type assignation_key_value DOTANDCOMMA
+Rule 92    constant_assignation -> access_modifiers CONST data_type assignation_key_value_multiple DOTANDCOMMA
+Rule 93    constant_assignation -> CONST data_type assignation_key_value_multiple DOTANDCOMMA
+Rule 94    variable_assignation -> access_modifiers data_type assignation_key_value DOTANDCOMMA
+Rule 95    variable_assignation -> data_type assignation_key_value DOTANDCOMMA
+Rule 96    variable_assignation -> access_modifiers data_type assignation_key_value_multiple DOTANDCOMMA
+Rule 97    variable_assignation -> data_type assignation_key_value_multiple DOTANDCOMMA
+Rule 98    late_initialization -> access_modifiers data_type VARIABLE DOTANDCOMMA
+Rule 99    late_initialization -> data_type VARIABLE DOTANDCOMMA
+Rule 100   late_initialization -> assignation_key_value DOTANDCOMMA
+Rule 101   assignation_key_value -> VARIABLE ASSIGNATION value
+Rule 102   assignation_key_value -> READ LPARENT RPARENT
+Rule 103   assignation_key_value_multiple -> assignation_key_value
+Rule 104   assignation_key_value_multiple -> assignation_key_value COMMA assignation_key_value_multiple
+Rule 105   assignation_with_datatype -> data_type assignation_key_value DOTANDCOMMA
+Rule 106   assignation_with_datatype -> data_type assignation_key_value COMMA assignation_with_datatype
+Rule 107   data_type -> CHARTYPE
+Rule 108   data_type -> STRINGTYPE
+Rule 109   data_type -> FLOATTYPE
+Rule 110   data_type -> DECIMALTYPE
+Rule 111   data_type -> INTTYPE
+Rule 112   data_type -> BOOLTYPE
+Rule 113   data_type -> array_type
+Rule 114   array_type -> CHARTYPE LBRACKET RBRACKET
+Rule 115   array_type -> STRINGTYPE LBRACKET RBRACKET
+Rule 116   array_type -> FLOATTYPE LBRACKET RBRACKET
+Rule 117   array_type -> DECIMALTYPE LBRACKET RBRACKET
+Rule 118   array_type -> INTTYPE LBRACKET RBRACKET
+Rule 119   array_type -> BOOLTYPE LBRACKET RBRACKET
+Rule 120   logic_operations -> logic_operation DOTANDCOMMA
+Rule 121   logic_operations -> logic_operation COMMA logic_operations
+Rule 122   block_for -> for_anidado
+Rule 123   block_for -> for_each
+Rule 124   for_simple -> FOR LPARENT assignation_with_datatype logic_operations DOTANDCOMMA VARIABLE INCREMENT RPARENT LKEY all_block_code RKEY
+Rule 125   for_simple -> FOR LPARENT assignation_with_datatype logic_operations DOTANDCOMMA VARIABLE DECREMENT RPARENT LKEY all_block_code RKEY
+Rule 126   for_anidado -> for_simple
+Rule 127   for_anidado -> FOR LPARENT assignation_with_datatype logic_operations DOTANDCOMMA VARIABLE INCREMENT RPARENT LKEY for_anidado RKEY
+Rule 128   for_anidado -> FOR LPARENT assignation_with_datatype logic_operations DOTANDCOMMA VARIABLE DECREMENT RPARENT LKEY for_anidado RKEY
+Rule 129   for_each -> FOREACH LPARENT data_type VARIABLE IN VARIABLE RPARENT LKEY all_block_code RKEY
+Rule 130   block_try_catch -> try_catch_simply
+Rule 131   block_try_catch -> try_catch_finally
+Rule 132   try_catch_simply -> TRY LKEY all_block_code RKEY CATCH LPARENT EXCEPTION VARIABLE RPARENT LKEY all_block_code RKEY
+Rule 133   try_catch_finally -> TRY LKEY all_block_code RKEY CATCH LPARENT EXCEPTION VARIABLE RPARENT LKEY all_block_code RKEY FINALLY LKEY all_block_code RKEY
+Rule 134   block_while -> normal_while
+Rule 135   block_while -> do_while
+Rule 136   normal_while -> WHILE LPARENT logic_operation RPARENT LKEY all_block_code RKEY
+Rule 137   do_while -> DO LKEY all_block_code RKEY WHILE LPARENT logic_operation RPARENT
+Rule 138   block_if -> IF LPARENT logic_operation RPARENT LKEY not_yes_nested_if RKEY other_if
+Rule 139   other_if -> ELSE LKEY not_yes_nested_if RKEY
+Rule 140   other_if -> ELSE_IF LPARENT logic_operation RPARENT LKEY not_yes_nested_if RKEY other_if
+Rule 141   not_yes_nested_if -> block_if
+Rule 142   not_yes_nested_if -> block_code
+Rule 143   dict_estruct -> dict_empty
+Rule 144   dict_estruct -> dict_full
+Rule 145   dict_empty -> DICTIONARY SMALLER_THAN GREATER_THAN VARIABLE ASSIGNATION NEW DICTIONARY SMALLER_THAN GREATER_THAN LPARENT RPARENT DOTANDCOMMA
+Rule 146   dict_full -> DICTIONARY SMALLER_THAN GREATER_THAN VARIABLE ASSIGNATION NEW DICTIONARY SMALLER_THAN GREATER_THAN LPARENT RPARENT LKEY key_value_pairs RKEY DOTANDCOMMA
+Rule 147   key_value_pairs -> key_value_pair
+Rule 148   key_value_pairs -> key_value_pair COMMA key_value_pairs
+Rule 149   key_value_pair -> LKEY VARIABLE COMMA value RKEY
+Rule 150   estruct_of_data -> list_empty
+Rule 151   estruct_of_data -> list_full
+Rule 152   functions_dict -> dict_func_put
+Rule 153   functions_dict -> dict_func_remove
+Rule 154   dict_func_put -> VARIABLE DOT PUT LPARENT STRING COMMA VARIABLE RPARENT DOTANDCOMMA
+Rule 155   dict_func_remove -> VARIABLE DOT REMOVE LPARENT VARIABLE RPARENT DOTANDCOMMA
+Rule 156   lists -> list_empty
+Rule 157   lists -> list_full
+Rule 158   list_empty -> LIST SMALLER_THAN STRINGTYPE GREATER_THAN VARIABLE ASSIGNATION NEW LIST SMALLER_THAN STRINGTYPE GREATER_THAN LPARENT RPARENT DOTANDCOMMA
+Rule 159   list_empty -> LIST SMALLER_THAN INTTYPE GREATER_THAN VARIABLE ASSIGNATION NEW LIST SMALLER_THAN INTTYPE GREATER_THAN LPARENT RPARENT DOTANDCOMMA
+Rule 160   list_full -> LIST SMALLER_THAN STRINGTYPE GREATER_THAN VARIABLE ASSIGNATION NEW LIST SMALLER_THAN STRINGTYPE GREATER_THAN LPARENT RPARENT LKEY strings_list RKEY DOTANDCOMMA
+Rule 161   list_full -> LIST SMALLER_THAN INTTYPE GREATER_THAN VARIABLE ASSIGNATION NEW LIST SMALLER_THAN INTTYPE GREATER_THAN LPARENT RPARENT LKEY ints_list RKEY DOTANDCOMMA
+Rule 162   strings_list -> STRING
+Rule 163   strings_list -> STRING COMMA strings_list
+Rule 164   ints_list -> INTEGER
+Rule 165   ints_list -> INTEGER COMMA ints_list
+Rule 166   functions_list -> list_func_clear
+Rule 167   functions_list -> list_func_count
+Rule 168   functions_list -> list_func_add
+Rule 169   functions_list -> list_func_removeat
+Rule 170   list_func_clear -> VARIABLE DOT CLEAR LPARENT RPARENT DOTANDCOMMA
+Rule 171   list_func_count -> VARIABLE DOT COUNT LPARENT RPARENT DOTANDCOMMA
+Rule 172   list_func_add -> VARIABLE DOT ADD LPARENT STRING RPARENT DOTANDCOMMA
+Rule 173   list_func_removeat -> VARIABLE DOT REMOVEAT LPARENT INTEGER RPARENT DOTANDCOMMA
+Rule 174   stack_struct -> STACK VARIABLE ASSIGNATION NEW STACK LPARENT RPARENT DOTANDCOMMA
+Rule 175   functions_stack -> stack_push
+Rule 176   functions_stack -> stack_pop
+Rule 177   functions_stack -> stack_clear
+Rule 178   functions_stack -> stack_peek
+Rule 179   functions_stack -> stack_isEmpty
+Rule 180   stack_push -> VARIABLE DOT PUSH LPARENT value RPARENT DOTANDCOMMA
+Rule 181   stack_pop -> VARIABLE DOT POP LPARENT RPARENT DOTANDCOMMA
+Rule 182   stack_clear -> VARIABLE DOT CLEAR LPARENT RPARENT DOTANDCOMMA
+Rule 183   stack_peek -> VARIABLE DOT PEEK LPARENT RPARENT DOTANDCOMMA
+Rule 184   stack_isEmpty -> VARIABLE DOT ISEMPTY LPARENT RPARENT DOTANDCOMMA
+Rule 185   queue_struct -> QUEUE SMALLER_THAN data_type GREATER_THAN VARIABLE ASSIGNATION NEW QUEUE SMALLER_THAN data_type GREATER_THAN LPARENT RPARENT DOTANDCOMMA
+Rule 186   queue_struct -> QUEUE SMALLER_THAN data_type GREATER_THAN VARIABLE ASSIGNATION NEW QUEUE SMALLER_THAN GREATER_THAN LPARENT RPARENT DOTANDCOMMA
+Rule 187   functions_queue -> queue_enqueue
+Rule 188   functions_queue -> queue_dequeue
+Rule 189   functions_queue -> queue_clear
+Rule 190   functions_queue -> queue_isEmpty
+Rule 191   functions_queue -> queue_peek
+Rule 192   queue_enqueue -> VARIABLE DOT ENQUEUE LPARENT value RPARENT DOTANDCOMMA
+Rule 193   queue_dequeue -> VARIABLE DOT DEQUEUE LPARENT RPARENT DOTANDCOMMA
+Rule 194   queue_clear -> VARIABLE DOT CLEAR LPARENT RPARENT DOTANDCOMMA
+Rule 195   queue_peek -> VARIABLE DOT PEEK LPARENT RPARENT DOTANDCOMMA
+Rule 196   queue_isEmpty -> VARIABLE DOT ISEMPTY LPARENT RPARENT DOTANDCOMMA
+Rule 197   simple_method -> STATIC data_type METHOD LPARENT function_arguments RPARENT LKEY all_block_code function_return RKEY
+Rule 198   simple_method -> STATIC VOID METHOD LPARENT function_arguments RPARENT LKEY all_block_code RKEY
+Rule 199   simple_method -> STATIC VOID MAIN LPARENT function_arguments RPARENT LKEY all_block_code function_return RKEY
+Rule 200   simple_method -> access_modifiers STATIC data_type METHOD LPARENT function_arguments RPARENT LKEY all_block_code function_return RKEY
+Rule 201   simple_method -> PUBLIC STATIC VOID METHOD LPARENT function_arguments RPARENT LKEY all_block_code RKEY
+Rule 202   function_return -> RETURN value DOTANDCOMMA
+Rule 203   function_argument -> data_type VARIABLE
+Rule 204   function_argument -> data_type CHAR
+Rule 205   function_argument -> METHOD VARIABLE
+Rule 206   function_argument -> data_type LBRACKET RBRACKET VARIABLE
+Rule 207   function_arguments -> function_argument
+Rule 208   function_arguments -> function_argument COMMA function_arguments
+Rule 209   declaration_async -> PUBLIC STATIC ASYNC TASK METHOD LPARENT RPARENT LKEY AWAIT TASK DOT METHOD LPARENT LPARENT RPARENT ARROW LKEY block_code RKEY RPARENT DOTANDCOMMA RKEY
+Rule 210   declaration_lambda -> ACTION SMALLER_THAN STRINGTYPE GREATER_THAN VARIABLE ASSIGNATION VARIABLE ARROW LKEY block_code RKEY
+Rule 211   concurrent_method -> method_declaration CONCURRENT LKEY concurrent_block RKEY
+Rule 212   method_declaration -> METHOD IDENTIFIER LPARENT RPARENT DOTANDCOMMA
+Rule 213   concurrent_block -> statement_list
+Rule 214   statement_list -> statement
+Rule 215   statement_list -> statement_list statement
+Rule 216   statement -> assignment_concurrent
+Rule 217   statement -> if_statement_concurrent
+Rule 218   statement -> while_loop_concurrent
+Rule 219   statement -> method_call_concurrent
+Rule 220   statement -> return_statement_concurrent
+Rule 221   assignment_concurrent -> VARIABLE ASSIGNATION expression DOTANDCOMMA
+Rule 222   if_statement_concurrent -> IF LPARENT condition RPARENT LKEY concurrent_block RKEY
+Rule 223   while_loop_concurrent -> WHILE LPARENT condition RPARENT LKEY concurrent_block RKEY
+Rule 224   method_call_concurrent -> IDENTIFIER LPARENT RPARENT DOTANDCOMMA
+Rule 225   return_statement_concurrent -> RETURN expression DOTANDCOMMA
+Rule 226   expression -> value_numeric
+Rule 227   expression -> VARIABLE
+Rule 228   expression -> value_numeric arithmetic_operator expression
+Rule 229   expression -> VARIABLE arithmetic_operator expression
+Rule 230   condition -> value_numeric logic_operator value_numeric
+Rule 231   condition -> VARIABLE logic_operator value_numeric
+Rule 232   condition -> value_numeric logic_operator VARIABLE
+Rule 233   condition -> VARIABLE logic_operator VARIABLE
 
 Terminals, with rules where they appear
 
-ACTION               : 
-ADD                  : 
+ACTION               : 210
+ADD                  : 172
 ADDITION_ASSIGNMENT  : 
-ARROW                : 
-ASSIGNATION          : 72 73 74 75 76 77 78 79 80 81 82 83 84 85 102 103
-ASYNC                : 
-AWAIT                : 
+ARROW                : 209 210
+ASSIGNATION          : 45 51 52 101 145 146 158 159 160 161 174 185 186 210 221
+ASYNC                : 209
+AWAIT                : 209
 BACK_SLASH           : 
-BOOLFALSE            : 22 83
-BOOLTRUE             : 21 80
-BOOLTYPE             : 17 70 71 89 90
+BOOLFALSE            : 58
+BOOLTRUE             : 57
+BOOLTYPE             : 112 119
 BREAK                : 
-CATCH                : 
-CHAR                 : 19
-CHARTYPE             : 12
-CLASS                : 2
-CLEAR                : 
-COMMA                : 92 94 96 98 100 114
-CONCURRENT           : 
-CONST                : 61 62
-COUNT                : 
-DECIMALTYPE          : 15
-DECIMAL_NUMBER       : 27
-DECREMENT            : 
-DEQUEUE              : 
-DICTIONARY           : 
-DIVIDE               : 44
+CATCH                : 132 133
+CHAR                 : 54 204
+CHARTYPE             : 107 114
+CLASS                : 2 3 4
+CLEAR                : 170 182 194
+COMMA                : 48 104 106 121 148 149 154 163 165 208
+CONCURRENT           : 211
+CONST                : 90 91 92 93
+COUNT                : 171
+DECIMALTYPE          : 110 117
+DECIMAL_NUMBER       : 62
+DECREMENT            : 125 128
+DEQUEUE              : 193
+DICTIONARY           : 145 145 146 146
+DIVIDE               : 83
 DIVISION_ASSIGNMENT  : 
-DO                   : 
+DO                   : 137
 DOLLARSIGN           : 
-DOT                  : 104 105 111
-DOTANDCOMMA          : 1 29 30 31 61 62 63 64 102 103 104 105 110
+DOT                  : 154 155 170 171 172 173 180 181 182 183 184 192 193 194 195 196 209
+DOTANDCOMMA          : 1 34 35 36 45 51 52 90 91 92 93 94 95 96 97 98 99 100 105 120 124 125 127 128 145 146 154 155 158 159 160 161 170 171 172 173 174 180 181 182 183 184 185 186 192 193 194 195 196 202 209 212 221 224 225
 DOUBLEPOINT          : 
 DOUBLE_QUOTATION_MARKS : 
-ELSE                 : 
-ELSE_IF              : 
-ENQUEUE              : 
-EQUAL_COMPARATION    : 50
-EXCEPTION            : 
-FINALLY              : 
-FLOATTYPE            : 14 69 88
-FLOAT_NUMBER         : 26 77
-FOR                  : 
-FOREACH              : 
-GREATER_THAN         : 48
-GREATER_THAN_OR_EQUAL : 52
+ELSE                 : 139
+ELSE_IF              : 140
+ENQUEUE              : 192
+EQUAL_COMPARATION    : 72
+EXCEPTION            : 132 133
+FINALLY              : 133
+FLOATTYPE            : 109 116
+FLOAT_NUMBER         : 61
+FOR                  : 124 125 127 128
+FOREACH              : 129
+GREATER_THAN         : 70 145 145 146 146 158 158 159 159 160 160 161 161 185 185 186 186 210
+GREATER_THAN_OR_EQUAL : 74
 ID                   : 
-IDENTIFIER           : 
-IF                   : 
-IN                   : 
-INCREMENT            : 
-INEQUALITY           : 51
-INTEGER              : 25 72
-INTTYPE              : 16 67 86
-ISEMPTY              : 
-JOIN                 : 105
+IDENTIFIER           : 212 224
+IF                   : 138 222
+IN                   : 129
+INCREMENT            : 124 127
+INEQUALITY           : 73
+INTEGER              : 50 52 60 68 69 164 165 173
+INTTYPE              : 111 118 159 159 161 161
+ISEMPTY              : 184 196
+JOIN                 : 
 JUMP_LINE            : 
-LBRACKET             : 3 4 5
-LIST                 : 
-LKEY                 : 2 3 4 5 106
-LOGICAND             : 57
-LOGICNOT             : 55
-LOGICOR              : 58
+LBRACKET             : 5 45 46 49 50 51 52 114 115 116 117 118 119 206
+LIST                 : 158 158 159 159 160 160 161 161
+LKEY                 : 2 3 4 5 124 125 127 128 129 132 132 133 133 133 136 137 138 139 140 146 149 160 161 197 198 199 200 201 209 209 210 211 222 223
+LOGICAND             : 76
+LOGICNOT             : 78
+LOGICOR              : 77
 LONG                 : 
-LPARENT              : 3 4 5 29 30 31 102 103 104 105 106 111 112
-MAIN                 : 3 4 5
-METHOD               : 
-MINUS                : 42
+LPARENT              : 5 34 35 36 102 124 125 127 128 129 132 133 136 137 138 140 145 146 154 155 158 159 160 161 170 171 172 173 174 180 181 182 183 184 185 186 192 193 194 195 196 197 198 199 200 201 209 209 209 212 222 223 224
+MAIN                 : 5 199
+METHOD               : 43 197 198 200 201 205 209 209 212
+MINUS                : 81
 MODULE_ASSIGNMENT    : 
 MULTIPLICATION_ASSIGNMENT : 
 NAMESPACE            : 
-NEW                  : 102 103
-PEEK                 : 
-PERCENT              : 45
+NEW                  : 145 146 158 159 160 161 174 185 186
+PEEK                 : 183 195
+PERCENT              : 84
 PIPE                 : 
-PLUS                 : 33 41
-POP                  : 
-PRINT                : 29 30 112
-PRIVATE              : 66
-PUBLIC               : 2 65
-PUSH                 : 
-PUT                  : 
-QUEUE                : 
-RBRACKET             : 3 4 5
-READ                 : 31
-REMOVE               : 
-REMOVEAT             : 
-RETURN               : 
-RKEY                 : 2 3 4 5 106
-RPARENT              : 3 4 5 29 30 31 102 103 104 105 106 111 112
+PLUS                 : 38 80
+POP                  : 181
+PRINT                : 34 35
+PRIVATE              : 86
+PUBLIC               : 2 3 4 85 201 209
+PUSH                 : 180
+PUT                  : 154
+QUEUE                : 185 185 186 186
+RBRACKET             : 5 45 46 49 50 51 52 114 115 116 117 118 119 206
+READ                 : 36 102
+REMOVE               : 155
+REMOVEAT             : 173
+RETURN               : 202 225
+RKEY                 : 2 3 4 5 124 125 127 128 129 132 132 133 133 133 136 137 138 139 140 146 149 160 161 197 198 199 200 201 209 209 210 211 222 223
+RPARENT              : 5 34 35 36 102 124 125 127 128 129 132 133 136 137 138 140 145 146 154 155 158 159 160 161 170 171 172 173 174 180 181 182 183 184 185 186 192 193 194 195 196 197 198 199 200 201 209 209 209 212 222 223 224
 SIPLE_QUOTATION_MARKS : 
-SMALLER_THAN         : 49
-SMALLER_THAN_OR_EQUAL : 53
-STACK                : 
-START                : 104
-STATIC               : 3 4 5 106
-STRING               : 18 29 32 33 75 112
-STRINGTYPE           : 3 4 5 13 68 87
+SMALLER_THAN         : 71 145 145 146 146 158 158 159 159 160 160 161 161 185 185 186 186 210
+SMALLER_THAN_OR_EQUAL : 75
+STACK                : 174 174
+START                : 
+STATIC               : 5 197 198 199 200 201 209
+STRING               : 34 37 38 53 154 162 163 172
+STRINGTYPE           : 5 108 115 158 158 160 160 210
 SUBTRACTION_ASSIGNMENT : 
 SWITCH               : 
 SYSTEM               : 1
 TABULATION           : 
-TASK                 : 
-THREAD               : 102 102 103 103
-TIMES                : 43
-TRY                  : 
+TASK                 : 209 209
+THREAD               : 
+TIMES                : 82
+TRY                  : 132 133
 USING                : 1
-VARIABLE             : 2 3 4 5 23 28 30 37 72 73 73 74 75 76 76 77 78 78 79 80 81 81 82 83 84 84 85 115
-VOID                 : 3 4 5 106
-WHILE                : 
-WRITE                : 107
+VARIABLE             : 2 3 4 5 35 45 49 49 50 51 51 52 55 65 67 69 98 99 101 124 125 127 128 129 129 132 133 145 146 149 154 154 155 155 158 159 160 161 170 171 172 173 174 180 181 182 183 184 185 186 192 193 194 195 196 203 205 206 210 210 221 227 229 231 232 233 233
+VOID                 : 5 198 199 201
+WHILE                : 136 137 223
+WRITE                : 
 error                : 
 
 Nonterminals, with rules where they appear
 
-access_modifiers     : 61 63
-all_block_code       : 3 3 4 5 5 11
-arithmetic_operation : 40 74 79
-arithmetic_operator  : 40
-assignation_false    : 71 99 100
-assignation_false_multiple : 90 100
-assignation_float    : 69 95 96
-assignation_float_multiple : 88 96
-assignation_int      : 67 91 92
-assignation_int_multiple : 86 92
-assignation_string   : 68 93 94
-assignation_string_multiple : 87 94
-assignation_true     : 70 97 98
-assignation_true_multiple : 89 98
-assignation_type_value : 
-assignation_type_value_multiple : 61 62 63 64
-block_code           : 10 11
-block_main_method    : 2
+LOGICXOR             : 79
+access_modifiers     : 90 92 94 96 98 200
+all_block_code       : 5 28 124 125 129 132 132 133 133 133 136 137 197 198 199 200 201
+all_method_definitions : 2 4 33
+arithmetic_operation : 9 63 66 67
+arithmetic_operator  : 66 67 228 229
+array                : 44
+array_assignation    : 11
+array_content        : 45 46 48
+array_indexing       : 13
+array_type           : 45 113
+array_value_assign   : 12
+assignation_key_value : 90 91 94 95 100 103 104 105 106
+assignation_key_value_multiple : 92 93 96 97 104
+assignation_with_datatype : 106 124 125 127 128
+assignment_concurrent : 216
+block_code           : 27 28 142 209 210
+block_for            : 24
+block_if             : 23 141
+block_main_method    : 2 3
 block_publicClass    : 1
-boolean_operation    : 56 82 85
-boolean_operator     : 56
-comparison_operation : 24 47
-comparison_operator  : 47
-concatenation        : 20 33
-concurrent_method    : 9 103 111
-constant_assignation : 59
-data_type            : 
-declaration_thread   : 101 101
+block_try_catch      : 25
+block_while          : 26
+concatenation        : 38 56
+concurrent_block     : 211 222 223
+concurrent_method    : 18
+condition            : 222 223
+constant_assignation : 87
+data_type            : 90 91 92 93 94 95 96 97 98 99 105 106 129 185 185 186 197 200 203 204 206
+declaration_async    : 30
+declaration_lambda   : 31
 def_const_or_var     : 6
+dict_empty           : 143
+dict_estruct         : 16
+dict_full            : 144
+dict_func_put        : 152
+dict_func_remove     : 153
+do_while             : 135
+estruct_of_data      : 
+expression           : 221 225 228 229
+for_anidado          : 122 127 128
+for_each             : 123
+for_simple           : 126
+function_argument    : 207 208
+function_arguments   : 197 198 199 200 201 208
+function_return      : 197 199 200
+functions_dict       : 17
+functions_list       : 15
+functions_queue      : 20
+functions_stack      : 22
+if_statement_concurrent : 217
+ints_list            : 161 165
+key_value_pair       : 147 148
+key_value_pairs      : 146 148
+late_initialization  : 89
+list_empty           : 150 156
+list_full            : 151 157
+list_func_add        : 168
+list_func_clear      : 166
+list_func_count      : 167
+list_func_removeat   : 169
+lists                : 14
+logic_operation      : 10 59 120 121 136 137 138 140
+logic_operations     : 121 124 125 127 128
+logic_operator       : 68 69 230 231 232 233
+method_call_concurrent : 219
+method_declaration   : 211
+method_definition    : 32 33
+normal_while         : 134
+not_yes_nested_if    : 138 139 140
+other_if             : 138 140
 print_data           : 7
 program              : 0
-read_data            : 38
-thread_arguments     : 114
-thread_expression    : 110 113 114
-thread_identificator : 102 102 103 104 105 106 111
-thread_init          : 101 101
-thread_logic         : 106 109
-thread_main          : 8
-thread_sentence      : 108 109
-thread_wait          : 101 101
-value                : 
-value_boolean        : 35 54 55 56
-value_numeric        : 34 39 40 46 47
-value_string         : 36
-variable_assignation : 60
+queue_clear          : 189
+queue_dequeue        : 188
+queue_enqueue        : 187
+queue_isEmpty        : 190
+queue_peek           : 191
+queue_struct         : 19
+read_data            : 8 42
+return_statement_concurrent : 220
+simple_method        : 29
+stack_clear          : 177
+stack_isEmpty        : 179
+stack_peek           : 178
+stack_pop            : 176
+stack_push           : 175
+stack_struct         : 21
+statement            : 214 215
+statement_list       : 213 215
+strings_list         : 160 163
+try_catch_finally    : 131
+try_catch_simply     : 130
+value                : 47 48 51 52 101 149 180 192 202
+value_logic          : 40
+value_numeric        : 39 64 66 68 226 228 230 230 231 232
+value_string         : 41
+variable_assignation : 88
+while_loop_concurrent : 218
 
-Parsing method: LALR
-
-state 0
-
-    (0) S' -> . program
-    (1) program -> . USING SYSTEM DOTANDCOMMA block_publicClass
-
-    USING           shift and go to state 2
-
-    program                        shift and go to state 1
-
-state 1
-
-    (0) S' -> program .
-
-
-
-state 2
-
-    (1) program -> USING . SYSTEM DOTANDCOMMA block_publicClass
-
-    SYSTEM          shift and go to state 3
-
-
-state 3
-
-    (1) program -> USING SYSTEM . DOTANDCOMMA block_publicClass
-
-    DOTANDCOMMA     shift and go to state 4
-
-
-state 4
-
-    (1) program -> USING SYSTEM DOTANDCOMMA . block_publicClass
-    (2) block_publicClass -> . PUBLIC CLASS VARIABLE LKEY block_main_method RKEY
-    (3) block_publicClass -> . STATIC VOID MAIN LPARENT STRINGTYPE LBRACKET RBRACKET VARIABLE RPARENT LKEY all_block_code RKEY all_block_code
-
-    PUBLIC          shift and go to state 6
-    STATIC          shift and go to state 7
-
-    block_publicClass              shift and go to state 5
-
-state 5
-
-    (1) program -> USING SYSTEM DOTANDCOMMA block_publicClass .
-
-    $end            reduce using rule 1 (program -> USING SYSTEM DOTANDCOMMA block_publicClass .)
-
-
-state 6
-
-    (2) block_publicClass -> PUBLIC . CLASS VARIABLE LKEY block_main_method RKEY
-
-    CLASS           shift and go to state 8
-
-
-state 7
-
-    (3) block_publicClass -> STATIC . VOID MAIN LPARENT STRINGTYPE LBRACKET RBRACKET VARIABLE RPARENT LKEY all_block_code RKEY all_block_code
-
-    VOID            shift and go to state 9
-
-
-state 8
-
-    (2) block_publicClass -> PUBLIC CLASS . VARIABLE LKEY block_main_method RKEY
-
-    VARIABLE        shift and go to state 10
-
-
-state 9
-
-    (3) block_publicClass -> STATIC VOID . MAIN LPARENT STRINGTYPE LBRACKET RBRACKET VARIABLE RPARENT LKEY all_block_code RKEY all_block_code
-
-    MAIN            shift and go to state 11
-
-
-state 10
-
-    (2) block_publicClass -> PUBLIC CLASS VARIABLE . LKEY block_main_method RKEY
-
-    LKEY            shift and go to state 12
-
-
-state 11
-
-    (3) block_publicClass -> STATIC VOID MAIN . LPARENT STRINGTYPE LBRACKET RBRACKET VARIABLE RPARENT LKEY all_block_code RKEY all_block_code
-
-    LPARENT         shift and go to state 13
-
-
-state 12
-
-    (2) block_publicClass -> PUBLIC CLASS VARIABLE LKEY . block_main_method RKEY
-    (4) block_main_method -> . STATIC VOID MAIN LPARENT STRINGTYPE LBRACKET RBRACKET VARIABLE RPARENT LKEY all_block_code RKEY
-    (5) block_main_method -> . STATIC VOID MAIN LPARENT STRINGTYPE LBRACKET RBRACKET VARIABLE RPARENT LKEY all_block_code RKEY all_block_code
-
-    STATIC          shift and go to state 15
-
-    block_main_method              shift and go to state 14
-
-state 13
-
-    (3) block_publicClass -> STATIC VOID MAIN LPARENT . STRINGTYPE LBRACKET RBRACKET VARIABLE RPARENT LKEY all_block_code RKEY all_block_code
-
-    STRINGTYPE      shift and go to state 16
-
-
-state 14
-
-    (2) block_publicClass -> PUBLIC CLASS VARIABLE LKEY block_main_method . RKEY
-
-    RKEY            shift and go to state 17
-
-
-state 15
-
-    (4) block_main_method -> STATIC . VOID MAIN LPARENT STRINGTYPE LBRACKET RBRACKET VARIABLE RPARENT LKEY all_block_code RKEY
-    (5) block_main_method -> STATIC . VOID MAIN LPARENT STRINGTYPE LBRACKET RBRACKET VARIABLE RPARENT LKEY all_block_code RKEY all_block_code
-
-    VOID            shift and go to state 18
-
-
-state 16
-
-    (3) block_publicClass -> STATIC VOID MAIN LPARENT STRINGTYPE . LBRACKET RBRACKET VARIABLE RPARENT LKEY all_block_code RKEY all_block_code
-
-    LBRACKET        shift and go to state 19
-
-
-state 17
-
-    (2) block_publicClass -> PUBLIC CLASS VARIABLE LKEY block_main_method RKEY .
-
-    $end            reduce using rule 2 (block_publicClass -> PUBLIC CLASS VARIABLE LKEY block_main_method RKEY .)
-
-
-state 18
-
-    (4) block_main_method -> STATIC VOID . MAIN LPARENT STRINGTYPE LBRACKET RBRACKET VARIABLE RPARENT LKEY all_block_code RKEY
-    (5) block_main_method -> STATIC VOID . MAIN LPARENT STRINGTYPE LBRACKET RBRACKET VARIABLE RPARENT LKEY all_block_code RKEY all_block_code
-
-    MAIN            shift and go to state 20
-
-
-state 19
-
-    (3) block_publicClass -> STATIC VOID MAIN LPARENT STRINGTYPE LBRACKET . RBRACKET VARIABLE RPARENT LKEY all_block_code RKEY all_block_code
-
-    RBRACKET        shift and go to state 21
-
-
-state 20
-
-    (4) block_main_method -> STATIC VOID MAIN . LPARENT STRINGTYPE LBRACKET RBRACKET VARIABLE RPARENT LKEY all_block_code RKEY
-    (5) block_main_method -> STATIC VOID MAIN . LPARENT STRINGTYPE LBRACKET RBRACKET VARIABLE RPARENT LKEY all_block_code RKEY all_block_code
-
-    LPARENT         shift and go to state 22
-
-
-state 21
-
-    (3) block_publicClass -> STATIC VOID MAIN LPARENT STRINGTYPE LBRACKET RBRACKET . VARIABLE RPARENT LKEY all_block_code RKEY all_block_code
-
-    VARIABLE        shift and go to state 23
-
-
-state 22
-
-    (4) block_main_method -> STATIC VOID MAIN LPARENT . STRINGTYPE LBRACKET RBRACKET VARIABLE RPARENT LKEY all_block_code RKEY
-    (5) block_main_method -> STATIC VOID MAIN LPARENT . STRINGTYPE LBRACKET RBRACKET VARIABLE RPARENT LKEY all_block_code RKEY all_block_code
-
-    STRINGTYPE      shift and go to state 24
-
-
-state 23
-
-    (3) block_publicClass -> STATIC VOID MAIN LPARENT STRINGTYPE LBRACKET RBRACKET VARIABLE . RPARENT LKEY all_block_code RKEY all_block_code
-
-    RPARENT         shift and go to state 25
-
-
-state 24
-
-    (4) block_main_method -> STATIC VOID MAIN LPARENT STRINGTYPE . LBRACKET RBRACKET VARIABLE RPARENT LKEY all_block_code RKEY
-    (5) block_main_method -> STATIC VOID MAIN LPARENT STRINGTYPE . LBRACKET RBRACKET VARIABLE RPARENT LKEY all_block_code RKEY all_block_code
-
-    LBRACKET        shift and go to state 26
-
-
-state 25
-
-    (3) block_publicClass -> STATIC VOID MAIN LPARENT STRINGTYPE LBRACKET RBRACKET VARIABLE RPARENT . LKEY all_block_code RKEY all_block_code
-
-    LKEY            shift and go to state 27
-
-
-state 26
-
-    (4) block_main_method -> STATIC VOID MAIN LPARENT STRINGTYPE LBRACKET . RBRACKET VARIABLE RPARENT LKEY all_block_code RKEY
-    (5) block_main_method -> STATIC VOID MAIN LPARENT STRINGTYPE LBRACKET . RBRACKET VARIABLE RPARENT LKEY all_block_code RKEY all_block_code
-
-    RBRACKET        shift and go to state 28
-
-
-state 27
-
-    (3) block_publicClass -> STATIC VOID MAIN LPARENT STRINGTYPE LBRACKET RBRACKET VARIABLE RPARENT LKEY . all_block_code RKEY all_block_code
-    (10) all_block_code -> . block_code
-    (11) all_block_code -> . block_code all_block_code
-    (6) block_code -> . def_const_or_var
-    (7) block_code -> . print_data
-    (8) block_code -> . thread_main
-    (9) block_code -> . concurrent_method
-    (59) def_const_or_var -> . constant_assignation
-    (60) def_const_or_var -> . variable_assignation
-    (29) print_data -> . PRINT LPARENT STRING RPARENT DOTANDCOMMA
-    (30) print_data -> . PRINT LPARENT VARIABLE RPARENT DOTANDCOMMA
-    (101) thread_main -> . declaration_thread declaration_thread thread_init thread_init thread_wait thread_wait
-    (106) concurrent_method -> . STATIC VOID thread_identificator LPARENT RPARENT LKEY thread_logic RKEY
-    (107) concurrent_method -> . WRITE
-    (61) constant_assignation -> . access_modifiers CONST assignation_type_value_multiple DOTANDCOMMA
-    (62) constant_assignation -> . CONST assignation_type_value_multiple DOTANDCOMMA
-    (63) variable_assignation -> . access_modifiers assignation_type_value_multiple DOTANDCOMMA
-    (64) variable_assignation -> . assignation_type_value_multiple DOTANDCOMMA
-    (102) declaration_thread -> . THREAD thread_identificator ASSIGNATION NEW THREAD LPARENT thread_identificator RPARENT DOTANDCOMMA
-    (103) declaration_thread -> . THREAD thread_identificator ASSIGNATION NEW THREAD LPARENT concurrent_method RPARENT DOTANDCOMMA
-    (65) access_modifiers -> . PUBLIC
-    (66) access_modifiers -> . PRIVATE
-    (86) assignation_type_value_multiple -> . INTTYPE assignation_int_multiple
-    (87) assignation_type_value_multiple -> . STRINGTYPE assignation_string_multiple
-    (88) assignation_type_value_multiple -> . FLOATTYPE assignation_float_multiple
-    (89) assignation_type_value_multiple -> . BOOLTYPE assignation_true_multiple
-    (90) assignation_type_value_multiple -> . BOOLTYPE assignation_false_multiple
-
-    PRINT           shift and go to state 39
-    STATIC          shift and go to state 29
-    WRITE           shift and go to state 41
-    CONST           shift and go to state 43
-    THREAD          shift and go to state 45
-    PUBLIC          shift and go to state 46
-    PRIVATE         shift and go to state 47
-    INTTYPE         shift and go to state 48
-    STRINGTYPE      shift and go to state 30
-    FLOATTYPE       shift and go to state 49
-    BOOLTYPE        shift and go to state 50
-
-    all_block_code                 shift and go to state 31
-    block_code                     shift and go to state 32
-    def_const_or_var               shift and go to state 33
-    print_data                     shift and go to state 34
-    thread_main                    shift and go to state 35
-    concurrent_method              shift and go to state 36
-    constant_assignation           shift and go to state 37
-    variable_assignation           shift and go to state 38
-    declaration_thread             shift and go to state 40
-    access_modifiers               shift and go to state 42
-    assignation_type_value_multiple shift and go to state 44
-
-state 28
-
-    (4) block_main_method -> STATIC VOID MAIN LPARENT STRINGTYPE LBRACKET RBRACKET . VARIABLE RPARENT LKEY all_block_code RKEY
-    (5) block_main_method -> STATIC VOID MAIN LPARENT STRINGTYPE LBRACKET RBRACKET . VARIABLE RPARENT LKEY all_block_code RKEY all_block_code
-
-    VARIABLE        shift and go to state 51
-
-
-state 29
-
-    (106) concurrent_method -> STATIC . VOID thread_identificator LPARENT RPARENT LKEY thread_logic RKEY
-
-    VOID            shift and go to state 52
-
-
-state 30
-
-    (87) assignation_type_value_multiple -> STRINGTYPE . assignation_string_multiple
-    (93) assignation_string_multiple -> . assignation_string
-    (94) assignation_string_multiple -> . assignation_string COMMA assignation_string_multiple
-    (75) assignation_string -> . VARIABLE ASSIGNATION STRING
-    (76) assignation_string -> . VARIABLE ASSIGNATION VARIABLE
-
-    VARIABLE        shift and go to state 55
-
-    assignation_string_multiple    shift and go to state 53
-    assignation_string             shift and go to state 54
-
-state 31
-
-    (3) block_publicClass -> STATIC VOID MAIN LPARENT STRINGTYPE LBRACKET RBRACKET VARIABLE RPARENT LKEY all_block_code . RKEY all_block_code
-
-    RKEY            shift and go to state 56
-
-
-state 32
-
-    (10) all_block_code -> block_code .
-    (11) all_block_code -> block_code . all_block_code
-    (10) all_block_code -> . block_code
-    (11) all_block_code -> . block_code all_block_code
-    (6) block_code -> . def_const_or_var
-    (7) block_code -> . print_data
-    (8) block_code -> . thread_main
-    (9) block_code -> . concurrent_method
-    (59) def_const_or_var -> . constant_assignation
-    (60) def_const_or_var -> . variable_assignation
-    (29) print_data -> . PRINT LPARENT STRING RPARENT DOTANDCOMMA
-    (30) print_data -> . PRINT LPARENT VARIABLE RPARENT DOTANDCOMMA
-    (101) thread_main -> . declaration_thread declaration_thread thread_init thread_init thread_wait thread_wait
-    (106) concurrent_method -> . STATIC VOID thread_identificator LPARENT RPARENT LKEY thread_logic RKEY
-    (107) concurrent_method -> . WRITE
-    (61) constant_assignation -> . access_modifiers CONST assignation_type_value_multiple DOTANDCOMMA
-    (62) constant_assignation -> . CONST assignation_type_value_multiple DOTANDCOMMA
-    (63) variable_assignation -> . access_modifiers assignation_type_value_multiple DOTANDCOMMA
-    (64) variable_assignation -> . assignation_type_value_multiple DOTANDCOMMA
-    (102) declaration_thread -> . THREAD thread_identificator ASSIGNATION NEW THREAD LPARENT thread_identificator RPARENT DOTANDCOMMA
-    (103) declaration_thread -> . THREAD thread_identificator ASSIGNATION NEW THREAD LPARENT concurrent_method RPARENT DOTANDCOMMA
-    (65) access_modifiers -> . PUBLIC
-    (66) access_modifiers -> . PRIVATE
-    (86) assignation_type_value_multiple -> . INTTYPE assignation_int_multiple
-    (87) assignation_type_value_multiple -> . STRINGTYPE assignation_string_multiple
-    (88) assignation_type_value_multiple -> . FLOATTYPE assignation_float_multiple
-    (89) assignation_type_value_multiple -> . BOOLTYPE assignation_true_multiple
-    (90) assignation_type_value_multiple -> . BOOLTYPE assignation_false_multiple
-
-    RKEY            reduce using rule 10 (all_block_code -> block_code .)
-    $end            reduce using rule 10 (all_block_code -> block_code .)
-    PRINT           shift and go to state 39
-    STATIC          shift and go to state 29
-    WRITE           shift and go to state 41
-    CONST           shift and go to state 43
-    THREAD          shift and go to state 45
-    PUBLIC          shift and go to state 46
-    PRIVATE         shift and go to state 47
-    INTTYPE         shift and go to state 48
-    STRINGTYPE      shift and go to state 30
-    FLOATTYPE       shift and go to state 49
-    BOOLTYPE        shift and go to state 50
-
-    block_code                     shift and go to state 32
-    all_block_code                 shift and go to state 57
-    def_const_or_var               shift and go to state 33
-    print_data                     shift and go to state 34
-    thread_main                    shift and go to state 35
-    concurrent_method              shift and go to state 36
-    constant_assignation           shift and go to state 37
-    variable_assignation           shift and go to state 38
-    declaration_thread             shift and go to state 40
-    access_modifiers               shift and go to state 42
-    assignation_type_value_multiple shift and go to state 44
-
-state 33
-
-    (6) block_code -> def_const_or_var .
-
-    PRINT           reduce using rule 6 (block_code -> def_const_or_var .)
-    STATIC          reduce using rule 6 (block_code -> def_const_or_var .)
-    WRITE           reduce using rule 6 (block_code -> def_const_or_var .)
-    CONST           reduce using rule 6 (block_code -> def_const_or_var .)
-    THREAD          reduce using rule 6 (block_code -> def_const_or_var .)
-    PUBLIC          reduce using rule 6 (block_code -> def_const_or_var .)
-    PRIVATE         reduce using rule 6 (block_code -> def_const_or_var .)
-    INTTYPE         reduce using rule 6 (block_code -> def_const_or_var .)
-    STRINGTYPE      reduce using rule 6 (block_code -> def_const_or_var .)
-    FLOATTYPE       reduce using rule 6 (block_code -> def_const_or_var .)
-    BOOLTYPE        reduce using rule 6 (block_code -> def_const_or_var .)
-    RKEY            reduce using rule 6 (block_code -> def_const_or_var .)
-    $end            reduce using rule 6 (block_code -> def_const_or_var .)
-
-
-state 34
-
-    (7) block_code -> print_data .
-
-    PRINT           reduce using rule 7 (block_code -> print_data .)
-    STATIC          reduce using rule 7 (block_code -> print_data .)
-    WRITE           reduce using rule 7 (block_code -> print_data .)
-    CONST           reduce using rule 7 (block_code -> print_data .)
-    THREAD          reduce using rule 7 (block_code -> print_data .)
-    PUBLIC          reduce using rule 7 (block_code -> print_data .)
-    PRIVATE         reduce using rule 7 (block_code -> print_data .)
-    INTTYPE         reduce using rule 7 (block_code -> print_data .)
-    STRINGTYPE      reduce using rule 7 (block_code -> print_data .)
-    FLOATTYPE       reduce using rule 7 (block_code -> print_data .)
-    BOOLTYPE        reduce using rule 7 (block_code -> print_data .)
-    RKEY            reduce using rule 7 (block_code -> print_data .)
-    $end            reduce using rule 7 (block_code -> print_data .)
-
-
-state 35
-
-    (8) block_code -> thread_main .
-
-    PRINT           reduce using rule 8 (block_code -> thread_main .)
-    STATIC          reduce using rule 8 (block_code -> thread_main .)
-    WRITE           reduce using rule 8 (block_code -> thread_main .)
-    CONST           reduce using rule 8 (block_code -> thread_main .)
-    THREAD          reduce using rule 8 (block_code -> thread_main .)
-    PUBLIC          reduce using rule 8 (block_code -> thread_main .)
-    PRIVATE         reduce using rule 8 (block_code -> thread_main .)
-    INTTYPE         reduce using rule 8 (block_code -> thread_main .)
-    STRINGTYPE      reduce using rule 8 (block_code -> thread_main .)
-    FLOATTYPE       reduce using rule 8 (block_code -> thread_main .)
-    BOOLTYPE        reduce using rule 8 (block_code -> thread_main .)
-    RKEY            reduce using rule 8 (block_code -> thread_main .)
-    $end            reduce using rule 8 (block_code -> thread_main .)
-
-
-state 36
-
-    (9) block_code -> concurrent_method .
-
-    PRINT           reduce using rule 9 (block_code -> concurrent_method .)
-    STATIC          reduce using rule 9 (block_code -> concurrent_method .)
-    WRITE           reduce using rule 9 (block_code -> concurrent_method .)
-    CONST           reduce using rule 9 (block_code -> concurrent_method .)
-    THREAD          reduce using rule 9 (block_code -> concurrent_method .)
-    PUBLIC          reduce using rule 9 (block_code -> concurrent_method .)
-    PRIVATE         reduce using rule 9 (block_code -> concurrent_method .)
-    INTTYPE         reduce using rule 9 (block_code -> concurrent_method .)
-    STRINGTYPE      reduce using rule 9 (block_code -> concurrent_method .)
-    FLOATTYPE       reduce using rule 9 (block_code -> concurrent_method .)
-    BOOLTYPE        reduce using rule 9 (block_code -> concurrent_method .)
-    RKEY            reduce using rule 9 (block_code -> concurrent_method .)
-    $end            reduce using rule 9 (block_code -> concurrent_method .)
-
-
-state 37
-
-    (59) def_const_or_var -> constant_assignation .
-
-    PRINT           reduce using rule 59 (def_const_or_var -> constant_assignation .)
-    STATIC          reduce using rule 59 (def_const_or_var -> constant_assignation .)
-    WRITE           reduce using rule 59 (def_const_or_var -> constant_assignation .)
-    CONST           reduce using rule 59 (def_const_or_var -> constant_assignation .)
-    THREAD          reduce using rule 59 (def_const_or_var -> constant_assignation .)
-    PUBLIC          reduce using rule 59 (def_const_or_var -> constant_assignation .)
-    PRIVATE         reduce using rule 59 (def_const_or_var -> constant_assignation .)
-    INTTYPE         reduce using rule 59 (def_const_or_var -> constant_assignation .)
-    STRINGTYPE      reduce using rule 59 (def_const_or_var -> constant_assignation .)
-    FLOATTYPE       reduce using rule 59 (def_const_or_var -> constant_assignation .)
-    BOOLTYPE        reduce using rule 59 (def_const_or_var -> constant_assignation .)
-    RKEY            reduce using rule 59 (def_const_or_var -> constant_assignation .)
-    $end            reduce using rule 59 (def_const_or_var -> constant_assignation .)
-
-
-state 38
-
-    (60) def_const_or_var -> variable_assignation .
-
-    PRINT           reduce using rule 60 (def_const_or_var -> variable_assignation .)
-    STATIC          reduce using rule 60 (def_const_or_var -> variable_assignation .)
-    WRITE           reduce using rule 60 (def_const_or_var -> variable_assignation .)
-    CONST           reduce using rule 60 (def_const_or_var -> variable_assignation .)
-    THREAD          reduce using rule 60 (def_const_or_var -> variable_assignation .)
-    PUBLIC          reduce using rule 60 (def_const_or_var -> variable_assignation .)
-    PRIVATE         reduce using rule 60 (def_const_or_var -> variable_assignation .)
-    INTTYPE         reduce using rule 60 (def_const_or_var -> variable_assignation .)
-    STRINGTYPE      reduce using rule 60 (def_const_or_var -> variable_assignation .)
-    FLOATTYPE       reduce using rule 60 (def_const_or_var -> variable_assignation .)
-    BOOLTYPE        reduce using rule 60 (def_const_or_var -> variable_assignation .)
-    RKEY            reduce using rule 60 (def_const_or_var -> variable_assignation .)
-    $end            reduce using rule 60 (def_const_or_var -> variable_assignation .)
-
-
-state 39
-
-    (29) print_data -> PRINT . LPARENT STRING RPARENT DOTANDCOMMA
-    (30) print_data -> PRINT . LPARENT VARIABLE RPARENT DOTANDCOMMA
-
-    LPARENT         shift and go to state 58
-
-
-state 40
-
-    (101) thread_main -> declaration_thread . declaration_thread thread_init thread_init thread_wait thread_wait
-    (102) declaration_thread -> . THREAD thread_identificator ASSIGNATION NEW THREAD LPARENT thread_identificator RPARENT DOTANDCOMMA
-    (103) declaration_thread -> . THREAD thread_identificator ASSIGNATION NEW THREAD LPARENT concurrent_method RPARENT DOTANDCOMMA
-
-    THREAD          shift and go to state 45
-
-    declaration_thread             shift and go to state 59
-
-state 41
-
-    (107) concurrent_method -> WRITE .
-
-    PRINT           reduce using rule 107 (concurrent_method -> WRITE .)
-    STATIC          reduce using rule 107 (concurrent_method -> WRITE .)
-    WRITE           reduce using rule 107 (concurrent_method -> WRITE .)
-    CONST           reduce using rule 107 (concurrent_method -> WRITE .)
-    THREAD          reduce using rule 107 (concurrent_method -> WRITE .)
-    PUBLIC          reduce using rule 107 (concurrent_method -> WRITE .)
-    PRIVATE         reduce using rule 107 (concurrent_method -> WRITE .)
-    INTTYPE         reduce using rule 107 (concurrent_method -> WRITE .)
-    STRINGTYPE      reduce using rule 107 (concurrent_method -> WRITE .)
-    FLOATTYPE       reduce using rule 107 (concurrent_method -> WRITE .)
-    BOOLTYPE        reduce using rule 107 (concurrent_method -> WRITE .)
-    RKEY            reduce using rule 107 (concurrent_method -> WRITE .)
-    $end            reduce using rule 107 (concurrent_method -> WRITE .)
-    RPARENT         reduce using rule 107 (concurrent_method -> WRITE .)
-    LPARENT         reduce using rule 107 (concurrent_method -> WRITE .)
-
-
-state 42
-
-    (61) constant_assignation -> access_modifiers . CONST assignation_type_value_multiple DOTANDCOMMA
-    (63) variable_assignation -> access_modifiers . assignation_type_value_multiple DOTANDCOMMA
-    (86) assignation_type_value_multiple -> . INTTYPE assignation_int_multiple
-    (87) assignation_type_value_multiple -> . STRINGTYPE assignation_string_multiple
-    (88) assignation_type_value_multiple -> . FLOATTYPE assignation_float_multiple
-    (89) assignation_type_value_multiple -> . BOOLTYPE assignation_true_multiple
-    (90) assignation_type_value_multiple -> . BOOLTYPE assignation_false_multiple
-
-    CONST           shift and go to state 60
-    INTTYPE         shift and go to state 48
-    STRINGTYPE      shift and go to state 30
-    FLOATTYPE       shift and go to state 49
-    BOOLTYPE        shift and go to state 50
-
-    assignation_type_value_multiple shift and go to state 61
-
-state 43
-
-    (62) constant_assignation -> CONST . assignation_type_value_multiple DOTANDCOMMA
-    (86) assignation_type_value_multiple -> . INTTYPE assignation_int_multiple
-    (87) assignation_type_value_multiple -> . STRINGTYPE assignation_string_multiple
-    (88) assignation_type_value_multiple -> . FLOATTYPE assignation_float_multiple
-    (89) assignation_type_value_multiple -> . BOOLTYPE assignation_true_multiple
-    (90) assignation_type_value_multiple -> . BOOLTYPE assignation_false_multiple
-
-    INTTYPE         shift and go to state 48
-    STRINGTYPE      shift and go to state 30
-    FLOATTYPE       shift and go to state 49
-    BOOLTYPE        shift and go to state 50
-
-    assignation_type_value_multiple shift and go to state 62
-
-state 44
-
-    (64) variable_assignation -> assignation_type_value_multiple . DOTANDCOMMA
-
-    DOTANDCOMMA     shift and go to state 63
-
-
-state 45
-
-    (102) declaration_thread -> THREAD . thread_identificator ASSIGNATION NEW THREAD LPARENT thread_identificator RPARENT DOTANDCOMMA
-    (103) declaration_thread -> THREAD . thread_identificator ASSIGNATION NEW THREAD LPARENT concurrent_method RPARENT DOTANDCOMMA
-    (115) thread_identificator -> . VARIABLE
-
-    VARIABLE        shift and go to state 65
-
-    thread_identificator           shift and go to state 64
-
-state 46
-
-    (65) access_modifiers -> PUBLIC .
-
-    CONST           reduce using rule 65 (access_modifiers -> PUBLIC .)
-    INTTYPE         reduce using rule 65 (access_modifiers -> PUBLIC .)
-    STRINGTYPE      reduce using rule 65 (access_modifiers -> PUBLIC .)
-    FLOATTYPE       reduce using rule 65 (access_modifiers -> PUBLIC .)
-    BOOLTYPE        reduce using rule 65 (access_modifiers -> PUBLIC .)
-
-
-state 47
-
-    (66) access_modifiers -> PRIVATE .
-
-    CONST           reduce using rule 66 (access_modifiers -> PRIVATE .)
-    INTTYPE         reduce using rule 66 (access_modifiers -> PRIVATE .)
-    STRINGTYPE      reduce using rule 66 (access_modifiers -> PRIVATE .)
-    FLOATTYPE       reduce using rule 66 (access_modifiers -> PRIVATE .)
-    BOOLTYPE        reduce using rule 66 (access_modifiers -> PRIVATE .)
-
-
-state 48
-
-    (86) assignation_type_value_multiple -> INTTYPE . assignation_int_multiple
-    (91) assignation_int_multiple -> . assignation_int
-    (92) assignation_int_multiple -> . assignation_int COMMA assignation_int_multiple
-    (72) assignation_int -> . VARIABLE ASSIGNATION INTEGER
-    (73) assignation_int -> . VARIABLE ASSIGNATION VARIABLE
-    (74) assignation_int -> . VARIABLE ASSIGNATION arithmetic_operation
-
-    VARIABLE        shift and go to state 68
-
-    assignation_int_multiple       shift and go to state 66
-    assignation_int                shift and go to state 67
-
-state 49
-
-    (88) assignation_type_value_multiple -> FLOATTYPE . assignation_float_multiple
-    (95) assignation_float_multiple -> . assignation_float
-    (96) assignation_float_multiple -> . assignation_float COMMA assignation_float_multiple
-    (77) assignation_float -> . VARIABLE ASSIGNATION FLOAT_NUMBER
-    (78) assignation_float -> . VARIABLE ASSIGNATION VARIABLE
-    (79) assignation_float -> . VARIABLE ASSIGNATION arithmetic_operation
-
-    VARIABLE        shift and go to state 71
-
-    assignation_float_multiple     shift and go to state 69
-    assignation_float              shift and go to state 70
-
-state 50
-
-    (89) assignation_type_value_multiple -> BOOLTYPE . assignation_true_multiple
-    (90) assignation_type_value_multiple -> BOOLTYPE . assignation_false_multiple
-    (97) assignation_true_multiple -> . assignation_true
-    (98) assignation_true_multiple -> . assignation_true COMMA assignation_true_multiple
-    (99) assignation_false_multiple -> . assignation_false
-    (100) assignation_false_multiple -> . assignation_false COMMA assignation_false_multiple
-    (80) assignation_true -> . VARIABLE ASSIGNATION BOOLTRUE
-    (81) assignation_true -> . VARIABLE ASSIGNATION VARIABLE
-    (82) assignation_true -> . VARIABLE ASSIGNATION boolean_operation
-    (83) assignation_false -> . VARIABLE ASSIGNATION BOOLFALSE
-    (84) assignation_false -> . VARIABLE ASSIGNATION VARIABLE
-    (85) assignation_false -> . VARIABLE ASSIGNATION boolean_operation
-
-    VARIABLE        shift and go to state 76
-
-    assignation_true_multiple      shift and go to state 72
-    assignation_false_multiple     shift and go to state 73
-    assignation_true               shift and go to state 74
-    assignation_false              shift and go to state 75
-
-state 51
-
-    (4) block_main_method -> STATIC VOID MAIN LPARENT STRINGTYPE LBRACKET RBRACKET VARIABLE . RPARENT LKEY all_block_code RKEY
-    (5) block_main_method -> STATIC VOID MAIN LPARENT STRINGTYPE LBRACKET RBRACKET VARIABLE . RPARENT LKEY all_block_code RKEY all_block_code
-
-    RPARENT         shift and go to state 77
-
-
-state 52
-
-    (106) concurrent_method -> STATIC VOID . thread_identificator LPARENT RPARENT LKEY thread_logic RKEY
-    (115) thread_identificator -> . VARIABLE
-
-    VARIABLE        shift and go to state 65
-
-    thread_identificator           shift and go to state 78
-
-state 53
-
-    (87) assignation_type_value_multiple -> STRINGTYPE assignation_string_multiple .
-
-    DOTANDCOMMA     reduce using rule 87 (assignation_type_value_multiple -> STRINGTYPE assignation_string_multiple .)
-
-
-state 54
-
-    (93) assignation_string_multiple -> assignation_string .
-    (94) assignation_string_multiple -> assignation_string . COMMA assignation_string_multiple
-
-    DOTANDCOMMA     reduce using rule 93 (assignation_string_multiple -> assignation_string .)
-    COMMA           shift and go to state 79
-
-
-state 55
-
-    (75) assignation_string -> VARIABLE . ASSIGNATION STRING
-    (76) assignation_string -> VARIABLE . ASSIGNATION VARIABLE
-
-    ASSIGNATION     shift and go to state 80
-
-
-state 56
-
-    (3) block_publicClass -> STATIC VOID MAIN LPARENT STRINGTYPE LBRACKET RBRACKET VARIABLE RPARENT LKEY all_block_code RKEY . all_block_code
-    (10) all_block_code -> . block_code
-    (11) all_block_code -> . block_code all_block_code
-    (6) block_code -> . def_const_or_var
-    (7) block_code -> . print_data
-    (8) block_code -> . thread_main
-    (9) block_code -> . concurrent_method
-    (59) def_const_or_var -> . constant_assignation
-    (60) def_const_or_var -> . variable_assignation
-    (29) print_data -> . PRINT LPARENT STRING RPARENT DOTANDCOMMA
-    (30) print_data -> . PRINT LPARENT VARIABLE RPARENT DOTANDCOMMA
-    (101) thread_main -> . declaration_thread declaration_thread thread_init thread_init thread_wait thread_wait
-    (106) concurrent_method -> . STATIC VOID thread_identificator LPARENT RPARENT LKEY thread_logic RKEY
-    (107) concurrent_method -> . WRITE
-    (61) constant_assignation -> . access_modifiers CONST assignation_type_value_multiple DOTANDCOMMA
-    (62) constant_assignation -> . CONST assignation_type_value_multiple DOTANDCOMMA
-    (63) variable_assignation -> . access_modifiers assignation_type_value_multiple DOTANDCOMMA
-    (64) variable_assignation -> . assignation_type_value_multiple DOTANDCOMMA
-    (102) declaration_thread -> . THREAD thread_identificator ASSIGNATION NEW THREAD LPARENT thread_identificator RPARENT DOTANDCOMMA
-    (103) declaration_thread -> . THREAD thread_identificator ASSIGNATION NEW THREAD LPARENT concurrent_method RPARENT DOTANDCOMMA
-    (65) access_modifiers -> . PUBLIC
-    (66) access_modifiers -> . PRIVATE
-    (86) assignation_type_value_multiple -> . INTTYPE assignation_int_multiple
-    (87) assignation_type_value_multiple -> . STRINGTYPE assignation_string_multiple
-    (88) assignation_type_value_multiple -> . FLOATTYPE assignation_float_multiple
-    (89) assignation_type_value_multiple -> . BOOLTYPE assignation_true_multiple
-    (90) assignation_type_value_multiple -> . BOOLTYPE assignation_false_multiple
-
-    PRINT           shift and go to state 39
-    STATIC          shift and go to state 29
-    WRITE           shift and go to state 41
-    CONST           shift and go to state 43
-    THREAD          shift and go to state 45
-    PUBLIC          shift and go to state 46
-    PRIVATE         shift and go to state 47
-    INTTYPE         shift and go to state 48
-    STRINGTYPE      shift and go to state 30
-    FLOATTYPE       shift and go to state 49
-    BOOLTYPE        shift and go to state 50
-
-    all_block_code                 shift and go to state 81
-    block_code                     shift and go to state 32
-    def_const_or_var               shift and go to state 33
-    print_data                     shift and go to state 34
-    thread_main                    shift and go to state 35
-    concurrent_method              shift and go to state 36
-    constant_assignation           shift and go to state 37
-    variable_assignation           shift and go to state 38
-    declaration_thread             shift and go to state 40
-    access_modifiers               shift and go to state 42
-    assignation_type_value_multiple shift and go to state 44
-
-state 57
-
-    (11) all_block_code -> block_code all_block_code .
-
-    RKEY            reduce using rule 11 (all_block_code -> block_code all_block_code .)
-    $end            reduce using rule 11 (all_block_code -> block_code all_block_code .)
-
-
-state 58
-
-    (29) print_data -> PRINT LPARENT . STRING RPARENT DOTANDCOMMA
-    (30) print_data -> PRINT LPARENT . VARIABLE RPARENT DOTANDCOMMA
-
-    STRING          shift and go to state 82
-    VARIABLE        shift and go to state 83
-
-
-state 59
-
-    (101) thread_main -> declaration_thread declaration_thread . thread_init thread_init thread_wait thread_wait
-    (104) thread_init -> . thread_identificator DOT START LPARENT RPARENT DOTANDCOMMA
-    (115) thread_identificator -> . VARIABLE
-
-    VARIABLE        shift and go to state 65
-
-    thread_init                    shift and go to state 84
-    thread_identificator           shift and go to state 85
-
-state 60
-
-    (61) constant_assignation -> access_modifiers CONST . assignation_type_value_multiple DOTANDCOMMA
-    (86) assignation_type_value_multiple -> . INTTYPE assignation_int_multiple
-    (87) assignation_type_value_multiple -> . STRINGTYPE assignation_string_multiple
-    (88) assignation_type_value_multiple -> . FLOATTYPE assignation_float_multiple
-    (89) assignation_type_value_multiple -> . BOOLTYPE assignation_true_multiple
-    (90) assignation_type_value_multiple -> . BOOLTYPE assignation_false_multiple
-
-    INTTYPE         shift and go to state 48
-    STRINGTYPE      shift and go to state 30
-    FLOATTYPE       shift and go to state 49
-    BOOLTYPE        shift and go to state 50
-
-    assignation_type_value_multiple shift and go to state 86
-
-state 61
-
-    (63) variable_assignation -> access_modifiers assignation_type_value_multiple . DOTANDCOMMA
-
-    DOTANDCOMMA     shift and go to state 87
-
-
-state 62
-
-    (62) constant_assignation -> CONST assignation_type_value_multiple . DOTANDCOMMA
-
-    DOTANDCOMMA     shift and go to state 88
-
-
-state 63
-
-    (64) variable_assignation -> assignation_type_value_multiple DOTANDCOMMA .
-
-    PRINT           reduce using rule 64 (variable_assignation -> assignation_type_value_multiple DOTANDCOMMA .)
-    STATIC          reduce using rule 64 (variable_assignation -> assignation_type_value_multiple DOTANDCOMMA .)
-    WRITE           reduce using rule 64 (variable_assignation -> assignation_type_value_multiple DOTANDCOMMA .)
-    CONST           reduce using rule 64 (variable_assignation -> assignation_type_value_multiple DOTANDCOMMA .)
-    THREAD          reduce using rule 64 (variable_assignation -> assignation_type_value_multiple DOTANDCOMMA .)
-    PUBLIC          reduce using rule 64 (variable_assignation -> assignation_type_value_multiple DOTANDCOMMA .)
-    PRIVATE         reduce using rule 64 (variable_assignation -> assignation_type_value_multiple DOTANDCOMMA .)
-    INTTYPE         reduce using rule 64 (variable_assignation -> assignation_type_value_multiple DOTANDCOMMA .)
-    STRINGTYPE      reduce using rule 64 (variable_assignation -> assignation_type_value_multiple DOTANDCOMMA .)
-    FLOATTYPE       reduce using rule 64 (variable_assignation -> assignation_type_value_multiple DOTANDCOMMA .)
-    BOOLTYPE        reduce using rule 64 (variable_assignation -> assignation_type_value_multiple DOTANDCOMMA .)
-    RKEY            reduce using rule 64 (variable_assignation -> assignation_type_value_multiple DOTANDCOMMA .)
-    $end            reduce using rule 64 (variable_assignation -> assignation_type_value_multiple DOTANDCOMMA .)
-
-
-state 64
-
-    (102) declaration_thread -> THREAD thread_identificator . ASSIGNATION NEW THREAD LPARENT thread_identificator RPARENT DOTANDCOMMA
-    (103) declaration_thread -> THREAD thread_identificator . ASSIGNATION NEW THREAD LPARENT concurrent_method RPARENT DOTANDCOMMA
-
-    ASSIGNATION     shift and go to state 89
-
-
-state 65
-
-    (115) thread_identificator -> VARIABLE .
-
-    ASSIGNATION     reduce using rule 115 (thread_identificator -> VARIABLE .)
-    LPARENT         reduce using rule 115 (thread_identificator -> VARIABLE .)
-    DOT             reduce using rule 115 (thread_identificator -> VARIABLE .)
-    RPARENT         reduce using rule 115 (thread_identificator -> VARIABLE .)
-
-
-state 66
-
-    (86) assignation_type_value_multiple -> INTTYPE assignation_int_multiple .
-
-    DOTANDCOMMA     reduce using rule 86 (assignation_type_value_multiple -> INTTYPE assignation_int_multiple .)
-
-
-state 67
-
-    (91) assignation_int_multiple -> assignation_int .
-    (92) assignation_int_multiple -> assignation_int . COMMA assignation_int_multiple
-
-    DOTANDCOMMA     reduce using rule 91 (assignation_int_multiple -> assignation_int .)
-    COMMA           shift and go to state 90
-
-
-state 68
-
-    (72) assignation_int -> VARIABLE . ASSIGNATION INTEGER
-    (73) assignation_int -> VARIABLE . ASSIGNATION VARIABLE
-    (74) assignation_int -> VARIABLE . ASSIGNATION arithmetic_operation
-
-    ASSIGNATION     shift and go to state 91
-
-
-state 69
-
-    (88) assignation_type_value_multiple -> FLOATTYPE assignation_float_multiple .
-
-    DOTANDCOMMA     reduce using rule 88 (assignation_type_value_multiple -> FLOATTYPE assignation_float_multiple .)
-
-
-state 70
-
-    (95) assignation_float_multiple -> assignation_float .
-    (96) assignation_float_multiple -> assignation_float . COMMA assignation_float_multiple
-
-    DOTANDCOMMA     reduce using rule 95 (assignation_float_multiple -> assignation_float .)
-    COMMA           shift and go to state 92
-
-
-state 71
-
-    (77) assignation_float -> VARIABLE . ASSIGNATION FLOAT_NUMBER
-    (78) assignation_float -> VARIABLE . ASSIGNATION VARIABLE
-    (79) assignation_float -> VARIABLE . ASSIGNATION arithmetic_operation
-
-    ASSIGNATION     shift and go to state 93
-
-
-state 72
-
-    (89) assignation_type_value_multiple -> BOOLTYPE assignation_true_multiple .
-
-    DOTANDCOMMA     reduce using rule 89 (assignation_type_value_multiple -> BOOLTYPE assignation_true_multiple .)
-
-
-state 73
-
-    (90) assignation_type_value_multiple -> BOOLTYPE assignation_false_multiple .
-
-    DOTANDCOMMA     reduce using rule 90 (assignation_type_value_multiple -> BOOLTYPE assignation_false_multiple .)
-
-
-state 74
-
-    (97) assignation_true_multiple -> assignation_true .
-    (98) assignation_true_multiple -> assignation_true . COMMA assignation_true_multiple
-
-    DOTANDCOMMA     reduce using rule 97 (assignation_true_multiple -> assignation_true .)
-    COMMA           shift and go to state 94
-
-
-state 75
-
-    (99) assignation_false_multiple -> assignation_false .
-    (100) assignation_false_multiple -> assignation_false . COMMA assignation_false_multiple
-
-    DOTANDCOMMA     reduce using rule 99 (assignation_false_multiple -> assignation_false .)
-    COMMA           shift and go to state 95
-
-
-state 76
-
-    (80) assignation_true -> VARIABLE . ASSIGNATION BOOLTRUE
-    (81) assignation_true -> VARIABLE . ASSIGNATION VARIABLE
-    (82) assignation_true -> VARIABLE . ASSIGNATION boolean_operation
-    (83) assignation_false -> VARIABLE . ASSIGNATION BOOLFALSE
-    (84) assignation_false -> VARIABLE . ASSIGNATION VARIABLE
-    (85) assignation_false -> VARIABLE . ASSIGNATION boolean_operation
-
-    ASSIGNATION     shift and go to state 96
-
-
-state 77
-
-    (4) block_main_method -> STATIC VOID MAIN LPARENT STRINGTYPE LBRACKET RBRACKET VARIABLE RPARENT . LKEY all_block_code RKEY
-    (5) block_main_method -> STATIC VOID MAIN LPARENT STRINGTYPE LBRACKET RBRACKET VARIABLE RPARENT . LKEY all_block_code RKEY all_block_code
-
-    LKEY            shift and go to state 97
-
-
-state 78
-
-    (106) concurrent_method -> STATIC VOID thread_identificator . LPARENT RPARENT LKEY thread_logic RKEY
-
-    LPARENT         shift and go to state 98
-
-
-state 79
-
-    (94) assignation_string_multiple -> assignation_string COMMA . assignation_string_multiple
-    (93) assignation_string_multiple -> . assignation_string
-    (94) assignation_string_multiple -> . assignation_string COMMA assignation_string_multiple
-    (75) assignation_string -> . VARIABLE ASSIGNATION STRING
-    (76) assignation_string -> . VARIABLE ASSIGNATION VARIABLE
-
-    VARIABLE        shift and go to state 55
-
-    assignation_string             shift and go to state 54
-    assignation_string_multiple    shift and go to state 99
-
-state 80
-
-    (75) assignation_string -> VARIABLE ASSIGNATION . STRING
-    (76) assignation_string -> VARIABLE ASSIGNATION . VARIABLE
-
-    STRING          shift and go to state 101
-    VARIABLE        shift and go to state 100
-
-
-state 81
-
-    (3) block_publicClass -> STATIC VOID MAIN LPARENT STRINGTYPE LBRACKET RBRACKET VARIABLE RPARENT LKEY all_block_code RKEY all_block_code .
-
-    $end            reduce using rule 3 (block_publicClass -> STATIC VOID MAIN LPARENT STRINGTYPE LBRACKET RBRACKET VARIABLE RPARENT LKEY all_block_code RKEY all_block_code .)
-
-
-state 82
-
-    (29) print_data -> PRINT LPARENT STRING . RPARENT DOTANDCOMMA
-
-    RPARENT         shift and go to state 102
-
-
-state 83
-
-    (30) print_data -> PRINT LPARENT VARIABLE . RPARENT DOTANDCOMMA
-
-    RPARENT         shift and go to state 103
-
-
-state 84
-
-    (101) thread_main -> declaration_thread declaration_thread thread_init . thread_init thread_wait thread_wait
-    (104) thread_init -> . thread_identificator DOT START LPARENT RPARENT DOTANDCOMMA
-    (115) thread_identificator -> . VARIABLE
-
-    VARIABLE        shift and go to state 65
-
-    thread_init                    shift and go to state 104
-    thread_identificator           shift and go to state 85
-
-state 85
-
-    (104) thread_init -> thread_identificator . DOT START LPARENT RPARENT DOTANDCOMMA
-
-    DOT             shift and go to state 105
-
-
-state 86
-
-    (61) constant_assignation -> access_modifiers CONST assignation_type_value_multiple . DOTANDCOMMA
-
-    DOTANDCOMMA     shift and go to state 106
-
-
-state 87
-
-    (63) variable_assignation -> access_modifiers assignation_type_value_multiple DOTANDCOMMA .
-
-    PRINT           reduce using rule 63 (variable_assignation -> access_modifiers assignation_type_value_multiple DOTANDCOMMA .)
-    STATIC          reduce using rule 63 (variable_assignation -> access_modifiers assignation_type_value_multiple DOTANDCOMMA .)
-    WRITE           reduce using rule 63 (variable_assignation -> access_modifiers assignation_type_value_multiple DOTANDCOMMA .)
-    CONST           reduce using rule 63 (variable_assignation -> access_modifiers assignation_type_value_multiple DOTANDCOMMA .)
-    THREAD          reduce using rule 63 (variable_assignation -> access_modifiers assignation_type_value_multiple DOTANDCOMMA .)
-    PUBLIC          reduce using rule 63 (variable_assignation -> access_modifiers assignation_type_value_multiple DOTANDCOMMA .)
-    PRIVATE         reduce using rule 63 (variable_assignation -> access_modifiers assignation_type_value_multiple DOTANDCOMMA .)
-    INTTYPE         reduce using rule 63 (variable_assignation -> access_modifiers assignation_type_value_multiple DOTANDCOMMA .)
-    STRINGTYPE      reduce using rule 63 (variable_assignation -> access_modifiers assignation_type_value_multiple DOTANDCOMMA .)
-    FLOATTYPE       reduce using rule 63 (variable_assignation -> access_modifiers assignation_type_value_multiple DOTANDCOMMA .)
-    BOOLTYPE        reduce using rule 63 (variable_assignation -> access_modifiers assignation_type_value_multiple DOTANDCOMMA .)
-    RKEY            reduce using rule 63 (variable_assignation -> access_modifiers assignation_type_value_multiple DOTANDCOMMA .)
-    $end            reduce using rule 63 (variable_assignation -> access_modifiers assignation_type_value_multiple DOTANDCOMMA .)
-
-
-state 88
-
-    (62) constant_assignation -> CONST assignation_type_value_multiple DOTANDCOMMA .
-
-    PRINT           reduce using rule 62 (constant_assignation -> CONST assignation_type_value_multiple DOTANDCOMMA .)
-    STATIC          reduce using rule 62 (constant_assignation -> CONST assignation_type_value_multiple DOTANDCOMMA .)
-    WRITE           reduce using rule 62 (constant_assignation -> CONST assignation_type_value_multiple DOTANDCOMMA .)
-    CONST           reduce using rule 62 (constant_assignation -> CONST assignation_type_value_multiple DOTANDCOMMA .)
-    THREAD          reduce using rule 62 (constant_assignation -> CONST assignation_type_value_multiple DOTANDCOMMA .)
-    PUBLIC          reduce using rule 62 (constant_assignation -> CONST assignation_type_value_multiple DOTANDCOMMA .)
-    PRIVATE         reduce using rule 62 (constant_assignation -> CONST assignation_type_value_multiple DOTANDCOMMA .)
-    INTTYPE         reduce using rule 62 (constant_assignation -> CONST assignation_type_value_multiple DOTANDCOMMA .)
-    STRINGTYPE      reduce using rule 62 (constant_assignation -> CONST assignation_type_value_multiple DOTANDCOMMA .)
-    FLOATTYPE       reduce using rule 62 (constant_assignation -> CONST assignation_type_value_multiple DOTANDCOMMA .)
-    BOOLTYPE        reduce using rule 62 (constant_assignation -> CONST assignation_type_value_multiple DOTANDCOMMA .)
-    RKEY            reduce using rule 62 (constant_assignation -> CONST assignation_type_value_multiple DOTANDCOMMA .)
-    $end            reduce using rule 62 (constant_assignation -> CONST assignation_type_value_multiple DOTANDCOMMA .)
-
-
-state 89
-
-    (102) declaration_thread -> THREAD thread_identificator ASSIGNATION . NEW THREAD LPARENT thread_identificator RPARENT DOTANDCOMMA
-    (103) declaration_thread -> THREAD thread_identificator ASSIGNATION . NEW THREAD LPARENT concurrent_method RPARENT DOTANDCOMMA
-
-    NEW             shift and go to state 107
-
-
-state 90
-
-    (92) assignation_int_multiple -> assignation_int COMMA . assignation_int_multiple
-    (91) assignation_int_multiple -> . assignation_int
-    (92) assignation_int_multiple -> . assignation_int COMMA assignation_int_multiple
-    (72) assignation_int -> . VARIABLE ASSIGNATION INTEGER
-    (73) assignation_int -> . VARIABLE ASSIGNATION VARIABLE
-    (74) assignation_int -> . VARIABLE ASSIGNATION arithmetic_operation
-
-    VARIABLE        shift and go to state 68
-
-    assignation_int                shift and go to state 67
-    assignation_int_multiple       shift and go to state 108
-
-state 91
-
-    (72) assignation_int -> VARIABLE ASSIGNATION . INTEGER
-    (73) assignation_int -> VARIABLE ASSIGNATION . VARIABLE
-    (74) assignation_int -> VARIABLE ASSIGNATION . arithmetic_operation
-    (39) arithmetic_operation -> . value_numeric
-    (40) arithmetic_operation -> . value_numeric arithmetic_operator arithmetic_operation
-    (25) value_numeric -> . INTEGER
-    (26) value_numeric -> . FLOAT_NUMBER
-    (27) value_numeric -> . DECIMAL_NUMBER
-    (28) value_numeric -> . VARIABLE
-
-    INTEGER         shift and go to state 110
-    VARIABLE        shift and go to state 109
-    FLOAT_NUMBER    shift and go to state 113
-    DECIMAL_NUMBER  shift and go to state 114
-
-    arithmetic_operation           shift and go to state 111
-    value_numeric                  shift and go to state 112
-
-state 92
-
-    (96) assignation_float_multiple -> assignation_float COMMA . assignation_float_multiple
-    (95) assignation_float_multiple -> . assignation_float
-    (96) assignation_float_multiple -> . assignation_float COMMA assignation_float_multiple
-    (77) assignation_float -> . VARIABLE ASSIGNATION FLOAT_NUMBER
-    (78) assignation_float -> . VARIABLE ASSIGNATION VARIABLE
-    (79) assignation_float -> . VARIABLE ASSIGNATION arithmetic_operation
-
-    VARIABLE        shift and go to state 71
-
-    assignation_float              shift and go to state 70
-    assignation_float_multiple     shift and go to state 115
-
-state 93
-
-    (77) assignation_float -> VARIABLE ASSIGNATION . FLOAT_NUMBER
-    (78) assignation_float -> VARIABLE ASSIGNATION . VARIABLE
-    (79) assignation_float -> VARIABLE ASSIGNATION . arithmetic_operation
-    (39) arithmetic_operation -> . value_numeric
-    (40) arithmetic_operation -> . value_numeric arithmetic_operator arithmetic_operation
-    (25) value_numeric -> . INTEGER
-    (26) value_numeric -> . FLOAT_NUMBER
-    (27) value_numeric -> . DECIMAL_NUMBER
-    (28) value_numeric -> . VARIABLE
-
-    FLOAT_NUMBER    shift and go to state 117
-    VARIABLE        shift and go to state 116
-    INTEGER         shift and go to state 119
-    DECIMAL_NUMBER  shift and go to state 114
-
-    arithmetic_operation           shift and go to state 118
-    value_numeric                  shift and go to state 112
-
-state 94
-
-    (98) assignation_true_multiple -> assignation_true COMMA . assignation_true_multiple
-    (97) assignation_true_multiple -> . assignation_true
-    (98) assignation_true_multiple -> . assignation_true COMMA assignation_true_multiple
-    (80) assignation_true -> . VARIABLE ASSIGNATION BOOLTRUE
-    (81) assignation_true -> . VARIABLE ASSIGNATION VARIABLE
-    (82) assignation_true -> . VARIABLE ASSIGNATION boolean_operation
-
-    VARIABLE        shift and go to state 121
-
-    assignation_true               shift and go to state 74
-    assignation_true_multiple      shift and go to state 120
-
-state 95
-
-    (100) assignation_false_multiple -> assignation_false COMMA . assignation_false_multiple
-    (99) assignation_false_multiple -> . assignation_false
-    (100) assignation_false_multiple -> . assignation_false COMMA assignation_false_multiple
-    (83) assignation_false -> . VARIABLE ASSIGNATION BOOLFALSE
-    (84) assignation_false -> . VARIABLE ASSIGNATION VARIABLE
-    (85) assignation_false -> . VARIABLE ASSIGNATION boolean_operation
-
-    VARIABLE        shift and go to state 123
-
-    assignation_false              shift and go to state 75
-    assignation_false_multiple     shift and go to state 122
-
-state 96
-
-    (80) assignation_true -> VARIABLE ASSIGNATION . BOOLTRUE
-    (81) assignation_true -> VARIABLE ASSIGNATION . VARIABLE
-    (82) assignation_true -> VARIABLE ASSIGNATION . boolean_operation
-    (83) assignation_false -> VARIABLE ASSIGNATION . BOOLFALSE
-    (84) assignation_false -> VARIABLE ASSIGNATION . VARIABLE
-    (85) assignation_false -> VARIABLE ASSIGNATION . boolean_operation
-    (54) boolean_operation -> . value_boolean
-    (55) boolean_operation -> . LOGICNOT value_boolean
-    (56) boolean_operation -> . value_boolean boolean_operator boolean_operation
-    (21) value_boolean -> . BOOLTRUE
-    (22) value_boolean -> . BOOLFALSE
-    (23) value_boolean -> . VARIABLE
-    (24) value_boolean -> . comparison_operation
-    (46) comparison_operation -> . value_numeric
-    (47) comparison_operation -> . value_numeric comparison_operator comparison_operation
-    (25) value_numeric -> . INTEGER
-    (26) value_numeric -> . FLOAT_NUMBER
-    (27) value_numeric -> . DECIMAL_NUMBER
-    (28) value_numeric -> . VARIABLE
-
-    BOOLTRUE        shift and go to state 125
-    VARIABLE        shift and go to state 124
-    BOOLFALSE       shift and go to state 127
-    LOGICNOT        shift and go to state 129
-    INTEGER         shift and go to state 119
-    FLOAT_NUMBER    shift and go to state 113
-    DECIMAL_NUMBER  shift and go to state 114
-
-    boolean_operation              shift and go to state 126
-    value_boolean                  shift and go to state 128
-    comparison_operation           shift and go to state 130
-    value_numeric                  shift and go to state 131
-
-state 97
-
-    (4) block_main_method -> STATIC VOID MAIN LPARENT STRINGTYPE LBRACKET RBRACKET VARIABLE RPARENT LKEY . all_block_code RKEY
-    (5) block_main_method -> STATIC VOID MAIN LPARENT STRINGTYPE LBRACKET RBRACKET VARIABLE RPARENT LKEY . all_block_code RKEY all_block_code
-    (10) all_block_code -> . block_code
-    (11) all_block_code -> . block_code all_block_code
-    (6) block_code -> . def_const_or_var
-    (7) block_code -> . print_data
-    (8) block_code -> . thread_main
-    (9) block_code -> . concurrent_method
-    (59) def_const_or_var -> . constant_assignation
-    (60) def_const_or_var -> . variable_assignation
-    (29) print_data -> . PRINT LPARENT STRING RPARENT DOTANDCOMMA
-    (30) print_data -> . PRINT LPARENT VARIABLE RPARENT DOTANDCOMMA
-    (101) thread_main -> . declaration_thread declaration_thread thread_init thread_init thread_wait thread_wait
-    (106) concurrent_method -> . STATIC VOID thread_identificator LPARENT RPARENT LKEY thread_logic RKEY
-    (107) concurrent_method -> . WRITE
-    (61) constant_assignation -> . access_modifiers CONST assignation_type_value_multiple DOTANDCOMMA
-    (62) constant_assignation -> . CONST assignation_type_value_multiple DOTANDCOMMA
-    (63) variable_assignation -> . access_modifiers assignation_type_value_multiple DOTANDCOMMA
-    (64) variable_assignation -> . assignation_type_value_multiple DOTANDCOMMA
-    (102) declaration_thread -> . THREAD thread_identificator ASSIGNATION NEW THREAD LPARENT thread_identificator RPARENT DOTANDCOMMA
-    (103) declaration_thread -> . THREAD thread_identificator ASSIGNATION NEW THREAD LPARENT concurrent_method RPARENT DOTANDCOMMA
-    (65) access_modifiers -> . PUBLIC
-    (66) access_modifiers -> . PRIVATE
-    (86) assignation_type_value_multiple -> . INTTYPE assignation_int_multiple
-    (87) assignation_type_value_multiple -> . STRINGTYPE assignation_string_multiple
-    (88) assignation_type_value_multiple -> . FLOATTYPE assignation_float_multiple
-    (89) assignation_type_value_multiple -> . BOOLTYPE assignation_true_multiple
-    (90) assignation_type_value_multiple -> . BOOLTYPE assignation_false_multiple
-
-    PRINT           shift and go to state 39
-    STATIC          shift and go to state 29
-    WRITE           shift and go to state 41
-    CONST           shift and go to state 43
-    THREAD          shift and go to state 45
-    PUBLIC          shift and go to state 46
-    PRIVATE         shift and go to state 47
-    INTTYPE         shift and go to state 48
-    STRINGTYPE      shift and go to state 30
-    FLOATTYPE       shift and go to state 49
-    BOOLTYPE        shift and go to state 50
-
-    all_block_code                 shift and go to state 132
-    block_code                     shift and go to state 32
-    def_const_or_var               shift and go to state 33
-    print_data                     shift and go to state 34
-    thread_main                    shift and go to state 35
-    concurrent_method              shift and go to state 36
-    constant_assignation           shift and go to state 37
-    variable_assignation           shift and go to state 38
-    declaration_thread             shift and go to state 40
-    access_modifiers               shift and go to state 42
-    assignation_type_value_multiple shift and go to state 44
-
-state 98
-
-    (106) concurrent_method -> STATIC VOID thread_identificator LPARENT . RPARENT LKEY thread_logic RKEY
-
-    RPARENT         shift and go to state 133
-
-
-state 99
-
-    (94) assignation_string_multiple -> assignation_string COMMA assignation_string_multiple .
-
-    DOTANDCOMMA     reduce using rule 94 (assignation_string_multiple -> assignation_string COMMA assignation_string_multiple .)
-
-
-state 100
-
-    (76) assignation_string -> VARIABLE ASSIGNATION VARIABLE .
-
-    COMMA           reduce using rule 76 (assignation_string -> VARIABLE ASSIGNATION VARIABLE .)
-    DOTANDCOMMA     reduce using rule 76 (assignation_string -> VARIABLE ASSIGNATION VARIABLE .)
-
-
-state 101
-
-    (75) assignation_string -> VARIABLE ASSIGNATION STRING .
-
-    COMMA           reduce using rule 75 (assignation_string -> VARIABLE ASSIGNATION STRING .)
-    DOTANDCOMMA     reduce using rule 75 (assignation_string -> VARIABLE ASSIGNATION STRING .)
-
-
-state 102
-
-    (29) print_data -> PRINT LPARENT STRING RPARENT . DOTANDCOMMA
-
-    DOTANDCOMMA     shift and go to state 134
-
-
-state 103
-
-    (30) print_data -> PRINT LPARENT VARIABLE RPARENT . DOTANDCOMMA
-
-    DOTANDCOMMA     shift and go to state 135
-
-
-state 104
-
-    (101) thread_main -> declaration_thread declaration_thread thread_init thread_init . thread_wait thread_wait
-    (105) thread_wait -> . thread_identificator DOT JOIN LPARENT RPARENT DOTANDCOMMA
-    (115) thread_identificator -> . VARIABLE
-
-    VARIABLE        shift and go to state 65
-
-    thread_wait                    shift and go to state 136
-    thread_identificator           shift and go to state 137
-
-state 105
-
-    (104) thread_init -> thread_identificator DOT . START LPARENT RPARENT DOTANDCOMMA
-
-    START           shift and go to state 138
-
-
-state 106
-
-    (61) constant_assignation -> access_modifiers CONST assignation_type_value_multiple DOTANDCOMMA .
-
-    PRINT           reduce using rule 61 (constant_assignation -> access_modifiers CONST assignation_type_value_multiple DOTANDCOMMA .)
-    STATIC          reduce using rule 61 (constant_assignation -> access_modifiers CONST assignation_type_value_multiple DOTANDCOMMA .)
-    WRITE           reduce using rule 61 (constant_assignation -> access_modifiers CONST assignation_type_value_multiple DOTANDCOMMA .)
-    CONST           reduce using rule 61 (constant_assignation -> access_modifiers CONST assignation_type_value_multiple DOTANDCOMMA .)
-    THREAD          reduce using rule 61 (constant_assignation -> access_modifiers CONST assignation_type_value_multiple DOTANDCOMMA .)
-    PUBLIC          reduce using rule 61 (constant_assignation -> access_modifiers CONST assignation_type_value_multiple DOTANDCOMMA .)
-    PRIVATE         reduce using rule 61 (constant_assignation -> access_modifiers CONST assignation_type_value_multiple DOTANDCOMMA .)
-    INTTYPE         reduce using rule 61 (constant_assignation -> access_modifiers CONST assignation_type_value_multiple DOTANDCOMMA .)
-    STRINGTYPE      reduce using rule 61 (constant_assignation -> access_modifiers CONST assignation_type_value_multiple DOTANDCOMMA .)
-    FLOATTYPE       reduce using rule 61 (constant_assignation -> access_modifiers CONST assignation_type_value_multiple DOTANDCOMMA .)
-    BOOLTYPE        reduce using rule 61 (constant_assignation -> access_modifiers CONST assignation_type_value_multiple DOTANDCOMMA .)
-    RKEY            reduce using rule 61 (constant_assignation -> access_modifiers CONST assignation_type_value_multiple DOTANDCOMMA .)
-    $end            reduce using rule 61 (constant_assignation -> access_modifiers CONST assignation_type_value_multiple DOTANDCOMMA .)
-
-
-state 107
-
-    (102) declaration_thread -> THREAD thread_identificator ASSIGNATION NEW . THREAD LPARENT thread_identificator RPARENT DOTANDCOMMA
-    (103) declaration_thread -> THREAD thread_identificator ASSIGNATION NEW . THREAD LPARENT concurrent_method RPARENT DOTANDCOMMA
-
-    THREAD          shift and go to state 139
-
-
-state 108
-
-    (92) assignation_int_multiple -> assignation_int COMMA assignation_int_multiple .
-
-    DOTANDCOMMA     reduce using rule 92 (assignation_int_multiple -> assignation_int COMMA assignation_int_multiple .)
-
-
-state 109
-
-    (73) assignation_int -> VARIABLE ASSIGNATION VARIABLE .
-    (28) value_numeric -> VARIABLE .
-
-  ! reduce/reduce conflict for COMMA resolved using rule 28 (value_numeric -> VARIABLE .)
-  ! reduce/reduce conflict for DOTANDCOMMA resolved using rule 28 (value_numeric -> VARIABLE .)
-    PLUS            reduce using rule 28 (value_numeric -> VARIABLE .)
-    MINUS           reduce using rule 28 (value_numeric -> VARIABLE .)
-    TIMES           reduce using rule 28 (value_numeric -> VARIABLE .)
-    DIVIDE          reduce using rule 28 (value_numeric -> VARIABLE .)
-    PERCENT         reduce using rule 28 (value_numeric -> VARIABLE .)
-    COMMA           reduce using rule 28 (value_numeric -> VARIABLE .)
-    DOTANDCOMMA     reduce using rule 28 (value_numeric -> VARIABLE .)
-
-  ! COMMA           [ reduce using rule 73 (assignation_int -> VARIABLE ASSIGNATION VARIABLE .) ]
-  ! DOTANDCOMMA     [ reduce using rule 73 (assignation_int -> VARIABLE ASSIGNATION VARIABLE .) ]
-
-
-state 110
-
-    (72) assignation_int -> VARIABLE ASSIGNATION INTEGER .
-    (25) value_numeric -> INTEGER .
-
-  ! reduce/reduce conflict for COMMA resolved using rule 25 (value_numeric -> INTEGER .)
-  ! reduce/reduce conflict for DOTANDCOMMA resolved using rule 25 (value_numeric -> INTEGER .)
-    PLUS            reduce using rule 25 (value_numeric -> INTEGER .)
-    MINUS           reduce using rule 25 (value_numeric -> INTEGER .)
-    TIMES           reduce using rule 25 (value_numeric -> INTEGER .)
-    DIVIDE          reduce using rule 25 (value_numeric -> INTEGER .)
-    PERCENT         reduce using rule 25 (value_numeric -> INTEGER .)
-    COMMA           reduce using rule 25 (value_numeric -> INTEGER .)
-    DOTANDCOMMA     reduce using rule 25 (value_numeric -> INTEGER .)
-
-  ! COMMA           [ reduce using rule 72 (assignation_int -> VARIABLE ASSIGNATION INTEGER .) ]
-  ! DOTANDCOMMA     [ reduce using rule 72 (assignation_int -> VARIABLE ASSIGNATION INTEGER .) ]
-
-
-state 111
-
-    (74) assignation_int -> VARIABLE ASSIGNATION arithmetic_operation .
-
-    COMMA           reduce using rule 74 (assignation_int -> VARIABLE ASSIGNATION arithmetic_operation .)
-    DOTANDCOMMA     reduce using rule 74 (assignation_int -> VARIABLE ASSIGNATION arithmetic_operation .)
-
-
-state 112
-
-    (39) arithmetic_operation -> value_numeric .
-    (40) arithmetic_operation -> value_numeric . arithmetic_operator arithmetic_operation
-    (41) arithmetic_operator -> . PLUS
-    (42) arithmetic_operator -> . MINUS
-    (43) arithmetic_operator -> . TIMES
-    (44) arithmetic_operator -> . DIVIDE
-    (45) arithmetic_operator -> . PERCENT
-
-    COMMA           reduce using rule 39 (arithmetic_operation -> value_numeric .)
-    DOTANDCOMMA     reduce using rule 39 (arithmetic_operation -> value_numeric .)
-    PLUS            shift and go to state 141
-    MINUS           shift and go to state 142
-    TIMES           shift and go to state 143
-    DIVIDE          shift and go to state 144
-    PERCENT         shift and go to state 145
-
-    arithmetic_operator            shift and go to state 140
-
-state 113
-
-    (26) value_numeric -> FLOAT_NUMBER .
-
-    PLUS            reduce using rule 26 (value_numeric -> FLOAT_NUMBER .)
-    MINUS           reduce using rule 26 (value_numeric -> FLOAT_NUMBER .)
-    TIMES           reduce using rule 26 (value_numeric -> FLOAT_NUMBER .)
-    DIVIDE          reduce using rule 26 (value_numeric -> FLOAT_NUMBER .)
-    PERCENT         reduce using rule 26 (value_numeric -> FLOAT_NUMBER .)
-    COMMA           reduce using rule 26 (value_numeric -> FLOAT_NUMBER .)
-    DOTANDCOMMA     reduce using rule 26 (value_numeric -> FLOAT_NUMBER .)
-    GREATER_THAN    reduce using rule 26 (value_numeric -> FLOAT_NUMBER .)
-    SMALLER_THAN    reduce using rule 26 (value_numeric -> FLOAT_NUMBER .)
-    EQUAL_COMPARATION reduce using rule 26 (value_numeric -> FLOAT_NUMBER .)
-    INEQUALITY      reduce using rule 26 (value_numeric -> FLOAT_NUMBER .)
-    GREATER_THAN_OR_EQUAL reduce using rule 26 (value_numeric -> FLOAT_NUMBER .)
-    SMALLER_THAN_OR_EQUAL reduce using rule 26 (value_numeric -> FLOAT_NUMBER .)
-    LOGICAND        reduce using rule 26 (value_numeric -> FLOAT_NUMBER .)
-    LOGICOR         reduce using rule 26 (value_numeric -> FLOAT_NUMBER .)
-
-
-state 114
-
-    (27) value_numeric -> DECIMAL_NUMBER .
-
-    PLUS            reduce using rule 27 (value_numeric -> DECIMAL_NUMBER .)
-    MINUS           reduce using rule 27 (value_numeric -> DECIMAL_NUMBER .)
-    TIMES           reduce using rule 27 (value_numeric -> DECIMAL_NUMBER .)
-    DIVIDE          reduce using rule 27 (value_numeric -> DECIMAL_NUMBER .)
-    PERCENT         reduce using rule 27 (value_numeric -> DECIMAL_NUMBER .)
-    COMMA           reduce using rule 27 (value_numeric -> DECIMAL_NUMBER .)
-    DOTANDCOMMA     reduce using rule 27 (value_numeric -> DECIMAL_NUMBER .)
-    GREATER_THAN    reduce using rule 27 (value_numeric -> DECIMAL_NUMBER .)
-    SMALLER_THAN    reduce using rule 27 (value_numeric -> DECIMAL_NUMBER .)
-    EQUAL_COMPARATION reduce using rule 27 (value_numeric -> DECIMAL_NUMBER .)
-    INEQUALITY      reduce using rule 27 (value_numeric -> DECIMAL_NUMBER .)
-    GREATER_THAN_OR_EQUAL reduce using rule 27 (value_numeric -> DECIMAL_NUMBER .)
-    SMALLER_THAN_OR_EQUAL reduce using rule 27 (value_numeric -> DECIMAL_NUMBER .)
-    LOGICAND        reduce using rule 27 (value_numeric -> DECIMAL_NUMBER .)
-    LOGICOR         reduce using rule 27 (value_numeric -> DECIMAL_NUMBER .)
-
-
-state 115
-
-    (96) assignation_float_multiple -> assignation_float COMMA assignation_float_multiple .
-
-    DOTANDCOMMA     reduce using rule 96 (assignation_float_multiple -> assignation_float COMMA assignation_float_multiple .)
-
-
-state 116
-
-    (78) assignation_float -> VARIABLE ASSIGNATION VARIABLE .
-    (28) value_numeric -> VARIABLE .
-
-  ! reduce/reduce conflict for COMMA resolved using rule 28 (value_numeric -> VARIABLE .)
-  ! reduce/reduce conflict for DOTANDCOMMA resolved using rule 28 (value_numeric -> VARIABLE .)
-    PLUS            reduce using rule 28 (value_numeric -> VARIABLE .)
-    MINUS           reduce using rule 28 (value_numeric -> VARIABLE .)
-    TIMES           reduce using rule 28 (value_numeric -> VARIABLE .)
-    DIVIDE          reduce using rule 28 (value_numeric -> VARIABLE .)
-    PERCENT         reduce using rule 28 (value_numeric -> VARIABLE .)
-    COMMA           reduce using rule 28 (value_numeric -> VARIABLE .)
-    DOTANDCOMMA     reduce using rule 28 (value_numeric -> VARIABLE .)
-
-  ! COMMA           [ reduce using rule 78 (assignation_float -> VARIABLE ASSIGNATION VARIABLE .) ]
-  ! DOTANDCOMMA     [ reduce using rule 78 (assignation_float -> VARIABLE ASSIGNATION VARIABLE .) ]
-
-
-state 117
-
-    (77) assignation_float -> VARIABLE ASSIGNATION FLOAT_NUMBER .
-    (26) value_numeric -> FLOAT_NUMBER .
-
-  ! reduce/reduce conflict for COMMA resolved using rule 26 (value_numeric -> FLOAT_NUMBER .)
-  ! reduce/reduce conflict for DOTANDCOMMA resolved using rule 26 (value_numeric -> FLOAT_NUMBER .)
-    PLUS            reduce using rule 26 (value_numeric -> FLOAT_NUMBER .)
-    MINUS           reduce using rule 26 (value_numeric -> FLOAT_NUMBER .)
-    TIMES           reduce using rule 26 (value_numeric -> FLOAT_NUMBER .)
-    DIVIDE          reduce using rule 26 (value_numeric -> FLOAT_NUMBER .)
-    PERCENT         reduce using rule 26 (value_numeric -> FLOAT_NUMBER .)
-    COMMA           reduce using rule 26 (value_numeric -> FLOAT_NUMBER .)
-    DOTANDCOMMA     reduce using rule 26 (value_numeric -> FLOAT_NUMBER .)
-
-  ! COMMA           [ reduce using rule 77 (assignation_float -> VARIABLE ASSIGNATION FLOAT_NUMBER .) ]
-  ! DOTANDCOMMA     [ reduce using rule 77 (assignation_float -> VARIABLE ASSIGNATION FLOAT_NUMBER .) ]
-
-
-state 118
-
-    (79) assignation_float -> VARIABLE ASSIGNATION arithmetic_operation .
-
-    COMMA           reduce using rule 79 (assignation_float -> VARIABLE ASSIGNATION arithmetic_operation .)
-    DOTANDCOMMA     reduce using rule 79 (assignation_float -> VARIABLE ASSIGNATION arithmetic_operation .)
-
-
-state 119
-
-    (25) value_numeric -> INTEGER .
-
-    PLUS            reduce using rule 25 (value_numeric -> INTEGER .)
-    MINUS           reduce using rule 25 (value_numeric -> INTEGER .)
-    TIMES           reduce using rule 25 (value_numeric -> INTEGER .)
-    DIVIDE          reduce using rule 25 (value_numeric -> INTEGER .)
-    PERCENT         reduce using rule 25 (value_numeric -> INTEGER .)
-    COMMA           reduce using rule 25 (value_numeric -> INTEGER .)
-    DOTANDCOMMA     reduce using rule 25 (value_numeric -> INTEGER .)
-    GREATER_THAN    reduce using rule 25 (value_numeric -> INTEGER .)
-    SMALLER_THAN    reduce using rule 25 (value_numeric -> INTEGER .)
-    EQUAL_COMPARATION reduce using rule 25 (value_numeric -> INTEGER .)
-    INEQUALITY      reduce using rule 25 (value_numeric -> INTEGER .)
-    GREATER_THAN_OR_EQUAL reduce using rule 25 (value_numeric -> INTEGER .)
-    SMALLER_THAN_OR_EQUAL reduce using rule 25 (value_numeric -> INTEGER .)
-    LOGICAND        reduce using rule 25 (value_numeric -> INTEGER .)
-    LOGICOR         reduce using rule 25 (value_numeric -> INTEGER .)
-
-
-state 120
-
-    (98) assignation_true_multiple -> assignation_true COMMA assignation_true_multiple .
-
-    DOTANDCOMMA     reduce using rule 98 (assignation_true_multiple -> assignation_true COMMA assignation_true_multiple .)
-
-
-state 121
-
-    (80) assignation_true -> VARIABLE . ASSIGNATION BOOLTRUE
-    (81) assignation_true -> VARIABLE . ASSIGNATION VARIABLE
-    (82) assignation_true -> VARIABLE . ASSIGNATION boolean_operation
-
-    ASSIGNATION     shift and go to state 146
-
-
-state 122
-
-    (100) assignation_false_multiple -> assignation_false COMMA assignation_false_multiple .
-
-    DOTANDCOMMA     reduce using rule 100 (assignation_false_multiple -> assignation_false COMMA assignation_false_multiple .)
-
-
-state 123
-
-    (83) assignation_false -> VARIABLE . ASSIGNATION BOOLFALSE
-    (84) assignation_false -> VARIABLE . ASSIGNATION VARIABLE
-    (85) assignation_false -> VARIABLE . ASSIGNATION boolean_operation
-
-    ASSIGNATION     shift and go to state 147
-
-
-state 124
-
-    (81) assignation_true -> VARIABLE ASSIGNATION VARIABLE .
-    (84) assignation_false -> VARIABLE ASSIGNATION VARIABLE .
-    (23) value_boolean -> VARIABLE .
-    (28) value_numeric -> VARIABLE .
-
-  ! reduce/reduce conflict for COMMA resolved using rule 81 (assignation_true -> VARIABLE ASSIGNATION VARIABLE .)
-  ! reduce/reduce conflict for DOTANDCOMMA resolved using rule 81 (assignation_true -> VARIABLE ASSIGNATION VARIABLE .)
-  ! reduce/reduce conflict for COMMA resolved using rule 23 (value_boolean -> VARIABLE .)
-  ! reduce/reduce conflict for DOTANDCOMMA resolved using rule 23 (value_boolean -> VARIABLE .)
-  ! reduce/reduce conflict for LOGICAND resolved using rule 23 (value_boolean -> VARIABLE .)
-  ! reduce/reduce conflict for LOGICOR resolved using rule 23 (value_boolean -> VARIABLE .)
-  ! reduce/reduce conflict for COMMA resolved using rule 23 (value_boolean -> VARIABLE .)
-  ! reduce/reduce conflict for DOTANDCOMMA resolved using rule 23 (value_boolean -> VARIABLE .)
-    LOGICAND        reduce using rule 23 (value_boolean -> VARIABLE .)
-    LOGICOR         reduce using rule 23 (value_boolean -> VARIABLE .)
-    COMMA           reduce using rule 23 (value_boolean -> VARIABLE .)
-    DOTANDCOMMA     reduce using rule 23 (value_boolean -> VARIABLE .)
-    GREATER_THAN    reduce using rule 28 (value_numeric -> VARIABLE .)
-    SMALLER_THAN    reduce using rule 28 (value_numeric -> VARIABLE .)
-    EQUAL_COMPARATION reduce using rule 28 (value_numeric -> VARIABLE .)
-    INEQUALITY      reduce using rule 28 (value_numeric -> VARIABLE .)
-    GREATER_THAN_OR_EQUAL reduce using rule 28 (value_numeric -> VARIABLE .)
-    SMALLER_THAN_OR_EQUAL reduce using rule 28 (value_numeric -> VARIABLE .)
-
-  ! COMMA           [ reduce using rule 81 (assignation_true -> VARIABLE ASSIGNATION VARIABLE .) ]
-  ! DOTANDCOMMA     [ reduce using rule 81 (assignation_true -> VARIABLE ASSIGNATION VARIABLE .) ]
-  ! COMMA           [ reduce using rule 84 (assignation_false -> VARIABLE ASSIGNATION VARIABLE .) ]
-  ! DOTANDCOMMA     [ reduce using rule 84 (assignation_false -> VARIABLE ASSIGNATION VARIABLE .) ]
-  ! LOGICAND        [ reduce using rule 28 (value_numeric -> VARIABLE .) ]
-  ! LOGICOR         [ reduce using rule 28 (value_numeric -> VARIABLE .) ]
-  ! COMMA           [ reduce using rule 28 (value_numeric -> VARIABLE .) ]
-  ! DOTANDCOMMA     [ reduce using rule 28 (value_numeric -> VARIABLE .) ]
-
-
-state 125
-
-    (80) assignation_true -> VARIABLE ASSIGNATION BOOLTRUE .
-    (21) value_boolean -> BOOLTRUE .
-
-  ! reduce/reduce conflict for COMMA resolved using rule 21 (value_boolean -> BOOLTRUE .)
-  ! reduce/reduce conflict for DOTANDCOMMA resolved using rule 21 (value_boolean -> BOOLTRUE .)
-    LOGICAND        reduce using rule 21 (value_boolean -> BOOLTRUE .)
-    LOGICOR         reduce using rule 21 (value_boolean -> BOOLTRUE .)
-    COMMA           reduce using rule 21 (value_boolean -> BOOLTRUE .)
-    DOTANDCOMMA     reduce using rule 21 (value_boolean -> BOOLTRUE .)
-
-  ! COMMA           [ reduce using rule 80 (assignation_true -> VARIABLE ASSIGNATION BOOLTRUE .) ]
-  ! DOTANDCOMMA     [ reduce using rule 80 (assignation_true -> VARIABLE ASSIGNATION BOOLTRUE .) ]
-
-
-state 126
-
-    (82) assignation_true -> VARIABLE ASSIGNATION boolean_operation .
-    (85) assignation_false -> VARIABLE ASSIGNATION boolean_operation .
-
-  ! reduce/reduce conflict for COMMA resolved using rule 82 (assignation_true -> VARIABLE ASSIGNATION boolean_operation .)
-  ! reduce/reduce conflict for DOTANDCOMMA resolved using rule 82 (assignation_true -> VARIABLE ASSIGNATION boolean_operation .)
-    COMMA           reduce using rule 82 (assignation_true -> VARIABLE ASSIGNATION boolean_operation .)
-    DOTANDCOMMA     reduce using rule 82 (assignation_true -> VARIABLE ASSIGNATION boolean_operation .)
-
-  ! COMMA           [ reduce using rule 85 (assignation_false -> VARIABLE ASSIGNATION boolean_operation .) ]
-  ! DOTANDCOMMA     [ reduce using rule 85 (assignation_false -> VARIABLE ASSIGNATION boolean_operation .) ]
-
-
-state 127
-
-    (83) assignation_false -> VARIABLE ASSIGNATION BOOLFALSE .
-    (22) value_boolean -> BOOLFALSE .
-
-  ! reduce/reduce conflict for COMMA resolved using rule 22 (value_boolean -> BOOLFALSE .)
-  ! reduce/reduce conflict for DOTANDCOMMA resolved using rule 22 (value_boolean -> BOOLFALSE .)
-    LOGICAND        reduce using rule 22 (value_boolean -> BOOLFALSE .)
-    LOGICOR         reduce using rule 22 (value_boolean -> BOOLFALSE .)
-    COMMA           reduce using rule 22 (value_boolean -> BOOLFALSE .)
-    DOTANDCOMMA     reduce using rule 22 (value_boolean -> BOOLFALSE .)
-
-  ! COMMA           [ reduce using rule 83 (assignation_false -> VARIABLE ASSIGNATION BOOLFALSE .) ]
-  ! DOTANDCOMMA     [ reduce using rule 83 (assignation_false -> VARIABLE ASSIGNATION BOOLFALSE .) ]
-
-
-state 128
-
-    (54) boolean_operation -> value_boolean .
-    (56) boolean_operation -> value_boolean . boolean_operator boolean_operation
-    (57) boolean_operator -> . LOGICAND
-    (58) boolean_operator -> . LOGICOR
-
-    COMMA           reduce using rule 54 (boolean_operation -> value_boolean .)
-    DOTANDCOMMA     reduce using rule 54 (boolean_operation -> value_boolean .)
-    LOGICAND        shift and go to state 149
-    LOGICOR         shift and go to state 150
-
-    boolean_operator               shift and go to state 148
-
-state 129
-
-    (55) boolean_operation -> LOGICNOT . value_boolean
-    (21) value_boolean -> . BOOLTRUE
-    (22) value_boolean -> . BOOLFALSE
-    (23) value_boolean -> . VARIABLE
-    (24) value_boolean -> . comparison_operation
-    (46) comparison_operation -> . value_numeric
-    (47) comparison_operation -> . value_numeric comparison_operator comparison_operation
-    (25) value_numeric -> . INTEGER
-    (26) value_numeric -> . FLOAT_NUMBER
-    (27) value_numeric -> . DECIMAL_NUMBER
-    (28) value_numeric -> . VARIABLE
-
-    BOOLTRUE        shift and go to state 152
-    BOOLFALSE       shift and go to state 153
-    VARIABLE        shift and go to state 154
-    INTEGER         shift and go to state 119
-    FLOAT_NUMBER    shift and go to state 113
-    DECIMAL_NUMBER  shift and go to state 114
-
-    value_boolean                  shift and go to state 151
-    comparison_operation           shift and go to state 130
-    value_numeric                  shift and go to state 131
-
-state 130
-
-    (24) value_boolean -> comparison_operation .
-
-    LOGICAND        reduce using rule 24 (value_boolean -> comparison_operation .)
-    LOGICOR         reduce using rule 24 (value_boolean -> comparison_operation .)
-    COMMA           reduce using rule 24 (value_boolean -> comparison_operation .)
-    DOTANDCOMMA     reduce using rule 24 (value_boolean -> comparison_operation .)
-
-
-state 131
-
-    (46) comparison_operation -> value_numeric .
-    (47) comparison_operation -> value_numeric . comparison_operator comparison_operation
-    (48) comparison_operator -> . GREATER_THAN
-    (49) comparison_operator -> . SMALLER_THAN
-    (50) comparison_operator -> . EQUAL_COMPARATION
-    (51) comparison_operator -> . INEQUALITY
-    (52) comparison_operator -> . GREATER_THAN_OR_EQUAL
-    (53) comparison_operator -> . SMALLER_THAN_OR_EQUAL
-
-    LOGICAND        reduce using rule 46 (comparison_operation -> value_numeric .)
-    LOGICOR         reduce using rule 46 (comparison_operation -> value_numeric .)
-    COMMA           reduce using rule 46 (comparison_operation -> value_numeric .)
-    DOTANDCOMMA     reduce using rule 46 (comparison_operation -> value_numeric .)
-    GREATER_THAN    shift and go to state 156
-    SMALLER_THAN    shift and go to state 157
-    EQUAL_COMPARATION shift and go to state 158
-    INEQUALITY      shift and go to state 159
-    GREATER_THAN_OR_EQUAL shift and go to state 160
-    SMALLER_THAN_OR_EQUAL shift and go to state 161
-
-    comparison_operator            shift and go to state 155
-
-state 132
-
-    (4) block_main_method -> STATIC VOID MAIN LPARENT STRINGTYPE LBRACKET RBRACKET VARIABLE RPARENT LKEY all_block_code . RKEY
-    (5) block_main_method -> STATIC VOID MAIN LPARENT STRINGTYPE LBRACKET RBRACKET VARIABLE RPARENT LKEY all_block_code . RKEY all_block_code
-
-    RKEY            shift and go to state 162
-
-
-state 133
-
-    (106) concurrent_method -> STATIC VOID thread_identificator LPARENT RPARENT . LKEY thread_logic RKEY
-
-    LKEY            shift and go to state 163
-
-
-state 134
-
-    (29) print_data -> PRINT LPARENT STRING RPARENT DOTANDCOMMA .
-
-    PRINT           reduce using rule 29 (print_data -> PRINT LPARENT STRING RPARENT DOTANDCOMMA .)
-    STATIC          reduce using rule 29 (print_data -> PRINT LPARENT STRING RPARENT DOTANDCOMMA .)
-    WRITE           reduce using rule 29 (print_data -> PRINT LPARENT STRING RPARENT DOTANDCOMMA .)
-    CONST           reduce using rule 29 (print_data -> PRINT LPARENT STRING RPARENT DOTANDCOMMA .)
-    THREAD          reduce using rule 29 (print_data -> PRINT LPARENT STRING RPARENT DOTANDCOMMA .)
-    PUBLIC          reduce using rule 29 (print_data -> PRINT LPARENT STRING RPARENT DOTANDCOMMA .)
-    PRIVATE         reduce using rule 29 (print_data -> PRINT LPARENT STRING RPARENT DOTANDCOMMA .)
-    INTTYPE         reduce using rule 29 (print_data -> PRINT LPARENT STRING RPARENT DOTANDCOMMA .)
-    STRINGTYPE      reduce using rule 29 (print_data -> PRINT LPARENT STRING RPARENT DOTANDCOMMA .)
-    FLOATTYPE       reduce using rule 29 (print_data -> PRINT LPARENT STRING RPARENT DOTANDCOMMA .)
-    BOOLTYPE        reduce using rule 29 (print_data -> PRINT LPARENT STRING RPARENT DOTANDCOMMA .)
-    RKEY            reduce using rule 29 (print_data -> PRINT LPARENT STRING RPARENT DOTANDCOMMA .)
-    $end            reduce using rule 29 (print_data -> PRINT LPARENT STRING RPARENT DOTANDCOMMA .)
-
-
-state 135
-
-    (30) print_data -> PRINT LPARENT VARIABLE RPARENT DOTANDCOMMA .
-
-    PRINT           reduce using rule 30 (print_data -> PRINT LPARENT VARIABLE RPARENT DOTANDCOMMA .)
-    STATIC          reduce using rule 30 (print_data -> PRINT LPARENT VARIABLE RPARENT DOTANDCOMMA .)
-    WRITE           reduce using rule 30 (print_data -> PRINT LPARENT VARIABLE RPARENT DOTANDCOMMA .)
-    CONST           reduce using rule 30 (print_data -> PRINT LPARENT VARIABLE RPARENT DOTANDCOMMA .)
-    THREAD          reduce using rule 30 (print_data -> PRINT LPARENT VARIABLE RPARENT DOTANDCOMMA .)
-    PUBLIC          reduce using rule 30 (print_data -> PRINT LPARENT VARIABLE RPARENT DOTANDCOMMA .)
-    PRIVATE         reduce using rule 30 (print_data -> PRINT LPARENT VARIABLE RPARENT DOTANDCOMMA .)
-    INTTYPE         reduce using rule 30 (print_data -> PRINT LPARENT VARIABLE RPARENT DOTANDCOMMA .)
-    STRINGTYPE      reduce using rule 30 (print_data -> PRINT LPARENT VARIABLE RPARENT DOTANDCOMMA .)
-    FLOATTYPE       reduce using rule 30 (print_data -> PRINT LPARENT VARIABLE RPARENT DOTANDCOMMA .)
-    BOOLTYPE        reduce using rule 30 (print_data -> PRINT LPARENT VARIABLE RPARENT DOTANDCOMMA .)
-    RKEY            reduce using rule 30 (print_data -> PRINT LPARENT VARIABLE RPARENT DOTANDCOMMA .)
-    $end            reduce using rule 30 (print_data -> PRINT LPARENT VARIABLE RPARENT DOTANDCOMMA .)
-
-
-state 136
-
-    (101) thread_main -> declaration_thread declaration_thread thread_init thread_init thread_wait . thread_wait
-    (105) thread_wait -> . thread_identificator DOT JOIN LPARENT RPARENT DOTANDCOMMA
-    (115) thread_identificator -> . VARIABLE
-
-    VARIABLE        shift and go to state 65
-
-    thread_wait                    shift and go to state 164
-    thread_identificator           shift and go to state 137
-
-state 137
-
-    (105) thread_wait -> thread_identificator . DOT JOIN LPARENT RPARENT DOTANDCOMMA
-
-    DOT             shift and go to state 165
-
-
-state 138
-
-    (104) thread_init -> thread_identificator DOT START . LPARENT RPARENT DOTANDCOMMA
-
-    LPARENT         shift and go to state 166
-
-
-state 139
-
-    (102) declaration_thread -> THREAD thread_identificator ASSIGNATION NEW THREAD . LPARENT thread_identificator RPARENT DOTANDCOMMA
-    (103) declaration_thread -> THREAD thread_identificator ASSIGNATION NEW THREAD . LPARENT concurrent_method RPARENT DOTANDCOMMA
-
-    LPARENT         shift and go to state 167
-
-
-state 140
-
-    (40) arithmetic_operation -> value_numeric arithmetic_operator . arithmetic_operation
-    (39) arithmetic_operation -> . value_numeric
-    (40) arithmetic_operation -> . value_numeric arithmetic_operator arithmetic_operation
-    (25) value_numeric -> . INTEGER
-    (26) value_numeric -> . FLOAT_NUMBER
-    (27) value_numeric -> . DECIMAL_NUMBER
-    (28) value_numeric -> . VARIABLE
-
-    INTEGER         shift and go to state 119
-    FLOAT_NUMBER    shift and go to state 113
-    DECIMAL_NUMBER  shift and go to state 114
-    VARIABLE        shift and go to state 169
-
-    value_numeric                  shift and go to state 112
-    arithmetic_operation           shift and go to state 168
-
-state 141
-
-    (41) arithmetic_operator -> PLUS .
-
-    INTEGER         reduce using rule 41 (arithmetic_operator -> PLUS .)
-    FLOAT_NUMBER    reduce using rule 41 (arithmetic_operator -> PLUS .)
-    DECIMAL_NUMBER  reduce using rule 41 (arithmetic_operator -> PLUS .)
-    VARIABLE        reduce using rule 41 (arithmetic_operator -> PLUS .)
-
-
-state 142
-
-    (42) arithmetic_operator -> MINUS .
-
-    INTEGER         reduce using rule 42 (arithmetic_operator -> MINUS .)
-    FLOAT_NUMBER    reduce using rule 42 (arithmetic_operator -> MINUS .)
-    DECIMAL_NUMBER  reduce using rule 42 (arithmetic_operator -> MINUS .)
-    VARIABLE        reduce using rule 42 (arithmetic_operator -> MINUS .)
-
-
-state 143
-
-    (43) arithmetic_operator -> TIMES .
-
-    INTEGER         reduce using rule 43 (arithmetic_operator -> TIMES .)
-    FLOAT_NUMBER    reduce using rule 43 (arithmetic_operator -> TIMES .)
-    DECIMAL_NUMBER  reduce using rule 43 (arithmetic_operator -> TIMES .)
-    VARIABLE        reduce using rule 43 (arithmetic_operator -> TIMES .)
-
-
-state 144
-
-    (44) arithmetic_operator -> DIVIDE .
-
-    INTEGER         reduce using rule 44 (arithmetic_operator -> DIVIDE .)
-    FLOAT_NUMBER    reduce using rule 44 (arithmetic_operator -> DIVIDE .)
-    DECIMAL_NUMBER  reduce using rule 44 (arithmetic_operator -> DIVIDE .)
-    VARIABLE        reduce using rule 44 (arithmetic_operator -> DIVIDE .)
-
-
-state 145
-
-    (45) arithmetic_operator -> PERCENT .
-
-    INTEGER         reduce using rule 45 (arithmetic_operator -> PERCENT .)
-    FLOAT_NUMBER    reduce using rule 45 (arithmetic_operator -> PERCENT .)
-    DECIMAL_NUMBER  reduce using rule 45 (arithmetic_operator -> PERCENT .)
-    VARIABLE        reduce using rule 45 (arithmetic_operator -> PERCENT .)
-
-
-state 146
-
-    (80) assignation_true -> VARIABLE ASSIGNATION . BOOLTRUE
-    (81) assignation_true -> VARIABLE ASSIGNATION . VARIABLE
-    (82) assignation_true -> VARIABLE ASSIGNATION . boolean_operation
-    (54) boolean_operation -> . value_boolean
-    (55) boolean_operation -> . LOGICNOT value_boolean
-    (56) boolean_operation -> . value_boolean boolean_operator boolean_operation
-    (21) value_boolean -> . BOOLTRUE
-    (22) value_boolean -> . BOOLFALSE
-    (23) value_boolean -> . VARIABLE
-    (24) value_boolean -> . comparison_operation
-    (46) comparison_operation -> . value_numeric
-    (47) comparison_operation -> . value_numeric comparison_operator comparison_operation
-    (25) value_numeric -> . INTEGER
-    (26) value_numeric -> . FLOAT_NUMBER
-    (27) value_numeric -> . DECIMAL_NUMBER
-    (28) value_numeric -> . VARIABLE
-
-    BOOLTRUE        shift and go to state 125
-    VARIABLE        shift and go to state 170
-    LOGICNOT        shift and go to state 129
-    BOOLFALSE       shift and go to state 153
-    INTEGER         shift and go to state 119
-    FLOAT_NUMBER    shift and go to state 113
-    DECIMAL_NUMBER  shift and go to state 114
-
-    boolean_operation              shift and go to state 171
-    value_boolean                  shift and go to state 128
-    comparison_operation           shift and go to state 130
-    value_numeric                  shift and go to state 131
-
-state 147
-
-    (83) assignation_false -> VARIABLE ASSIGNATION . BOOLFALSE
-    (84) assignation_false -> VARIABLE ASSIGNATION . VARIABLE
-    (85) assignation_false -> VARIABLE ASSIGNATION . boolean_operation
-    (54) boolean_operation -> . value_boolean
-    (55) boolean_operation -> . LOGICNOT value_boolean
-    (56) boolean_operation -> . value_boolean boolean_operator boolean_operation
-    (21) value_boolean -> . BOOLTRUE
-    (22) value_boolean -> . BOOLFALSE
-    (23) value_boolean -> . VARIABLE
-    (24) value_boolean -> . comparison_operation
-    (46) comparison_operation -> . value_numeric
-    (47) comparison_operation -> . value_numeric comparison_operator comparison_operation
-    (25) value_numeric -> . INTEGER
-    (26) value_numeric -> . FLOAT_NUMBER
-    (27) value_numeric -> . DECIMAL_NUMBER
-    (28) value_numeric -> . VARIABLE
-
-    BOOLFALSE       shift and go to state 127
-    VARIABLE        shift and go to state 172
-    LOGICNOT        shift and go to state 129
-    BOOLTRUE        shift and go to state 152
-    INTEGER         shift and go to state 119
-    FLOAT_NUMBER    shift and go to state 113
-    DECIMAL_NUMBER  shift and go to state 114
-
-    boolean_operation              shift and go to state 173
-    value_boolean                  shift and go to state 128
-    comparison_operation           shift and go to state 130
-    value_numeric                  shift and go to state 131
-
-state 148
-
-    (56) boolean_operation -> value_boolean boolean_operator . boolean_operation
-    (54) boolean_operation -> . value_boolean
-    (55) boolean_operation -> . LOGICNOT value_boolean
-    (56) boolean_operation -> . value_boolean boolean_operator boolean_operation
-    (21) value_boolean -> . BOOLTRUE
-    (22) value_boolean -> . BOOLFALSE
-    (23) value_boolean -> . VARIABLE
-    (24) value_boolean -> . comparison_operation
-    (46) comparison_operation -> . value_numeric
-    (47) comparison_operation -> . value_numeric comparison_operator comparison_operation
-    (25) value_numeric -> . INTEGER
-    (26) value_numeric -> . FLOAT_NUMBER
-    (27) value_numeric -> . DECIMAL_NUMBER
-    (28) value_numeric -> . VARIABLE
-
-    LOGICNOT        shift and go to state 129
-    BOOLTRUE        shift and go to state 152
-    BOOLFALSE       shift and go to state 153
-    VARIABLE        shift and go to state 154
-    INTEGER         shift and go to state 119
-    FLOAT_NUMBER    shift and go to state 113
-    DECIMAL_NUMBER  shift and go to state 114
-
-    value_boolean                  shift and go to state 128
-    boolean_operation              shift and go to state 174
-    comparison_operation           shift and go to state 130
-    value_numeric                  shift and go to state 131
-
-state 149
-
-    (57) boolean_operator -> LOGICAND .
-
-    LOGICNOT        reduce using rule 57 (boolean_operator -> LOGICAND .)
-    BOOLTRUE        reduce using rule 57 (boolean_operator -> LOGICAND .)
-    BOOLFALSE       reduce using rule 57 (boolean_operator -> LOGICAND .)
-    VARIABLE        reduce using rule 57 (boolean_operator -> LOGICAND .)
-    INTEGER         reduce using rule 57 (boolean_operator -> LOGICAND .)
-    FLOAT_NUMBER    reduce using rule 57 (boolean_operator -> LOGICAND .)
-    DECIMAL_NUMBER  reduce using rule 57 (boolean_operator -> LOGICAND .)
-
-
-state 150
-
-    (58) boolean_operator -> LOGICOR .
-
-    LOGICNOT        reduce using rule 58 (boolean_operator -> LOGICOR .)
-    BOOLTRUE        reduce using rule 58 (boolean_operator -> LOGICOR .)
-    BOOLFALSE       reduce using rule 58 (boolean_operator -> LOGICOR .)
-    VARIABLE        reduce using rule 58 (boolean_operator -> LOGICOR .)
-    INTEGER         reduce using rule 58 (boolean_operator -> LOGICOR .)
-    FLOAT_NUMBER    reduce using rule 58 (boolean_operator -> LOGICOR .)
-    DECIMAL_NUMBER  reduce using rule 58 (boolean_operator -> LOGICOR .)
-
-
-state 151
-
-    (55) boolean_operation -> LOGICNOT value_boolean .
-
-    COMMA           reduce using rule 55 (boolean_operation -> LOGICNOT value_boolean .)
-    DOTANDCOMMA     reduce using rule 55 (boolean_operation -> LOGICNOT value_boolean .)
-
-
-state 152
-
-    (21) value_boolean -> BOOLTRUE .
-
-    COMMA           reduce using rule 21 (value_boolean -> BOOLTRUE .)
-    DOTANDCOMMA     reduce using rule 21 (value_boolean -> BOOLTRUE .)
-    LOGICAND        reduce using rule 21 (value_boolean -> BOOLTRUE .)
-    LOGICOR         reduce using rule 21 (value_boolean -> BOOLTRUE .)
-
-
-state 153
-
-    (22) value_boolean -> BOOLFALSE .
-
-    COMMA           reduce using rule 22 (value_boolean -> BOOLFALSE .)
-    DOTANDCOMMA     reduce using rule 22 (value_boolean -> BOOLFALSE .)
-    LOGICAND        reduce using rule 22 (value_boolean -> BOOLFALSE .)
-    LOGICOR         reduce using rule 22 (value_boolean -> BOOLFALSE .)
-
-
-state 154
-
-    (23) value_boolean -> VARIABLE .
-    (28) value_numeric -> VARIABLE .
-
-  ! reduce/reduce conflict for COMMA resolved using rule 23 (value_boolean -> VARIABLE .)
-  ! reduce/reduce conflict for DOTANDCOMMA resolved using rule 23 (value_boolean -> VARIABLE .)
-  ! reduce/reduce conflict for LOGICAND resolved using rule 23 (value_boolean -> VARIABLE .)
-  ! reduce/reduce conflict for LOGICOR resolved using rule 23 (value_boolean -> VARIABLE .)
-    COMMA           reduce using rule 23 (value_boolean -> VARIABLE .)
-    DOTANDCOMMA     reduce using rule 23 (value_boolean -> VARIABLE .)
-    LOGICAND        reduce using rule 23 (value_boolean -> VARIABLE .)
-    LOGICOR         reduce using rule 23 (value_boolean -> VARIABLE .)
-    GREATER_THAN    reduce using rule 28 (value_numeric -> VARIABLE .)
-    SMALLER_THAN    reduce using rule 28 (value_numeric -> VARIABLE .)
-    EQUAL_COMPARATION reduce using rule 28 (value_numeric -> VARIABLE .)
-    INEQUALITY      reduce using rule 28 (value_numeric -> VARIABLE .)
-    GREATER_THAN_OR_EQUAL reduce using rule 28 (value_numeric -> VARIABLE .)
-    SMALLER_THAN_OR_EQUAL reduce using rule 28 (value_numeric -> VARIABLE .)
-
-  ! COMMA           [ reduce using rule 28 (value_numeric -> VARIABLE .) ]
-  ! DOTANDCOMMA     [ reduce using rule 28 (value_numeric -> VARIABLE .) ]
-  ! LOGICAND        [ reduce using rule 28 (value_numeric -> VARIABLE .) ]
-  ! LOGICOR         [ reduce using rule 28 (value_numeric -> VARIABLE .) ]
-
-
-state 155
-
-    (47) comparison_operation -> value_numeric comparison_operator . comparison_operation
-    (46) comparison_operation -> . value_numeric
-    (47) comparison_operation -> . value_numeric comparison_operator comparison_operation
-    (25) value_numeric -> . INTEGER
-    (26) value_numeric -> . FLOAT_NUMBER
-    (27) value_numeric -> . DECIMAL_NUMBER
-    (28) value_numeric -> . VARIABLE
-
-    INTEGER         shift and go to state 119
-    FLOAT_NUMBER    shift and go to state 113
-    DECIMAL_NUMBER  shift and go to state 114
-    VARIABLE        shift and go to state 169
-
-    value_numeric                  shift and go to state 131
-    comparison_operation           shift and go to state 175
-
-state 156
-
-    (48) comparison_operator -> GREATER_THAN .
-
-    INTEGER         reduce using rule 48 (comparison_operator -> GREATER_THAN .)
-    FLOAT_NUMBER    reduce using rule 48 (comparison_operator -> GREATER_THAN .)
-    DECIMAL_NUMBER  reduce using rule 48 (comparison_operator -> GREATER_THAN .)
-    VARIABLE        reduce using rule 48 (comparison_operator -> GREATER_THAN .)
-
-
-state 157
-
-    (49) comparison_operator -> SMALLER_THAN .
-
-    INTEGER         reduce using rule 49 (comparison_operator -> SMALLER_THAN .)
-    FLOAT_NUMBER    reduce using rule 49 (comparison_operator -> SMALLER_THAN .)
-    DECIMAL_NUMBER  reduce using rule 49 (comparison_operator -> SMALLER_THAN .)
-    VARIABLE        reduce using rule 49 (comparison_operator -> SMALLER_THAN .)
-
-
-state 158
-
-    (50) comparison_operator -> EQUAL_COMPARATION .
-
-    INTEGER         reduce using rule 50 (comparison_operator -> EQUAL_COMPARATION .)
-    FLOAT_NUMBER    reduce using rule 50 (comparison_operator -> EQUAL_COMPARATION .)
-    DECIMAL_NUMBER  reduce using rule 50 (comparison_operator -> EQUAL_COMPARATION .)
-    VARIABLE        reduce using rule 50 (comparison_operator -> EQUAL_COMPARATION .)
-
-
-state 159
-
-    (51) comparison_operator -> INEQUALITY .
-
-    INTEGER         reduce using rule 51 (comparison_operator -> INEQUALITY .)
-    FLOAT_NUMBER    reduce using rule 51 (comparison_operator -> INEQUALITY .)
-    DECIMAL_NUMBER  reduce using rule 51 (comparison_operator -> INEQUALITY .)
-    VARIABLE        reduce using rule 51 (comparison_operator -> INEQUALITY .)
-
-
-state 160
-
-    (52) comparison_operator -> GREATER_THAN_OR_EQUAL .
-
-    INTEGER         reduce using rule 52 (comparison_operator -> GREATER_THAN_OR_EQUAL .)
-    FLOAT_NUMBER    reduce using rule 52 (comparison_operator -> GREATER_THAN_OR_EQUAL .)
-    DECIMAL_NUMBER  reduce using rule 52 (comparison_operator -> GREATER_THAN_OR_EQUAL .)
-    VARIABLE        reduce using rule 52 (comparison_operator -> GREATER_THAN_OR_EQUAL .)
-
-
-state 161
-
-    (53) comparison_operator -> SMALLER_THAN_OR_EQUAL .
-
-    INTEGER         reduce using rule 53 (comparison_operator -> SMALLER_THAN_OR_EQUAL .)
-    FLOAT_NUMBER    reduce using rule 53 (comparison_operator -> SMALLER_THAN_OR_EQUAL .)
-    DECIMAL_NUMBER  reduce using rule 53 (comparison_operator -> SMALLER_THAN_OR_EQUAL .)
-    VARIABLE        reduce using rule 53 (comparison_operator -> SMALLER_THAN_OR_EQUAL .)
-
-
-state 162
-
-    (4) block_main_method -> STATIC VOID MAIN LPARENT STRINGTYPE LBRACKET RBRACKET VARIABLE RPARENT LKEY all_block_code RKEY .
-    (5) block_main_method -> STATIC VOID MAIN LPARENT STRINGTYPE LBRACKET RBRACKET VARIABLE RPARENT LKEY all_block_code RKEY . all_block_code
-    (10) all_block_code -> . block_code
-    (11) all_block_code -> . block_code all_block_code
-    (6) block_code -> . def_const_or_var
-    (7) block_code -> . print_data
-    (8) block_code -> . thread_main
-    (9) block_code -> . concurrent_method
-    (59) def_const_or_var -> . constant_assignation
-    (60) def_const_or_var -> . variable_assignation
-    (29) print_data -> . PRINT LPARENT STRING RPARENT DOTANDCOMMA
-    (30) print_data -> . PRINT LPARENT VARIABLE RPARENT DOTANDCOMMA
-    (101) thread_main -> . declaration_thread declaration_thread thread_init thread_init thread_wait thread_wait
-    (106) concurrent_method -> . STATIC VOID thread_identificator LPARENT RPARENT LKEY thread_logic RKEY
-    (107) concurrent_method -> . WRITE
-    (61) constant_assignation -> . access_modifiers CONST assignation_type_value_multiple DOTANDCOMMA
-    (62) constant_assignation -> . CONST assignation_type_value_multiple DOTANDCOMMA
-    (63) variable_assignation -> . access_modifiers assignation_type_value_multiple DOTANDCOMMA
-    (64) variable_assignation -> . assignation_type_value_multiple DOTANDCOMMA
-    (102) declaration_thread -> . THREAD thread_identificator ASSIGNATION NEW THREAD LPARENT thread_identificator RPARENT DOTANDCOMMA
-    (103) declaration_thread -> . THREAD thread_identificator ASSIGNATION NEW THREAD LPARENT concurrent_method RPARENT DOTANDCOMMA
-    (65) access_modifiers -> . PUBLIC
-    (66) access_modifiers -> . PRIVATE
-    (86) assignation_type_value_multiple -> . INTTYPE assignation_int_multiple
-    (87) assignation_type_value_multiple -> . STRINGTYPE assignation_string_multiple
-    (88) assignation_type_value_multiple -> . FLOATTYPE assignation_float_multiple
-    (89) assignation_type_value_multiple -> . BOOLTYPE assignation_true_multiple
-    (90) assignation_type_value_multiple -> . BOOLTYPE assignation_false_multiple
-
-    RKEY            reduce using rule 4 (block_main_method -> STATIC VOID MAIN LPARENT STRINGTYPE LBRACKET RBRACKET VARIABLE RPARENT LKEY all_block_code RKEY .)
-    PRINT           shift and go to state 39
-    STATIC          shift and go to state 29
-    WRITE           shift and go to state 41
-    CONST           shift and go to state 43
-    THREAD          shift and go to state 45
-    PUBLIC          shift and go to state 46
-    PRIVATE         shift and go to state 47
-    INTTYPE         shift and go to state 48
-    STRINGTYPE      shift and go to state 30
-    FLOATTYPE       shift and go to state 49
-    BOOLTYPE        shift and go to state 50
-
-    all_block_code                 shift and go to state 176
-    block_code                     shift and go to state 32
-    def_const_or_var               shift and go to state 33
-    print_data                     shift and go to state 34
-    thread_main                    shift and go to state 35
-    concurrent_method              shift and go to state 36
-    constant_assignation           shift and go to state 37
-    variable_assignation           shift and go to state 38
-    declaration_thread             shift and go to state 40
-    access_modifiers               shift and go to state 42
-    assignation_type_value_multiple shift and go to state 44
-
-state 163
-
-    (106) concurrent_method -> STATIC VOID thread_identificator LPARENT RPARENT LKEY . thread_logic RKEY
-    (108) thread_logic -> . thread_sentence
-    (109) thread_logic -> . thread_logic thread_sentence
-    (110) thread_sentence -> . thread_expression DOTANDCOMMA
-    (111) thread_expression -> . thread_identificator DOT concurrent_method LPARENT RPARENT
-    (112) thread_expression -> . PRINT LPARENT STRING RPARENT
-    (115) thread_identificator -> . VARIABLE
-
-    PRINT           shift and go to state 181
-    VARIABLE        shift and go to state 65
-
-    thread_identificator           shift and go to state 177
-    thread_logic                   shift and go to state 178
-    thread_sentence                shift and go to state 179
-    thread_expression              shift and go to state 180
-
-state 164
-
-    (101) thread_main -> declaration_thread declaration_thread thread_init thread_init thread_wait thread_wait .
-
-    PRINT           reduce using rule 101 (thread_main -> declaration_thread declaration_thread thread_init thread_init thread_wait thread_wait .)
-    STATIC          reduce using rule 101 (thread_main -> declaration_thread declaration_thread thread_init thread_init thread_wait thread_wait .)
-    WRITE           reduce using rule 101 (thread_main -> declaration_thread declaration_thread thread_init thread_init thread_wait thread_wait .)
-    CONST           reduce using rule 101 (thread_main -> declaration_thread declaration_thread thread_init thread_init thread_wait thread_wait .)
-    THREAD          reduce using rule 101 (thread_main -> declaration_thread declaration_thread thread_init thread_init thread_wait thread_wait .)
-    PUBLIC          reduce using rule 101 (thread_main -> declaration_thread declaration_thread thread_init thread_init thread_wait thread_wait .)
-    PRIVATE         reduce using rule 101 (thread_main -> declaration_thread declaration_thread thread_init thread_init thread_wait thread_wait .)
-    INTTYPE         reduce using rule 101 (thread_main -> declaration_thread declaration_thread thread_init thread_init thread_wait thread_wait .)
-    STRINGTYPE      reduce using rule 101 (thread_main -> declaration_thread declaration_thread thread_init thread_init thread_wait thread_wait .)
-    FLOATTYPE       reduce using rule 101 (thread_main -> declaration_thread declaration_thread thread_init thread_init thread_wait thread_wait .)
-    BOOLTYPE        reduce using rule 101 (thread_main -> declaration_thread declaration_thread thread_init thread_init thread_wait thread_wait .)
-    RKEY            reduce using rule 101 (thread_main -> declaration_thread declaration_thread thread_init thread_init thread_wait thread_wait .)
-    $end            reduce using rule 101 (thread_main -> declaration_thread declaration_thread thread_init thread_init thread_wait thread_wait .)
-
-
-state 165
-
-    (105) thread_wait -> thread_identificator DOT . JOIN LPARENT RPARENT DOTANDCOMMA
-
-    JOIN            shift and go to state 182
-
-
-state 166
-
-    (104) thread_init -> thread_identificator DOT START LPARENT . RPARENT DOTANDCOMMA
-
-    RPARENT         shift and go to state 183
-
-
-state 167
-
-    (102) declaration_thread -> THREAD thread_identificator ASSIGNATION NEW THREAD LPARENT . thread_identificator RPARENT DOTANDCOMMA
-    (103) declaration_thread -> THREAD thread_identificator ASSIGNATION NEW THREAD LPARENT . concurrent_method RPARENT DOTANDCOMMA
-    (115) thread_identificator -> . VARIABLE
-    (106) concurrent_method -> . STATIC VOID thread_identificator LPARENT RPARENT LKEY thread_logic RKEY
-    (107) concurrent_method -> . WRITE
-
-    VARIABLE        shift and go to state 65
-    STATIC          shift and go to state 29
-    WRITE           shift and go to state 41
-
-    thread_identificator           shift and go to state 184
-    concurrent_method              shift and go to state 185
-
-state 168
-
-    (40) arithmetic_operation -> value_numeric arithmetic_operator arithmetic_operation .
-
-    COMMA           reduce using rule 40 (arithmetic_operation -> value_numeric arithmetic_operator arithmetic_operation .)
-    DOTANDCOMMA     reduce using rule 40 (arithmetic_operation -> value_numeric arithmetic_operator arithmetic_operation .)
-
-
-state 169
-
-    (28) value_numeric -> VARIABLE .
-
-    PLUS            reduce using rule 28 (value_numeric -> VARIABLE .)
-    MINUS           reduce using rule 28 (value_numeric -> VARIABLE .)
-    TIMES           reduce using rule 28 (value_numeric -> VARIABLE .)
-    DIVIDE          reduce using rule 28 (value_numeric -> VARIABLE .)
-    PERCENT         reduce using rule 28 (value_numeric -> VARIABLE .)
-    COMMA           reduce using rule 28 (value_numeric -> VARIABLE .)
-    DOTANDCOMMA     reduce using rule 28 (value_numeric -> VARIABLE .)
-    GREATER_THAN    reduce using rule 28 (value_numeric -> VARIABLE .)
-    SMALLER_THAN    reduce using rule 28 (value_numeric -> VARIABLE .)
-    EQUAL_COMPARATION reduce using rule 28 (value_numeric -> VARIABLE .)
-    INEQUALITY      reduce using rule 28 (value_numeric -> VARIABLE .)
-    GREATER_THAN_OR_EQUAL reduce using rule 28 (value_numeric -> VARIABLE .)
-    SMALLER_THAN_OR_EQUAL reduce using rule 28 (value_numeric -> VARIABLE .)
-    LOGICAND        reduce using rule 28 (value_numeric -> VARIABLE .)
-    LOGICOR         reduce using rule 28 (value_numeric -> VARIABLE .)
-
-
-state 170
-
-    (81) assignation_true -> VARIABLE ASSIGNATION VARIABLE .
-    (23) value_boolean -> VARIABLE .
-    (28) value_numeric -> VARIABLE .
-
-  ! reduce/reduce conflict for COMMA resolved using rule 23 (value_boolean -> VARIABLE .)
-  ! reduce/reduce conflict for DOTANDCOMMA resolved using rule 23 (value_boolean -> VARIABLE .)
-  ! reduce/reduce conflict for LOGICAND resolved using rule 23 (value_boolean -> VARIABLE .)
-  ! reduce/reduce conflict for LOGICOR resolved using rule 23 (value_boolean -> VARIABLE .)
-  ! reduce/reduce conflict for COMMA resolved using rule 23 (value_boolean -> VARIABLE .)
-  ! reduce/reduce conflict for DOTANDCOMMA resolved using rule 23 (value_boolean -> VARIABLE .)
-    LOGICAND        reduce using rule 23 (value_boolean -> VARIABLE .)
-    LOGICOR         reduce using rule 23 (value_boolean -> VARIABLE .)
-    COMMA           reduce using rule 23 (value_boolean -> VARIABLE .)
-    DOTANDCOMMA     reduce using rule 23 (value_boolean -> VARIABLE .)
-    GREATER_THAN    reduce using rule 28 (value_numeric -> VARIABLE .)
-    SMALLER_THAN    reduce using rule 28 (value_numeric -> VARIABLE .)
-    EQUAL_COMPARATION reduce using rule 28 (value_numeric -> VARIABLE .)
-    INEQUALITY      reduce using rule 28 (value_numeric -> VARIABLE .)
-    GREATER_THAN_OR_EQUAL reduce using rule 28 (value_numeric -> VARIABLE .)
-    SMALLER_THAN_OR_EQUAL reduce using rule 28 (value_numeric -> VARIABLE .)
-
-  ! COMMA           [ reduce using rule 81 (assignation_true -> VARIABLE ASSIGNATION VARIABLE .) ]
-  ! DOTANDCOMMA     [ reduce using rule 81 (assignation_true -> VARIABLE ASSIGNATION VARIABLE .) ]
-  ! LOGICAND        [ reduce using rule 28 (value_numeric -> VARIABLE .) ]
-  ! LOGICOR         [ reduce using rule 28 (value_numeric -> VARIABLE .) ]
-  ! COMMA           [ reduce using rule 28 (value_numeric -> VARIABLE .) ]
-  ! DOTANDCOMMA     [ reduce using rule 28 (value_numeric -> VARIABLE .) ]
-
-
-state 171
-
-    (82) assignation_true -> VARIABLE ASSIGNATION boolean_operation .
-
-    COMMA           reduce using rule 82 (assignation_true -> VARIABLE ASSIGNATION boolean_operation .)
-    DOTANDCOMMA     reduce using rule 82 (assignation_true -> VARIABLE ASSIGNATION boolean_operation .)
-
-
-state 172
-
-    (84) assignation_false -> VARIABLE ASSIGNATION VARIABLE .
-    (23) value_boolean -> VARIABLE .
-    (28) value_numeric -> VARIABLE .
-
-  ! reduce/reduce conflict for COMMA resolved using rule 23 (value_boolean -> VARIABLE .)
-  ! reduce/reduce conflict for DOTANDCOMMA resolved using rule 23 (value_boolean -> VARIABLE .)
-  ! reduce/reduce conflict for LOGICAND resolved using rule 23 (value_boolean -> VARIABLE .)
-  ! reduce/reduce conflict for LOGICOR resolved using rule 23 (value_boolean -> VARIABLE .)
-  ! reduce/reduce conflict for COMMA resolved using rule 23 (value_boolean -> VARIABLE .)
-  ! reduce/reduce conflict for DOTANDCOMMA resolved using rule 23 (value_boolean -> VARIABLE .)
-    LOGICAND        reduce using rule 23 (value_boolean -> VARIABLE .)
-    LOGICOR         reduce using rule 23 (value_boolean -> VARIABLE .)
-    COMMA           reduce using rule 23 (value_boolean -> VARIABLE .)
-    DOTANDCOMMA     reduce using rule 23 (value_boolean -> VARIABLE .)
-    GREATER_THAN    reduce using rule 28 (value_numeric -> VARIABLE .)
-    SMALLER_THAN    reduce using rule 28 (value_numeric -> VARIABLE .)
-    EQUAL_COMPARATION reduce using rule 28 (value_numeric -> VARIABLE .)
-    INEQUALITY      reduce using rule 28 (value_numeric -> VARIABLE .)
-    GREATER_THAN_OR_EQUAL reduce using rule 28 (value_numeric -> VARIABLE .)
-    SMALLER_THAN_OR_EQUAL reduce using rule 28 (value_numeric -> VARIABLE .)
-
-  ! COMMA           [ reduce using rule 84 (assignation_false -> VARIABLE ASSIGNATION VARIABLE .) ]
-  ! DOTANDCOMMA     [ reduce using rule 84 (assignation_false -> VARIABLE ASSIGNATION VARIABLE .) ]
-  ! LOGICAND        [ reduce using rule 28 (value_numeric -> VARIABLE .) ]
-  ! LOGICOR         [ reduce using rule 28 (value_numeric -> VARIABLE .) ]
-  ! COMMA           [ reduce using rule 28 (value_numeric -> VARIABLE .) ]
-  ! DOTANDCOMMA     [ reduce using rule 28 (value_numeric -> VARIABLE .) ]
-
-
-state 173
-
-    (85) assignation_false -> VARIABLE ASSIGNATION boolean_operation .
-
-    COMMA           reduce using rule 85 (assignation_false -> VARIABLE ASSIGNATION boolean_operation .)
-    DOTANDCOMMA     reduce using rule 85 (assignation_false -> VARIABLE ASSIGNATION boolean_operation .)
-
-
-state 174
-
-    (56) boolean_operation -> value_boolean boolean_operator boolean_operation .
-
-    COMMA           reduce using rule 56 (boolean_operation -> value_boolean boolean_operator boolean_operation .)
-    DOTANDCOMMA     reduce using rule 56 (boolean_operation -> value_boolean boolean_operator boolean_operation .)
-
-
-state 175
-
-    (47) comparison_operation -> value_numeric comparison_operator comparison_operation .
-
-    LOGICAND        reduce using rule 47 (comparison_operation -> value_numeric comparison_operator comparison_operation .)
-    LOGICOR         reduce using rule 47 (comparison_operation -> value_numeric comparison_operator comparison_operation .)
-    COMMA           reduce using rule 47 (comparison_operation -> value_numeric comparison_operator comparison_operation .)
-    DOTANDCOMMA     reduce using rule 47 (comparison_operation -> value_numeric comparison_operator comparison_operation .)
-
-
-state 176
-
-    (5) block_main_method -> STATIC VOID MAIN LPARENT STRINGTYPE LBRACKET RBRACKET VARIABLE RPARENT LKEY all_block_code RKEY all_block_code .
-
-    RKEY            reduce using rule 5 (block_main_method -> STATIC VOID MAIN LPARENT STRINGTYPE LBRACKET RBRACKET VARIABLE RPARENT LKEY all_block_code RKEY all_block_code .)
-
-
-state 177
-
-    (111) thread_expression -> thread_identificator . DOT concurrent_method LPARENT RPARENT
-
-    DOT             shift and go to state 186
-
-
-state 178
-
-    (106) concurrent_method -> STATIC VOID thread_identificator LPARENT RPARENT LKEY thread_logic . RKEY
-    (109) thread_logic -> thread_logic . thread_sentence
-    (110) thread_sentence -> . thread_expression DOTANDCOMMA
-    (111) thread_expression -> . thread_identificator DOT concurrent_method LPARENT RPARENT
-    (112) thread_expression -> . PRINT LPARENT STRING RPARENT
-    (115) thread_identificator -> . VARIABLE
-
-    RKEY            shift and go to state 187
-    PRINT           shift and go to state 181
-    VARIABLE        shift and go to state 65
-
-    thread_identificator           shift and go to state 177
-    thread_sentence                shift and go to state 188
-    thread_expression              shift and go to state 180
-
-state 179
-
-    (108) thread_logic -> thread_sentence .
-
-    RKEY            reduce using rule 108 (thread_logic -> thread_sentence .)
-    PRINT           reduce using rule 108 (thread_logic -> thread_sentence .)
-    VARIABLE        reduce using rule 108 (thread_logic -> thread_sentence .)
-
-
-state 180
-
-    (110) thread_sentence -> thread_expression . DOTANDCOMMA
-
-    DOTANDCOMMA     shift and go to state 189
-
-
-state 181
-
-    (112) thread_expression -> PRINT . LPARENT STRING RPARENT
-
-    LPARENT         shift and go to state 190
-
-
-state 182
-
-    (105) thread_wait -> thread_identificator DOT JOIN . LPARENT RPARENT DOTANDCOMMA
-
-    LPARENT         shift and go to state 191
-
-
-state 183
-
-    (104) thread_init -> thread_identificator DOT START LPARENT RPARENT . DOTANDCOMMA
-
-    DOTANDCOMMA     shift and go to state 192
-
-
-state 184
-
-    (102) declaration_thread -> THREAD thread_identificator ASSIGNATION NEW THREAD LPARENT thread_identificator . RPARENT DOTANDCOMMA
-
-    RPARENT         shift and go to state 193
-
-
-state 185
-
-    (103) declaration_thread -> THREAD thread_identificator ASSIGNATION NEW THREAD LPARENT concurrent_method . RPARENT DOTANDCOMMA
-
-    RPARENT         shift and go to state 194
-
-
-state 186
-
-    (111) thread_expression -> thread_identificator DOT . concurrent_method LPARENT RPARENT
-    (106) concurrent_method -> . STATIC VOID thread_identificator LPARENT RPARENT LKEY thread_logic RKEY
-    (107) concurrent_method -> . WRITE
-
-    STATIC          shift and go to state 29
-    WRITE           shift and go to state 41
-
-    concurrent_method              shift and go to state 195
-
-state 187
-
-    (106) concurrent_method -> STATIC VOID thread_identificator LPARENT RPARENT LKEY thread_logic RKEY .
-
-    PRINT           reduce using rule 106 (concurrent_method -> STATIC VOID thread_identificator LPARENT RPARENT LKEY thread_logic RKEY .)
-    STATIC          reduce using rule 106 (concurrent_method -> STATIC VOID thread_identificator LPARENT RPARENT LKEY thread_logic RKEY .)
-    WRITE           reduce using rule 106 (concurrent_method -> STATIC VOID thread_identificator LPARENT RPARENT LKEY thread_logic RKEY .)
-    CONST           reduce using rule 106 (concurrent_method -> STATIC VOID thread_identificator LPARENT RPARENT LKEY thread_logic RKEY .)
-    THREAD          reduce using rule 106 (concurrent_method -> STATIC VOID thread_identificator LPARENT RPARENT LKEY thread_logic RKEY .)
-    PUBLIC          reduce using rule 106 (concurrent_method -> STATIC VOID thread_identificator LPARENT RPARENT LKEY thread_logic RKEY .)
-    PRIVATE         reduce using rule 106 (concurrent_method -> STATIC VOID thread_identificator LPARENT RPARENT LKEY thread_logic RKEY .)
-    INTTYPE         reduce using rule 106 (concurrent_method -> STATIC VOID thread_identificator LPARENT RPARENT LKEY thread_logic RKEY .)
-    STRINGTYPE      reduce using rule 106 (concurrent_method -> STATIC VOID thread_identificator LPARENT RPARENT LKEY thread_logic RKEY .)
-    FLOATTYPE       reduce using rule 106 (concurrent_method -> STATIC VOID thread_identificator LPARENT RPARENT LKEY thread_logic RKEY .)
-    BOOLTYPE        reduce using rule 106 (concurrent_method -> STATIC VOID thread_identificator LPARENT RPARENT LKEY thread_logic RKEY .)
-    RKEY            reduce using rule 106 (concurrent_method -> STATIC VOID thread_identificator LPARENT RPARENT LKEY thread_logic RKEY .)
-    $end            reduce using rule 106 (concurrent_method -> STATIC VOID thread_identificator LPARENT RPARENT LKEY thread_logic RKEY .)
-    RPARENT         reduce using rule 106 (concurrent_method -> STATIC VOID thread_identificator LPARENT RPARENT LKEY thread_logic RKEY .)
-    LPARENT         reduce using rule 106 (concurrent_method -> STATIC VOID thread_identificator LPARENT RPARENT LKEY thread_logic RKEY .)
-
-
-state 188
-
-    (109) thread_logic -> thread_logic thread_sentence .
-
-    RKEY            reduce using rule 109 (thread_logic -> thread_logic thread_sentence .)
-    PRINT           reduce using rule 109 (thread_logic -> thread_logic thread_sentence .)
-    VARIABLE        reduce using rule 109 (thread_logic -> thread_logic thread_sentence .)
-
-
-state 189
-
-    (110) thread_sentence -> thread_expression DOTANDCOMMA .
-
-    RKEY            reduce using rule 110 (thread_sentence -> thread_expression DOTANDCOMMA .)
-    PRINT           reduce using rule 110 (thread_sentence -> thread_expression DOTANDCOMMA .)
-    VARIABLE        reduce using rule 110 (thread_sentence -> thread_expression DOTANDCOMMA .)
-
-
-state 190
-
-    (112) thread_expression -> PRINT LPARENT . STRING RPARENT
-
-    STRING          shift and go to state 196
-
-
-state 191
-
-    (105) thread_wait -> thread_identificator DOT JOIN LPARENT . RPARENT DOTANDCOMMA
-
-    RPARENT         shift and go to state 197
-
-
-state 192
-
-    (104) thread_init -> thread_identificator DOT START LPARENT RPARENT DOTANDCOMMA .
-
-    VARIABLE        reduce using rule 104 (thread_init -> thread_identificator DOT START LPARENT RPARENT DOTANDCOMMA .)
-
-
-state 193
-
-    (102) declaration_thread -> THREAD thread_identificator ASSIGNATION NEW THREAD LPARENT thread_identificator RPARENT . DOTANDCOMMA
-
-    DOTANDCOMMA     shift and go to state 198
-
-
-state 194
-
-    (103) declaration_thread -> THREAD thread_identificator ASSIGNATION NEW THREAD LPARENT concurrent_method RPARENT . DOTANDCOMMA
-
-    DOTANDCOMMA     shift and go to state 199
-
-
-state 195
-
-    (111) thread_expression -> thread_identificator DOT concurrent_method . LPARENT RPARENT
-
-    LPARENT         shift and go to state 200
-
-
-state 196
-
-    (112) thread_expression -> PRINT LPARENT STRING . RPARENT
-
-    RPARENT         shift and go to state 201
-
-
-state 197
-
-    (105) thread_wait -> thread_identificator DOT JOIN LPARENT RPARENT . DOTANDCOMMA
-
-    DOTANDCOMMA     shift and go to state 202
-
-
-state 198
-
-    (102) declaration_thread -> THREAD thread_identificator ASSIGNATION NEW THREAD LPARENT thread_identificator RPARENT DOTANDCOMMA .
-
-    THREAD          reduce using rule 102 (declaration_thread -> THREAD thread_identificator ASSIGNATION NEW THREAD LPARENT thread_identificator RPARENT DOTANDCOMMA .)
-    VARIABLE        reduce using rule 102 (declaration_thread -> THREAD thread_identificator ASSIGNATION NEW THREAD LPARENT thread_identificator RPARENT DOTANDCOMMA .)
-
-
-state 199
-
-    (103) declaration_thread -> THREAD thread_identificator ASSIGNATION NEW THREAD LPARENT concurrent_method RPARENT DOTANDCOMMA .
-
-    THREAD          reduce using rule 103 (declaration_thread -> THREAD thread_identificator ASSIGNATION NEW THREAD LPARENT concurrent_method RPARENT DOTANDCOMMA .)
-    VARIABLE        reduce using rule 103 (declaration_thread -> THREAD thread_identificator ASSIGNATION NEW THREAD LPARENT concurrent_method RPARENT DOTANDCOMMA .)
-
-
-state 200
-
-    (111) thread_expression -> thread_identificator DOT concurrent_method LPARENT . RPARENT
-
-    RPARENT         shift and go to state 203
-
-
-state 201
-
-    (112) thread_expression -> PRINT LPARENT STRING RPARENT .
-
-    DOTANDCOMMA     reduce using rule 112 (thread_expression -> PRINT LPARENT STRING RPARENT .)
-
-
-state 202
-
-    (105) thread_wait -> thread_identificator DOT JOIN LPARENT RPARENT DOTANDCOMMA .
-
-    VARIABLE        reduce using rule 105 (thread_wait -> thread_identificator DOT JOIN LPARENT RPARENT DOTANDCOMMA .)
-    PRINT           reduce using rule 105 (thread_wait -> thread_identificator DOT JOIN LPARENT RPARENT DOTANDCOMMA .)
-    STATIC          reduce using rule 105 (thread_wait -> thread_identificator DOT JOIN LPARENT RPARENT DOTANDCOMMA .)
-    WRITE           reduce using rule 105 (thread_wait -> thread_identificator DOT JOIN LPARENT RPARENT DOTANDCOMMA .)
-    CONST           reduce using rule 105 (thread_wait -> thread_identificator DOT JOIN LPARENT RPARENT DOTANDCOMMA .)
-    THREAD          reduce using rule 105 (thread_wait -> thread_identificator DOT JOIN LPARENT RPARENT DOTANDCOMMA .)
-    PUBLIC          reduce using rule 105 (thread_wait -> thread_identificator DOT JOIN LPARENT RPARENT DOTANDCOMMA .)
-    PRIVATE         reduce using rule 105 (thread_wait -> thread_identificator DOT JOIN LPARENT RPARENT DOTANDCOMMA .)
-    INTTYPE         reduce using rule 105 (thread_wait -> thread_identificator DOT JOIN LPARENT RPARENT DOTANDCOMMA .)
-    STRINGTYPE      reduce using rule 105 (thread_wait -> thread_identificator DOT JOIN LPARENT RPARENT DOTANDCOMMA .)
-    FLOATTYPE       reduce using rule 105 (thread_wait -> thread_identificator DOT JOIN LPARENT RPARENT DOTANDCOMMA .)
-    BOOLTYPE        reduce using rule 105 (thread_wait -> thread_identificator DOT JOIN LPARENT RPARENT DOTANDCOMMA .)
-    RKEY            reduce using rule 105 (thread_wait -> thread_identificator DOT JOIN LPARENT RPARENT DOTANDCOMMA .)
-    $end            reduce using rule 105 (thread_wait -> thread_identificator DOT JOIN LPARENT RPARENT DOTANDCOMMA .)
-
-
-state 203
-
-    (111) thread_expression -> thread_identificator DOT concurrent_method LPARENT RPARENT .
-
-    DOTANDCOMMA     reduce using rule 111 (thread_expression -> thread_identificator DOT concurrent_method LPARENT RPARENT .)
-
-WARNING: 
-WARNING: Conflicts:
-WARNING: 
-WARNING: reduce/reduce conflict in state 109 resolved using rule (value_numeric -> VARIABLE)
-WARNING: rejected rule (assignation_int -> VARIABLE ASSIGNATION VARIABLE) in state 109
-WARNING: reduce/reduce conflict in state 110 resolved using rule (value_numeric -> INTEGER)
-WARNING: rejected rule (assignation_int -> VARIABLE ASSIGNATION INTEGER) in state 110
-WARNING: reduce/reduce conflict in state 116 resolved using rule (value_numeric -> VARIABLE)
-WARNING: rejected rule (assignation_float -> VARIABLE ASSIGNATION VARIABLE) in state 116
-WARNING: reduce/reduce conflict in state 117 resolved using rule (value_numeric -> FLOAT_NUMBER)
-WARNING: rejected rule (assignation_float -> VARIABLE ASSIGNATION FLOAT_NUMBER) in state 117
-WARNING: reduce/reduce conflict in state 124 resolved using rule (assignation_true -> VARIABLE ASSIGNATION VARIABLE)
-WARNING: rejected rule (assignation_false -> VARIABLE ASSIGNATION VARIABLE) in state 124
-WARNING: reduce/reduce conflict in state 124 resolved using rule (value_boolean -> VARIABLE)
-WARNING: rejected rule (assignation_true -> VARIABLE ASSIGNATION VARIABLE) in state 124
-WARNING: reduce/reduce conflict in state 124 resolved using rule (value_boolean -> VARIABLE)
-WARNING: rejected rule (value_numeric -> VARIABLE) in state 124
-WARNING: reduce/reduce conflict in state 125 resolved using rule (value_boolean -> BOOLTRUE)
-WARNING: rejected rule (assignation_true -> VARIABLE ASSIGNATION BOOLTRUE) in state 125
-WARNING: reduce/reduce conflict in state 126 resolved using rule (assignation_true -> VARIABLE ASSIGNATION boolean_operation)
-WARNING: rejected rule (assignation_false -> VARIABLE ASSIGNATION boolean_operation) in state 126
-WARNING: reduce/reduce conflict in state 127 resolved using rule (value_boolean -> BOOLFALSE)
-WARNING: rejected rule (assignation_false -> VARIABLE ASSIGNATION BOOLFALSE) in state 127
-WARNING: reduce/reduce conflict in state 154 resolved using rule (value_boolean -> VARIABLE)
-WARNING: rejected rule (value_numeric -> VARIABLE) in state 154
-WARNING: reduce/reduce conflict in state 170 resolved using rule (value_boolean -> VARIABLE)
-WARNING: rejected rule (assignation_true -> VARIABLE ASSIGNATION VARIABLE) in state 170
-WARNING: reduce/reduce conflict in state 170 resolved using rule (value_boolean -> VARIABLE)
-WARNING: rejected rule (value_numeric -> VARIABLE) in state 170
-WARNING: reduce/reduce conflict in state 172 resolved using rule (value_boolean -> VARIABLE)
-WARNING: rejected rule (assignation_false -> VARIABLE ASSIGNATION VARIABLE) in state 172
-WARNING: reduce/reduce conflict in state 172 resolved using rule (value_boolean -> VARIABLE)
-WARNING: rejected rule (value_numeric -> VARIABLE) in state 172
-WARNING: Rule (assignation_int -> VARIABLE ASSIGNATION VARIABLE) is never reduced
-WARNING: Rule (assignation_int -> VARIABLE ASSIGNATION INTEGER) is never reduced
-WARNING: Rule (assignation_float -> VARIABLE ASSIGNATION VARIABLE) is never reduced
-WARNING: Rule (assignation_float -> VARIABLE ASSIGNATION FLOAT_NUMBER) is never reduced
-WARNING: Rule (assignation_false -> VARIABLE ASSIGNATION VARIABLE) is never reduced
-WARNING: Rule (assignation_true -> VARIABLE ASSIGNATION VARIABLE) is never reduced
-WARNING: Rule (assignation_true -> VARIABLE ASSIGNATION BOOLTRUE) is never reduced
-WARNING: Rule (assignation_false -> VARIABLE ASSIGNATION BOOLFALSE) is never reduced

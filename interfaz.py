@@ -1,6 +1,6 @@
 import tkinter as tk
 import lexico
-import sintactico
+import sintactico2
 import os
 from tkinter import filedialog
 
@@ -8,15 +8,16 @@ from tkinter import filedialog
 
 def analizar_sintactico():
     contenido_texto = espacioTexto.get("1.0", tk.END)
-    result = sintactico.analizar_sintactico_string(contenido_texto)
+    sintactico2.analizar_sintactico(contenido_texto)
+    errores = sintactico2.mensajes_error
 
-    if result is not None:
-        mensaje = "Análisis sintáctico exitoso"
+    if len(errores) > 0:
+        mensaje = "\n".join(errores)
     else:
-        mensaje = sintactico.p_error_message
+        mensaje = "Análisis sintáctico exitoso"
 
-    espacioTextoDerDer.delete("1.0", tk.END)
-    espacioTextoDerDer.insert(tk.END, mensaje)
+    espacioTextoDerInf.delete("1.0", tk.END)
+    espacioTextoDerInf.insert(tk.END, mensaje)
 
 def analizar_lexico():
     contenido_texto = espacioTexto.get("1.0", tk.END)
@@ -25,11 +26,11 @@ def analizar_lexico():
 
     print(result)
 
-    espacioTextoDerIzq.delete("1.0", tk.END)
+    espacioTextoDerSup.delete("1.0", tk.END)
     for token in result:
         linea = str(token.lineno) + ": " + str(token.value) + " - " + str(token.type)
         print(linea)
-        espacioTextoDerIzq.insert(tk.END, linea + "\n")
+        espacioTextoDerSup.insert(tk.END, linea + "\n")
 
 
 def cargar_contenido():
@@ -48,18 +49,20 @@ def cargar_contenido():
 
 def limpiar_contenido():
     espacioTexto.delete("1.0", tk.END)
-    espacioTextoDerIzq.delete("1.0", tk.END)
-    espacioTextoDerDer.delete("1.0", tk.END)
+    espacioTextoDerSup.delete("1.0", tk.END)
+    espacioTextoDerInf.delete("1.0", tk.END)
 
 #ventana principal
 ventana = tk.Tk()
 ventana.geometry("1200x800")
-
-contenedorIzq = tk.Frame(ventana)
-contenedorIzq.pack(side="left", fill="both", expand=True)
+ventana.grid_columnconfigure((0, 1, 2, 3, 4), weight=1)
+ventana.grid_rowconfigure(0, weight=1)
 
 ancho_ventana = ventana.winfo_width()
 alto_ventana = ventana.winfo_height()
+
+contenedorIzq = tk.Frame(ventana)
+contenedorIzq.grid(row=0, column=0, columnspan=2, sticky="nsew")
 
 ancho_espacio = ancho_ventana // 2
 alto_espacio = alto_ventana
@@ -80,31 +83,31 @@ boton2 = tk.Button(contenedorBotones, text="Limpiar", padx=10, command=limpiar_c
 boton2.pack(side="left")
 
 contenedorDer = tk.Frame(ventana, bg="blue")
-contenedorDer.pack(side="right", fill="both", expand=True)
+contenedorDer.grid(row=0, column=2, columnspan=3, sticky="nsew")
 
 #Contenedores mitad derecho
-contenedorDerIzq = tk.Frame(contenedorDer)
-contenedorDerIzq.pack(side="left", fill="both", expand=True)
+contenedorDerSup = tk.Frame(contenedorDer)
+contenedorDerSup.pack(side="top", fill="both", expand=True)
 
-contenedorDerDer = tk.Frame(contenedorDer)
-contenedorDerDer.pack(side="right", fill="both", expand=True)
+contenedorDerInf = tk.Frame(contenedorDer)
+contenedorDerInf.pack(side="bottom", fill="both", expand=True)
 
-contenedorTextoDerIzq = tk.Frame(contenedorDerIzq, padx=20, pady=20)
-contenedorTextoDerIzq.pack(fill="both", expand=True)
+contenedorTextoDerSup = tk.Frame(contenedorDerSup, padx=20, pady=20)
+contenedorTextoDerSup.pack(fill="both", expand=True)
 
-contenedorTextoDerDer = tk.Frame(contenedorDerDer, padx=20, pady=20)
-contenedorTextoDerDer.pack(fill="both", expand=True)
+contenedorTextoDerInf = tk.Frame(contenedorDerInf, padx=20, pady=20)
+contenedorTextoDerInf.pack(fill="both", expand=True)
 
-espacioTextoDerIzq = tk.Text(contenedorTextoDerIzq, bg="black", fg="white", width=ancho_espacio, height=alto_espacio)
-espacioTextoDerIzq.pack(fill="both", expand=True)
+espacioTextoDerSup = tk.Text(contenedorTextoDerSup, bg="black", fg="white", width=ancho_espacio, height=alto_espacio)
+espacioTextoDerSup.pack(fill="both", expand=True)
 
-espacioTextoDerDer = tk.Text(contenedorTextoDerDer, bg="black", fg="white", width=ancho_espacio, height=alto_espacio)
-espacioTextoDerDer.pack(fill="both", expand=True)
+espacioTextoDerInf = tk.Text(contenedorTextoDerInf, bg="black", fg="white", width=ancho_espacio, height=alto_espacio)
+espacioTextoDerInf.pack(fill="both", expand=True)
 
-boton = tk.Button(contenedorDerDer, text="Sintactico", command=analizar_sintactico)
+boton = tk.Button(contenedorDerInf, text="Sintactico", command=analizar_sintactico)
 boton.pack(side="bottom")
 
-boton = tk.Button(contenedorDerIzq, text="Lexico", command=analizar_lexico)
+boton = tk.Button(contenedorDerSup, text="Lexico", command=analizar_lexico)
 boton.pack(side="bottom")
 
 ventana.mainloop()

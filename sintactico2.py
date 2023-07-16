@@ -297,7 +297,7 @@ public class clase1 {
         bool var6 = false;
         int operacion1 = 123 / 123123 + 5345 * 123124 - 4365;
         int var = 4;
-        string var2 = "5" , var3 = "6";
+        string var2 = "6", var3 = "8";
     }
 }
 '''
@@ -310,3 +310,5 @@ def analizar_sintactico_string(content):
         print(result)
         return result
 var = analizar_sintactico_string(datos)
+
+
