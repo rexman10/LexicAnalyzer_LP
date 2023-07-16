@@ -565,12 +565,34 @@ def p_queue_isEmpty(p):
 
     #fin colas
 
+'''
+#Funcion ejecucion en sintactico2.py
 def p_error(p):
     if p:
          print("Error de sintaxis en token:", p.type, "in: ", p.lexpos, p.value)
          sintactico.errok()
     else:
          print("Syntax error at EOF")
+'''
+
+#Inicio Funcion ejecucion en interfaz.py (Tambien devuelve salida por consola)
+mensajes_error = []
+
+def p_error(p):
+    if p:
+        error_message = "Error de sintaxis en el token: " + str(p.type) + ", línea: " + str(p.lineno)
+        error_message += ", columna: " + str(obtener_columna(p.lexpos))
+        mensajes_error.append(error_message)
+        #Comentar sntactico.errok()
+        sintactico.errok()
+    else:
+        print("Syntax error at EOF")
+
+def obtener_columna(lexpos):
+    linea_actual = datos.rfind('\n', 0, lexpos) + 1
+    return lexpos - linea_actual + 1
+#Fin Funcion ejecucion en interfaz.py (Tambien devuelve salida por consola)
+
 # Build the parser
 sintactico = yacc.yacc()
 
@@ -607,7 +629,7 @@ public class clase1 {
             Autumn,
             Winter
         }
-        string var2 = "6", var3 = "8";   
+        string var2 = "5", var3 = "8";   
         do{
             Queue pila1 = new Queue ();
             pila1.EnQueue(5);
@@ -649,12 +671,31 @@ public class clase1 {
 '''
 
 print(datos)
-def analizar_sintactico_string(content):
+
+'''
+#Funcion ejecucion en sintactico2.py
+def analizar_sintactico_sintactico(content):
     result = sintactico.parse(content)
     #return result is not None
     if result!=None:
         print(result)
         return result
-var = analizar_sintactico_string(datos)
+var = analizar_sintactico_sintactico(datos)
+'''
 
 
+#Inicio Funcion ejecucion en interfaz.py (Tambien devuelve salida por consola)
+def analizar_sintactico(contenido):
+    result = sintactico.parse(contenido)
+    #return result is not None
+    if result!=None:
+        return result
+
+analizar_sintactico(datos)
+
+if len(mensajes_error) > 0:
+    for error in mensajes_error:
+        print(error)
+    else:
+        print("Análisis sintáctico exitoso")
+#Inicio Funcion ejecucion en interfaz.py (Tambien devuelve salida por consola)
