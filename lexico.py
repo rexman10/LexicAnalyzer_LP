@@ -45,6 +45,8 @@ reserved = {
     "Action":"ACTION",
     "await":"AWAIT",
     "Main":"MAIN",
+    "e":"ERROR",
+    "enum":"ENUM",
     #Fin aporte Adair Abrigo
 
     #Inicio aporte David Rivera

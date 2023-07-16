@@ -1,16 +1,21 @@
-using System; 
+using System;
 public class clase1 {
-    public static void Main(string[] args){
-        const int var2 = 14 ; 
-        var3 = var2 ; 
-        const int var5 = 4 ;
-        int var2 = 14 ; var3 = var2 ; 
-        List<string> nombres = new List<string>(){"Adair"};
-        nombres.Add("Eduardo"); 
-        nombres.RemoveAt(0);
-        try{  const int var5 = 4 ; } 
-        catch (exception e){ dsadas } 
-        finally { final }
+    static void Main (string[] args) {
+        bool var1 = x >= 34 && x == 34;
+        bool var2 = x <= 34 || x == 34;
+        bool var3 = x > 34;
+        bool var4 = x < 34 && x == 34 && x != 34;
+        bool var5 = true;   
+        bool var6 = false;
+        int operacion1 = 123 / 123123 + 5345 * 123124 - 4365;
+        int var = 4;
+        string var2 = "6", var3 = "8";
+        try{
+            bool var5 = true;
+        }catch(exception e){
+            Console.WriteLine(e);
+        }
+        List<int> nombres = new List<int>(){4 , 5, 5, 6};    
         nombres.Clear(); 
         nombres.Count();
     }

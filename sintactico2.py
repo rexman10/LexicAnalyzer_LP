@@ -22,6 +22,14 @@ def p_block_code(p):
                                 | print_data
                                 | thread_main
                                 | concurrent_method
+
+                                | block_try_catch
+                                | lists
+                                | functions_list
+                                
+                                | statement_lambda
+
+                                | enums
     '''
 
 def p_all_block_code(p):
@@ -272,9 +280,103 @@ def p_thread_identificator(p):
     '''
     thread_identificator        : VARIABLE
     '''
-
-
 #Fin Metodos Concurrentes
+
+
+
+#Incio estructuras de control
+def p_block_try_catch(p):
+    '''block_try_catch          : try_catch_simply
+                                | try_catch_finally
+    '''
+
+def p_try_catch_simply(p):
+    'try_catch_simply           : TRY LKEY all_block_code_try RKEY CATCH LPARENT EXCEPTION ERROR RPARENT LKEY PRINT LPARENT ERROR RPARENT DOTANDCOMMA RKEY'
+    
+def p_try_catch_finally(p):
+    'try_catch_finally          : TRY LKEY all_block_code_try RKEY CATCH LPARENT EXCEPTION ERROR RPARENT LKEY PRINT LPARENT ERROR RPARENT DOTANDCOMMA RKEY FINALLY LKEY all_block_code_try RKEY'
+
+def p_block_code_try(p):
+    '''block_code_try           : def_const_or_var
+                                | print_data
+    '''
+
+def p_all_block_code_try(p):
+    '''all_block_code_try       : block_code_try
+                                | block_code_try all_block_code_try        
+    '''
+
+
+
+
+#Estructuras de datos
+def p_lists(p):
+    ''' lists                   : list_empty
+                                | list_full
+    '''
+
+def p_list_empty(p):
+    '''list_empty               : LIST SMALLER_THAN STRINGTYPE GREATER_THAN VARIABLE ASSIGNATION NEW LIST SMALLER_THAN STRINGTYPE GREATER_THAN LPARENT RPARENT DOTANDCOMMA
+                                | LIST SMALLER_THAN INTTYPE GREATER_THAN VARIABLE ASSIGNATION NEW LIST SMALLER_THAN INTTYPE GREATER_THAN LPARENT RPARENT DOTANDCOMMA
+    '''
+    
+def p_list_full(p):
+    '''list_full                : LIST SMALLER_THAN STRINGTYPE GREATER_THAN VARIABLE ASSIGNATION NEW LIST SMALLER_THAN STRINGTYPE GREATER_THAN LPARENT RPARENT LKEY strings_list RKEY DOTANDCOMMA
+                                | LIST SMALLER_THAN INTTYPE GREATER_THAN VARIABLE ASSIGNATION NEW LIST SMALLER_THAN INTTYPE GREATER_THAN LPARENT RPARENT LKEY ints_list RKEY DOTANDCOMMA
+    '''
+
+def p_strings_list(p):
+    '''strings_list             : STRING
+                                | STRING COMMA strings_list
+    '''
+
+def p_ints_list(p):
+    '''ints_list                : INTEGER
+                                | INTEGER COMMA ints_list
+    '''
+
+def p_functions_list(p):
+    '''functions_list           : list_func_clear
+                                | list_func_count
+                                | list_func_add
+                                | list_func_removeat
+    '''
+
+def p_list_func_clear(p):
+    "list_func_clear            : VARIABLE DOT CLEAR LPARENT RPARENT DOTANDCOMMA"
+
+def p_list_func_count(p):
+    "list_func_count            : VARIABLE DOT COUNT LPARENT RPARENT DOTANDCOMMA"
+
+def p_list_func_add(p):
+    '''list_func_add            : VARIABLE DOT ADD LPARENT INTEGER RPARENT DOTANDCOMMA
+                                | VARIABLE DOT ADD LPARENT STRING RPARENT DOTANDCOMMA
+    '''
+    
+
+def p_list_func_removeat(p):
+    '''list_func_removeat       : VARIABLE DOT REMOVEAT LPARENT INTEGER RPARENT DOTANDCOMMA
+                                | VARIABLE DOT REMOVEAT LPARENT STRING RPARENT DOTANDCOMMA
+    '''
+
+
+
+#Declaración de funciones
+
+def p_statement_lambda(p):
+    'statement_lambda           : LPARENT VARIABLE ARROW LKEY all_block_code RKEY RPARENT'
+    
+
+
+
+#Tipos de datos
+def p_enums(p):
+    'enums                    : ENUM METHOD LKEY list_enums RKEY'
+
+def p_list_enums(p):
+    '''list_enums               : METHOD
+                                | METHOD COMMA list_enums 
+    '''
 
 def p_error(p):
     if p:
@@ -293,11 +395,31 @@ public class clase1 {
         bool var2 = x <= 34 || x == 34;
         bool var3 = x > 34;
         bool var4 = x < 34 && x == 34 && x != 34;
-        bool var5 = true;
+        bool var5 = true;   
         bool var6 = false;
         int operacion1 = 123 / 123123 + 5345 * 123124 - 4365;
         int var = 4;
         string var2 = "6", var3 = "8";
+        try{
+            bool var5 = true;
+        }catch(exception e){
+            Console.WriteLine(e);
+        }
+        List<int> numeros = new List<int>(){4 , 5, 5, 6};    
+        numeros.Clear(); 
+        numeros.Count();
+        numeros.Add(4);
+        numeros.RemoveAt(0);
+        (x => {
+            int operacion1 = 123 / 123123 + 5345 * 123124 - 4365;
+        })
+        enum Season
+        {
+            Spring,
+            Summer,
+            Autumn,
+            Winter
+        }
     }
 }
 '''
