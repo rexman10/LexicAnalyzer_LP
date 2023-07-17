@@ -34,6 +34,7 @@ def p_block_code(p):
 
                                 | enums
                                 | normal_if
+                                | block_for
                                 | block_while
                                 | stack_struct
                                 | functions_stack
@@ -378,9 +379,25 @@ def p_thread_identificator(p):
     '''
 #Fin Metodos Concurrentes
 
+#Declaración de funciones
 
+def p_statement_lambda(p):
+    'statement_lambda           : LPARENT VARIABLE ARROW LKEY all_block_code RKEY RPARENT'
+    
+#Tipos de datos
+def p_enums(p):
+    'enums                      : ENUM METHOD LKEY list_enums RKEY'
 
-#Incio estructuras de control
+def p_list_enums(p):
+    '''list_enums               : METHOD
+                                | METHOD COMMA list_enums 
+    '''
+
+#Fin Metodos Concurrentes
+
+#Estructuras de control 
+    #sentencia try-catch 
+
 def p_block_try_catch(p):
     '''block_try_catch          : try_catch_simply
                                 | try_catch_finally
@@ -402,10 +419,57 @@ def p_all_block_code_try(p):
                                 | block_code_try all_block_code_try        
     '''
 
+    #sentencia if 
 
+def p_block_if(p):
+    '''block_if                 : normal_if
+                                | all_block_code
+    '''
+def p_normal_if(p):
+    '''normal_if                : IF LPARENT boolean_operation RPARENT LKEY block_if RKEY other_if
+                                | IF LPARENT boolean_operation RPARENT LKEY block_if RKEY 
+    '''
 
+def p_other_if(p):
+    '''other_if                 : ELSE LKEY block_if RKEY
+                                | ELSE_IF LPARENT boolean_operation RPARENT LKEY block_if RKEY other_if
+    '''
+
+    #fin sentencia if
+    #sentencia while
+def p_block_while(p):
+    '''block_while              : normal_while
+                                | do_while             
+    '''
+
+def p_normal_while(p):
+    'normal_while               : WHILE LPARENT boolean_operation RPARENT LKEY all_block_code RKEY'
+
+def p_do_while(p):
+    'do_while                   : DO LKEY all_block_code RKEY WHILE LPARENT boolean_operation RPARENT'
+    
+    #fin sentencia while
+    #sentencia for
+def p_block_for(p):
+    '''block_for                : for_simple
+                                | for_each
+    '''
+
+def p_for_simple(p):
+    '''for_simple               : FOR LPARENT INTTYPE assignation_int DOTANDCOMMA comparison_operation DOTANDCOMMA VARIABLE INCREMENT RPARENT LKEY all_block_code RKEY
+                                | FOR LPARENT INTTYPE assignation_int DOTANDCOMMA comparison_operation DOTANDCOMMA VARIABLE DECREMENT RPARENT LKEY all_block_code RKEY
+
+    '''
+
+def p_for_each(p):
+    '''for_each                 : FOREACH LPARENT data_type VARIABLE IN VARIABLE RPARENT LKEY all_block_code RKEY
+    '''
+
+    #fin sentencia for
 
 #Estructuras de datos
+
+    #Inicio listas 
 def p_lists(p):
     ''' lists                   : list_empty
                                 | list_full
@@ -455,60 +519,7 @@ def p_list_func_removeat(p):
                                 | VARIABLE DOT REMOVEAT LPARENT STRING RPARENT DOTANDCOMMA
     '''
 
-
-
-#Declaración de funciones
-
-def p_statement_lambda(p):
-    'statement_lambda           : LPARENT VARIABLE ARROW LKEY all_block_code RKEY RPARENT'
-    
-
-
-
-#Tipos de datos
-def p_enums(p):
-    'enums                      : ENUM METHOD LKEY list_enums RKEY'
-
-def p_list_enums(p):
-    '''list_enums               : METHOD
-                                | METHOD COMMA list_enums 
-    '''
-
-#Fin Metodos Concurrentes
-
-#Estructuras de control 
-    #sentencia if 
-
-def p_block_if(p):
-    '''block_if                 : normal_if
-                                | all_block_code
-    '''
-def p_normal_if(p):
-    '''normal_if                : IF LPARENT boolean_operation RPARENT LKEY block_if RKEY other_if
-                                | IF LPARENT boolean_operation RPARENT LKEY block_if RKEY 
-    '''
-
-def p_other_if(p):
-    '''other_if                 : ELSE LKEY block_if RKEY
-                                | ELSE_IF LPARENT boolean_operation RPARENT LKEY block_if RKEY other_if
-    '''
-
-    #fin sentencia if
-    #sentencia while
-def p_block_while(p):
-    '''block_while              : normal_while
-                                | do_while             
-    '''
-
-def p_normal_while(p):
-    'normal_while               : WHILE LPARENT boolean_operation RPARENT LKEY all_block_code RKEY'
-
-def p_do_while(p):
-    'do_while                   : DO LKEY all_block_code RKEY WHILE LPARENT boolean_operation RPARENT'
-    #fin sentencia while
-
-
-#Estructuras de datos
+    #fin listas
     #Inicio pilas
 def p_stack_struct(p):
     'stack_struct               : STACK VARIABLE ASSIGNATION NEW STACK LPARENT RPARENT DOTANDCOMMA'
@@ -664,6 +675,19 @@ public class clase1 {
                 string[] arreglo1 = ["true", "false"];
                 char[] arreglo1 = ['A', 'z', 'p', 'G'];
             }
+        }
+
+        for(int i=0;i<5;i++){
+            bool var4 = x < 34 && x == 34 && x != 34;
+            bool var5 = true;
+            for(int i=0;i<5;i--){
+                bool var4 = x < 34 && x == 34 && x != 34;
+                bool var5 = true;
+                foreach(int elementos in numeros){
+                    bool var5 = true;
+                }
+            }
+
         }
 
     }
