@@ -1,34 +1,22 @@
 using System;
-public class clase {
-    // Realiza BFS en el graph a partir del vértice `v`
-    public static void Bfs(Graph graph, int v, boolean[] discovered)
-    {
-        // crea una queue para hacer BFS
-        Queue<Integer> q = new Queue<>();
-
-        // marca el vértice de origen como descubierto
+public class clase1 {
+    static void Main (string[] args) {
+        bool var1 = x >= 34 && x == 34;
+        bool var2 = x <= 34 || x == 34;
+    }
+    public static void Bfs(Graph graph, int v, bool[] discovered){
+        Queue<Integer> queue = new Queue<>();
         discovered[v] = true;
-
-        // poner en queue el vértice fuente
-        q.EnQueue(v);
-
-        // bucle hasta que la queue esté vacía
-        while (!q.isEmpty())
-        {
-            // quitar la queue del nodo frontal e imprimirlo
-            v = q.DeQueue();
-           Console.WriteLine(v + " ");
-
-            // hacer para cada borde (v, u)
-            for (int u: graph.adjList.get(v))
-            {
-                if (!discovered[u])
-                {
-                    // marcarlo como descubierto y ponerlo en queue
+        queue.EnQueue(v);
+        while (!queue.IsEmpty()){
+            v = queue.DeQueue();
+            Console.WriteLine(v + " ");
+            foreach(int u in adjList){
+                if (!discovered[u]){
                     discovered[u] = true;
-                    q.enqueue(u);
+                    queue.EnQueue(u);
                 }
             }
         }
     }
-} 
+}

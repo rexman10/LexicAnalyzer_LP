@@ -70,6 +70,7 @@ def p_data_type(p):
 def p_value_string(p):
     '''value_string             : STRING
                                 | CHAR
+                                | VARIABLE
                                 | concatenation
     '''
 
@@ -78,6 +79,9 @@ def p_value_boolean(p):
                                 | BOOLFALSE
                                 | VARIABLE
                                 | comparison_operation
+                                | functions_queue
+                                | array_indexing
+                                | VARIABLE DOT ISEMPTY LPARENT RPARENT
     '''
 
 def p_value_numeric(p):
@@ -88,8 +92,7 @@ def p_value_numeric(p):
     '''
 
 def p_print_data(p):
-    '''print_data               : PRINT LPARENT STRING RPARENT DOTANDCOMMA
-                                | PRINT LPARENT VARIABLE RPARENT DOTANDCOMMA
+    '''print_data               : PRINT LPARENT value_string RPARENT DOTANDCOMMA
     '''
 
 def p_read_data(p):
@@ -98,7 +101,9 @@ def p_read_data(p):
 
 def p_concatenation(p):
     '''concatenation            : STRING
+                                | VARIABLE
                                 | STRING PLUS concatenation
+                                | VARIABLE PLUS concatenation
     '''
 
 def p_array_type(p):
@@ -251,6 +256,7 @@ def p_constant_assignation(p):
 def p_variable_assignation(p):
     '''variable_assignation     : access_modifiers assignation_type_value_multiple DOTANDCOMMA
                                 | assignation_type_value_multiple DOTANDCOMMA
+                                | VARIABLE ASSIGNATION functions_queue
     '''
 
 def p_access_modifiers(p):
@@ -332,15 +338,15 @@ def p_assignation_false_multiple(p):
 # Definicion de metodos
 
 def p_method_definition(p):
-    '''method_definition        : access_modifiers STATIC data_type METHOD LPARENT func_parameters RPARENT LKEY RETURN VARIABLE DOTANDCOMMA RKEY
-                                | access_modifiers STATIC VOID METHOD LPARENT func_parameters RPARENT LKEY RKEY
-                                | STATIC data_type METHOD LPARENT func_parameters RPARENT LKEY RETURN VARIABLE DOTANDCOMMA RKEY
-                                | STATIC VOID METHOD LPARENT func_parameters RPARENT LKEY RKEY
+    '''method_definition        : access_modifiers STATIC data_type METHOD LPARENT func_parameters RPARENT LKEY all_block_code RETURN VARIABLE DOTANDCOMMA RKEY
+                                | access_modifiers STATIC VOID METHOD LPARENT func_parameters RPARENT LKEY all_block_code RKEY
+                                | STATIC data_type METHOD LPARENT func_parameters RPARENT LKEY all_block_code RETURN VARIABLE DOTANDCOMMA RKEY
+                                | STATIC VOID METHOD LPARENT func_parameters RPARENT LKEY all_block_code RKEY
 
-                                | access_modifiers STATIC data_type METHOD LPARENT RPARENT LKEY RETURN VARIABLE DOTANDCOMMA RKEY
-                                | access_modifiers STATIC VOID METHOD LPARENT RPARENT LKEY RKEY
-                                | STATIC data_type METHOD LPARENT RPARENT LKEY RETURN VARIABLE DOTANDCOMMA RKEY
-                                | STATIC VOID METHOD LPARENT RPARENT LKEY RKEY
+                                | access_modifiers STATIC data_type METHOD LPARENT RPARENT LKEY all_block_code RETURN VARIABLE DOTANDCOMMA RKEY
+                                | access_modifiers STATIC VOID METHOD LPARENT RPARENT LKEY all_block_code RKEY
+                                | STATIC data_type METHOD LPARENT RPARENT LKEY all_block_code RETURN VARIABLE DOTANDCOMMA RKEY
+                                | STATIC VOID METHOD LPARENT RPARENT LKEY all_block_code RKEY
 
                                 | data_type METHOD LPARENT func_parameters RPARENT LKEY block_code RETURN VARIABLE DOTANDCOMMA RKEY
     '''
@@ -642,20 +648,100 @@ datos = '''
 using System;
 public class clase1 {
     static void Main (string[] args) {
-        enum Clasificacion {Pesado, Medio, Liviano }
-        const int gravedad = 9;
-        List<int> masa_obj = new List<int>(){22, 20, 21, 26}; 
-        List<int> peso = new List<int>();
-        foreach(int elementos in numeros){
-            int peso = gravedad * elementos;
-            peso.Add(peso);
+        bool var1 = x >= 34 && x == 34;
+        bool var2 = x <= 34 || x == 34;
+        bool var3 = x > 34;
+        bool var4 = x < 34 && x == 34 && x != 34;
+        bool var5 = true;   
+        bool var6 = false;
+        int operacion1 = 123 / 123123 + 5345 * 123124 - 4365;
+        int var = 4;
+        string var2 = "6", var3 = "8";
+        try{
+            bool var5 = true;
+        }catch(exception e){
+            Console.WriteLine(e);
         }
-        string Calcdensity (int density) 
+        List<int> numeros = new List<int>(){4 , 5, 5, 6};    
+        numeros.Clear(); 
+        numeros.Count();
+        numeros.Add(4);
+        numeros.RemoveAt(0);
+        (x => {
+            int operacion1 = 123 / 123123 + 5345 * 123124 - 4365;
+        })
+        enum Season
         {
-            int tiempo = 2;
-            return tiempo;
+            Spring,
+            Summer,
+            Autumn,
+            Winter
+        }
+        string var2 = "5", var3 = "8";   
+        do{
+            Queue<Integer> pila1 = new Queue<>();
+            pila1.EnQueue(5);
+            pila1.DeQueue();
+            pila1.Clear();
+            pila1.Peek();
+            pila1.IsEmpty();
+        }while(5>10 && 6==3 || false && holi || !false)    
+
+        if (5>10 && 6==3 || false && holi || !false){
+            bool var4 = x < 34 && x == 34 && x != 34;
+            bool var5 = true;
+            bool var6 = false;
+            if (5>10 && 6==3 || false && holi || !false){
+                bool var4 = x < 34 && x == 34 && x != 34;
+                bool var5 = true; 
+            }
+        }else_if(5>10 && 6==3 || false && holi || !false){
+            bool var4 = x < 34 && x == 34 && x != 34;
+            bool var5 = true; 
+        }else{
+            bool var4 = x < 34 && x == 34 && x != 34;
+            bool var5 = true;
+            bool var6 = false;
+            if (5>10 && 6==3 || false && holi || !false){
+                bool var4 = x < 34 && x == 34 && x != 34;
+                bool var5 = true;
+                bool[] arreglo1 = [true, false];
+                int[] arreglo1 = [12, 74];
+                decimal[] arreglo1 = [12.25m, -74.141m];
+                float[] arreglo1 = [12.17f, 74.20f];
+                string[] arreglo1 = ["true", "false"];
+                char[] arreglo1 = ['A', 'z', 'p', 'G'];
+            }
         }
 
+        for(int i=0;i<5;i++){
+            bool var4 = x < 34 && x == 34 && x != 34;
+            bool var5 = true;
+            for(int i=0;i<5;i--){
+                bool var4 = x < 34 && x == 34 && x != 34;
+                bool var5 = true;
+                foreach(int elementos in numeros){
+                    bool var5 = true;
+                }
+            }
+        }
+    }
+    char[] arreglo1 = ['A', 'z', 'p', 'G'];
+
+    public static void Bfs(Graph graph, int v, bool[] discovered){
+        Queue<Integer> queue = new Queue<>();
+        discovered[v] = true;
+        queue.EnQueue(v);
+        while (!queue.IsEmpty()){
+            v = queue.DeQueue();
+            Console.WriteLine(v + " ");
+            foreach(int u in adjList){
+                if (!discovered[u]){
+                    discovered[u] = true;
+                    queue.EnQueue(u);
+                }
+            }
+        }
     }
 }
 '''
