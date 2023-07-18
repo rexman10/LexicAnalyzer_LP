@@ -8,8 +8,10 @@ from tkinter import filedialog
 
 def analizar_sintactico():
     contenido_texto = espacioTexto.get("1.0", tk.END)
+
     sintactico2.analizar_sintactico(contenido_texto)
     errores = sintactico2.mensajes_error
+    sintactico2.resetear_errores()
 
     if len(errores) > 0:
         mensaje = "\n".join(errores)
