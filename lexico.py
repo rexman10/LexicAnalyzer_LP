@@ -51,7 +51,6 @@ reserved = {
 
     #Inicio aporte David Rivera
     "Concurrent": "CONCURRENT",
-    "add": "ADD",
     "ContainsKey": "CONTAINSKEY",
     "ContainsValue": "CONTAINSVALUE",
     #Cambiar la R minucla por mayuscula
@@ -126,7 +125,6 @@ tokens = (
     'INEQUALITY',
     'GREATER_THAN_OR_EQUAL',
     'SMALLER_THAN_OR_EQUAL',
-    'CONCURRENT',
     'IDENTIFIER',
     #Operadores logicos
     'LOGICAND',
@@ -187,7 +185,6 @@ t_SMALLER_THAN_OR_EQUAL = r'\<\='
 t_LOGICAND = r'\&\&'
 t_LOGICOR = r'\|\|'
 t_LOGICNOT = r'\!'
-t_CONCURRENT = r'CONCURRENT'
 t_IDENTIFIER = r'[a-zA-Z_][a-zA-Z0-9_]*'
 #Fin aporte David Rivera
 #Inicio aporte Kenneth Pacheco
