@@ -9,7 +9,6 @@ def p_program(p):
 
 def p_block_publicClass(p):
     '''block_publicClass        : PUBLIC CLASS VARIABLE LKEY block_main_method RKEY
-                                | STATIC VOID MAIN LPARENT STRINGTYPE LBRACKET RBRACKET VARIABLE RPARENT LKEY all_block_code RKEY all_block_code
     '''
 
 def p_block_main_method(p):
@@ -25,8 +24,10 @@ def p_block_code(p):
                                 | array_indexing
                                 | thread_main
                                 | concurrent_method
+                                | method_definition
 
                                 | block_try_catch
+
                                 | lists
                                 | functions_list
                                 
@@ -34,10 +35,14 @@ def p_block_code(p):
 
                                 | enums
                                 | normal_if
+
                                 | block_for
+
                                 | block_while
+
                                 | stack_struct
                                 | functions_stack
+
                                 | queue_struct
                                 | functions_queue
     '''
@@ -56,6 +61,8 @@ def p_data_type(p):
                                 | DECIMALTYPE
                                 | INTTYPE
                                 | BOOLTYPE
+                                | array_type
+                                | METHOD
     '''
 
 # Valores disponibles
@@ -322,6 +329,28 @@ def p_assignation_false_multiple(p):
                                                 | assignation_false COMMA assignation_false_multiple
     '''
 
+# Definicion de metodos
+
+def p_method_definition(p):
+    '''method_definition        : access_modifiers STATIC data_type METHOD LPARENT func_parameters RPARENT LKEY RETURN VARIABLE DOTANDCOMMA RKEY
+                                | access_modifiers STATIC VOID METHOD LPARENT func_parameters RPARENT LKEY RKEY
+                                | STATIC data_type METHOD LPARENT func_parameters RPARENT LKEY RETURN VARIABLE DOTANDCOMMA RKEY
+                                | STATIC VOID METHOD LPARENT func_parameters RPARENT LKEY RKEY
+
+                                | access_modifiers STATIC data_type METHOD LPARENT RPARENT LKEY RETURN VARIABLE DOTANDCOMMA RKEY
+                                | access_modifiers STATIC VOID METHOD LPARENT RPARENT LKEY RKEY
+                                | STATIC data_type METHOD LPARENT RPARENT LKEY RETURN VARIABLE DOTANDCOMMA RKEY
+                                | STATIC VOID METHOD LPARENT RPARENT LKEY RKEY
+    '''
+
+def p_func_parameter(p):
+    '''func_parameter           : data_type VARIABLE'''
+
+def p_func_parameters(p):
+    '''func_parameters          : func_parameter
+                                | func_parameter COMMA func_parameters
+    '''
+
 #Inicio Metodos concurrentes
 def p_thread_main(p):
     '''
@@ -549,7 +578,7 @@ def p_stack_isEmpty(p):
     #fin pilas
     #inicio colas
 def p_queue_struct(p):
-    'queue_struct               : QUEUE VARIABLE ASSIGNATION NEW QUEUE LPARENT RPARENT DOTANDCOMMA'
+    'queue_struct               : QUEUE SMALLER_THAN data_type GREATER_THAN VARIABLE ASSIGNATION NEW QUEUE SMALLER_THAN GREATER_THAN LPARENT RPARENT DOTANDCOMMA'
 
 def p_functions_queue(p):
     '''functions_queue          : queue_enqueue
@@ -642,7 +671,7 @@ public class clase1 {
         }
         string var2 = "5", var3 = "8";   
         do{
-            Queue pila1 = new Queue ();
+            Queue<Integer> pila1 = new Queue<>();
             pila1.EnQueue(5);
             pila1.DeQueue();
             pila1.Clear();
@@ -687,10 +716,18 @@ public class clase1 {
                     bool var5 = true;
                 }
             }
-
         }
-
     }
+    char[] arreglo1 = ['A', 'z', 'p', 'G'];
+
+    public static string Bfs(Graph graph, int value, bool[] discovered){return var;}
+    public static void Bfs(Graph graph, int value, bool[] discovered){}
+    static int Bfs(Graph graph, int value, bool[] discovered){return var;}
+    static void Bfs(Graph graph, int value, bool[] discovered){}
+    public static bool Bfs(){return var;}
+    public static void Bfs(){}
+    static decimal Bfs(){return var;}
+    static void Bfs(){}
 }
 '''
 
@@ -720,6 +757,6 @@ analizar_sintactico(datos)
 if len(mensajes_error) > 0:
     for error in mensajes_error:
         print(error)
-    else:
-        print("Análisis sintáctico exitoso")
+else:
+    print("Análisis sintáctico exitoso")
 #Inicio Funcion ejecucion en interfaz.py (Tambien devuelve salida por consola)
