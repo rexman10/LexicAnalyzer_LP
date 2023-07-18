@@ -341,6 +341,8 @@ def p_method_definition(p):
                                 | access_modifiers STATIC VOID METHOD LPARENT RPARENT LKEY RKEY
                                 | STATIC data_type METHOD LPARENT RPARENT LKEY RETURN VARIABLE DOTANDCOMMA RKEY
                                 | STATIC VOID METHOD LPARENT RPARENT LKEY RKEY
+
+                                | data_type METHOD LPARENT func_parameters RPARENT LKEY block_code RETURN VARIABLE DOTANDCOMMA RKEY
     '''
 
 def p_func_parameter(p):
@@ -540,12 +542,12 @@ def p_list_func_count(p):
 def p_list_func_add(p):
     '''list_func_add            : VARIABLE DOT ADD LPARENT INTEGER RPARENT DOTANDCOMMA
                                 | VARIABLE DOT ADD LPARENT STRING RPARENT DOTANDCOMMA
+                                | VARIABLE DOT ADD LPARENT VARIABLE RPARENT DOTANDCOMMA
     '''
     
 
 def p_list_func_removeat(p):
     '''list_func_removeat       : VARIABLE DOT REMOVEAT LPARENT INTEGER RPARENT DOTANDCOMMA
-                                | VARIABLE DOT REMOVEAT LPARENT STRING RPARENT DOTANDCOMMA
     '''
 
     #fin listas
@@ -640,98 +642,27 @@ datos = '''
 using System;
 public class clase1 {
     static void Main (string[] args) {
-        bool var1 = x >= 34 && x == 34;
-        bool var2 = x <= 34 || x == 34;
-        bool var3 = x > 34;
-        bool var4 = x < 34 && x == 34 && x != 34;
-        bool var5 = true;   
-        bool var6 = false;
-        int operacion1 = 123 / 123123 + 5345 * 123124 - 4365;
-        int var = 4;
-        string var2 = "6", var3 = "8";
-        try{
-            bool var5 = true;
-        }catch(exception e){
-            Console.WriteLine(e);
+        enum Clasificacion {Pesado, Medio, Liviano }
+        const int gravedad = 9;
+        List<int> masa_obj = new List<int>(){22, 20, 21, 26}; 
+        List<int> peso = new List<int>();
+        foreach(int elementos in numeros){
+            int peso = gravedad * elementos;
+            peso.Add(peso);
         }
-        List<int> numeros = new List<int>(){4 , 5, 5, 6};    
-        numeros.Clear(); 
-        numeros.Count();
-        numeros.Add(4);
-        numeros.RemoveAt(0);
-        (x => {
-            int operacion1 = 123 / 123123 + 5345 * 123124 - 4365;
-        })
-        enum Season
+        string Calcdensity (int density) 
         {
-            Spring,
-            Summer,
-            Autumn,
-            Winter
-        }
-        string var2 = "5", var3 = "8";   
-        do{
-            Queue<Integer> pila1 = new Queue<>();
-            pila1.EnQueue(5);
-            pila1.DeQueue();
-            pila1.Clear();
-            pila1.Peek();
-            pila1.IsEmpty();
-        }while(5>10 && 6==3 || false && holi || !false)    
-
-        if (5>10 && 6==3 || false && holi || !false){
-            bool var4 = x < 34 && x == 34 && x != 34;
-            bool var5 = true;
-            bool var6 = false;
-            if (5>10 && 6==3 || false && holi || !false){
-                bool var4 = x < 34 && x == 34 && x != 34;
-                bool var5 = true; 
-            }
-        }else_if(5>10 && 6==3 || false && holi || !false){
-            bool var4 = x < 34 && x == 34 && x != 34;
-            bool var5 = true; 
-        }else{
-            bool var4 = x < 34 && x == 34 && x != 34;
-            bool var5 = true;
-            bool var6 = false;
-            if (5>10 && 6==3 || false && holi || !false){
-                bool var4 = x < 34 && x == 34 && x != 34;
-                bool var5 = true;
-                bool[] arreglo1 = [true, false];
-                int[] arreglo1 = [12, 74];
-                decimal[] arreglo1 = [12.25m, -74.141m];
-                float[] arreglo1 = [12.17f, 74.20f];
-                string[] arreglo1 = ["true", "false"];
-                char[] arreglo1 = ['A', 'z', 'p', 'G'];
-            }
+            int tiempo = 2;
+            return tiempo;
         }
 
-        for(int i=0;i<5;i++){
-            bool var4 = x < 34 && x == 34 && x != 34;
-            bool var5 = true;
-            for(int i=0;i<5;i--){
-                bool var4 = x < 34 && x == 34 && x != 34;
-                bool var5 = true;
-                foreach(int elementos in numeros){
-                    bool var5 = true;
-                }
-            }
-        }
     }
-    char[] arreglo1 = ['A', 'z', 'p', 'G'];
-
-    public static string Bfs(Graph graph, int value, bool[] discovered){return var;}
-    public static void Bfs(Graph graph, int value, bool[] discovered){}
-    static int Bfs(Graph graph, int value, bool[] discovered){return var;}
-    static void Bfs(Graph graph, int value, bool[] discovered){}
-    public static bool Bfs(){return var;}
-    public static void Bfs(){}
-    static decimal Bfs(){return var;}
-    static void Bfs(){}
 }
 '''
 
 print(datos)
+
+
 
 '''
 #Funcion ejecucion en sintactico2.py

@@ -1,22 +1,16 @@
 using System;
 public class clase1 {
     static void Main (string[] args) {
-        bool var1 = x >= 34 && x == 34;
-        bool var2 = x <= 34 || x == 34;
-        bool var3 = x > 34;
-        bool var4 = x < 34 && x == 34 && x != 34;
-        bool var5 = true;   
-        bool var6 = false;
-        int operacion1 = 123 / 123123 + 5345 * 123124 - 4365;
-        int var = 4;
-        string var2 = "6", var3 = "8";
-        try{
-            bool var5 = true;
-        }catch(exception e){
-            Console.WriteLine(e);
-        }
-        List<int> nombres = new List<int>(){4 , 5, 5, 6};    
-        nombres.Clear(); 
-        nombres.Count();
+        const float GRAVEDAD = 9.8;
+        List<int> peso_obj = new List<int>(){22, 20, 21, 26}; 
+        for (int u: graph.adjList.get(v))
+            {
+                if (!discovered[u])
+                {
+                    // marcarlo como descubierto y ponerlo en queue
+                    discovered[u] = true;
+                    q.enqueue(u);
+                }
+            }
     }
 }
