@@ -1,16 +1,7 @@
 using System;
 public class clase1 {
     static void Main (string[] args) {
-        const float GRAVEDAD = 9.8;
-        List<int> peso_obj = new List<int>(){22, 20, 21, 26}; 
-        for (int u: graph.adjList.get(v))
-            {
-                if (!discovered[u])
-                {
-                    // marcarlo como descubierto y ponerlo en queue
-                    discovered[u] = true;
-                    q.enqueue(u);
-                }
-            }
+        const int gravedad = 9;
+        List<int> masa = new List<int>(){22, 20, 21, 26}; 
     }
 }

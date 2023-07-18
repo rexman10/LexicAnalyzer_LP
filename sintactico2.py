@@ -746,8 +746,41 @@ public class clase1 {
 }
 '''
 
-print(datos)
+#print(datos)
 
+datos2 = '''
+using System;
+public class clase1 {
+    static void Main (string[] args) {
+        const int factor= 9;
+        List<int> distancias = new List<int>(){22, 20, 21, 26}; 
+        List<int> distanciascorregidas = new List<int>();
+        foreach(int masa in masas){
+            int dt = factor * distancias;
+            distanciascorregidas.Add(dt);
+            Console.WriteLine(dt);        
+        }
+        public static void CalculateVe(Graph graph, int v){
+        Queue<Integer> tiempos = new Queue<>();
+        discovered[v] = true;
+        queue.EnQueue(v);
+        while (!queue.IsEmpty()){
+            v = queue.DeQueue();
+            Console.WriteLine(v + " ");
+            foreach(int u in adjList){
+                if (!discovered[u]){
+                    discovered[u] = true;
+                    queue.EnQueue(u);
+                }
+            }
+        }
+    }
+
+    }
+}
+'''
+
+print(datos2)
 
 
 '''
@@ -769,7 +802,7 @@ def analizar_sintactico(contenido):
     if result!=None:
         return result
 
-analizar_sintactico(datos)
+analizar_sintactico(datos2)
 
 if len(mensajes_error) > 0:
     for error in mensajes_error:
