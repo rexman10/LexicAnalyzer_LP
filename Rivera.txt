@@ -1,0 +1,40 @@
+using System;
+
+public class mainRecursion
+{
+    static void Main(string[] args)
+    {
+        Thread threaduno = new Thread(static void metodouno()
+        {
+            // Lógica del primer método concurrente
+            Console.WriteLine("metodouno is running");
+        });
+        Thread threaddos = new Thread(static void metododos()
+        {
+            // Lógica del segundo método concurrente
+            Console.WriteLine("metododos is running");
+        });
+
+        threaduno.Start();
+        threaddos.Start();
+
+        // Aquí puedes realizar otras operaciones mientras los hilos se ejecutan en paralelo
+
+        threaduno.Join();
+        threaddos.Join();
+
+        // El programa espera a que ambos hilos finalicen antes de salir
+    }
+
+    static void metodouno()
+    {
+        // Lógica del primer método concurrente
+        Console.WriteLine("metodouno is running");
+    }
+
+    static void metododos()
+    {
+        // Lógica del segundo método concurrente
+        Console.WriteLine("metododos is running");
+    }
+}

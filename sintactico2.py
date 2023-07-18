@@ -45,6 +45,8 @@ def p_block_code(p):
 
                                 | queue_struct
                                 | functions_queue
+
+                                | dictionary_declaration
     '''
 
 def p_all_block_code(p):
@@ -613,6 +615,98 @@ def p_queue_isEmpty(p):
 
     #fin colas
 
+    #Inicio diccionarios
+
+def p_dictionary_declaration(p):
+    '''
+    dictionary_declaration      : dictionary_string
+                                | dictionary_integer
+    '''
+
+def p_dictionary_integer(p):
+    '''
+    dictionary_integer          : dictionary_integer_empty
+                                | dictionary_integer_full
+    '''
+
+def p_dictionary_string(p):
+    '''
+    dictionary_string           : dictionary_string_empty
+                                | dictionary_string_full
+    '''
+
+def p_dictionary_string_full(p):
+    '''
+    dictionary_string_full      : DICTIONARY SMALLER_THAN STRINGTYPE COMMA STRINGTYPE GREATER_THAN VARIABLE ASSIGNATION NEW DICTIONARY SMALLER_THAN STRINGTYPE COMMA STRINGTYPE GREATER_THAN LPARENT RPARENT LKEY dictionary_string_full_values RKEY DOTANDCOMMA
+    '''
+
+def p_dictionary_string_full_values(p):
+    '''
+    dictionary_string_full_values       : LKEY value_string COMMA value_string RKEY
+                                        | LKEY value_string COMMA value_string RKEY COMMA dictionary_string_full_values
+    '''
+
+def p_dictionary_string_empty(p):
+    '''
+    dictionary_string_empty     : DICTIONARY SMALLER_THAN STRINGTYPE COMMA STRINGTYPE GREATER_THAN VARIABLE ASSIGNATION NEW DICTIONARY SMALLER_THAN STRINGTYPE COMMA STRINGTYPE GREATER_THAN LPARENT RPARENT DOTANDCOMMA dictionary_string_empty_methods
+    '''
+
+def p_dictionary_string_empty_methods(p):
+    '''
+    dictionary_string_empty_methods : dictionary_string_empty_add
+                                    | dictionary_string_empty_add dictionary_string_empty_methods
+                                    | dictionary_string_empty_remove
+                                    | dictionary_string_empty_remove dictionary_string_empty_methods
+    '''
+def p_dictionary_string_empty_add(p):
+    '''
+    dictionary_string_empty_add     : VARIABLE DOT ADD LPARENT value_string COMMA value_string RPARENT DOTANDCOMMA
+                                    | VARIABLE DOT ADD LPARENT value_string COMMA value_string RPARENT DOTANDCOMMA dictionary_string_empty_methods
+    '''
+
+def p_dictionary_string_empty_remove(p):
+    '''
+    dictionary_string_empty_remove  : VARIABLE DOT REMOVEDICT LPARENT value_string RPARENT DOTANDCOMMA
+                                    | VARIABLE DOT REMOVEDICT LPARENT value_string RPARENT DOTANDCOMMA dictionary_string_empty_methods
+    '''
+
+def p_dictionary_integer_full(p):
+    '''
+    dictionary_integer_full      : DICTIONARY SMALLER_THAN INTTYPE COMMA INTTYPE GREATER_THAN VARIABLE ASSIGNATION NEW DICTIONARY SMALLER_THAN INTTYPE COMMA INTTYPE GREATER_THAN LPARENT RPARENT LKEY dictionary_integer_full_values RKEY DOTANDCOMMA
+    '''
+
+def p_dictionary_integer_full_values(p):
+    '''
+    dictionary_integer_full_values      : LKEY value_numeric COMMA value_numeric RKEY
+                                        | LKEY value_numeric COMMA value_numeric RKEY COMMA dictionary_integer_full_values
+    '''
+def p_dictionary_integer_empty(p):
+    '''
+    dictionary_integer_empty        : DICTIONARY SMALLER_THAN INTTYPE COMMA INTTYPE GREATER_THAN VARIABLE ASSIGNATION NEW DICTIONARY SMALLER_THAN INTTYPE COMMA INTTYPE GREATER_THAN LPARENT RPARENT DOTANDCOMMA dictionary_integer_empty_methods
+    '''
+
+
+def p_dictionary_integer_empty_methods(p):
+    '''
+    dictionary_integer_empty_methods    : dictionary_integer_empty_add
+                                        | dictionary_integer_empty_add dictionary_integer_empty_methods
+                                        | dictionary_integer_empty_remove
+                                        | dictionary_integer_empty_remove dictionary_integer_empty_methods
+
+    '''
+def p_dictionary_integer_empty_add(p):
+    '''
+    dictionary_integer_empty_add        : VARIABLE DOT ADD LPARENT INTEGER COMMA INTEGER RPARENT DOTANDCOMMA
+                                        | VARIABLE DOT ADD LPARENT INTEGER COMMA INTEGER RPARENT DOTANDCOMMA dictionary_integer_empty_methods
+    '''
+
+def p_dictionary_integer_empty_remove(p):
+    '''
+    dictionary_integer_empty_remove     : VARIABLE DOT REMOVEDICT LPARENT value_numeric RPARENT DOTANDCOMMA
+                                        | VARIABLE DOT REMOVEDICT LPARENT value_numeric RPARENT DOTANDCOMMA dictionary_integer_empty_methods
+    '''
+    # Fin diccionarios
+
 '''
 #Funcion ejecucion en sintactico2.py
 def p_error(p):
@@ -629,16 +723,19 @@ mensajes_error = []
 def p_error(p):
     if p:
         error_message = "Error de sintaxis en el token: " + str(p.type) + ", línea: " + str(p.lineno)
-        error_message += ", columna: " + str(obtener_columna(p.lexpos))
         mensajes_error.append(error_message)
         #Comentar sntactico.errok()
         sintactico.errok()
     else:
         print("Syntax error at EOF")
 
-def obtener_columna(lexpos):
-    linea_actual = datos.rfind('\n', 0, lexpos) + 1
-    return lexpos - linea_actual + 1
+def resetear_linea():
+    global contenido_archivo
+    contenido_archivo = None
+
+def resetear_errores():
+    global mensajes_error
+    mensajes_error = []
 #Fin Funcion ejecucion en interfaz.py (Tambien devuelve salida por consola)
 
 # Build the parser
@@ -648,6 +745,23 @@ datos = '''
 using System;
 public class clase1 {
     static void Main (string[] args) {
+        Dictionary<string, string> comunidadesCapitales = new Dictionary<string, string>()
+        {
+            {"Aragon", "Zaragoza"},
+            {"Navarra", "Pamplona"}
+        };
+        Dictionary<string, string> dicc = new Dictionary<string, string>();
+        dicc.Add("mirandma","Martin Miranda");
+        dicc.Add("polizzia","Ariel Polizzi");
+        dicc.Remove("polizzia");
+        
+        Dictionary<int, int> diccint = new Dictionary<int, int>();
+        diccint.Add(5, 25);
+        diccint.Add(8, 30);
+        diccint.Add(12,38);
+        diccint.Add(58,59);
+        diccint.Remove(58);
+    
         bool var1 = x >= 34 && x == 34;
         bool var2 = x <= 34 || x == 34;
         bool var3 = x > 34;
@@ -802,7 +916,7 @@ def analizar_sintactico(contenido):
     if result!=None:
         return result
 
-analizar_sintactico(datos2)
+analizar_sintactico(datos)
 
 if len(mensajes_error) > 0:
     for error in mensajes_error:

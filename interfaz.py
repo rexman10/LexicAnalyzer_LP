@@ -21,6 +21,7 @@ def analizar_sintactico():
 
 def analizar_lexico():
     contenido_texto = espacioTexto.get("1.0", tk.END)
+    lexico.resetear_numero_linea()
     numero_linea_inicial = lexico.obtener_numero_linea()
     result = lexico.analyze_lexical_string(contenido_texto, numero_linea_inicial)
 
@@ -34,7 +35,7 @@ def analizar_lexico():
 
 
 def cargar_contenido():
-    lexico.reseteo_numero_linea()
+
     global contenido_archivo
 
     archivo = filedialog.askopenfilename(initialdir=os.path.dirname(__file__), title="Seleccionar archivo",
@@ -43,9 +44,11 @@ def cargar_contenido():
         with open(archivo, "r") as f:
             contenido_archivo = f.read()
 
+        sintactico2.resetear_linea()  # Reinicia el conteo de línea
         espacioTexto.delete("1.0", tk.END)
         espacioTexto.insert(tk.END, contenido_archivo)
         print(contenido_archivo)
+
 
 def limpiar_contenido():
     espacioTexto.delete("1.0", tk.END)

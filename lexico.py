@@ -50,6 +50,12 @@ reserved = {
     #Fin aporte Adair Abrigo
 
     #Inicio aporte David Rivera
+    "Concurrent": "CONCURRENT",
+    "add": "ADD",
+    "ContainsKey": "CONTAINSKEY",
+    "ContainsValue": "CONTAINSVALUE",
+    #Cambiar la R minucla por mayuscula
+    "Remove": "REMOVEDICT",
     "Thread": "THREAD",
     "Start": "START",
     "Join": "JOIN",
@@ -57,7 +63,6 @@ reserved = {
     "Dictionary": "DICTIONARY",
     "else_if": "ELSE_IF",
     "put": "PUT",
-    "remove": "REMOVE",
     "break": "BREAK",
     "try": "TRY",
     "new": "NEW",
@@ -247,7 +252,7 @@ def t_CHAR(t):
     return t
 
 #Para reestablecer el numero delineas al analizar nuevo archivo
-def reseteo_numero_linea():
+def resetear_numero_linea():
     global numero_linea
     numero_linea = 1
 
